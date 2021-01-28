@@ -31,6 +31,9 @@ var actdev = (function ($) {
 		// Icon size, set globally for all layers
 		iconSize: [38, 42],
 		
+		// Geolocation position
+		geolocationPosition: 'top-left',
+		
 		// Enable scale bar
 		enableScale: true,
 		
