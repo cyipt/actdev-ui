@@ -19,9 +19,9 @@ var actdev = (function ($) {
 		
 		// Initial lat/lon/zoom of map and tile layer
 		defaultLocation: {
-			latitude: 51.51137,
-			longitude: -0.10498,
-			zoom: 17
+			latitude: 53.035,
+			longitude: -0.763,
+			zoom: 5.82
 		},
 		defaultTileLayer: 'opencyclemap',
 		
