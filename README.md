@@ -1,4 +1,4 @@
-# ACTDEV 
+# ActDev
 
 Active travel provision and potential in planned and proposed development sites.
 
@@ -36,13 +36,13 @@ sudo sh -c "echo '127.0.0.1 actdev' >> /etc/hosts"
 
 To make changes/additions to layers, amend `/js/actdev.js`, which contains the layer declarations.
 
-The layers can include any of the [properties supported by the underlying library](https://github.com/cyclestreets/Mapboxgljs.LayerViewer/blob/master/src/layerviewer.js#L218).
+The layer definitions can include any of the [properties supported by the underlying library](https://github.com/cyclestreets/Mapboxgljs.LayerViewer/blob/master/src/layerviewer.js#L218).
 
-To add a new layer:
+To add a new layer, simply:
 
  1. In `/js/actdev.js`, add the new layer and its parameters
- 2. In `/index.html`, add in a new menu entry in the menu `<nav>` section
- 3. In `/index.html`, add a panel in `<div id="sections">` which provides some explanation
+ 2. In the layout file, `/index.html`, add in a new menu entry in the menu `<nav>` section
+ 3. In the layout file, `/index.html`, add a panel in `<div id="sections">` which provides some explanation
 
 
 ## License
