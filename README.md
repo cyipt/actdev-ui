@@ -48,3 +48,8 @@ To add a new layer, simply:
 ## License
 
 GPL3.
+
+
+## Copyright
+
+University of Leeds and CycleStreets Ltd, 2021.
