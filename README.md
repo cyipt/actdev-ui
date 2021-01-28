@@ -36,7 +36,7 @@ sudo sh -c "echo '127.0.0.1 actdev' >> /etc/hosts"
 
 To make changes/additions to layers, amend `/js/actdev.js`, which contains the layer declarations.
 
-The layers can include any of the [https://github.com/cyclestreets/Mapboxgljs.LayerViewer/blob/master/src/layerviewer.js#L218](properties supported by the underlying library).
+The layers can include any of the [properties supported by the underlying library](https://github.com/cyclestreets/Mapboxgljs.LayerViewer/blob/master/src/layerviewer.js#L218).
 
 To add a new layer:
 
