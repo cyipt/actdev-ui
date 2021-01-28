@@ -42,6 +42,9 @@ var actdev = (function ($) {
 		regionsField: 'site_name',
 		regionsSubstitutionToken: '{site_name}',
 		regionSwitcherPosition: 'bottom-left',
+		
+		// Initial view of all regions; will use regionsFile
+		initialRegionsView: true
 	};
 	
 	// Layer definitions
