@@ -73,6 +73,12 @@
 							<input type="checkbox" name="show[]" id="show_sites" />
 							<a href="#sites" title="Sites data" class="tooltip"><i class="fa fa-draw-polygon"></i><br />Sites</a>
 						</li>
+						<li class="studyarea">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_studyarea" />
+							<a href="#studyarea" title="Study area" class="tooltip"><i class="fa fa-atlas"></i><br />Study area</a>
+						</li>
 						<!--
 						<li class="desireLinesFew">
 							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
@@ -92,12 +98,6 @@
 							<p class="total"></p>
 							<input type="checkbox" name="show[]" id="show_routes" />
 							<a href="#routes" title="Routes" class="tooltip"><i class="fa fa-bezier-curve"></i><br />Desire line routes</a>
-						</li>
-						<li class="smallStudyArea">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_smallStudyArea" />
-							<a href="#smallStudyArea" title="Desire lines few" class="tooltip"><i class="fa fa-atlas"></i><br />Small study area</a>
 						</li>
 						<li class="buildings">
 							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
@@ -143,6 +143,10 @@
 						<h2>Sites</h2>
 						<p>New developments</p>
 					</div>
+					<div id="studyarea">
+						<h2>Small study area</h2>
+						<p><em>Description to follow</em></p>
+					</div>
 					<!--
 					<div id="desireLinesFew">
 						<h2>Desire lines few</h2>
@@ -156,10 +160,6 @@
 					<div id="routes">
 						<h2>Desire line routes</h2>
 						<p><em>These represent desire lines, expressed as the likely cycle route (fast route)</em></p>
-					</div>
-					<div id="smallStudyArea">
-						<h2>Small study area</h2>
-						<p><em>Description to follow</em></p>
 					</div>
 					<div id="buildings">
 						<h2>Buildings</h2>

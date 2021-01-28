@@ -26,7 +26,7 @@ var actdev = (function ($) {
 		defaultTileLayer: 'mapboxstreets',
 		
 		// Default layers ticked
-		defaultLayers: ['sites', 'smallStudyArea', 'desireLinesFew', 'buildings'],
+		defaultLayers: ['sites', 'studyarea', 'routes', 'buildings'],
 		
 		// Icon size, set globally for all layers
 		iconSize: [38, 42],
@@ -72,7 +72,7 @@ var actdev = (function ($) {
 			apiKey: false,
 		},
 		
-		smallStudyArea: {
+		studyarea: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/small-study-area.geojson',
 			apiKey: false,
 			polygonStyle: 'blue',
