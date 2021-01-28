@@ -48,7 +48,10 @@ var actdev = (function ($) {
 		
 		// Initial view of all regions; will use regionsFile
 		initialRegionsView: true,
-		initialRegionsViewRemovalZoom: false
+		initialRegionsViewRemovalZoom: false,
+		
+		// Feedback API URL; re-use of settings values represented as placeholders {%apiBaseUrl}, {%apiKey}, are supported
+		feedbackApiUrl: '{%apiBaseUrl}/v2/feedback.add?key={%apiKey}',
 	};
 	
 	// Layer definitions
