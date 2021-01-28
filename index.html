@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>ACTDEV - Active travel provision and potential in planned and proposed development sites.</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-title" content="Actdev" />
+	
+	<link rel="stylesheet" href="/css/fonts.css" type="text/css" />
+	<link rel="stylesheet" href="/js/lib/mapbox-gl-js/mapbox-gl.css" />
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+	<script src="/js/lib/mapbox-gl-js/mapbox-gl.min.js"></script>
+	<script src="/js/lib/jquery/jquery.min.js"></script>
+	
+	<script src="/js/lib/jquery-ui/jquery-ui.min.js"></script>
+	
+	<script src="/js/lib/jQuery-Touch-Events/src/1.0.9/jquery.mobile-events.min.js"></script>
+
+	<script src="/js/lib/mapbox-gl-draw/mapbox-gl-draw.js"></script>
+	<link rel="stylesheet" href="/js/lib/mapbox-gl-draw/mapbox-gl-draw.css" />
+	
+	<script src="/js/lib/js-cookie/js.cookie.js"></script>
+	
+	<!-- Vex dialogs; see: https://github.hubspot.com/vex/ -->
+	<script src="/js/lib/vex-4.1.0/dist/js/vex.combined.min.js"></script>
+	<link rel="stylesheet" href="/js/lib/vex-4.1.0/dist/css/vex.css" />
+	<link rel="stylesheet" href="/js/lib/vex-4.1.0/dist/css/vex-theme-plain.css" />
+	
+	<!-- GeoJSON parser for flat JSON; see: https://www.npmjs.com/package/geojson -->
+	<!--<script src="https://unpkg.com/geojson@0.5.0/geojson.js"></script>-->
+	<script src="/js/lib/GeoJSON.js/geojson.js"></script>
+	
+	<!-- GeoJSON extent library; see: https://github.com/mapbox/geojson-extent -->
+	<script src="/js/lib/geojson-extent/geojson-extent.js"></script>
+	
+	<!-- LayerViewer library, providing the application logic -->
+	<script src="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.js"></script>
+	<link rel="stylesheet" type="text/css" href="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.css" />
+	<script src="/js/lib/Mapboxgljs.LayerViewer/lib/geocoder.js"></script>
+
+	<!-- Fontawesome icons -->
+	<script src="/js/lib/fontawesome/fontawesome-kit-7bd5544b77.js"></script>
+	
+	<!-- Actdev application and its config, implementing the LayerViewer library -->
+	<script src="/.config.js"></script>
+	<script src="/js/actdev.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<script>
+		$(function() {
+			actdev.initialise (config);
+		});
+	</script>
+<body>
+
+	<div id="globalsites">
+		<p>ACTDEV</p>
+	</div>
+	
+	<main>
+		
+		<form id="data">
+		
+			<nav>
+				
+				<div id="selector">
+					<ul>
+						<li class="sites">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_sites" />
+							<a href="#sites" title="Sites data" class="tooltip"><i class="fa fa-draw-polygon"></i><br />Sites</a>
+						</li>
+						<li class="desireLinesFew">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_desireLinesFew" />
+							<a href="#desireLinesFew" title="Desire lines few" class="tooltip"><i class="fa fa-bezier-curve"></i><br />Desire lines few</a>
+						</li>
+						<li class="desireLinesMany">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_desireLinesMany" />
+							<a href="#desireLinesMany" title="Desire lines few" class="tooltip"><i class="fa fa-vector-square"></i><br />Desire lines many</a>
+						</li>
+						<li class="smallStudyArea">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_smallStudyArea" />
+							<a href="#smallStudyArea" title="Desire lines few" class="tooltip"><i class="fa fa-atlas"></i><br />Small study area</a>
+						</li>
+						<li class="buildings">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_buildings" />
+							<a href="#buildings" title="Buildings" class="tooltip"><i class="fa fa-building"></i><br />Buildings</a>
+						</li>
+						<li class="jts">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_jts" />
+							<a href="#jts" title="Journey time statistics" class="tooltip"><i class="fa fa-wave-square"></i><br />Journey time statistics</a>
+						</li>
+						<li class="planningapplications">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_planningapplications" />
+							<a href="#planningapplications" title="Planning applications" class="tooltip"><i class="fa fa-file-alt"></i><br />Planning applications</a>
+						</li>
+						<li class="collisions">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_collisions" />
+							<a href="#collisions" title="Collisions" class="tooltip"><i class="fa fa-car-crash"></i><br />Collisions</a>
+						</li>
+						<li class="trafficcounts">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_trafficcounts" />
+							<a href="#trafficcounts" title="Traffic data" class="tooltip"><i class="fa fa-car"></i><br />Traffic counts</a>
+						</li>
+					</ul>
+				</div>
+				
+				<div id="sections">
+					
+					<header>
+						<h1>ACTDEV</h1>
+						<p class="about">Active travel provision and potential in planned and proposed development sites.</p>
+					</header>
+
+					<div id="sites">
+						<h2>Sites</h2>
+						<p>New developments</p>
+					</div>
+					<div id="desireLinesFew">
+						<h2>Desire lines few</h2>
+						<p><em>Description to follow</em></p>
+					</div>
+					<div id="desireLinesMany">
+						<h2>Desire lines many</h2>
+						<p><em>Description to follow</em></p>
+					</div>
+					<div id="smallStudyArea">
+						<h2>Small study area</h2>
+						<p><em>Description to follow</em></p>
+					</div>
+					<div id="buildings">
+						<h2>Buildings</h2>
+						<p><em>Description to follow</em></p>
+					</div>
+					<div id="jts">
+						<h2>Journey time statistics</h2>
+						<p><em>Description to follow</em></p>
+					</div>
+					<div id="collisions">
+						<h2>Collisions</h2>
+						<p>Although cycling is not an inherently unsafe activity, collisions are more frequent than they should be due to lack of cycle infrastructure. Data is from DfT/police STATS19, from 2005-2019. See <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/230596/stats20-2011.pdf" target="_blank">definitions</a>.</p>
+						<p>Zoom in to see all - while zoomed out only a selection is shown due to the volume.</p>
+						
+						<div class="filters">
+							<h3>Filter to:</h3>
+							
+							<h4>Severity:</h4>
+							<div class="controls">
+								<select name="field:severity" id="severity">
+									<option value="" id="severity___NULL">All</option>
+									<option value="fatal" id="severity_fatal">Fatal</option>
+									<option value="fatal,serious" id="severity_fatalserious">Fatal / serious</option>
+									<option value="serious" id="severity_serious">Serious</option>
+									<option value="serious,slight" id="severity_seriousslight">Serious / slight</option>
+									<option value="slight" id="severity_slight">Slight</option>
+								</select>&nbsp; collisions
+							</div>
+							
+							<h4>Casualty:</h4>
+							<div class="controls">
+								<input type="checkbox" checked="checked" name="field:casualties[]" id="casualties_Cyclist" value="Cyclist" /><label for="casualties_Cyclist">Cyclist</label><br />
+								<input type="checkbox" name="field:casualties[]" id="casualties_Pedestrian" value="Pedestrian" /><label for="casualties_Pedestrian">Pedestrian</label><br />
+								<input type="checkbox" name="field:casualties[]" id="casualties_Car_occupant" value="Car occupant" /><label for="casualties_Car_occupant">Car occupant</label><br />
+							</div>
+							
+							<h4>Date range:</h4>
+							<p>&nbsp;
+								<select name="since" data-yearly-range-since-sqldate="2005,2019">
+									<option value="">&nbsp;</option>
+								</select>
+								-
+								<select name="until" data-yearly-range-until-sqldate="2005,2019">
+									<option value="">&nbsp;</option>
+								</select>
+							</p>
+							
+							<!--
+							<h4>With a:</h4>
+							<div class="controls">
+								<input type="checkbox" checked="checked" name="field:involved[]" id="involved_Car_occupant" value="Driver" /><label for="involved_Car_occupant">Driver</label>
+								<input type="checkbox" name="field:involved[]" id="involved_Cyclist" value="Cyclist" /><label for="involved_Cyclist">Cyclist</label>
+								<input type="checkbox" name="field:involved[]" id="involved_Pedestrian" value="Pedestrian" /><label for="involved_Pedestrian">Ped</label><br />
+							</div>
+							-->
+							
+							<h4>Limit to:</h4>
+							<div class="controls">
+								<input type="checkbox" name="field:Junction_Detail" value="1,2,3,5,6,7" id="junctions" /><label for="junctions">Junctions</label><br />
+								<input type="checkbox" name="field:Road_Type" value="2" id="onewaystreets" /><label for="onewaystreets">One-way streets</label><br />
+								<input type="checkbox" name="field:1st_Road_Class" value="1,2,3" id="aroads" /><label for="aroads" title="A, A(M), and motorways">A-roads</label><br />
+								<select name="field:Speed_limit" id="speedlimit">
+									<option value="" id="speedlimit___NULL">All</option>
+									<option value="20" id="speedlimit_20">20 mph</option>
+									<option value="20,30" id="speedlimit_20_30">20/30mph</option>
+									<option value="30" id="speedlimit_30">30mph</option>
+									<option value="40,50,60,70" id="speedlimit_40_70">40-70mph</option>
+									<option value="50,60,70" id="speedlimit_50plus">50-70mph</option>
+								</select> speed limit
+							</div>
+							
+							<!--
+							<p>&#9655; More filters</p>
+							-->
+		
+						</div>
+						
+						<div class="export button">
+							<p>Export: <img class="csv" src="/js/lib/Mapboxgljs.LayerViewer/images/page_excel.png" alt="Spreadsheet" /></p>
+						</div>
+						
+						<!--
+						<div id="compare" class="filters">
+							<h3>&#10018; Comparison charts:</h3>
+						
+							<script>
+								$(function() {
+									$(':checkbox.enable').on('change', function() {
+										$(this).closest('div').toggleClass('enabled', this.checked);
+									});
+								});
+							</script>
+							
+							<div id="collisions_dateRange">
+								<h4>
+									<input type="checkbox" id="enableDateRange" class="enable" />
+									<label for="enableDateRange">Changes over time:</label>
+								</h4>
+								<div class="controls">
+									<label for="dateFrom">From: </label><input type="date" name="dateFrom" /><br />
+									<label for="dateTo">To: </label><input type="date" name="dateTo" />
+								</div>
+							</div>
+							
+							<div id="localAuthorities">
+								<h4>
+									<input type="checkbox" id="enableLocalAuthorities" class="enable" />
+									<label for="enableLocalAuthorities">Local Authorities:</label>
+								</h4>
+								<div class="controls">
+	
+									<select name="localAuthority1">
+										<option value="" id="localAuthority1_"></option>
+										<option value="London" id="localAuthority1_london">London</option>
+										<option value="Cambridge" id="localAuthority1_cambridge">Cambridge</option>
+										<option value="Edinburgh" id="localAuthority1_edinburgh">Edinburgh</option>
+									</select>
+									<select name="localAuthority2">
+										<option value="" id="localAuthority2_all">All</option>
+										<option value="London" id="localAuthority2_london">London</option>
+										<option value="Cambridge" id="localAuthority2_cambridge">Cambridge</option>
+										<option value="Edinburgh" id="localAuthority2_edinburgh">Edinburgh</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						-->
+					</div>
+					<div id="trafficcounts">
+						<h2>Traffic count data</h2>
+						<p>This map contains official traffic counts of all main roads in the UK, for each type of vehicle. This is a visualisation of the DfT's AADF (Annual Average Daily Flows) data. Figures are average daily counts.</p>
+						<p><em>Based on work originally by <a href="https://hfcyclists.org.uk/s4c-maps/dft-annual-average-daily-flow-vehicle-counts-mapped-visualised/" target="_blank">Alex Ingram at hfcyclists</a>.</em></p>
+					</div>
+					<div id="planningapplications">
+						<h2>Planning applications</h2>
+						<p>New developments have the potential to worsen traffic conditions, but can also bring opportunities to fund infrastructure improvements.</p>
+						
+						<div class="filters">
+							<h3>Filters:</h3>
+							
+							<div id="dateRecent">
+								<h4>Since:</h4>
+								<select name="recent">
+									<option value="">Recent</option>
+									<option value="56">8 weeks</option>
+									<option value="91">13 weeks</option>
+									<option value="112">16 weeks</option>
+								</select>
+								<p><a href="https://www.gov.uk/guidance/determining-a-planning-application" target="_blank">Read more about consultation time limits.</a></p>
+							</div>
+							
+							<h4>Size of development:</h4>
+							<ul class="controls">
+								<li><label><input type="checkbox" name="app_size[]" value="Small">Small</label></li>
+								<li><label><input type="checkbox" name="app_size[]" value="Medium">Medium</label></li>
+								<li><label><input type="checkbox" name="app_size[]" value="Large">Large</label></li>
+							</ul>
+							
+							<h4>Application type:</h4>
+							<ul class="controls">
+								<li><label><input type="checkbox" name="app_type[]" value="Full">Full</label></li>
+								<li><label><input type="checkbox" name="app_type[]" value="Outline">Outline</label></li>
+								<li><label><input type="checkbox" name="app_type[]" value="Amendment">Amendment</label></li>
+								<li><label><input type="checkbox" name="app_type[]" value="Heritage">Heritage</label></li>
+								<li><label><input type="checkbox" name="app_type[]" value="Trees">Trees</label></li>
+								<li><label><input type="checkbox" name="app_type[]" value="Advertising">Advertising</label></li>
+								<li><label><input type="checkbox" name="app_type[]" value="Telecoms">Telecoms</label></li>
+								<li><label><input type="checkbox" name="app_type[]" value="Other">Other</label></li>
+								<li><label><input type="checkbox" name="app_type[]" value="Conditions">Conditions</label></li>
+							</ul>
+							
+							<h4>Status</h4>
+							<ul class="controls">
+								<li><label><input type="checkbox" checked="checked" name="app_state[]" value="Undecided" />Current</label></li>
+								<li><label><input type="checkbox" name="app_state[]" value="Permitted,Conditions,Rejected,Withdrawn,Other" />Decided</label></li>
+							</ul>
+							
+							<div id="dateRange">
+								<h4>Between dates:</h4>
+								<div class="controls">
+									<label for="planningapplications_start_date">From: </label><input type="date" name="start_date" id="planningapplications_start_date" /><br />
+									<label for="planningapplications_end_date">To: </label><input type="date" name="end_date" id="planningapplications_end_date" />
+								</div>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+			</nav>
+			
+			<div id="geocoder" class="geocoder">
+				<input type="text" name="location" autocomplete="off" placeholder="Search locations and move map" tabindex="1" spellcheck="false" />
+			</div>
+			
+			<div id="map" class="map">
+			</div>
+			
+		</form>
+		
+	</main>
+	
+	<footer>
+	</footer>
+
+	<div id="feedback">
+		
+	</div>
+	
+</body>
+
+</html>
+
