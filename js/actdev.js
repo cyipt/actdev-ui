@@ -23,7 +23,7 @@ var actdev = (function ($) {
 			longitude: -0.763,
 			zoom: 5.82
 		},
-		defaultTileLayer: 'opencyclemap',
+		defaultTileLayer: 'mapboxstreets',
 		
 		// Default layers ticked
 		defaultLayers: ['sites', 'smallStudyArea', 'desireLinesFew', 'buildings'],
