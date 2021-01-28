@@ -2,6 +2,7 @@
 
 	# Available URL(s)
 	ServerName actdev.cyipt.bike
+	ServerAlias actdev
 	
 	# Logging
 	CustomLog /var/log/apache2/actdev-access.log combined
