@@ -8,7 +8,7 @@
 	ErrorLog /var/log/apache2/actdev-error.log
 
 	# Where the files are
-	DocumentRoot /var/www/actdev/
+	DocumentRoot /var/www/actdev-ui/
 	
 	# Allow access
 	<Directory />
