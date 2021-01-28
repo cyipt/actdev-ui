@@ -2,10 +2,8 @@
 
 Active travel provision and potential in planned and proposed development sites.
 
-To make changes amend /js/actdev.js.
 
-
-# Installation
+## Installation
 
 This assumes you're running this on Apache.
 
@@ -32,6 +30,19 @@ sudo sh -c "echo '127.0.0.1 actdev' >> /etc/hosts"
 
 # Open your web browser at http://actdev/
 ```
+
+
+## Development guidelines
+
+To make changes/additions to layers, amend `/js/actdev.js`, which contains the layer declarations.
+
+The layers can include any of the [https://github.com/cyclestreets/Mapboxgljs.LayerViewer/blob/master/src/layerviewer.js#L218](properties supported by the underlying library).
+
+To add a new layer:
+
+ 1. In `/js/actdev.js`, add the new layer and its parameters
+ 2. In `/index.html`, add in a new menu entry in the menu `<nav>` section
+ 3. In `/index.html`, add a panel in `<div id="sections">` which provides some explanation
 
 
 ## License
