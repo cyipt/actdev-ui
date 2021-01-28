@@ -9,7 +9,7 @@ To make changes amend /js/actdev.js.
 
 This assumes you're running this on Apache.
 
-{{{
+```
 # Enter your webserver's files area
 cd /var/www/
 
@@ -31,7 +31,7 @@ sudo service apache2 restart
 sudo sh -c "echo '127.0.0.1 actdev' >> /etc/hosts"
 
 # Open your web browser at http://actdev/
-}}}
+```
 
 
 ## License
