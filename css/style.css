@@ -1,5 +1,6 @@
 /* Colour scheme */
 body {--raw-sienna: rgba(234, 140, 85, 1); --cedar-chest: rgba(199, 81, 70, 1); --firebrick: rgba(173, 46, 36, 1); --falu-red: rgba(129, 23, 27, 1); --rosewood: rgba(84, 8, 4, 1);}
+
 /* Layout */
 html, body {width: 100%; height: 100%; margin: 0; padding: 0;}
 body {background-color: white;}
@@ -52,6 +53,7 @@ footer p a {color: #ccc; text-decoration: none;}
 nav {color: white;}
 nav a {color: white; text-decoration: none; border-bottom: 1px solid rgba(173, 46, 36, 1);}
 #map .mapboxgl-ctrl-attrib {margin-right: 335px;}
+#map .mapboxgl-ctrl-top-right {margin-right: 335px;}
 
 /* Layer-specific popup styling */
 #map .mapboxgl-popup.trafficcounts .mapboxgl-popup-content {min-width: 500px; max-width: 500px;}
@@ -125,4 +127,5 @@ ul.tabs li.ui-state-active a {background-color: #333; color: white;}
 	#selector ul li a {font-size: 0.83em;}
 	#sections {width: 150px; padding: 0 10px 20px; font-size: 0.83em;}
 	#map .mapboxgl-ctrl-attrib {margin-right: 10px /* default */;}
+	#map .mapboxgl-ctrl-top-right {margin-right: 10px /* default */; margin-top: 50px;}
 }
