@@ -26,7 +26,7 @@ var actdev = (function ($) {
 		defaultTileLayer: 'opencyclemap',
 		
 		// Default layers ticked
-		defaultLayers: ['sites', 'smallStudyArea', 'desireLinesFew'],
+		defaultLayers: ['sites', 'smallStudyArea', 'desireLinesFew', 'buildings'],
 		
 		// Icon size, set globally for all layers
 		iconSize: [38, 42],
