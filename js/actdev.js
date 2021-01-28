@@ -44,7 +44,8 @@ var actdev = (function ($) {
 		regionSwitcherPosition: 'bottom-left',
 		
 		// Initial view of all regions; will use regionsFile
-		initialRegionsView: true
+		initialRegionsView: true,
+		initialRegionsViewRemovalZoom: false
 	};
 	
 	// Layer definitions
