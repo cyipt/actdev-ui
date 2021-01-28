@@ -53,6 +53,7 @@ var actdev = (function ($) {
 		
 		sites: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/site.geojson',
+			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonStyle: 'green',
 		},
@@ -60,12 +61,14 @@ var actdev = (function ($) {
 		/*
 		desireLinesFew: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/desire-lines-few.geojson',
+			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonStyle: 'blue',
 		},
 
 		desireLinesMany: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/desire-lines-many.geojson',
+			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonStyle: 'blue',
 		},
@@ -73,23 +76,27 @@ var actdev = (function ($) {
 
 		routes: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/routes-fast.geojson',
+			retrievalStrategy: 'none',
 			apiKey: false,
 		},
 		
 		studyarea: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/small-study-area.geojson',
+			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonStyle: 'blue',
 		},
 
 		buildings: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/buildings_od.geojson',
+			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonStyle: 'green',
 		},
 		
 		jts: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/jts-lsoas.geojson',
+			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonStyle: 'green',
 		},
