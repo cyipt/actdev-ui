@@ -44,6 +44,7 @@ var actdev = (function ($) {
 		regionsFile: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.geojson',
 		regionsField: 'site_name',
 		regionsSubstitutionToken: '{site_name}',
+		regionSwitcherNullText: 'Go to development',
 		
 		// Initial view of all regions; will use regionsFile
 		initialRegionsView: true,
