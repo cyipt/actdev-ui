@@ -53,6 +53,7 @@ var actdev = (function ($) {
 			polygonStyle: 'green',
 		},
 
+		/*
 		desireLinesFew: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/desire-lines-few.geojson',
 			apiKey: false,
@@ -64,7 +65,13 @@ var actdev = (function ($) {
 			apiKey: false,
 			polygonStyle: 'blue',
 		},
+		*/
 
+		routes: {
+			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/routes-fast.geojson',
+			apiKey: false,
+		},
+		
 		smallStudyArea: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/small-study-area.geojson',
 			apiKey: false,
