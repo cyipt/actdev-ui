@@ -146,6 +146,20 @@ var actdev = (function ($) {
 				types: 'way',
 				wayFields: 'name,ridingSurface,id,cyclableText,quietness,speedMph,speedKmph,pause,color'
 			},
+			lineColourField: 'quietness',
+			lineColourStops: [
+				[100, '#1D658B'],
+				[90, '#42A3D7'],
+				[80, '#3B92B1'],
+				[70, '#1F739E'],
+				[60, '#66B8E1'],
+				[50, '#D9EDF7'],
+				[40, '#F8E4E8'],
+				[30, '#E292A4'],
+				[20, '#D45C76'],
+				[10, '#E15D6B'],
+				[0, '#D62839']
+			],
 			sendZoom: true,
 			popupHtml:
 				  '<table>'
