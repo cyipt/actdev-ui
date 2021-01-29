@@ -120,7 +120,15 @@ var actdev = (function ($) {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/buildings_od.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
-			polygonStyle: 'green',
+			polygonColourField: 'building',
+			polygonStyle: {
+				'residential': 'green',
+				'retail': 'orange',
+				'civic': 'purple',
+				'commercial': 'red',
+				'office': 'gray',
+				'warehouse': 'red',
+			}
 		},
 		
 		jts: {
