@@ -84,6 +84,23 @@ var actdev = (function ($) {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/routes-fast.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
+			lineColourField: 'all_commute_base',
+			lineColourStops: [
+				[9999, '#5E2612'],
+				[50, '#8B2500'],
+				[25, '#CD5B45'],
+				[12, '#EE8262'],
+			],
+			lineWidthField: 'all_commute_base',
+			// #!# Not working yet - possibly bug in library
+			lineWidthStops: [
+				[50, 30],
+				[32, 20],
+				[10, 10],
+				[5, 5],
+				[3, 4],
+				[0, 3],
+			],
 		},
 		
 		studyarea: {
