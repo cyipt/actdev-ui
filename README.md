@@ -12,12 +12,12 @@ This assumes you're running this on Apache.
 cd /var/www/
 
 # Clone the repo
-sudo git clone https://github.com/cyipt/actdev-ui
+git clone https://github.com/cyipt/actdev-ui
 cd actdev-ui
 
 # Clone the library within the repo
 cd js/lib/
-sudo git clone https://github.com/cyclestreets/Mapboxgljs.LayerViewer
+git clone https://github.com/cyclestreets/Mapboxgljs.LayerViewer
 cd -
 
 # Add an Apache configuration
@@ -27,6 +27,11 @@ sudo service apache2 restart
 
 # Add local host
 sudo sh -c "echo '127.0.0.1 actdev' >> /etc/hosts"
+
+# Copy the config template and add API keys
+cp .config.js.template .config.js
+
+# Use a text editor of your choice to add the API keys to the config file
 
 # Open your web browser at http://actdev/
 ```
