@@ -111,6 +111,12 @@
 							<input type="checkbox" name="show[]" id="show_jts" />
 							<a href="#jts" title="Journey time statistics" class="tooltip"><i class="fa fa-wave-square"></i><br />Journey time stats</a>
 						</li>
+						<li class="cycleability">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_cycleability" />
+							<a href="#cycleability" title="Cycleability ratings layer" class="tooltip"><i class="fa fa-biking"></i><br />Cycleability ratings</a>
+						</li>
 						<li class="planningapplications">
 							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
 							<p class="total"></p>
@@ -293,6 +299,13 @@
 						<p>This map contains official traffic counts of all main roads in the UK, for each type of vehicle. This is a visualisation of the DfT's AADF (Annual Average Daily Flows) data. Figures are average daily counts.</p>
 						<p><em>Based on work originally by <a href="https://hfcyclists.org.uk/s4c-maps/dft-annual-average-daily-flow-vehicle-counts-mapped-visualised/" target="_blank">Alex Ingram at hfcyclists</a>.</em></p>
 					</div>
+					
+					<div id="cycleability">
+						<h2>Cycleability ratings</h2>
+						<p>This layer shows ratings of the cycleability rating of every street and path. Data comes from the CycleStreets routing engine.</p>
+						<p>Currently this only shows a maximum of 400 linear features at a time. Please contact us via the feedback form if you need mass extracts covering a larger region.</p>
+					</div>
+					
 					<div id="planningapplications">
 						<h2>Planning applications</h2>
 						<p>New developments have the potential to worsen traffic conditions, but can also bring opportunities to fund infrastructure improvements.</p>
