@@ -8,8 +8,18 @@ body {background-color: white;}
 main {position: fixed; width: 100%; height: calc(100% - 32px - 25px); top: 32px;}
 main form {width: 100%; height: 100%;}
 nav {position: absolute; right: 0; width: 335px; height: 100%; z-index: 1000;}
-header {position: relative; left: -8px; padding: 5px 8px 20px; margin: 0; background: rgba(129, 23, 27, 0.2);}
+header {position: relative; left: -8px; padding: 5px 8px 20px; margin: 0;}
 footer {position: fixed; width: 100%; height: 25px; z-index: 9999; bottom: 0; padding: 0;}
+
+/* Colour scheme */
+#globalsites {background-color: rgba(129, 23, 27, 1);}					/* Top bar */
+#sections {background-color: rgb(129, 23, 27); opacity: 0.85;}			/* Panel for each layer */
+#sections header {background-color: rgba(129, 23, 27, 0.2);}			/* Main title, within nav */
+#selector {background-color: rgba(0, 0, 0, 0.8);}						/* Menu button backgrounds */
+#selector ul li.selected {background-color: rgb(199, 81, 70);}			/* Menu button, when item selected */
+#selector ul li:hover {background-color: rgb(234, 140, 85);}			/* Menu hover */
+#selector ul li.selected:hover {background-color: rgb(226, 113, 29);}	/* Menu hover, when item selected */
+footer {background-color: rgba(129, 23, 27, 1);}						/* Bottom bar */
 
 /* Typography */
 body, input, textarea {font-family: 'Cabin', Arial, Helvetica, sans-serif; font-size: 1em;} /* https://www.google.com/fonts */
@@ -21,12 +31,10 @@ header h1 {padding-top: 0; font-weight: normal; margin-top: 15px; margin-bottom:
 header p {margin: 0;}
 
 /* Footer */
-footer {background-color: rgba(129, 23, 27, 1);}
 footer p {margin: 5px 20px 5px 5px; padding: 0; text-align: right; color: #eee; font-size: 0.78em; white-space: nowrap;}
 footer p a {color: #ccc; text-decoration: none;}
 
 /* Global properties navigation */
-#globalsites {background-color: rgba(129, 23, 27, 1);}
 #globalsites p, #globalsites ul {margin: 5px 0 0 0; padding: 10px 0 0 0; display: block; width: 100%; text-align: center; position: relative; top: -2px; font-size: 1em; overflow: hidden;}
 #globalsites p, #globalsites ul li a {color: white; text-decoration: none;}
 #globalsites p {float: left; color: white; padding: 4px 11px 0;}
@@ -55,34 +63,27 @@ nav a {color: white; text-decoration: none; border-bottom: 1px solid rgba(173, 4
 /* Form styling */
 input[type=checkbox] {margin-right: 5px;}
 
-
+/* Form panels */
 h2 {margin-bottom: 2px; padding-bottom: 0;}
-
-
-#selector {float: left; width: 95px; height: 100%; background-color: rgba(0, 0, 0, 0.8); opacity: 0.85; overflow-y: auto;}
-
+#selector {float: left; width: 95px; height: 100%; opacity: 0.85; overflow-y: auto;}
 #selector ul {height: 100%; list-style: none; width: 100%; margin: 0; padding: 0;}
 #selector ul li {margin-left: auto; margin-right: 0; border-top: 1px solid gray; border-left: 4px solid gray; position: relative;}
 #selector ul li:first-child {border-top: 0;}
 #selector ul li:last-child {border-bottom: 1px solid gray;}
-#selector ul li.selected {background-color: rgb(199, 81, 70); border-left: 4px solid brown;}
+#selector ul li.selected {border-left: 4px solid brown;}
 #selector ul li a {font-size: 0.9em; padding: 17px 7px; display: block; text-align: center;}
-#selector ul li:hover {background-color: rgb(234, 140, 85);}
-#selector ul li.selected:hover {background-color: rgb(226, 113, 29);}
 #selector ul li a img, #selector ul li a i {width: 40px; color: rgb(255, 201, 113);}
-
 #selector input {position: absolute; left: 6px; top: 6px;}
 
 /* Toolbar */
-#sections {width: 200px; height: calc(100% - 20px); position: absolute; right: 0; background-color: rgb(129, 23, 27); opacity: 0.85; margin-top: 0; padding: 0 20px 20px; font-size: 0.92em; overflow: scroll;}
+#sections {width: 200px; height: calc(100% - 20px); position: absolute; right: 0; opacity: 0.85; margin-top: 0; padding: 0 20px 20px; font-size: 0.92em; overflow: scroll;}
 
 /* Sections */
 #sections #compare > div {opacity: 0.5;}
 #sections #compare div.enabled {opacity: 1;}
 #sections #compare div p {margin-bottom: 4px;}
 #sections #compare div .controls label {width: 45px; display: inline-block;}
-
-#sections div.filters {background: rgba(255,255,255,0.1); padding: 0 0 5px; margin: 20px 0 15px;}
+#sections div.filters {background-color: rgba(255,255,255,0.1); padding: 0 0 5px; margin: 20px 0 15px;}
 #sections div.filters h3 {background-color: rgba(255,255,255,0.2); padding: 2px 5px; margin: 0; font-size: 1.1em;}
 #sections div.filters p {margin: 0;}
 #sections div.filters > div {padding: 5px 5px;}
