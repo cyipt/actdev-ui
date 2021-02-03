@@ -107,6 +107,7 @@ var actdev = (function ($) {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/small-study-area.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
+			popups: false,
 			style: {
 				Polygon: {
 					"fill-outline-color": "red",
