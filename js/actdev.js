@@ -23,7 +23,7 @@ var actdev = (function ($) {
 			longitude: -0.763,
 			zoom: 5.82
 		},
-		defaultTileLayer: 'mapboxstreets',
+		defaultTileLayer: 'light',
 		
 		// Default layers ticked
 		defaultLayers: ['sites', 'studyarea', 'routes', 'buildings'],
