@@ -102,6 +102,12 @@
 							<input type="checkbox" name="show[]" id="show_routes" />
 							<a href="#routes" title="Routes" class="tooltip"><i class="fa fa-bezier-curve"></i><br />Desire line routes</a>
 						</li>
+						<li class="accessibility">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_accessibility" />
+							<a href="#accessibility" title="Accessibility, shown as concentric rings from the development" class="tooltip"><i class="fa fa-life-ring"></i><br />Accessibility</a>
+						</li>
 						<li class="buildings">
 							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
 							<p class="total"></p>
@@ -168,7 +174,11 @@
 					-->
 					<div id="routes">
 						<h2>Desire line routes</h2>
-						<p><em>These represent desire lines, expressed as the likely cycle route (fast route)</em></p>
+						<p>These represent desire lines, expressed as the likely cycle route (fast route).</p>
+					</div>
+					<div id="acessibility">
+						<h2>Accessibility</h2>
+						<p>These represent the cycleability of the development, shown as concentric rings from the development.</p>
 					</div>
 					<div id="buildings">
 						<h2>Buildings</h2>
