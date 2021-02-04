@@ -251,7 +251,7 @@ var actdev = (function ($) {
 				+ '<p>Size of development: <strong>{properties.size}</strong><br />'
 				+ 'Type of development: <strong>{properties.type}</strong><br />'
 				+ 'Status: <strong>{properties.state}</strong></p>'
-				+ '<p>Reference: <a href="{properties.url}">{properties.id}</a><br />'
+				+ '<p>Reference: <a href="{properties.url}" target="_blank">{properties.id}</a><br />'
 				+ 'Local Authority: {properties.area}<br />'
 				+ 'Date: {properties.startdate}</p>'
 				+ '<p><a href="{properties.url}"><img src="/images/icons/bullet_go.png" /> <strong>View full details</a></strong></p>'
