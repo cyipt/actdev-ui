@@ -103,6 +103,12 @@ var actdev = (function ($) {
 			],
 		},
 		
+		accessibility: {
+			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/dartboard-1-3-6km.geojson',
+			retrievalStrategy: 'none',
+			apiKey: false
+		},
+		
 		studyarea: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/small-study-area.geojson',
 			retrievalStrategy: 'none',
