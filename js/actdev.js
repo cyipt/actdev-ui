@@ -234,12 +234,10 @@ var actdev = (function ($) {
 		},
 		
 		planningapplications: {
-			apiCall: 'https://www.planit.org.uk/api/applics/geojson',
+			apiCall: '/v2/planningapplications.locations',
 			apiFixedParameters: {
-				pg_sz: 100,
-				limit: 100
+				limit: 250
 			},
-			apiKey: false,
 			iconUrl: '/images/icons/signs_neutral.svg',
 			iconSizeField: 'app_size',
 			iconSizes: {
@@ -250,12 +248,12 @@ var actdev = (function ($) {
 			popupHtml:
 				  '<p><strong>{properties.description}</strong></p>'
 				+ '<p>{properties.address}</p>'
-				+ '<p>Size of development: <strong>{properties.app_size}</strong><br />'
-				+ 'Type of development: <strong>{properties.app_type}</strong><br />'
-				+ 'Status: <strong>{properties.app_state}</strong></p>'
-				+ '<p>Reference: <a href="{properties.url}">{properties.uid}</a><br />'
-				+ 'Local Authority: {properties.authority_name}<br />'
-				+ 'Date: {properties.start_date}</p>'
+				+ '<p>Size of development: <strong>{properties.size}</strong><br />'
+				+ 'Type of development: <strong>{properties.type}</strong><br />'
+				+ 'Status: <strong>{properties.state}</strong></p>'
+				+ '<p>Reference: <a href="{properties.url}">{properties.id}</a><br />'
+				+ 'Local Authority: {properties.area}<br />'
+				+ 'Date: {properties.startdate}</p>'
 				+ '<p><a href="{properties.url}"><img src="/images/icons/bullet_go.png" /> <strong>View full details</a></strong></p>'
 		},
 	};
