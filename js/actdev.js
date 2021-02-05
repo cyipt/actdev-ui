@@ -101,6 +101,9 @@ var actdev = (function ($) {
 				[3, 4],
 				[0, 3],
 			],
+			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/desire-line-data-dictionary.csv',
+			csvNamesField: 'names',
+			csvHumanReadableField: 'descriptions',
 		},
 		
 		accessibility: {
