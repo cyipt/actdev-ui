@@ -62,6 +62,8 @@ var actdev = (function ($) {
 			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonStyle: 'green',
+			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/site-data-dictionary.csv',
+			fieldLabelsCsvField: 'names',
 		},
 
 		/*
