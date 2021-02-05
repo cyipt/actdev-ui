@@ -81,7 +81,7 @@ var actdev = (function ($) {
 		*/
 
 		routes: {
-			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/routes-fast.geojson',
+			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/rnet-fast.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
 			lineColourField: 'all_commute_base',
