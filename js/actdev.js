@@ -94,7 +94,7 @@ var actdev = (function ($) {
 				[5, '#CD5B45'],
 				[1, '#EE8262'],
 			],
-			lineWidthField: 'all_commute_base',
+			lineWidthField: 'busyness',
 			// #!# Not working yet - possibly bug in library
 			lineWidthStops: [
 				[50, 30],
@@ -113,13 +113,13 @@ var actdev = (function ($) {
 			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonStyleStops: [
-				[50, '#2fd987'],
-				[30, '#aec993'],
-				[20, '#fc7753'],
-				[5, '#9d0208'],
-				[1, '#6a040f'],
+				[0.8, '#2fd987'],
+				[0.6, '#aec993'],
+				[0.4, '#fc7753'],
+				[0.2, '#9d0208'],
+				[0, '#6a040f'],
 			],
-			polygonColourField: 'n',
+			polygonColourField: 'busyness',
 			fillOpacity: 0.6
 		},
 		
