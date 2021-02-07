@@ -87,14 +87,14 @@ var actdev = (function ($) {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/rnet-fast.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
-			lineColourField: 'all_commute_base',
+			lineColourField: 'busyness',
 			lineColourStops: [
 				[9999, '#5E2612'],
-				[50, '#8B2500'],
-				[25, '#CD5B45'],
-				[12, '#EE8262'],
+				[10, '#8B2500'],
+				[5, '#CD5B45'],
+				[1, '#EE8262'],
 			],
-			lineWidthField: 'all_commute_base',
+			lineWidthField: 'busyness',
 			// #!# Not working yet - possibly bug in library
 			lineWidthStops: [
 				[50, 30],
@@ -111,7 +111,16 @@ var actdev = (function ($) {
 		accessibility: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/dartboard-1-3-6km.geojson',
 			retrievalStrategy: 'none',
-			apiKey: false
+			apiKey: false,
+			polygonStyleStops: [
+				[0.8, '#2fd987'],
+				[0.6, '#aec993'],
+				[0.4, '#fc7753'],
+				[0.2, '#9d0208'],
+				[0, '#6a040f'],
+			],
+			polygonColourField: 'busyness',
+			fillOpacity: 0.6
 		},
 		
 		studyarea: {
