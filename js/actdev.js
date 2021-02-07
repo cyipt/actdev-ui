@@ -111,7 +111,16 @@ var actdev = (function ($) {
 		accessibility: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/dartboard-1-3-6km.geojson',
 			retrievalStrategy: 'none',
-			apiKey: false
+			apiKey: false,
+			polygonStyleStops: [
+				[50, '#2fd987'],
+				[30, '#aec993'],
+				[20, '#fc7753'],
+				[5, '#9d0208'],
+				[1, '#6a040f'],
+			],
+			polygonColourField: 'n',
+			fillOpacity: 0.6
 		},
 		
 		studyarea: {
