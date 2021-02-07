@@ -87,12 +87,12 @@ var actdev = (function ($) {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/rnet-fast.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
-			lineColourField: 'all_commute_base',
+			lineColourField: 'busyness',
 			lineColourStops: [
 				[9999, '#5E2612'],
-				[50, '#8B2500'],
-				[25, '#CD5B45'],
-				[12, '#EE8262'],
+				[10, '#8B2500'],
+				[5, '#CD5B45'],
+				[1, '#EE8262'],
 			],
 			lineWidthField: 'all_commute_base',
 			// #!# Not working yet - possibly bug in library
