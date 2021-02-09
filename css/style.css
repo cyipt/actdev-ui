@@ -57,6 +57,9 @@ nav a {text-decoration: none;}
 #map .mapboxgl-ctrl-top-right #regionswitcher {background-color: none; border: 0; padding: 0; margin-top: 0; margin-right: 15px;}
 #regionswitcher select {appearance: none; font-size: 16px; padding: 5px 10px; font-family: inherit; font-family: 'Cabin', Arial, Helvetica, sans-serif; box-shadow: 5px 5px 10px 0px rgba(28,28,28,0.5); border: 1px solid #eee;}
 
+/* Legend */
+body #legend {width: 100px;}
+
 /* Layer-specific popup styling */
 #map .mapboxgl-popup.sites .mapboxgl-popup-content {min-width: 500px; max-width: 500px;}
 #map .mapboxgl-popup.trafficcounts .mapboxgl-popup-content {min-width: 500px; max-width: 500px;}

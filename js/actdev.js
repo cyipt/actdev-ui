@@ -154,7 +154,8 @@ var actdev = (function ($) {
 				[20, '#a89e75'],
 				[10, '#d3c165'],
 				[0, '#faea47'],
-			]
+			],
+			legend: 'range'
 		},
 		
 		// https://www.cyclestreets.net/api/v2/mapdata/
