@@ -91,6 +91,7 @@ var actdev = (function ($) {
 				[3, 2],
 				[0, 1],
 			],
+			legend: 'range',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/desire-line-data-dictionary.csv',
 			fieldLabelsCsvField: 'names',
 		},
