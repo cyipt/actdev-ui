@@ -108,6 +108,7 @@ var actdev = (function ($) {
 				[0.2, '#9d0208'],
 				[0, '#6a040f'],
 			],
+			legend: 'range',
 			fillOpacity: 0.6
 		},
 		
