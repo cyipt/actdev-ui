@@ -94,9 +94,9 @@ var actdev = (function ($) {
 				[5, '#CD5B45'],
 				[1, '#EE8262'],
 			],
-			lineWidthField: 'busyness',
-			// #!# Not working yet - possibly bug in library
+			lineWidthField: 'cycle_base',
 			lineWidthStops: [
+				[999999, 50],
 				[50, 30],
 				[32, 20],
 				[10, 10],
