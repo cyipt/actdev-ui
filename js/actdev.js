@@ -194,7 +194,6 @@ var actdev = (function ($) {
 				+ '<tr><td>Pause:</td><td>{properties.pause}</td></tr>'
 				+ '<tr><td>Full details:</td><td>OSM #<a href="https://www.openstreetmap.org/way/{properties.id}" target="_blank" title="[Link opens in a new window]">{properties.id}</a></td></tr>'
 				+ '</table>'
-				+ '<p>{%osmeditlink}</p>'
 		},
 		
 		collisions: {
