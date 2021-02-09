@@ -12,14 +12,17 @@ header {position: relative; left: -8px; padding: 5px 8px 20px; margin: 0;}
 footer {position: fixed; width: 100%; height: 25px; z-index: 9999; bottom: 0; padding: 0;}
 
 /* Colour scheme */
-#globalsites {background-color: rgba(129, 23, 27, 1);}					/* Top bar */
-#sections {background-color: rgb(129, 23, 27); opacity: 0.85;}			/* Panel for each layer */
+#globalsites {background-color: #0B2027;}					/* Top bar */
+#sections {background-color: #4A789A /*#40798C*/; opacity: 0.95; color: white;}		/* Panel for each layer */
 #sections header {background-color: rgba(129, 23, 27, 0.2);}			/* Main title, within nav */
-#selector {background-color: rgba(0, 0, 0, 0.8);}						/* Menu button backgrounds */
-#selector ul li.selected {background-color: rgb(199, 81, 70);}			/* Menu button, when item selected */
-#selector ul li:hover {background-color: rgb(234, 140, 85);}			/* Menu hover */
-#selector ul li.selected:hover {background-color: rgb(226, 113, 29);}	/* Menu hover, when item selected */
-footer {background-color: rgba(129, 23, 27, 1);}						/* Bottom bar */
+#selector {background-color: #CFD7C7;}						/* Menu button backgrounds */
+#selector ul li a {color: black; border-bottom: 1px solid gray;}
+#selector ul li.selected {background-color: #70A9C1; border-left-color: #40798C;}			/* Menu button, when item selected */
+#selector ul li.selected a {color: white;}
+#selector ul li:hover {background-color: #70A9C1;}			/* Menu hover */
+#selector ul li.selected:hover {background-color: #70A9C1;}	/* Menu hover, when item selected */
+#selector ul li a img, #selector ul li a i {color: #0B2027;}
+footer {background-color: #0B2027;}						/* Bottom bar */
 
 /* Typography */
 body, input, textarea {font-family: 'Cabin', Arial, Helvetica, sans-serif; font-size: 1em;} /* https://www.google.com/fonts */
@@ -46,7 +49,7 @@ _#globalsites ul li.somekey a:hover {background-color: LightGoldenRodYellow; col
 
 /* Main controls */
 nav {color: white;}
-nav a {color: white; text-decoration: none; border-bottom: 1px solid rgba(173, 46, 36, 1);}
+nav a {text-decoration: none;}
 #map .mapboxgl-ctrl-attrib {margin-right: 335px;}
 
 /* Region switcher */
@@ -71,13 +74,12 @@ h2 {margin-bottom: 2px; padding-bottom: 0;}
 #selector ul li {margin-left: auto; margin-right: 0; border-top: 1px solid gray; border-left: 4px solid gray; position: relative;}
 #selector ul li:first-child {border-top: 0;}
 #selector ul li:last-child {border-bottom: 1px solid gray;}
-#selector ul li.selected {border-left: 4px solid brown;}
 #selector ul li a {font-size: 0.9em; padding: 17px 7px; display: block; text-align: center;}
-#selector ul li a img, #selector ul li a i {width: 40px; color: rgb(255, 201, 113);}
+#selector ul li a img, #selector ul li a i {width: 40px;}
 #selector input {position: absolute; left: 6px; top: 6px;}
 
 /* Toolbar */
-#sections {width: 200px; height: calc(100% - 20px); position: absolute; right: 0; opacity: 0.85; margin-top: 0; padding: 0 20px 20px; font-size: 0.92em; overflow: scroll;}
+#sections {width: 200px; height: calc(100% - 20px); position: absolute; right: 0; margin-top: 0; padding: 0 20px 20px; font-size: 0.92em; overflow: scroll;}
 
 /* Sections */
 #sections #compare > div {opacity: 0.5;}
