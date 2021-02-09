@@ -182,6 +182,7 @@ var actdev = (function ($) {
 				[10, '#E15D6B'],
 				[0, '#D62839']
 			],
+			legend: 'range',
 			sendZoom: true,
 			popupHtml:
 				  '<table>'
