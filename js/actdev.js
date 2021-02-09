@@ -144,7 +144,17 @@ var actdev = (function ($) {
 			retrievalStrategy: 'none',
 			apiKey: false,
 			popupsRoundingDP: 1,
-			polygonStyle: 'green',
+			polygonColourField: 'weightedJobsCyct',
+			fillOpacity: 0.8,
+			polygonColourStops: [
+				[60, '#0c204d'],
+				[50, '#253e6c'],
+				[40, '#565c6d'],
+				[30, '#7c7b78'],
+				[20, '#a89e75'],
+				[10, '#d3c165'],
+				[0, '#faea47'],
+			]
 		},
 		
 		// https://www.cyclestreets.net/api/v2/mapdata/
