@@ -99,14 +99,14 @@ var actdev = (function ($) {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/dartboard-1-3-6km.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
-			polygonStyleStops: [
+			polygonColourField: 'busyness',
+			polygonColourStops: [
 				[0.8, '#2fd987'],
 				[0.6, '#aec993'],
 				[0.4, '#fc7753'],
 				[0.2, '#9d0208'],
 				[0, '#6a040f'],
 			],
-			polygonColourField: 'busyness',
 			fillOpacity: 0.6
 		},
 		
