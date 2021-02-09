@@ -66,23 +66,7 @@ var actdev = (function ($) {
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/site-data-dictionary.csv',
 			fieldLabelsCsvField: 'names',
 		},
-
-		/*
-		desireLinesFew: {
-			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/desire-lines-few.geojson',
-			retrievalStrategy: 'none',
-			apiKey: false,
-			polygonStyle: 'blue',
-		},
-
-		desireLinesMany: {
-			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/desire-lines-many.geojson',
-			retrievalStrategy: 'none',
-			apiKey: false,
-			polygonStyle: 'blue',
-		},
-		*/
-
+		
 		routes: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/rnet-fast.geojson',
 			retrievalStrategy: 'none',
@@ -136,7 +120,7 @@ var actdev = (function ($) {
 				
 			}
 		},
-
+		
 		buildings: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/buildings_od.geojson',
 			retrievalStrategy: 'none',
