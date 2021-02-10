@@ -82,11 +82,23 @@
 							<input type="checkbox" name="show[]" id="show_studyarea" />
 							<a href="#studyarea" title="Study area" class="tooltip"><i class="fa fa-atlas"></i><br />Study area</a>
 						</li>
+						<li class="routenetwork">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_routenetwork" />
+							<a href="#routenetwork" title="Route network data" class="tooltip"><i class="fa fa-bezier-curve"></i><br />Route network data</a>
+						</li>
 						<li class="routes">
 							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
 							<p class="total"></p>
 							<input type="checkbox" name="show[]" id="show_routes" />
-							<a href="#routes" title="Route network" class="tooltip"><i class="fa fa-bezier-curve"></i><br />Route network</a>
+							<a href="#routes" title="Route data" class="tooltip"><i class="fa fa-bezier-curve"></i><br />Route data</a>
+						</li>
+						<li class="desirelines">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_desirelines" />
+							<a href="#desirelines" title="Desire lines" class="tooltip"><i class="fa fa-bezier-curve"></i><br />Desire lines</a>
 						</li>
 						<li class="accessibility">
 							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
@@ -148,9 +160,17 @@
 						<h2>Small study area</h2>
 						<p><em>Description to follow</em></p>
 					</div>
+					<div id="routenetwork">
+						<h2>Route network data</h2>
+						<p>These represent the route network data along the desire lines (likely fast route).</p>
+					</div>
 					<div id="routes">
-						<h2>Desire line routes</h2>
-						<p>These represent desire lines, expressed as the likely cycle route (fast route).</p>
+						<h2>Routes</h2>
+						<p>These represent the routes (as whole route geometries) along the desire lines (likely fast route).</p>
+					</div>
+					<div id="desirelines">
+						<h2>Desire lines</h2>
+						<p>This shows the desire lines (straight line).</p>
 					</div>
 					<div id="accessibility">
 						<h2>Accessibility</h2>

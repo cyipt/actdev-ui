@@ -26,7 +26,7 @@ var actdev = (function ($) {
 		defaultTileLayer: 'light',
 		
 		// Default layers ticked
-		defaultLayers: ['sites', 'studyarea', 'routes', 'buildings'],
+		defaultLayers: ['sites', 'studyarea', 'routenetwork', 'buildings'],
 		
 		// Icon size, set globally for all layers
 		iconSize: [38, 42],
@@ -67,13 +67,13 @@ var actdev = (function ($) {
 			fieldLabelsCsvField: 'names',
 		},
 		
-		routes: {
+		routenetwork: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/rnet-fast.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
 			lineColourField: 'busyness',
 			lineColourStops: [
-				[9999, '#5e2612'],
+				[100, '#5e2612'],
 				[10, '#8b2500'],
 				[5, '#cd5b45'],
 				[1, '#ee8262'],
@@ -93,6 +93,57 @@ var actdev = (function ($) {
 			],
 			legend: 'range',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/rnet-cycle-data-dictionary.csv',
+			fieldLabelsCsvField: 'names',
+		},
+		
+		routes: {
+			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/routes-fast.geojson',
+			retrievalStrategy: 'none',
+			apiKey: false,
+			lineColourField: 'mean_busyness',
+			lineColourStops: [
+				[100, '#5e2612'],
+				[10, '#8b2500'],
+				[5, '#cd5b45'],
+				[1, '#ee8262'],
+			],
+			lineWidthField: 'cycle_base',
+			lineWidthStops: [
+				[999999, 30],
+				[500, 24],
+				[200, 20],
+				[100, 16],
+				[50, 12],
+				[25, 8],
+				[10, 4],
+				[5, 3],
+				[3, 2],
+				[0, 1],
+			],
+			legend: 'range',
+			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/routes-cycle-data-dictionary.csv',
+			fieldLabelsCsvField: 'names',
+		},
+		
+		desirelines: {
+			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/desire-lines-many.geojson',
+			retrievalStrategy: 'none',
+			apiKey: false,
+			lineWidthField: 'cycle_base',
+			lineWidthStops: [
+				[999999, 30],
+				[500, 24],
+				[200, 20],
+				[100, 16],
+				[50, 12],
+				[25, 8],
+				[10, 4],
+				[5, 3],
+				[3, 2],
+				[0, 1],
+			],
+			// legend: 'range',
+			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/desire-line-data-dictionary.csv',
 			fieldLabelsCsvField: 'names',
 		},
 		
