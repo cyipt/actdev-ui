@@ -92,7 +92,7 @@ var actdev = (function ($) {
 				[0, 1],
 			],
 			legend: 'range',
-			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/desire-line-data-dictionary.csv',
+			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/rnet-cycle-data-dictionary.csv',
 			fieldLabelsCsvField: 'names',
 		},
 		
@@ -159,7 +159,9 @@ var actdev = (function ($) {
 				[10, '#d3c165'],
 				[0, '#faea47'],
 			],
-			legend: 'range'
+			legend: 'range',
+			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/jts-lsoas-data-dictionary.csv',
+			fieldLabelsCsvField: 'names'
 		},
 		
 		// https://www.cyclestreets.net/api/v2/mapdata/
