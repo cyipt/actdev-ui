@@ -12,17 +12,17 @@ header {position: relative; left: -8px; padding: 5px 8px 20px; margin: 0;}
 footer {position: fixed; width: 100%; height: 25px; z-index: 9999; bottom: 0; padding: 0;}
 
 /* Colour scheme */
-#globalsites {background-color: #0B2027;}					/* Top bar */
-#sections {background-color: #4A789A /*#40798C*/; opacity: 0.95; color: white;}		/* Panel for each layer */
+#globalsites {background-color: #0b2027;}					/* Top bar */
+#sections {background-color: #4a789a; opacity: 0.95; color: white;}		/* Panel for each layer */
 #sections header {background-color: rgba(129, 23, 27, 0.2);}			/* Main title, within nav */
-#selector {background-color: #CFD7C7;}						/* Menu button backgrounds */
+#selector {background-color: #cFd7c7;}						/* Menu button backgrounds */
 #selector ul li a {color: black; border-bottom: 1px solid gray;}
-#selector ul li.selected {background-color: #70A9C1; border-left-color: #40798C;}			/* Menu button, when item selected */
+#selector ul li.selected {background-color: #70a9c1; border-left-color: #40798c;}			/* Menu button, when item selected */
 #selector ul li.selected a {color: white;}
-#selector ul li:hover {background-color: #70A9C1;}			/* Menu hover */
-#selector ul li.selected:hover {background-color: #70A9C1;}	/* Menu hover, when item selected */
-#selector ul li a img, #selector ul li a i {color: #0B2027;}
-footer {background-color: #0B2027;}						/* Bottom bar */
+#selector ul li:hover {background-color: #70a9c1;}			/* Menu hover */
+#selector ul li.selected:hover {background-color: #70a9c1;}	/* Menu hover, when item selected */
+#selector ul li a img, #selector ul li a i {color: #0b2027;}
+footer {background-color: #0b2027;}						/* Bottom bar */
 
 /* Typography */
 body, input, textarea {font-family: 'Cabin', Arial, Helvetica, sans-serif; font-size: 1em;} /* https://www.google.com/fonts */
