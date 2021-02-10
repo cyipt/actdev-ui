@@ -1,3 +1,7 @@
+# Simplify A/B Street URLs
+RewriteEngine on
+RewriteRule ^abstreet/([-a-z]+)$ /abstreet/index.html?--dev&--actdev=$1 [L]
+
 # Normalise with trailing slash
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
