@@ -166,7 +166,7 @@ var actdev = (function ($) {
 			apiFixedParameters: {
 				limit: 400,
 				types: 'way',
-				wayFields: 'name,ridingSurface,id,cyclableText,quietness,speedMph,speedKmph,pause,color'
+				wayFields: 'name,ridingSurface,id,cyclableText,walkableText,quietness,speedMph,speedKmph,pause,color'
 			},
 			lineColourField: 'quietness',
 			lineColourStops: [
@@ -184,15 +184,21 @@ var actdev = (function ($) {
 			],
 			legend: 'range',
 			sendZoom: true,
-			popupHtml:
-				  '<table>'
-				+ '<tr><td>Name:</td><td><strong>{properties.name}</strong></td></tr>'
-				+ '<tr><td>Type:</td><td>{properties.ridingSurface}</td></tr>'
+			popupHtml: ''
+				+ '<h3>{properties.name}</h3>'
+				+ '<p>Type: {properties.ridingSurface}</p>'
+				+ '<p>Full details: OpenStreetMap #<a href="https://www.openstreetmap.org/way/{properties.id}" target="_blank" title="[Link opens in a new window]">{properties.id}</a></p>'
+				+ '<h4>&#x1f6b6;&#x1f3fe; Walkability ratings:</h4>'
+				+ '<table>'
+				+ '<tr><td>Walkable?:</td><td>{properties.walkableText}</td></tr>'
+				+ '<tr><td>Quietness:</td><td><em>We regret this data is not yet available. We hope to add it in a future release.</em></td></tr>'
+				+ '</table>'
+				+ '<h4>&#x1f6b2; Cycleability ratings:</h4>'
+				+ '<table>'
 				+ '<tr><td>Cyclable?:</td><td>{properties.cyclableText}</td></tr>'
 				+ '<tr><td>Quietness:</td><td><strong>{properties.quietness}%</strong></td></tr>'
-				+ '<tr><td>Speed (max achievable):</td><td><strong>{properties.speedMph} mph</strong><br />({properties.speedKmph} km/h)</td></tr>'
+				+ '<tr><td>Speed - max achievable:</td><td><strong>{properties.speedMph} mph</strong> ({properties.speedKmph} km/h)</td></tr>'
 				+ '<tr><td>Pause:</td><td>{properties.pause}</td></tr>'
-				+ '<tr><td>Full details:</td><td>OSM #<a href="https://www.openstreetmap.org/way/{properties.id}" target="_blank" title="[Link opens in a new window]">{properties.id}</a></td></tr>'
 				+ '</table>'
 		},
 		
