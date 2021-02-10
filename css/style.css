@@ -70,6 +70,10 @@ body #legend {width: 100px; padding: 6px;}
 #map .mapboxgl-popup.cycleability table td:first-child {width: 6.5em;}
 #map .mapboxgl-popup.cycleability h4 {margin: 1.5em 0 0; padding: 0;}
 
+/* Simulation link */
+p#simulation {margin: 15px 0;}
+p#simulation a {display: block; max-width: 15em; border: 1px solid gray; padding: 12px; border-radius: 5px; background-color: #4a789a; font-weight: bold; color: white; text-decoration: none; font-size: 1.2em; box-shadow: 10px 10px 3px 0px #a3b4e6;}
+
 /* Form styling */
 input[type=checkbox] {margin-right: 5px;}
 

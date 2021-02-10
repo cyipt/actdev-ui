@@ -116,7 +116,9 @@ var actdev = (function ($) {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/small-study-area.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
-			popups: false,
+			popupHtml: ''
+				+ '<h3>Study area: {properties.site_name}</h3>'
+				+ '<p id="simulation"><a target="_blank" href="/abstreet/?--dev&--actdev={properties.site_name}&--cam=14/53.3637/-2.1772">Open travel simulation <br />in A/B Street</a></p>',
 			style: {
 				Polygon: {
 					"fill-outline-color": "red",
