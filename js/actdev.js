@@ -68,7 +68,7 @@ var actdev = (function ($) {
 		},
 		
 		routenetwork: {
-			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/rnet-fast.geojson',
+			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/rnet-{%type}.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
 			lineColourField: 'busyness',
@@ -97,7 +97,7 @@ var actdev = (function ($) {
 		},
 		
 		routes: {
-			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/routes-fast.geojson',
+			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/routes-{%type}.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
 			lineColourField: 'mean_busyness',

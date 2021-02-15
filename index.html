@@ -161,12 +161,44 @@
 						<p><em>Description to follow</em></p>
 					</div>
 					<div id="routenetwork">
+						
 						<h2>Route network data</h2>
 						<p>These represent the route network data along the desire lines (likely fast route).</p>
+						
+						<div class="filters">
+							<h3>Routes type:</h3>
+							
+							<div class="controls">
+								<select name="type" id="routenetwork_type">
+										<option value=""></option>
+										<option value="quiet">Cycling - quietest route</option>
+										<option value="balanced">Cycling - balanced route</option>
+										<option value="fast" selected="selected">Cycling - fastest route</option>
+										<option value="walk">Walking routes</option>
+								</select>
+							</div>
+						</div>
+						
 					</div>
 					<div id="routes">
-						<h2>Routes</h2>
-						<p>These represent the routes (as whole route geometries) along the desire lines (likely fast route).</p>
+						
+						<h2>Route data</h2>
+						<p>These represent the routes that are likely to be taken by for desire lines.</p>
+						
+						<div class="filters">
+							<h3>Routes type:</h3>
+							
+							<div class="controls">
+								<select name="type" id="routes_type">
+										<option value=""></option>
+										<option value="quiet">Cycling - quietest route</option>
+										<option value="balanced">Cycling - balanced route</option>
+										<option value="fast" selected="selected">Cycling - fastest route</option>
+										<option value="walk">Walking routes</option>
+								</select>
+							</div>
+						</div>
+						
 					</div>
 					<div id="desirelines">
 						<h2>Desire lines</h2>
