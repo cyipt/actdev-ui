@@ -43,6 +43,7 @@ var actdev = (function ($) {
 		// Region switcher, with areas defined as a GeoJSON file
 		regionsFile: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.geojson',
 		regionsField: 'site_name',
+		regionsNameField: 'full_name',
 		regionsSubstitutionToken: '{site_name}',
 		regionSwitcherNullText: 'Go to development',
 		
