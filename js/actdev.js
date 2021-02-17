@@ -210,7 +210,7 @@ var actdev = (function ($) {
 			apiKey: false,
 			popupHtml: ''
 				+ '<h3>Study area: {properties.site_name}</h3>'
-				+ '<p id="simulation"><a target="_blank" href="/abstreet/?--actdev={properties.site_name}&--cam=' + window.location.hash.substr(1) + '">Open travel simulation <br />in A/B Street</a></p>',
+				+ '<p id="simulation"><a target="_blank" href="/abstreet/?--actdev={properties.site_name}&--cam={%mapposition}">Open travel simulation <br />in A/B Street</a></p>',
 			style: {
 				Polygon: {
 					"fill-outline-color": "red",
