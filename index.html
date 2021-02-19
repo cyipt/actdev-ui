@@ -124,6 +124,12 @@
 							<input type="checkbox" name="show[]" id="show_cycleability" />
 							<a href="#cycleability" title="Walkability and cycleability ratings layer" class="tooltip"><i class="fa fa-biking"></i><br />Walkability / cycleability</a>
 						</li>
+						<li class="photos">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_photos" />
+							<a href="#photos" title="Photos" class="tooltip"><i class="fa fa-camera"></i><br />Photos</a>
+						</li>
 						<li class="planningapplications">
 							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
 							<p class="total"></p>
@@ -348,6 +354,12 @@
 						<h3>&#x1f6b2; Cycleability ratings:</h3>
 						<p>Data comes from the CycleStreets routing engine.</p>
 						<p>(Note that currently this only shows a maximum of 400 linear features at a time.)</p>
+					</div>
+					
+					<div id="photos">
+						<h2>Photos</h2>
+						<p>Photos from around sites.</p>
+						<p>Note: Some of these photos are sourced from the <a href="https://www.cyclestreets.net/photomap/" target="_blank">CycleStreets Photomap</a> and are the copyright of their respective photographers.</p>
 					</div>
 					
 					<div id="planningapplications">

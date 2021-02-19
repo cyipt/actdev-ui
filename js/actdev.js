@@ -26,7 +26,7 @@ var actdev = (function ($) {
 		defaultTileLayer: 'light',
 		
 		// Default layers ticked
-		defaultLayers: ['sites', 'studyarea', 'routenetwork', 'buildings'],
+		defaultLayers: ['sites', 'studyarea', 'routenetwork', 'buildings', 'photos'],
 		
 		// Icon size, set globally for all layers
 		iconSize: [38, 42],
@@ -354,6 +354,48 @@ var actdev = (function ($) {
 				+ '[macro:yearstable({properties.minyear}, {properties.maxyear}, cycles;p2w;cars;buses;lgvs;mgvs;hgvs;all_motors;all_motors_pcu, Cycles;P2W;Cars;Buses;LGVs;MGVs;HGVs;Motors;Motor PCU)]'
 				+ '<p><strong>{properties.maxyear} PCU breakdown -</strong> Cycles: {properties.cycle_pcu}, P2W: {properties.p2w_pcu}, Cars: {properties.car_pcu}, Buses: {properties.bus_pcu}, LGVs: {properties.lgv_pcu}, MGVs: {properties.mgv_pcu}, HGVs: {properties.hgv_pcu}</p>'
 				+ '</div>'
+		},
+		
+		photos: {
+			apiCall: '/v2/photomap.locations',
+			apiFixedParameters: {
+				tags: 'actdev',
+				fields: 'id,captionHtml,hasPhoto,thumbnailUrl,url,username,licenseName,iconUrl,categoryName,metacategoryName,datetime,apiUrl',
+				thumbnailsize: 300,
+				datetime: 'friendlydate'
+			},
+			iconField: 'iconUrl',		// icons specified in the field value
+			popupHtml:
+				  '<p><a href="/photomap/{properties.id}/" id="details" data-url="{properties.apiUrl}&thumbnailsize=800"><img src="{properties.thumbnailUrl}" /></a></p>'
+				+ '<div class="scrollable">'
+				+ '<strong>{properties.captionHtml}</strong>'
+				+ '</div>'
+				+ '<table>'
+				+ '<tr><td>Date:</td><td>{properties.datetime}</td></tr>'
+				+ '<tr><td>By:</td><td>{properties.username}</td></tr>'
+				+ '<tr><td>Category:</td><td>{properties.categoryName} &mdash; {properties.metacategoryName}</td></tr>'
+				+ '</table>'
+				+ '<p><a href="{properties.url}"><img src="/images/icons/bullet_go.png" /> <strong>View full details</a></strong></p>',
+			detailsOverlay: 'apiUrl',
+			overlayHtml:
+				  '<table class="fullimage">'
+				+ '<tr>'
+				+ '<td>'
+				+ '<p><img src="{properties.thumbnailUrl}" /></p>'
+				+ '</td>'
+				+ '<td>'
+				+ '<p>'
+				+ '<strong>{properties.caption}</strong>'
+				+ '</p>'
+				+ '<table>'
+				// + '<tr><td>Date:</td><td>{properties.datetime}</td></tr>'
+				+ '<tr><td>By:</td><td>{properties.username}</td></tr>'
+				// + '<tr><td>Category:</td><td>{properties.categoryName} &mdash; {properties.metacategoryName}</td></tr>'
+				+ '</table>'
+				+ '{%streetview}'
+				+ '</td>'
+				+ '</tr>'
+				+ '</table>'
 		},
 		
 		planningapplications: {
