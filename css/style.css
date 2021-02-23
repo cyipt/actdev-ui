@@ -4,7 +4,7 @@ a {text-decoration: none;}
 ul {list-style: none;}
 
 /* Typography */
-body {background-color: #434343; color: white; font-family: 'Source Sans Pro', sans-serif;}
+body {background-color: #434343; font-family: 'Source Sans Pro', sans-serif;}
 h1 {color: white;}
 .green {color: #53e21f;}
 .blue {color: #4aa59d;}
@@ -14,8 +14,8 @@ h1 {color: white;}
 /* Main container */
 html, body, section {height: 100vh;}
 .app-container {display: flex;}
-.infographic-half {background-color: #434343; flex: 1; padding: 1rem; overflow-y: scroll;}
-.map-half {background-color: #7a7a7a; flex: 1; padding: 1rem;}
+.infographic-half {background-color: #434343; color: white; flex: 1; padding: 1rem; overflow-y: scroll;}
+.map-half {background-color: #7a7a7a; flex: 1;}
 
 /* Infographic side */
 
