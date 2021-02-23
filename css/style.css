@@ -79,7 +79,7 @@ ul.site-data-carousel .controls label {margin-left: 7.5px; font-weight: 300; fon
 .ios-segmented-control .option {position: relative; cursor: pointer;}
 .ios-segmented-control .option:hover input:not(:checked) + label span, .ios-segmented-control .option:active input:not(:checked) + label span, .ios-segmented-control .option:focus input:not(:checked) + label span {opacity: .2;}
 .ios-segmented-control .option:active input:not(:checked) + label span {transform: scale(.95);}  
-.ios-segmented-control .option label {position: relative; display: block; text-align: center; padding: 3px 6vmin; background: rgba(255,255,255,0); font-weight: 500; color: rgba(0,0,0,1); font-size: 14px;}  
+.ios-segmented-control .option label {position: relative; display: block; text-align: center; padding: 3px 6vmin; background: rgba(255,255,255,0); font-weight: 500; color: rgba(0,0,0,1); font-size: 20px; height: 45px; line-height: 40px;}  
 .ios-segmented-control .option label::before, .ios-segmented-control .option label::after {content: ''; width: 1px; background: rgba(142,142,147,.15); position: absolute; top: 14%; bottom: 14%; will-change: background; -webkit-transition: background .2s ease; transition: background .2s ease;}  
 .ios-segmented-control .option label::before {left: 0; transform: translateX(-.5px);}  
 .ios-segmented-control .option label::after {right: 0; transform: translateX(.5px);}  
