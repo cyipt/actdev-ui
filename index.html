@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8" />
 	<title>ActDev - Active travel provision and potential in planned and proposed development sites.</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
+
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-title" content="ActDev" />
-	
-	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
-	
+
 	<link rel="stylesheet" href="/js/lib/mapbox-gl-js/mapbox-gl.css" />
 	<script src="/js/lib/mapbox-gl-js/mapbox-gl.min.js"></script>
 	<script src="/js/lib/jquery/jquery.min.js"></script>
-	
+
 	<script src="/js/lib/jquery-ui/jquery-ui.min.js"></script>
-	
+
 	<script src="/js/lib/jQuery-Touch-Events/src/1.0.9/jquery.mobile-events.min.js"></script>
 
 	<script src="/js/lib/mapbox-gl-draw/mapbox-gl-draw.js"></script>
 	<link rel="stylesheet" href="/js/lib/mapbox-gl-draw/mapbox-gl-draw.css" />
-	
+
 	<script src="/js/lib/js-cookie/js.cookie.js"></script>
-	
+
 	<!-- Vex dialogs; see: https://github.hubspot.com/vex/ -->
 	<script src="/js/lib/vex-4.1.0/dist/js/vex.combined.min.js"></script>
 	<link rel="stylesheet" href="/js/lib/vex-4.1.0/dist/css/vex.css" />
 	<link rel="stylesheet" href="/js/lib/vex-4.1.0/dist/css/vex-theme-plain.css" />
-	
+
 	<!-- GeoJSON parser for flat JSON; see: https://www.npmjs.com/package/geojson -->
 	<!--<script src="https://unpkg.com/geojson@0.5.0/geojson.js"></script>-->
 	<script src="/js/lib/GeoJSON.js/geojson.js"></script>
-	
+
 	<!-- GeoJSON extent library; see: https://github.com/mapbox/geojson-extent -->
 	<script src="/js/lib/geojson-extent/geojson-extent.js"></script>
-	
+
 	<!-- LayerViewer library, providing the application logic -->
 	<script src="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.js"></script>
 	<link rel="stylesheet" type="text/css" href="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.css" />
@@ -44,430 +45,335 @@
 	<!-- Fontawesome icons -->
 	<script src="/js/lib/fontawesome/fontawesome-kit-7bd5544b77.js"></script>
 
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
+		rel="stylesheet">
+
 	<!-- Parse CSV -->
 	<script src="/js/lib/PapaParse/papaparse.min.js"></script>
 	
+	<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+	<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
 	<!-- ActDev application and its config, implementing the LayerViewer library -->
 	<script src="/.config.js"></script>
 	<script src="/js/actdev.js"></script>
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	<script>
-		$(function() {
-			actdev.initialise (config);
+		$(function () {
+			actdev.initialise(config);
 		});
 	</script>
+
 <body>
-
-	<div id="globalsites">
-		<p>ActDev</p>
-	</div>
-	
 	<main>
-		
-		<form id="data">
-		
-			<nav>
-				
-				<div id="selector">
-					<ul>
-						<li class="sites">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_sites" />
-							<a href="#sites" title="Sites data" class="tooltip"><i class="fa fa-draw-polygon"></i><br />Sites</a>
-						</li>
-						<li class="studyarea">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_studyarea" />
-							<a href="#studyarea" title="Study area" class="tooltip"><i class="fa fa-atlas"></i><br />Study area</a>
-						</li>
-						<li class="routenetwork">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_routenetwork" />
-							<a href="#routenetwork" title="Route network data" class="tooltip"><i class="fa fa-bezier-curve"></i><br />Route network data</a>
-						</li>
-						<li class="routes">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_routes" />
-							<a href="#routes" title="Route data" class="tooltip"><i class="fa fa-bezier-curve"></i><br />Route data</a>
-						</li>
-						<li class="desirelines">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_desirelines" />
-							<a href="#desirelines" title="Desire lines" class="tooltip"><i class="fa fa-bezier-curve"></i><br />Desire lines</a>
-						</li>
-						<li class="accessibility">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_accessibility" />
-							<a href="#accessibility" title="Accessibility, shown as concentric rings from the development" class="tooltip"><i class="fa fa-life-ring"></i><br />Accessibility</a>
-						</li>
-						<li class="buildings">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_buildings" />
-							<a href="#buildings" title="Buildings" class="tooltip"><i class="fa fa-building"></i><br />Buildings</a>
-						</li>
-						<li class="jts">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_jts" />
-							<a href="#jts" title="Journey time statistics" class="tooltip"><i class="fa fa-wave-square"></i><br />Journey time stats</a>
-						</li>
-						<li class="cycleability">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_cycleability" />
-							<a href="#cycleability" title="Walkability and cycleability ratings layer" class="tooltip"><i class="fa fa-biking"></i><br />Walkability / cycleability</a>
-						</li>
-						<li class="photos">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_photos" />
-							<a href="#photos" title="Photos" class="tooltip"><i class="fa fa-camera"></i><br />Photos</a>
-						</li>
-						<li class="planningapplications">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_planningapplications" />
-							<a href="#planningapplications" title="Planning applications" class="tooltip"><i class="fa fa-file-alt"></i><br />Planning applications</a>
-						</li>
-						<li class="collisions">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_collisions" />
-							<a href="#collisions" title="Collisions" class="tooltip"><i class="fa fa-car-crash"></i><br />Collisions</a>
-						</li>
-						<li class="trafficcounts">
-							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
-							<p class="total"></p>
-							<input type="checkbox" name="show[]" id="show_trafficcounts" />
-							<a href="#trafficcounts" title="Traffic data" class="tooltip"><i class="fa fa-car"></i><br />Traffic counts</a>
-						</li>
-					</ul>
-				</div>
-				
-				<div id="sections">
-					
-					<header>
-						<h1>ActDev</h1>
-						<p class="about">Active travel provision and potential in planned and proposed development sites.</p>
-					</header>
+		<section class="app-container">
+			<div class="infographic-half">
 
-					<div id="sites">
-						<h2>Sites</h2>
-						<p>New developments</p>
-					</div>
-					<div id="studyarea">
-						<h2>Small study area</h2>
-						<p><em>Description to follow</em></p>
-					</div>
-					<div id="routenetwork">
-						
-						<h2>Route network data</h2>
-						<p>These represent the route network data along the desire lines (likely fast route).</p>
-						
-						<div class="filters">
-							<h3>Routes type:</h3>
-							
-							<div class="controls">
-								<select name="type" id="routenetwork_type">
-										<option value=""></option>
-										<option value="walk">Walking routes</option>
-										<option value="quiet">Cycling - quietest route</option>
-										<option value="balanced">Cycling - balanced route</option>
-										<option value="fast" selected="selected">Cycling - fastest route</option>
-								</select>
-							</div>
+				<div class="infographic-header">
+					
+					<i class="fa fa-long-arrow-alt-left site-back-arrow"></i>
+					<h1>Great Kneighton</h1>
+
+					<div class="infographic-header-container">
+						<div class="infographic-header-left">
+							<p class="site-description">Potential blurb about the site here, with some auto generated text-based
+								info. Potential blurb about the site here, with some auto generated text-based info.</p>
+
+							<ul class="external-links">
+								<li><a class="site-info-link" href="#">View planning applications <i class="fa fa-chevron-right"></i></a></li>
+								<li><a class="site-info-link" href="#">View simulation <i class="fa fa-chevron-right"></i></a></li>
+							</ul>
 						</div>
-						
-					</div>
-					<div id="routes">
-						
-						<h2>Route data</h2>
-						<p>These represent the routes that are likely to be taken by for desire lines.</p>
-						
-						<div class="filters">
-							<h3>Routes type:</h3>
-							
-							<div class="controls">
-								<select name="type" id="routes_type">
-										<option value=""></option>
-										<option value="walk">Walking routes</option>
-										<option value="quiet">Cycling - quietest route</option>
-										<option value="balanced">Cycling - balanced route</option>
-										<option value="fast" selected="selected">Cycling - fastest route</option>
-								</select>
-							</div>
-						</div>
-						
-					</div>
-					<div id="desirelines">
-						<h2>Desire lines</h2>
-						<p>This shows the desire lines (straight line).</p>
-					</div>
-					<div id="accessibility">
-						<h2>Accessibility</h2>
-						<p>These represent the cycleability of the development, shown as concentric rings from the development.</p>
-					</div>
-					<div id="buildings">
-						<h2>Buildings</h2>
-						<p><em>Description to follow</em></p>
-					</div>
-					<div id="jts">
-						<h2>Journey time statistics</h2>
-						<p><em>Description to follow</em></p>
-					</div>
-					<div id="collisions">
-						<h2>Collisions</h2>
-						<p>Although cycling is not an inherently unsafe activity, collisions are more frequent than they should be due to lack of cycle infrastructure. Data is from DfT/police STATS19, from 2005-2019. See <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/230596/stats20-2011.pdf" target="_blank">definitions</a>.</p>
-						<p>Zoom in to see all - while zoomed out only a selection is shown due to the volume.</p>
-						
-						<div class="filters">
-							<h3>Filter to:</h3>
-							
-							<h4>Severity:</h4>
-							<div class="controls">
-								<select name="field:severity" id="severity">
-									<option value="" id="severity___NULL">All</option>
-									<option value="fatal" id="severity_fatal">Fatal</option>
-									<option value="fatal,serious" id="severity_fatalserious">Fatal / serious</option>
-									<option value="serious" id="severity_serious">Serious</option>
-									<option value="serious,slight" id="severity_seriousslight">Serious / slight</option>
-									<option value="slight" id="severity_slight">Slight</option>
-								</select>&nbsp; collisions
-							</div>
-							
-							<h4>Casualty:</h4>
-							<div class="controls">
-								<input type="checkbox" checked="checked" name="field:casualties[]" id="casualties_Cyclist" value="Cyclist" /><label for="casualties_Cyclist">Cyclist</label><br />
-								<input type="checkbox" name="field:casualties[]" id="casualties_Pedestrian" value="Pedestrian" /><label for="casualties_Pedestrian">Pedestrian</label><br />
-								<input type="checkbox" name="field:casualties[]" id="casualties_Car_occupant" value="Car occupant" /><label for="casualties_Car_occupant">Car occupant</label><br />
-							</div>
-							
-							<h4>Date range:</h4>
-							<p>&nbsp;
-								<select name="since" data-yearly-range-since-sqldate="2005,2019">
-									<option value="">&nbsp;</option>
-								</select>
-								-
-								<select name="until" data-yearly-range-until-sqldate="2005,2019">
-									<option value="">&nbsp;</option>
-								</select>
-							</p>
-							
-							<!--
-							<h4>With a:</h4>
-							<div class="controls">
-								<input type="checkbox" checked="checked" name="field:involved[]" id="involved_Car_occupant" value="Driver" /><label for="involved_Car_occupant">Driver</label>
-								<input type="checkbox" name="field:involved[]" id="involved_Cyclist" value="Cyclist" /><label for="involved_Cyclist">Cyclist</label>
-								<input type="checkbox" name="field:involved[]" id="involved_Pedestrian" value="Pedestrian" /><label for="involved_Pedestrian">Ped</label><br />
-							</div>
-							-->
-							
-							<h4>Limit to:</h4>
-							<div class="controls">
-								<input type="checkbox" name="field:Junction_Detail" value="1,2,3,5,6,7" id="junctions" /><label for="junctions">Junctions</label><br />
-								<input type="checkbox" name="field:Road_Type" value="2" id="onewaystreets" /><label for="onewaystreets">One-way streets</label><br />
-								<input type="checkbox" name="field:1st_Road_Class" value="1,2,3" id="aroads" /><label for="aroads" title="A, A(M), and motorways">A-roads</label><br />
-								<select name="field:Speed_limit" id="speedlimit">
-									<option value="" id="speedlimit___NULL">All</option>
-									<option value="20" id="speedlimit_20">20 mph</option>
-									<option value="20,30" id="speedlimit_20_30">20/30mph</option>
-									<option value="30" id="speedlimit_30">30mph</option>
-									<option value="40,50,60,70" id="speedlimit_40_70">40-70mph</option>
-									<option value="50,60,70" id="speedlimit_50plus">50-70mph</option>
-								</select> speed limit
-							</div>
-							
-							<!--
-							<p>&#9655; More filters</p>
-							-->
-		
-						</div>
-						
-						<div class="export button">
-							<p>Export: <img class="csv" src="/js/lib/Mapboxgljs.LayerViewer/images/page_excel.png" alt="Spreadsheet" /></p>
-						</div>
-						
-						<!--
-						<div id="compare" class="filters">
-							<h3>&#10018; Comparison charts:</h3>
-						
-							<script>
-								$(function() {
-									$(':checkbox.enable').on('change', function() {
-										$(this).closest('div').toggleClass('enabled', this.checked);
-									});
-								});
-							</script>
-							
-							<div id="collisions_dateRange">
-								<h4>
-									<input type="checkbox" id="enableDateRange" class="enable" />
-									<label for="enableDateRange">Changes over time:</label>
-								</h4>
-								<div class="controls">
-									<label for="dateFrom">From: </label><input type="date" name="dateFrom" /><br />
-									<label for="dateTo">To: </label><input type="date" name="dateTo" />
+
+						<div class="infographic-header-right">
+							<div class="ios-segmented-control">
+								<span class="selection"></span>
+								<div class="option">
+									<input type="radio" id="current" name="current-scenario" value="current" checked>
+									<label for="current"><span>Current</span></label>
 								</div>
-							</div>
-							
-							<div id="localAuthorities">
-								<h4>
-									<input type="checkbox" id="enableLocalAuthorities" class="enable" />
-									<label for="enableLocalAuthorities">Local Authorities:</label>
-								</h4>
-								<div class="controls">
-	
-									<select name="localAuthority1">
-										<option value="" id="localAuthority1_"></option>
-										<option value="London" id="localAuthority1_london">London</option>
-										<option value="Cambridge" id="localAuthority1_cambridge">Cambridge</option>
-										<option value="Edinburgh" id="localAuthority1_edinburgh">Edinburgh</option>
-									</select>
-									<select name="localAuthority2">
-										<option value="" id="localAuthority2_all">All</option>
-										<option value="London" id="localAuthority2_london">London</option>
-										<option value="Cambridge" id="localAuthority2_cambridge">Cambridge</option>
-										<option value="Edinburgh" id="localAuthority2_edinburgh">Edinburgh</option>
-									</select>
+								<div class="option">
+									<input type="radio" id="scenario" name="current-scenario" value="scenario">
+									<label for="scenario"><span>Scenario</span></label>
 								</div>
 							</div>
 						</div>
-						-->
 					</div>
-					<div id="trafficcounts">
-						<h2>Traffic count data</h2>
-						<p>This map contains official traffic counts of all main roads in the UK, for each type of vehicle. This is a visualisation of the DfT's AADF (Annual Average Daily Flows) data. Figures are average daily counts.</p>
-						<p><em>Based on work originally by <a href="https://hfcyclists.org.uk/s4c-maps/dft-annual-average-daily-flow-vehicle-counts-mapped-visualised/" target="_blank">Alex Ingram at hfcyclists</a>.</em></p>
-					</div>
-					
-					<div id="cycleability">
-						<h2>Walkability and cycleability</h2>
-						<h3>&#x1f6b6;&#x1f3fe; Walkability ratings:</h3>
-						<p>We regret this data is not yet available. We hope to add it in a future release.</p>
-						<h3>&#x1f6b2; Cycleability ratings:</h3>
-						<p>Data comes from the CycleStreets routing engine.</p>
-						<p>(Note that currently this only shows a maximum of 400 linear features at a time.)</p>
-					</div>
-					
-					<div id="photos">
-						<h2>Photos</h2>
-						<p>Photos from around sites.</p>
-						<p>Note: Some of these photos are sourced from the <a href="https://www.cyclestreets.net/photomap/" target="_blank">CycleStreets Photomap</a> and are the copyright of their respective photographers.</p>
-					</div>
-					
-					<div id="planningapplications">
-						<h2>Planning applications</h2>
-						<p>New developments have the potential to worsen traffic conditions, but can also bring opportunities to fund infrastructure improvements.</p>
-						
-						<div class="filters">
-							<h3>Filters:</h3>
-							
-							<div id="dateRecent">
-								<h4>Since:</h4>
-								<select name="recent">
-									<option value="">Recent</option>
-									<option value="56">8 weeks</option>
-									<option value="91">13 weeks</option>
-									<option value="112">16 weeks</option>
-								</select>
-								<p><a href="https://www.gov.uk/guidance/determining-a-planning-application" target="_blank">Read more about consultation time limits.</a></p>
-							</div>
-							
-							<h4>Size of development:</h4>
-							<ul class="controls">
-								<li><label><input type="checkbox" name="size[]" value="Small">Small</label></li>
-								<li><label><input type="checkbox" name="size[]" value="Medium" checked="checked">Medium</label></li>
-								<li><label><input type="checkbox" name="size[]" value="Large" checked="checked">Large</label></li>
-							</ul>
-							
-							<h4>Status</h4>
-							<ul class="controls">
-								<li><label><input type="checkbox" checked="checked" name="state[]" value="Undecided" />Current</label></li>
-								<li><label><input type="checkbox" name="state[]" value="Conditions,Permitted,Referred,Rejected,Unresolved,Withdrawn" />Decided</label></li>
-							</ul>
-							
-							<h4>Application type:</h4>
-							<ul class="controls">
-								<li><label><input type="checkbox" name="type[]" value="Full">Full</label></li>
-								<li><label><input type="checkbox" name="type[]" value="Outline">Outline</label></li>
-								<li><label><input type="checkbox" name="type[]" value="Amendment">Amendment</label></li>
-								<li><label><input type="checkbox" name="type[]" value="Heritage">Heritage</label></li>
-								<li><label><input type="checkbox" name="type[]" value="Trees">Trees</label></li>
-								<li><label><input type="checkbox" name="type[]" value="Advertising">Advertising</label></li>
-								<li><label><input type="checkbox" name="type[]" value="Telecoms">Telecoms</label></li>
-								<li><label><input type="checkbox" name="type[]" value="Other">Other</label></li>
-								<li><label><input type="checkbox" name="type[]" value="Conditions">Conditions</label></li>
-							</ul>
-							
-							<div id="dateRange">
-								<h4>Between dates:</h4>
-								<div class="controls">
-									<label for="planningapplications_since">From: </label><input type="date" name="since" id="planningapplications_since" /><br />
-									<label for="planningapplications_until">To: </label><input type="date" name="until" id="planningapplications_until" />
-								</div>
-							</div>
-							
+
+					<div class="headline-stats">
+						<div class="main-headline-stat">
+							<h3>68%</h3>
+							<h4>accessibility</h4>
 						</div>
-						
+						<ul class="secondary-stats">
+							<li class="blue">
+								<h3>28%</h3>
+								<h4>mode share</h4>
+							</li>
+							<li class="red">
+								<h3>2%</h3>
+								<h4>2011 data</h4>
+							</li>
+							<li class="yellow">
+								<h3>42%</h3>
+								<h4>sys</h4>
+							</li>
+						</ul>
 					</div>
 				</div>
-			</nav>
-			
-			<div id="geocoder" class="geocoder">
-				<input type="text" name="location" autocomplete="off" placeholder="Search locations and move map" tabindex="1" spellcheck="false" />
+
+				<div class="site-info-sections">
+					<div class="site-info-section">
+						<div class="site-info-title">
+							<h4>Accessibility</h4>
+							<hr>
+						</div>
+						<div class="site-info-content">
+							<div class="graph-container">
+								<img src="/images/placeholders/graph1.png" />
+							</div>
+							<div class="caption-container">
+								Caption here & more information about the graph on the left.
+							</div>
+						</div>
+						
+					</div>
+
+					<div class="site-info-section">
+						<div class="site-info-title">
+							<h4>Site data</h4>
+							<hr>
+						</div>
+						<p class="section-description">Explanatory text here about the section</p>
+						<ul class="site-data-carousel">
+
+							<li>
+								
+								<div class="data-carousel-header">
+									<input type="checkbox" name="desire-lines" id="desire-lines" />
+									<label for="desire-lines"><img src="/images/placeholders/desire-lines.png" />
+									</label>
+									
+									<p>Desire lines</p>
+									<p class="info-circle">ⓘ</p>
+								</div>
+								<div class="controls"></div>
+							</li>
+
+							<li>
+								<div class="data-carousel-header">
+									<input type="checkbox" name="route-network" id="route-network" checked />
+									<label for="route-network"><img src="/images/placeholders/route-network.png" /></label>
+									<p>Route network</p>
+									<p class="info-circle">ⓘ</p>
+								</div>
+
+								<div class="controls">
+									<input type="radio" id="option1" name="gender" value="option1">
+									<label for="male">Option 1</label><br>
+									<input type="radio" id="option2" name="gender" value="option2">
+									<label for="female">Option 2</label><br>
+									<input type="radio" id="option3" name="gender" value="option3">
+									<label for="other">Option 3</label>
+								</div>
+							</li>
+
+							<li>
+								<div class="data-carousel-header">
+									<input type="checkbox" name="accessibility" id="accessibility" checked />
+									<label for="accessibility"><img src="/images/placeholders/accessibility.png" /></label>
+									<p>Accessibility</p>
+									<p class="info-circle">ⓘ</p>
+								</div>
+								<div class="controls">
+									<input type="radio" id="cycling" name="gender" value="male">
+									<label for="male">Cycling</label><br>
+									<input type="radio" id="walking" name="gender" value="female">
+									<label for="female">Walking</label><br>
+								</div>
+							</li>
+
+							<li>
+								<div class="data-carousel-header">
+									<input type="checkbox" name="study-area" id="study-area" />
+									<label for="study-area"><img src="/images/placeholders/study-area.png" /></label>
+									<p>Study area</p>
+									<p class="info-circle">ⓘ</p>
+								</div>
+								<div class="controls"></div>
+							</li>
+							<li>
+								<div class="data-carousel-header">
+									<input type="checkbox" name="study-area" id="study-area" />
+									<label for="study-area"><img src="/images/placeholders/study-area.png" /></label>
+									<p>Study area</p>
+									<p class="info-circle">ⓘ</p>
+								</div>
+								<div class="controls"></div>
+							</li>
+						</ul>
+					</div>
+
+					<div class="site-info-section">
+						<div class="site-info-title">
+							<h4>Site photos</h4>
+							<hr>
+						</div>
+						<div class="carousel">
+							<div class="carousel-cell">
+								<img src="/images/placeholders/photo1.png" />
+							</div>
+							<div class="carousel-cell">
+								<img src="/images/placeholders/photo2.png" />
+							</div>
+							<div class="carousel-cell">
+								<img src="/images/placeholders/photo3.png" />
+							</div>
+							<div class="carousel-cell">
+								<img src="/images/placeholders/photo4.png" />
+							</div>
+							<div class="carousel-cell">
+								<img src="/images/placeholders/photo5.png" />
+							</div>
+						</div>
+					</div>
+
+				</div>
 			</div>
-			
-			<div id="map" class="map">
+
+
+			<div class="map-half">
 			</div>
-			
-		</form>
-		
+		</section>
+
 	</main>
-	
-	<footer>
-		<p>Created by <a href="https://environment.leeds.ac.uk/transport">University of Leeds</a> and <a href="https://www.cyclestreets.org/">CycleStreets</a> &nbsp;||&nbsp; <a class="feedback" href="https://www.cyclestreets.net/feedback/">Feedback</a> &nbsp;||&nbsp; An open source project - <a href="https://www.github.com/cyipt/actdev-ui/">contribute on Github</a></p>
-	</footer>
 
-	<div id="feedback" class="feedback">
-		
-		<h2>Give feedback</h2>
-		<form method="post" id="feedbackform" name="feedbackform" action="https://www.cyclestreets.net/feedback/" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
-			<table>
-				<tr>
-					<td colspan="2">
-						<p>We welcome your feedback!</p>
-					</td>
-				</tr>
-				<tr>
-					<td>Comments:</td>
-					<td><textarea name="comments" cols="60" rows="5" required="required"></textarea></td>
-				</tr>
-				<tr>
-					<td>Your name:</td>
-					<td><input type="text" name="name" size="40" maxlength="255" required="required" /></td>
-				</tr>
-				<tr>
-					<td>E-mail:</td>
-					<td><input type="email" name="email" size="40" maxlength="255" required="required" /></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" value="Submit!" class="button" /></td>
-				</tr>
-			</table>
-			<input type="hidden" name="type" value="other" />
-		</form>
-		
-	</div>
-	
+
 </body>
 
-</html>
+<script>
+	var flky = new Flickity( '.carousel', {
+  // options, defaults listed
 
+  accessibility: true,
+  // enable keyboard navigation, pressing left & right keys
+
+  adaptiveHeight: false,
+  // set carousel height to the selected slide
+
+  autoPlay: false,
+  // advances to the next cell
+  // if true, default is 3 seconds
+  // or set time between advances in milliseconds
+  // i.e. `autoPlay: 1000` will advance every 1 second
+
+  cellAlign: 'center',
+  // alignment of cells, 'center', 'left', or 'right'
+  // or a decimal 0-1, 0 is beginning (left) of container, 1 is end (right)
+
+  cellSelector: undefined,
+  // specify selector for cell elements
+
+  contain: true,
+  // will contain cells to container
+  // so no excess scroll at beginning or end
+  // has no effect if wrapAround is enabled
+
+  draggable: '>1',
+  // enables dragging & flicking
+  // if at least 2 cells
+
+  dragThreshold: 3,
+  // number of pixels a user must scroll horizontally to start dragging
+  // increase to allow more room for vertical scroll for touch devices
+
+  freeScroll: false,
+  // enables content to be freely scrolled and flicked
+  // without aligning cells
+
+  friction: 0.2,
+  // smaller number = easier to flick farther
+
+  groupCells: '80%',
+  // group cells together in slides
+
+  initialIndex: 0,
+  // zero-based index of the initial selected cell
+
+  lazyLoad: true,
+  // enable lazy-loading images
+  // set img data-flickity-lazyload="src.jpg"
+  // set to number to load images adjacent cells
+
+  percentPosition: false,
+  // sets positioning in percent values, rather than pixels
+  // Enable if items have percent widths
+  // Disable if items have pixel widths, like images
+
+  prevNextButtons: true,
+  // creates and enables buttons to click to previous & next cells
+
+  pageDots: false,
+  // create and enable page dots
+
+  resize: true,
+  // listens to window resize events to adjust size & positions
+
+  rightToLeft: false,
+  // enables right-to-left layout
+
+  setGallerySize: false,
+  // sets the height of gallery
+  // disable if gallery already has height set with CSS
+
+  watchCSS: false,
+  // watches the content of :after of the element
+  // activates if #element:after { content: 'flickity' }
+
+  wrapAround: false
+  // at end of cells, wraps-around to first for infinite scrolling
+
+});
+</script>
+
+<!-- iOS control script -->
+<script>
+	// Constants
+	const SEGMENTED_CONTROL_BASE_SELECTOR = ".ios-segmented-control";
+	const SEGMENTED_CONTROL_INDIVIDUAL_SEGMENT_SELECTOR = ".ios-segmented-control .option input";
+	const SEGMENTED_CONTROL_BACKGROUND_PILL_SELECTOR = ".ios-segmented-control .selection";
+
+
+	// Main
+	document.addEventListener("DOMContentLoaded", setup);
+
+	// Body functions
+	function setup() {
+		forEachElement(SEGMENTED_CONTROL_BASE_SELECTOR, elem => {
+			elem.addEventListener("change", updatePillPosition);
+		})
+		window.addEventListener("resize",
+		updatePillPosition); // Prevent pill from detaching from element when window resized. Becuase this is rare I haven't bothered with throttling the event
+	}
+
+	function updatePillPosition() {
+		forEachElement(SEGMENTED_CONTROL_INDIVIDUAL_SEGMENT_SELECTOR, (elem, index) => {
+			if (elem.checked) moveBackgroundPillToElement(elem, index);
+		})
+	}
+
+	function moveBackgroundPillToElement(elem, index) {
+		document.querySelector(SEGMENTED_CONTROL_BACKGROUND_PILL_SELECTOR).style.transform = "translateX(" + (elem
+			.offsetWidth * index) + "px)";
+	}
+
+	// Helper functions
+
+	function forEachElement(className, fn) {
+		Array.from(document.querySelectorAll(className)).forEach(fn);
+	}
+</script>
+
+</html>
