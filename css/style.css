@@ -17,32 +17,38 @@ html, body, section {height: 100vh;}
 .infographic-half {background-color: #434343; flex: 1; padding: 1rem; overflow-y: scroll;}
 .map-half {background-color: #7a7a7a; flex: 1; padding: 1rem;}
 
-.infographic-header-container {display: flex;}
-.infographic-header-left {flex: 1; margin-left: 80px;}
-
 /* Infographic side */
 
 /* Headline */
-i.site-back-arrow {display: inline-block; font-size: 30px; padding: 0 10px 0 15px;}
-h1 {font-size: 50px; display: inline-block; padding: 5px 5px 5px 20px; margin: 0;}
-p.site-description {padding: 10px 30px 15px 0;}
-ul.external-links li {display: inline-block;}
-ul.external-links li a.site-info-link {display: inline-block;}
-ul.external-links li a.site-info-link {color: white; padding: 0; margin: 5px 20px 0 0; transition: .3s;}
-ul.external-links li a.site-info-link:hover {transform: scale(1.05); color: orange;}
+.infographic-header i.site-back-arrow {display: inline-block; font-size: 30px; padding: 0 10px 0 15px;}
+.infographic-header h1 {font-size: 50px; display: inline-block; padding: 5px 5px 5px 20px; margin: 0;}
+.infographic-header-container {display: flex; flex-wrap: wrap; margin-left: 80px;}
+.infographic-header-left {flex: 1;}
+.infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px;}
+.infographic-header ul.external-links li {display: inline-block;}
+.infographic-header ul.external-links li a.site-info-link {display: inline-block;}
+.infographic-header ul.external-links li a.site-info-link {color: white; padding: 0; margin: 5px 20px 0 0; transition: .3s;}
+.infographic-header ul.external-links li a.site-info-link:hover {transform: scale(1.05); color: orange;}
+
 .headline-stats {padding: 20px 0 0 80px; display: block;}
 .headline-stats .main-headline-stat, .headline-stats .secondary-stats {display: inline-block;}
 .headline-stats h3, .headline-stats h4 {display: inline-block;}
 .headline-stats .main-headline-stat {color: green; margin-right: 10px;}
 .headline-stats .main-headline-stat h3 {font-size: 35px;}
 .headline-stats .main-headline-stat h4 {font-size: 28px; font-weight: 300;}
-.headline-stats ul.secondary-stats li {display: inline-block; padding: 0 10px;}
+.headline-stats ul.secondary-stats li {display: inline-block; padding: 0 10px 0 0;}
 .headline-stats .secondary-stats h3 {font-size: 23px;}
 .headline-stats .secondary-stats h4 {font-size: 16px; font-weight: 300;}
 
+@media screen and (max-width: 800px) {
+    .infographic-header h1 {font-size: 35px; padding-left: 10px;}
+    .infographic-header-container {margin-left: 10px;}
+    .headline-stats {padding-left: 10px;}
+}
+
 /* Site info */
 .site-info-sections {margin: 20px 10px;}
-.site-info-content {display: flex;}
+.site-info-content {display: flex; flex-flow: row wrap;}
 .site-info-content .graph-container {flex-basis: 70%}
 .site-info-content .caption-container {margin-top: 10px; flex-basis: 30%;}
 .site-info-title {display:flex; flex-direction:row; align-items: center;}
