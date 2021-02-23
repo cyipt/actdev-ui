@@ -26,7 +26,7 @@ var actdev = (function ($) {
 		defaultTileLayer: 'light',
 		
 		// Default layers ticked
-		defaultLayers: ['sites', 'studyarea', 'routenetwork', 'buildings', 'photos'],
+		defaultLayers: ['sites', 'studyarea', 'routenetwork', 'buildings'],
 		
 		// Icon size, set globally for all layers
 		iconSize: [38, 42],
