@@ -628,8 +628,15 @@ var actdev = (function ($) {
 							target.text(flooredNumber);
 						}
 					});
+
+					// Set the property of number, so the animation begins from this number next time, as opposed to 0
+					element.prop('number', number);
 				} else {
+					// Set the text as N/A
 					$('.' + metric.name).find ('h3').text ('N/A');
+					
+					// Hide the changed stat part
+					$('.' + metric.name).find ('h5').hide();
 				}
 			});
 		},
