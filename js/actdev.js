@@ -46,7 +46,7 @@ var actdev = (function ($) {
 		regionsNameField: 'full_name',
 		regionsSubstitutionToken: '{site_name}',
 		regionSwitcherNullText: 'Go to development',
-		regionSwitcherCallback: function (selectedRegion) {actdev.getRegionInfographic (selectedRegion);},
+		regionSwitcherCallback: function (selectedRegion) {actdev.populateRegionData (selectedRegion);},
 		
 		// Initial view of all regions; will use regionsFile
 		initialRegionsView: true,
@@ -441,16 +441,44 @@ var actdev = (function ($) {
 			// Run the layerviewer for these settings and layers
 			layerviewer.initialise (_settings, _layerConfig);
 		},
-
+		
 		
 		// Function to fetch and generate site statistics
-		getRegionInfographic: function (selectedRegion)
+		populateRegionData: function (selectedRegion)
 		{
-			// Parse region information
-			actdev.parseRegionInformation (selectedRegion);
+			// Parse and insert region textual information (title, description)
+			actdev.parseRegionTextualInformation (selectedRegion);
+
+			// Fetch and insert the graphs
+			actdev.insertSiteMetricsGraph (selectedRegion);
 			
+			// Populate site statistics
+			actdev.populateSiteStatistics (selectedRegion);
+		},
+
+		
+		// Parse and populate site statistics
+		populateSiteStatistics (selectedRegion)
+		{
 			const siteMetricsUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/in-site-metrics.csv'.replace('{selectedRegion}', selectedRegion);
-			const siteMetrics = ['site_walk_circuity', 'site_cycle_circuity', 'site_drive_circuity']
+			const dataMetricsToShow = [
+				{
+					name: 'percent_cycle_base',
+					percentage: true
+				}, 
+				{
+					name: 'percent_walk_base',
+					percentage: true
+				}, 
+				{
+					name: 'percent_drive_base',
+					percentage: true
+				}, 
+				{
+					name: 'site_cycle_circuity',
+					percentage: false
+				}
+			]
 			
 			// Stream and parse the CSV file
 			var decimalPlaces = 2;
@@ -460,43 +488,73 @@ var actdev = (function ($) {
 				download: true,
 				complete: function (fields) {
 					
-					// Unpack the prased data object
-					var data = fields.data.shift();
+					// Unpack the parsed data object
+					var inSiteMetrics = fields.data.shift();
+
+					// Merge in the mode_split objects
+					const siteModeSplit = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/mode-split.csv'.replace('{selectedRegion}', selectedRegion);
+					Papa.parse (siteModeSplit, {
+						header: true,
+						download: true,
+						complete: function (fields) {
+							
+							// Unpack the parsed data object
+							var modeSplitData = fields.data.shift();
+
+							// Merge the mode-split data with the in-site-metrics
+							var data = {...inSiteMetrics, ...modeSplitData}
 					
-					// Map the array
-					siteMetrics.map(metric => {
-						if (data.hasOwnProperty (metric)) {
-							
-							// Find the h3 for each statistic
-							var element = $('.' + metric).find('h3');
-							
-							// Animate the number
-							element.animateNumber ({
-								number: data[metric] * decimalFactor,
-						  
-								numberStep: function(now, tween) {
-								  var flooredNumber = Math.floor(now) / decimalFactor,
-									  target = $(tween.elem);
-						  
-								  if (decimalPlaces > 0) {
-									// Force decimal places even if they are 0
-									flooredNumber = flooredNumber.toFixed(decimalPlaces);
-								  }
-						  
-								  target.text(flooredNumber);
+							// Map the array
+							dataMetricsToShow.map(metric => {
+								if (data.hasOwnProperty (metric.name)) {
+									
+									// Find the h3 for each statistic
+									var element = $('.' + metric.name).find('h3');
+									
+									// Animate the number
+									element.animateNumber ({
+										number: data[metric.name] * decimalFactor,
+								
+										numberStep: function(now, tween) {
+											var flooredNumber = Math.floor(now) / decimalFactor, target = $(tween.elem);
+								
+											if (decimalPlaces > 0) {
+												// Force decimal places even if they are 0
+												flooredNumber = flooredNumber.toFixed(decimalPlaces);
+											}
+									
+											// Add a percentage sign
+											if (metric.percentage) {
+												flooredNumber = flooredNumber + '%';
+											}
+											
+											// Set text
+											target.text(flooredNumber);
+											}
+										});
+								} else {
+									$('.' + metric.name).find('h3').text ('N/A');
 								}
-							  });
-						} else {
-							$('.' + metric).find('h3').text ('N/A');
+							});
 						}
 					});
 				}
 			});
 		},
+		
+		
+		// Fetch and insert site metrics graph 
+		insertSiteMetricsGraph (selectedRegion) 
+		{
+			const metricsImgUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/in-site-metrics.png?raw=true'.replace('{selectedRegion}', selectedRegion);
+			
+			// Add the image
+			$('.graph-container img').attr ('src', metricsImgUrl);
+		},
 
 		
 		// Function to fetch and set region information
-		parseRegionInformation: function (selectedRegion)
+		parseRegionTextualInformation: function (selectedRegion)
 		{
 			const allSitesInfoUrl = "https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.csv";
 			
