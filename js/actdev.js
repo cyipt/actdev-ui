@@ -435,24 +435,28 @@ var actdev = (function ($) {
 	var dataMetricsToShow = [
 		{
 			name: 'percent_cycle_base',
+			full_name: 'cycle',
 			percentage: true,
 			decimal_points: 0,
 			go_active: 'percent_cycle_goactive'
 		}, 
 		{
 			name: 'percent_walk_base',
+			full_name: 'walk',
 			percentage: true,
 			decimal_points: 0,
 			go_active: 'percent_walk_goactive'
 		}, 
 		{
 			name: 'percent_drive_base',
+			full_name: 'driving',
 			percentage: true,
 			decimal_points: 0,
 			go_active: 'percent_drive_goactive'
 		}, 
 		{
 			name: 'site_cycle_circuity',
+			full_name: 'cycle circuity',
 			percentage: false,
 			decimal_points: 2,
 			go_active: false
@@ -634,9 +638,21 @@ var actdev = (function ($) {
 					// If the number is the same, don't animate it
 					if (element.prop('number') != number) {
 						
+						// Calculate the color
+						// !FIXME this can be more details
+						var color;
+						if (number > 35) {
+							color = 'green';
+						} else if (number > 25) {
+							color = '#f0bb40';
+						} else {
+							color = 'red';
+						}
+						
 						// Animate the number
 						element.animateNumber ({
 							number: number * decimalFactor,
+							color: color,
 					
 							numberStep: function(now, tween) {
 								var flooredNumber = Math.floor(now) / decimalFactor, target = $(tween.elem);
@@ -655,6 +671,10 @@ var actdev = (function ($) {
 								target.text(flooredNumber);
 							}
 						});
+
+						// Set the proper label and colours
+						$('.' + metric.name).find ('h4').first ().text(metric.full_name).css('color', color);
+						$('.' + metric.name).find ('h5').first ().css('color', color);
 					}	
 
 					// Set the property of number, so the animation begins from this number next time, as opposed to 0
