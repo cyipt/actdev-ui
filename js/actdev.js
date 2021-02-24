@@ -46,6 +46,7 @@ var actdev = (function ($) {
 		regionsNameField: 'full_name',
 		regionsSubstitutionToken: '{site_name}',
 		regionSwitcherNullText: 'Go to development',
+		regionSwitcherCallback: function (selectedRegion) {actdev.getRegionInfographic (selectedRegion);},
 		
 		// Initial view of all regions; will use regionsFile
 		initialRegionsView: true,
@@ -421,8 +422,7 @@ var actdev = (function ($) {
 				+ 'Date: {properties.startdate}</p>'
 				+ '<p><a href="{properties.url}"><img src="/images/icons/bullet_go.png" /> <strong>View full details</a></strong></p>'
 		},
-	};
-	
+	};	
 	
 	return {
 		
@@ -440,6 +440,113 @@ var actdev = (function ($) {
 			
 			// Run the layerviewer for these settings and layers
 			layerviewer.initialise (_settings, _layerConfig);
+		},
+
+		
+		// Function to fetch and generate site statistics
+		getRegionInfographic: function (selectedRegion)
+		{
+			// Parse region information
+			actdev.parseRegionInformation (selectedRegion);
+			
+			const siteMetricsUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/in-site-metrics.csv'.replace('{selectedRegion}', selectedRegion);
+			const siteMetrics = ['site_walk_circuity', 'site_cycle_circuity', 'site_drive_circuity']
+			
+			// Stream and parse the CSV file
+			var decimalPlaces = 2;
+			var decimalFactor = decimalPlaces === 0 ? 1 : Math.pow(10, decimalPlaces);
+			Papa.parse (siteMetricsUrl, {
+				header: true,
+				download: true,
+				complete: function (fields) {
+					
+					// Unpack the prased data object
+					var data = fields.data.shift();
+					
+					// Map the array
+					siteMetrics.map(metric => {
+						if (data.hasOwnProperty (metric)) {
+							
+							// Find the h3 for each statistic
+							var element = $('.' + metric).find('h3');
+							
+							// Animate the number
+							element.animateNumber ({
+								number: data[metric] * decimalFactor,
+						  
+								numberStep: function(now, tween) {
+								  var flooredNumber = Math.floor(now) / decimalFactor,
+									  target = $(tween.elem);
+						  
+								  if (decimalPlaces > 0) {
+									// Force decimal places even if they are 0
+									flooredNumber = flooredNumber.toFixed(decimalPlaces);
+								  }
+						  
+								  target.text(flooredNumber);
+								}
+							  });
+						} else {
+							$('.' + metric).find('h3').text ('N/A');
+						}
+					});
+				}
+			});
+		},
+
+		
+		// Function to fetch and set region information
+		parseRegionInformation: function (selectedRegion)
+		{
+			const allSitesInfoUrl = "https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.csv";
+			
+			// Stream and parse the CSV file
+			Papa.parse (allSitesInfoUrl, {
+				header: true,
+				download: true,
+				complete: function (fields) {
+					
+					// Locate the site in the all_sites object
+					let site = fields.data.find (o => o.site_name === selectedRegion);
+					
+					// Set the title text
+					$('h1.site-title').text (site.full_name);
+					
+					// Start building the descriptive blurb
+					var descriptionText = `This development in ${site.main_local_authority} will contain ${site.dwellings_when_complete} dwellings when complete.`
+					
+					// Complete the blurb, based on completion status
+					var completionText = '';
+					switch (site.is_complete) {
+						case 'yes':
+								completionText = ' The project has been completed.';
+								break;
+						case 'yes (partly before 2011)':
+								completionText = ' The project has been completed, being partly completed before 2011.';
+								break;
+						case 'mostly':
+							completionText = ' The project is mostly complete.';
+							break;
+						case 'mostly (partly before 2011)':
+								completionText = ' The project is mostly complete, and was partly completed before 2011.';
+								break;
+						case 'partly':
+								completionText = ' The project is partly complete.';
+								break;
+						case 'partly (partly before 2011)':
+							completionText = ' The project is partly complete, and was partly completed before 2011.';
+							break;
+						case 'no':
+							completionText = ' The project is not complete.';
+							break;
+						default:
+							break;
+					}
+
+					// Add this to the HTML
+					$('.site-description').text (descriptionText + completionText);
+				}
+			})
 		}
 	};
 	

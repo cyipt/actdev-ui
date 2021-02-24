@@ -93,9 +93,9 @@
 <script>
     const mdFileLocation = "https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui/about/about.md";
 	
-	fetch(mdFileLocation)
-   		.then( r => r.text() )
-   		.then( t => {
+	fetch (mdFileLocation)
+   		.then (r => r.text())
+   		.then (t => {
 			$('.about-md').html (marked(t));
 		   });
   </script>

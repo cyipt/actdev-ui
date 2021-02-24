@@ -53,8 +53,15 @@
 	<!-- Parse CSV -->
 	<script src="/js/lib/PapaParse/papaparse.min.js"></script>
 	
+	<!-- Flickity carousel -->
 	<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 	<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+	<!-- D3.js -->
+	<script src="https://d3js.org/d3.v6.min.js"></script>
+
+	<!-- Animate number -->
+	<script src="/js/lib/jquery-animateNumber-0.0.14/jquery.animateNumber.min.js"></script>
 
 	<!-- ActDev application and its config, implementing the LayerViewer library -->
 	<script src="/.config.js"></script>
@@ -74,12 +81,11 @@
 				<div class="infographic-header">
 					
 					<i class="fa fa-long-arrow-alt-left site-back-arrow"></i>
-					<h1>Great Kneighton</h1>
+					<h1 class="site-title"></h1>
 
 					<div class="infographic-header-container">
 						<div class="infographic-header-left">
-							<p class="site-description">Potential blurb about the site here, with some auto generated text-based
-								info. Potential blurb about the site here, with some auto generated text-based info.</p>
+							<p class="site-description"></p>
 
 							<ul class="external-links">
 								<li><a class="site-info-link" href="#">View planning applications <i class="fa fa-chevron-right"></i></a></li>
@@ -103,22 +109,22 @@
 					</div>
 
 					<div class="headline-stats">
-						<div class="main-headline-stat">
-							<h3>68%</h3>
+						<div class="main-headline-stat site_cycle_circuity">
+							<h3></h3>
 							<h4>accessibility</h4>
 						</div>
 						<ul class="secondary-stats">
-							<li class="blue">
-								<h3>28%</h3>
-								<h4>mode share</h4>
+							<li class="blue site_cycle_circuity">
+								<h3></h3>
+								<h4>walk circuity</h4>
 							</li>
-							<li class="red">
-								<h3>2%</h3>
-								<h4>2011 data</h4>
+							<li class="red site_walk_circuity">
+								<h3></h3>
+								<h4>walk circuity</h4>
 							</li>
-							<li class="yellow">
-								<h3>42%</h3>
-								<h4>sys</h4>
+							<li class="yellow site_drive_circuity">
+								<h3></h3>
+								<h4>drive circuity</h4>
 							</li>
 						</ul>
 					</div>
@@ -245,9 +251,7 @@
 
 
 			<div class="map-half">
-				<div id="map">
-					
-				</div>
+				<div id="map"></div>
 			</div>
 		</section>
 
@@ -256,89 +260,122 @@
 
 </body>
 
+<!-- D3 chart -->
 <script>
-	var flky = new Flickity( '.carousel', {
-  // options, defaults listed
+	var chart = function () {
+		const svg = d3.select(DOM.svg(width, height))
+		.attr("viewBox", `${-width / 2} ${-height / 2} ${width} ${height}`)
+		.style("width", "100%")
+		.style("height", "auto")
+		.style("font", "10px sans-serif");
 
-  accessibility: true,
-  // enable keyboard navigation, pressing left & right keys
+		svg.append("g")
+		.selectAll("g")
+		.data(d3.stack().keys(data.columns.slice(1))(data))
+		.join("g")
+		.attr("fill", d => z(d.key))
+		.selectAll("path")
+		.data(d => d)
+		.join("path")
+		.attr("d", arc);
 
-  adaptiveHeight: false,
-  // set carousel height to the selected slide
+		svg.append("g")
+		.call(xAxis);
 
-  autoPlay: false,
-  // advances to the next cell
-  // if true, default is 3 seconds
-  // or set time between advances in milliseconds
-  // i.e. `autoPlay: 1000` will advance every 1 second
+		svg.append("g")
+		.call(yAxis);
 
-  cellAlign: 'center',
-  // alignment of cells, 'center', 'left', or 'right'
-  // or a decimal 0-1, 0 is beginning (left) of container, 1 is end (right)
+		svg.append("g")
+		.call(legend);
 
-  cellSelector: undefined,
-  // specify selector for cell elements
+		return svg.node();
+	}
+</script>
 
-  contain: true,
-  // will contain cells to container
-  // so no excess scroll at beginning or end
-  // has no effect if wrapAround is enabled
 
-  draggable: '>1',
-  // enables dragging & flicking
-  // if at least 2 cells
+<script>
+	var flky = new Flickity('.carousel', {
+		// options, defaults listed
 
-  dragThreshold: 3,
-  // number of pixels a user must scroll horizontally to start dragging
-  // increase to allow more room for vertical scroll for touch devices
+		accessibility: true,
+		// enable keyboard navigation, pressing left & right keys
 
-  freeScroll: false,
-  // enables content to be freely scrolled and flicked
-  // without aligning cells
+		adaptiveHeight: false,
+		// set carousel height to the selected slide
 
-  friction: 0.2,
-  // smaller number = easier to flick farther
+		autoPlay: false,
+		// advances to the next cell
+		// if true, default is 3 seconds
+		// or set time between advances in milliseconds
+		// i.e. `autoPlay: 1000` will advance every 1 second
 
-  groupCells: '80%',
-  // group cells together in slides
+		cellAlign: 'center',
+		// alignment of cells, 'center', 'left', or 'right'
+		// or a decimal 0-1, 0 is beginning (left) of container, 1 is end (right)
 
-  initialIndex: 0,
-  // zero-based index of the initial selected cell
+		cellSelector: undefined,
+		// specify selector for cell elements
 
-  lazyLoad: true,
-  // enable lazy-loading images
-  // set img data-flickity-lazyload="src.jpg"
-  // set to number to load images adjacent cells
+		contain: true,
+		// will contain cells to container
+		// so no excess scroll at beginning or end
+		// has no effect if wrapAround is enabled
 
-  percentPosition: false,
-  // sets positioning in percent values, rather than pixels
-  // Enable if items have percent widths
-  // Disable if items have pixel widths, like images
+		draggable: '>1',
+		// enables dragging & flicking
+		// if at least 2 cells
 
-  prevNextButtons: true,
-  // creates and enables buttons to click to previous & next cells
+		dragThreshold: 3,
+		// number of pixels a user must scroll horizontally to start dragging
+		// increase to allow more room for vertical scroll for touch devices
 
-  pageDots: false,
-  // create and enable page dots
+		freeScroll: false,
+		// enables content to be freely scrolled and flicked
+		// without aligning cells
 
-  resize: true,
-  // listens to window resize events to adjust size & positions
+		friction: 0.2,
+		// smaller number = easier to flick farther
 
-  rightToLeft: false,
-  // enables right-to-left layout
+		groupCells: '80%',
+		// group cells together in slides
 
-  setGallerySize: false,
-  // sets the height of gallery
-  // disable if gallery already has height set with CSS
+		initialIndex: 0,
+		// zero-based index of the initial selected cell
 
-  watchCSS: false,
-  // watches the content of :after of the element
-  // activates if #element:after { content: 'flickity' }
+		lazyLoad: true,
+		// enable lazy-loading images
+		// set img data-flickity-lazyload="src.jpg"
+		// set to number to load images adjacent cells
 
-  wrapAround: false
-  // at end of cells, wraps-around to first for infinite scrolling
+		percentPosition: false,
+		// sets positioning in percent values, rather than pixels
+		// Enable if items have percent widths
+		// Disable if items have pixel widths, like images
 
-});
+		prevNextButtons: true,
+		// creates and enables buttons to click to previous & next cells
+
+		pageDots: false,
+		// create and enable page dots
+
+		resize: true,
+		// listens to window resize events to adjust size & positions
+
+		rightToLeft: false,
+		// enables right-to-left layout
+
+		setGallerySize: false,
+		// sets the height of gallery
+		// disable if gallery already has height set with CSS
+
+		watchCSS: false,
+		// watches the content of :after of the element
+		// activates if #element:after { content: 'flickity' }
+
+		wrapAround: false
+		// at end of cells, wraps-around to first for infinite scrolling
+
+	});
 </script>
 
 <!-- iOS control script -->
@@ -358,7 +395,8 @@
 			elem.addEventListener("change", updatePillPosition);
 		})
 		window.addEventListener("resize",
-		updatePillPosition); // Prevent pill from detaching from element when window resized. Becuase this is rare I haven't bothered with throttling the event
+			updatePillPosition
+			); // Prevent pill from detaching from element when window resized. Becuase this is rare I haven't bothered with throttling the event
 	}
 
 	function updatePillPosition() {
