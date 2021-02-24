@@ -1,12 +1,12 @@
 # Introduction
 
-Following on from the progress made in ACTON, ActDev is a four month project to further develop quantifiable measures of the accessibility of new housing developments for walking and cycling.
-
+ActDev is a project to develop a strong and nationally scalable evidence base on walking and cycling potential and provision in and around new development sites.
+In the first phase of work, we developed a prototype web application showing walking and cycling route from 35 housing developments to key 'trip attractors' and calculated walking and cycling metrics within the boundary of each site.
+The results demonstrate the importance of considering walking and cycling potential and provision early in the planning process, the possibility of quantifying walking and cycling opportunities associated with new developments, and the feasibility of developing an actionable evidence base that will enable the planning process to support ambitious walking, cycling and decarbonisation targets nationawide. 
 
 # High level aims
 
-The high level aims of ActDev are to create a tool which:
-Provides a rating for the level of active travel provision (cycling and walking) between development sites and key services, to determine whether a location would be or is acceptable from health perspectives.
+The high level aims of are to provides ratings for the level of active travel provision (cycling and walking) between development sites and key services, to determine whether a location would be or is acceptable from health perspectives.
 
 For known planned/existing development sites, the tool will provide additional analysis to inform specific improvements that could be made in active travel provision and proximity of key services within walking and cycling distance.
 Makes the case for further work to create an interactive web application (including the underlying evolving evidence base) to do the above but on a national scale.
