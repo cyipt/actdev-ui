@@ -532,6 +532,11 @@ var actdev = (function ($) {
 		{
 			const siteMetricsUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/in-site-metrics.csv'.replace('{selectedRegion}', selectedRegion);
 			
+			// Reset the "cached" numbers used when animating stats
+			dataMetricsToShow.map (metric => {
+				$('.' + metric.name).find ('h3').first ().prop ('number', '')
+			});
+
 			// Stream and parse the CSV file
 			Papa.parse (siteMetricsUrl, {
 				header: true,
@@ -579,11 +584,10 @@ var actdev = (function ($) {
 		
 		// Parse and populate site statistics
 		populateSiteStatistics ()
-		{
+		{	
 			// Map the array
 			dataMetricsToShow.map(metric => {
 				if (regionData.hasOwnProperty (metric.name)) {
-					
 					// Find the h3 for each statistic
 					var element = $('.' + metric.name).find ('h3').first ();
 
@@ -604,16 +608,16 @@ var actdev = (function ($) {
 						element.data('difference', difference)
 						
 						// Change the actual stat text
-						var html;
+						var differenceHtml = '';
 						if (difference > 0) {
-							html = '<i class="fa fa-arrow-up"></i>' + difference;
+							differenceHtml = '<i class="fa fa-arrow-up"></i>' + difference;
 						} else if (difference < 0) {
-							html = '<i class="fa fa-arrow-down"></i>' + difference;
+							differenceHtml = '<i class="fa fa-arrow-down"></i>' + difference;
 						} else {
-							html = difference;
+							differenceHtml = difference;
 						}
 						
-						$('.' + metric.name).find ('h5').first ().html(html);
+						$('.' + metric.name).find ('h5').first ().html(differenceHtml);
 					}
 					
 					// Calculate the decimal factor
@@ -628,31 +632,30 @@ var actdev = (function ($) {
 					}
 
 					// If the number is the same, don't animate it
-					if (element.prop('number') == number) {
-						return;
-					}
+					if (element.prop('number') != number) {
+						
+						// Animate the number
+						element.animateNumber ({
+							number: number * decimalFactor,
 					
-					// Animate the number
-					element.animateNumber ({
-						number: number * decimalFactor,
-				
-						numberStep: function(now, tween) {
-							var flooredNumber = Math.floor(now) / decimalFactor, target = $(tween.elem);
-				
-							if (metric.decimal_points > 0) {
-								// Force decimal places even if they are 0
-								flooredNumber = flooredNumber.toFixed(metric.decimal_points);
-							}
+							numberStep: function(now, tween) {
+								var flooredNumber = Math.floor(now) / decimalFactor, target = $(tween.elem);
 					
-							// Add a percentage sign if necessary
-							if (metric.percentage) {
-								flooredNumber = flooredNumber + '%';
+								if (metric.decimal_points > 0) {
+									// Force decimal places even if they are 0
+									flooredNumber = flooredNumber.toFixed(metric.decimal_points);
+								}
+						
+								// Add a percentage sign if necessary
+								if (metric.percentage) {
+									flooredNumber = flooredNumber + '%';
+								}
+								
+								// Set text
+								target.text(flooredNumber);
 							}
-							
-							// Set text
-							target.text(flooredNumber);
-						}
-					});
+						});
+					}	
 
 					// Set the property of number, so the animation begins from this number next time, as opposed to 0
 					element.prop('number', number);
