@@ -425,6 +425,33 @@ var actdev = (function ($) {
 	};	
 
 	var regionData = {}; // This will be overwritten each time a new region's data is fetched
+	var currentScenario = 'current';
+	var dataMetricsToShow = [
+		{
+			name: 'percent_cycle_base',
+			percentage: true,
+			decimal_points: 0,
+			go_active: 'percent_cycle_goactive'
+		}, 
+		{
+			name: 'percent_walk_base',
+			percentage: true,
+			decimal_points: 0,
+			go_active: 'percent_walk_goactive'
+		}, 
+		{
+			name: 'percent_drive_base',
+			percentage: true,
+			decimal_points: 0,
+			go_active: 'percent_drive_goactive'
+		}, 
+		{
+			name: 'site_cycle_circuity',
+			percentage: false,
+			decimal_points: 2,
+			go_active: false
+		}
+	]
 	
 	return {
 		
@@ -442,6 +469,43 @@ var actdev = (function ($) {
 			
 			// Run the layerviewer for these settings and layers
 			layerviewer.initialise (_settings, _layerConfig);
+
+			actdev.listenForScenarioChange ();
+			
+		},
+
+
+		// Listener for toggling of the current/goactive segmented control
+		listenForScenarioChange: function ()
+		{
+			$('.ios-segmented-control').change (function () {
+				// Save the new scenario
+				actdev.setCurrentScenario ();
+
+				// Refresh the new stats
+				actdev.populateSiteStatistics ()
+
+				// If we are currently in go-active mode, reveal the changed stats
+				if (actdev.getCurrentScenario () === 'goactive') {
+					$('.stat h5').show();
+				} else {
+					$('.stat h5').hide();
+				}
+
+			});
+		},
+
+
+		// Returns current or goactive
+		getCurrentScenario: function ()
+		{
+			return $('input[name=current-scenario]:checked', '#scenario').val ();
+		},
+
+
+		setCurrentScenario: function ()
+		{
+			currentScenario = actdev.getCurrentScenario ();
 		},
 
 
@@ -497,53 +561,55 @@ var actdev = (function ($) {
 		// Parse and populate site statistics
 		populateSiteStatistics ()
 		{
-			const dataMetricsToShow = [
-				{
-					name: 'percent_cycle_base',
-					percentage: true,
-					decimal_points: 0,
-					go_active: 'percent_cycle_goactive'
-				}, 
-				{
-					name: 'percent_walk_base',
-					percentage: true,
-					decimal_points: 0,
-					go_active: 'percent_walk_goactive'
-				}, 
-				{
-					name: 'percent_drive_base',
-					percentage: true,
-					decimal_points: 0,
-					go_active: 'percent_drive_goactive'
-				}, 
-				{
-					name: 'site_cycle_circuity',
-					percentage: false,
-					decimal_points: 2,
-					go_active: false
-				}
-			]
-			
-
 			// Map the array
 			dataMetricsToShow.map(metric => {
 				if (regionData.hasOwnProperty (metric.name)) {
 					
 					// Find the h3 for each statistic
-					var element = $('.' + metric.name).find('h3').first();
+					var element = $('.' + metric.name).find ('h3').first ();
 
 					// Populate element with data-current and data-goactive (if applicable)
 					element.data('current', regionData[metric.name]);
-					if (metric.hasOwnProperty ('go_active')) {
+					if (metric.go_active) {
 						element.data('goactive', regionData[metric.go_active]);
+						
+						// Populate the h5 elements with the amount of change
+						var difference = parseFloat(-regionData[metric.name]) + parseFloat(regionData[metric.go_active]);
+
+						// Add a + symbol if the number is above 0
+						if (difference > 0) {
+							difference = '+' + difference;
+						}
+						
+						// Save the difference into the element data
+						element.data('difference', difference)
+						
+						// Change the actual stat text
+						var html;
+						if (difference > 0) {
+							html = '<i class="fa fa-arrow-up"></i>' + difference;
+						} else if (difference < 0) {
+							html = '<i class="fa fa-arrow-down"></i>' + difference;
+						} else {
+							html = difference;
+						}
+						
+						$('.' + metric.name).find ('h5').first ().html(html);
 					}
 					
 					// Calculate the decimal factor
-					var decimalFactor = metric.decimal_points === 0 ? 1 : Math.pow(10, metric.decimal_points);
+					var decimalFactor = metric.decimal_points === 0 ? 1 : Math.pow (10, metric.decimal_points);
 					
-					// Animate the number
+					// Get the number
+					// If this element doesn't have a different go_active number, keep it the same
+					if (!metric.go_active) {
+						var number = element.data ('current')
+					} else {
+						var number = (currentScenario == 'current' ? element.data ('current') : element.data('goactive'));
+					}
+
 					element.animateNumber ({
-						number: regionData[metric.name] * decimalFactor,
+						number: number * decimalFactor,
 				
 						numberStep: function(now, tween) {
 							var flooredNumber = Math.floor(now) / decimalFactor, target = $(tween.elem);
@@ -553,7 +619,7 @@ var actdev = (function ($) {
 								flooredNumber = flooredNumber.toFixed(metric.decimal_points);
 							}
 					
-							// Add a percentage sign
+							// Add a percentage sign if necessary
 							if (metric.percentage) {
 								flooredNumber = flooredNumber + '%';
 							}
@@ -563,11 +629,12 @@ var actdev = (function ($) {
 						}
 					});
 				} else {
-					$('.' + metric.name).find('h3').text ('N/A');
+					$('.' + metric.name).find ('h3').text ('N/A');
 				}
 			});
-
 		},
+
+
 		
 		
 		// Fetch and insert site metrics graph 

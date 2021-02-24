@@ -94,35 +94,41 @@
 						</div>
 
 						<div class="infographic-header-right">
-							<div class="ios-segmented-control">
-								<span class="selection"></span>
-								<div class="option">
-									<input type="radio" id="current" name="current-scenario" value="current" checked>
-									<label for="current"><span>Current</span></label>
+							<form id="scenario">
+								<div class="ios-segmented-control">
+									<span class="selection"></span>
+									<div class="option">
+										<input type="radio" id="current" name="current-scenario" value="current" checked>
+										<label for="current"><span>Current</span></label>
+									</div>
+									<div class="option">
+										<input type="radio" id="goactive" name="current-scenario" value="goactive">
+										<label for="goactive"><span>Go Active</span></label>
+									</div>
 								</div>
-								<div class="option">
-									<input type="radio" id="scenario" name="current-scenario" value="scenario">
-									<label for="scenario"><span>Go Active</span></label>
-								</div>
-							</div>
+							</form>
 						</div>
 					</div>
 
 					<div class="headline-stats">
-						<div class="main-headline-stat percent_cycle_base">
+						<div class="stat main-headline-stat percent_cycle_base">
+							<h5></h5>
 							<h3></h3>
 							<h4>cycle base</h4>
 						</div>
 						<ul class="secondary-stats">
-							<li class="blue percent_walk_base">
+							<li class="stat blue percent_walk_base">
+								<h5></h5>
 								<h3></h3>
 								<h4>walking</h4>
 							</li>
-							<li class="red percent_drive_base">
+							<li class="stat red percent_drive_base">
+								<h5></h5>
 								<h3></h3>
 								<h4>driving</h4>
 							</li>
-							<li class="yellow site_cycle_circuity">
+							<li class="stat yellow site_cycle_circuity">
+								<h5></h5>
 								<h3></h3>
 								<h4>site cycle circuity</h4>
 							</li>
