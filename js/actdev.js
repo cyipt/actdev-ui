@@ -470,8 +470,21 @@ var actdev = (function ($) {
 			// Run the layerviewer for these settings and layers
 			layerviewer.initialise (_settings, _layerConfig);
 
+			// Initialise ACTDEV UI listeners
+			actdev.initUi ();
+			
+			// Listen to scenario being changed
 			actdev.listenForScenarioChange ();
 			
+		},
+
+
+		// Initialise general UI handlers
+		initUi: function ()
+		{
+			$('#selector ul li label').on ('click', function (e) {
+				$(e.target).closest ('li').toggleClass ('active');
+			})
 		},
 
 

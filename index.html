@@ -259,6 +259,35 @@
 			<div class="map-half">
 				<div id="map"></div>
 			</div>
+
+			<div id="selector">
+				<ul>
+					<li class="buildings active">
+						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+						<p class="total"></p>
+						<input type="checkbox" name="show[]" id="show_buildings" />
+						<label for="show_buildings"><i class="fa fa-building"></i><br />Buildings</label>
+					</li>		
+					<li class="planningapplications">
+						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+						<p class="total"></p>
+						<input type="checkbox" name="show[]" id="show_planningapplications" />
+						<label for="show_planningapplications"><i class="fa fa-file-alt"></i><br />Applications</label>
+					</li>
+					<li class="collisions">
+						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+						<p class="total"></p>
+						<input type="checkbox" name="show[]" id="show_collisions" />
+						<label for="show_collisions"><i class="fa fa-car-crash"></i><br />Collisions</label>
+					</li>
+					<li class="trafficcounts">
+						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+						<p class="total"></p>
+						<input type="checkbox" name="show[]" id="show_trafficcounts" />
+						<label for="show_trafficcounts"><i class="fa fa-car"></i><br />Traffic counts</label>
+					</li>			
+				</ul>
+			</div>
 		</section>
 
 	</main>
