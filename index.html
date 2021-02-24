@@ -159,73 +159,65 @@
 							<hr>
 						</div>
 						<p class="section-description">Explanatory text here about the section</p>
-						<ul class="site-data-carousel">
-
-							<li>
-								
-								<div class="data-carousel-header">
-									<input type="checkbox" name="desire-lines" id="desire-lines" />
-									<label for="desire-lines"><img src="/images/placeholders/desire-lines.png" />
-									</label>
+						<div class="selector">
+							<ul class="site-data-carousel">
+								<li class="desirelines">
 									
-									<p>Desire lines</p>
-									<p class="info-circle">ⓘ</p>
-								</div>
-								<div class="controls"></div>
-							</li>
+									<div class="data-carousel-header">
+										<input type="checkbox" name="show[]" id="show_desirelines" />
+										<label for="show_desirelines"><img src="/images/placeholders/desire-lines.png" />
+										</label>
+										
+										<p>Desire lines</p>
+										<p class="info-circle">ⓘ</p>
+									</div>
+									<div class="controls"></div>
+								</li>
 
-							<li>
-								<div class="data-carousel-header">
-									<input type="checkbox" name="route-network" id="route-network" checked />
-									<label for="route-network"><img src="/images/placeholders/route-network.png" /></label>
-									<p>Route network</p>
-									<p class="info-circle">ⓘ</p>
-								</div>
+								<li>
+									<div class="data-carousel-header">
+										<input type="checkbox" name="show[]k" id="show_routenetwork" checked />
+										<label for="show_routenetwork"><img src="/images/placeholders/route-network.png" /></label>
+										<p>Route network</p>
+										<p class="info-circle">ⓘ</p>
+									</div>
 
-								<div class="controls">
-									<input type="radio" id="option1" name="gender" value="option1">
-									<label for="male">Option 1</label><br>
-									<input type="radio" id="option2" name="gender" value="option2">
-									<label for="female">Option 2</label><br>
-									<input type="radio" id="option3" name="gender" value="option3">
-									<label for="other">Option 3</label>
-								</div>
-							</li>
+									<div class="controls">
+										<input type="radio" id="option1" name="routenetwork" value="option1">
+										<label for="option1">Option 1</label><br>
+										<input type="radio" id="option2" name="routenetwork" value="option2">
+										<label for="option2">Option 2</label><br>
+										<input type="radio" id="option3" name="routenetwork" value="option3">
+										<label for="other">Option 3</label>
+									</div>
+								</li>
 
-							<li>
-								<div class="data-carousel-header">
-									<input type="checkbox" name="accessibility" id="accessibility" checked />
-									<label for="accessibility"><img src="/images/placeholders/accessibility.png" /></label>
-									<p>Accessibility</p>
-									<p class="info-circle">ⓘ</p>
-								</div>
-								<div class="controls">
-									<input type="radio" id="cycling" name="gender" value="male">
-									<label for="male">Cycling</label><br>
-									<input type="radio" id="walking" name="gender" value="female">
-									<label for="female">Walking</label><br>
-								</div>
-							</li>
+								<li>
+									<div class="data-carousel-header">
+										<input type="checkbox" name="show[]" id="show_accessibility" checked />
+										<label for="show_accessibility"><img src="/images/placeholders/accessibility.png" /></label>
+										<p>Accessibility</p>
+										<p class="info-circle">ⓘ</p>
+									</div>
+									<div class="controls">
+										<input type="radio" id="cycling" name="accessibility" value="cycling">
+										<label for="cycling">Cycling</label><br>
+										<input type="radio" id="walking" name="accessibility" value="walking">
+										<label for="walking">Walking</label><br>
+									</div>
+								</li>
 
-							<li>
-								<div class="data-carousel-header">
-									<input type="checkbox" name="study-area" id="study-area" />
-									<label for="study-area"><img src="/images/placeholders/study-area.png" /></label>
-									<p>Study area</p>
-									<p class="info-circle">ⓘ</p>
-								</div>
-								<div class="controls"></div>
-							</li>
-							<li>
-								<div class="data-carousel-header">
-									<input type="checkbox" name="study-area" id="study-area" />
-									<label for="study-area"><img src="/images/placeholders/study-area.png" /></label>
-									<p>Study area</p>
-									<p class="info-circle">ⓘ</p>
-								</div>
-								<div class="controls"></div>
-							</li>
-						</ul>
+								<li>
+									<div class="data-carousel-header">
+										<input type="checkbox" name="show[]" id="show_studyarea" />
+										<label for="show_studyarea"><img src="/images/placeholders/study-area.png" /></label>
+										<p>Study area</p>
+										<p class="info-circle">ⓘ</p>
+									</div>
+									<div class="controls"></div>
+								</li>
+							</ul>
+						</div>
 					</div>
 
 					<div class="site-info-section">
@@ -260,9 +252,9 @@
 				<div id="map"></div>
 			</div>
 
-			<div id="selector">
+			<div class="selector map" id="selector">
 				<ul>
-					<li class="buildings active">
+					<li class="buildings">
 						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
 						<p class="total"></p>
 						<input type="checkbox" name="show[]" id="show_buildings" />

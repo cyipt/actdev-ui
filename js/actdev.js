@@ -36,6 +36,12 @@ var actdev = (function ($) {
 		
 		// Enable scale bar
 		enableScale: true,
+
+		// Custom selector the for selector
+		selector: '.selector',
+
+		// Custom data loading spinner selector for layerviewer. For layer specific spinner, should contain layerId
+		//dataLoadingSpinnerSelector: 'empty',
 		
 		// First-run welcome message
 		firstRunMessageHtml: '<p>Welcome to Actdev (Alpha UI), Active travel provision and potential in planned and proposed development sites.</p><p><strong>Please choose a region</strong> in the top-right to begin.</p>',
@@ -654,8 +660,8 @@ var actdev = (function ($) {
 					// Set the text as N/A
 					$('.' + metric.name).find ('h3').text ('N/A');
 					
-					// Hide the changed stat part
-					$('.' + metric.name).find ('h5').hide();
+					// Empty the changed stat part
+					$('.' + metric.name).find ('h5').empty();
 				}
 			});
 		},
