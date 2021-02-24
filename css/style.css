@@ -77,10 +77,11 @@ ul.site-data-carousel .controls label {margin-left: 7.5px; font-weight: 300; fon
 .site-info-section .flickity-prev-next-button {width: 30px; height: 30px;}
 
 /* Map side */
-#selector {position: absolute; bottom: 0; right: 0; float: right; margin: 25px; padding: 0 25px; background-color: #515151; border-radius: 25px; box-shadow: 5px 5px 15px -1px #000000;}
-#selector ul li {display: inline-block; border-radius: 2px; width: 60px; height: 60px; vertical-align: top; text-align: center; margin: 0 1px; padding: 10px 0; font-size: 10px;}
+#selector {position: absolute; bottom: 0; right: 0; float: right; margin: 25px; padding: 0 25px; background-color: #515151; border-radius: 25px; box-shadow: 5px 5px 15px -1px #000000; opacity: 0.85}
+#selector ul li {display: inline-block; border-radius: 2px; width: 60px; height: 60px; vertical-align: top; text-align: center; margin: 0 1px; padding: 10px 0; font-size: 10px; transition: .3s}
 #selector ul li:hover {background-color: grey;}
 #selector ul li.active {background-color: orange;}
+#selector ul li.active:hover {background-color: rgb(247, 219, 167);}
 #selector ul li label i {font-size: 20px; padding-bottom: 5px;}
 #selector ul li label {color: white;}
 #selector ul li input {display: none;}
