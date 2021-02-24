@@ -621,6 +621,12 @@ var actdev = (function ($) {
 						var number = (currentScenario == 'current' ? element.data ('current') : element.data('goactive'));
 					}
 
+					// If the number is the same, don't animate it
+					if (element.prop('number') == number) {
+						return;
+					}
+					
+					// Animate the number
 					element.animateNumber ({
 						number: number * decimalFactor,
 				
