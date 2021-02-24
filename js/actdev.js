@@ -36,6 +36,12 @@ var actdev = (function ($) {
 		
 		// Enable scale bar
 		enableScale: true,
+
+		// Custom selector the for selector
+		selector: '.selector',
+
+		// Custom data loading spinner selector for layerviewer. For layer specific spinner, should contain layerId
+		//dataLoadingSpinnerSelector: 'empty',
 		
 		// First-run welcome message
 		firstRunMessageHtml: '<p>Welcome to Actdev (Alpha UI), Active travel provision and potential in planned and proposed development sites.</p><p><strong>Please choose a region</strong> in the top-right to begin.</p>',
@@ -46,6 +52,7 @@ var actdev = (function ($) {
 		regionsNameField: 'full_name',
 		regionsSubstitutionToken: '{site_name}',
 		regionSwitcherNullText: 'Go to development',
+		regionSwitcherCallback: function (selectedRegion) {actdev.fetchRegionData (selectedRegion);},
 		
 		// Initial view of all regions; will use regionsFile
 		initialRegionsView: true,
@@ -421,8 +428,36 @@ var actdev = (function ($) {
 				+ 'Date: {properties.startdate}</p>'
 				+ '<p><a href="{properties.url}"><img src="/images/icons/bullet_go.png" /> <strong>View full details</a></strong></p>'
 		},
-	};
-	
+	};	
+
+	var regionData = {}; // This will be overwritten each time a new region's data is fetched
+	var currentScenario = 'current';
+	var dataMetricsToShow = [
+		{
+			name: 'percent_cycle_base',
+			percentage: true,
+			decimal_points: 0,
+			go_active: 'percent_cycle_goactive'
+		}, 
+		{
+			name: 'percent_walk_base',
+			percentage: true,
+			decimal_points: 0,
+			go_active: 'percent_walk_goactive'
+		}, 
+		{
+			name: 'percent_drive_base',
+			percentage: true,
+			decimal_points: 0,
+			go_active: 'percent_drive_goactive'
+		}, 
+		{
+			name: 'site_cycle_circuity',
+			percentage: false,
+			decimal_points: 2,
+			go_active: false
+		}
+	]
 	
 	return {
 		
@@ -440,6 +475,265 @@ var actdev = (function ($) {
 			
 			// Run the layerviewer for these settings and layers
 			layerviewer.initialise (_settings, _layerConfig);
+
+			// Initialise ACTDEV UI listeners
+			actdev.initUi ();
+			
+			// Listen to scenario being changed
+			actdev.listenForScenarioChange ();
+			
+		},
+
+
+		// Initialise general UI handlers
+		initUi: function ()
+		{
+			$('#selector ul li label').on ('click', function (e) {
+				$(e.target).closest ('li').toggleClass ('active');
+			})
+		},
+
+
+		// Listener for toggling of the current/goactive segmented control
+		listenForScenarioChange: function ()
+		{
+			$('.ios-segmented-control').change (function () {
+				// Save the new scenario
+				actdev.setCurrentScenario ();
+
+				// Refresh the new stats
+				actdev.populateSiteStatistics ()
+
+				// If we are currently in go-active mode, reveal the changed stats
+				if (actdev.getCurrentScenario () === 'goactive') {
+					$('.stat h5').show();
+				} else {
+					$('.stat h5').hide();
+				}
+
+			});
+		},
+
+
+		// Returns current or goactive
+		getCurrentScenario: function ()
+		{
+			return $('input[name=current-scenario]:checked', '#scenario').val ();
+		},
+
+
+		setCurrentScenario: function ()
+		{
+			currentScenario = actdev.getCurrentScenario ();
+		},
+
+
+		fetchRegionData: function (selectedRegion)
+		{
+			const siteMetricsUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/in-site-metrics.csv'.replace('{selectedRegion}', selectedRegion);
+			
+			// Reset the "cached" numbers used when animating stats
+			dataMetricsToShow.map (metric => {
+				$('.' + metric.name).find ('h3').first ().prop ('number', '')
+			});
+
+			// Stream and parse the CSV file
+			Papa.parse (siteMetricsUrl, {
+				header: true,
+				download: true,
+				complete: function (fields) {
+					
+					// Unpack the parsed data object
+					var inSiteMetrics = fields.data.shift();
+
+					// Merge in the mode_split objects
+					const siteModeSplit = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/mode-split.csv'.replace('{selectedRegion}', selectedRegion);
+					Papa.parse (siteModeSplit, {
+						header: true,
+						download: true,
+						complete: function (fields) {
+							
+							// Unpack the parsed data object
+							var modeSplitData = fields.data.shift();
+
+							// Merge the mode-split data with the in-site-metrics and overwrite the class property
+							regionData = {...inSiteMetrics, ...modeSplitData}
+
+							// Populate the page with the fetched data
+							actdev.populateRegionData (selectedRegion);
+						}
+					});
+				}
+			});
+		},
+
+		
+		// Function to fetch and generate site statistics
+		populateRegionData: function (selectedRegion)
+		{	
+			// Parse and insert region textual information (title, description)
+			actdev.parseRegionTextualInformation (selectedRegion);
+
+			// Fetch and insert the graphs
+			actdev.insertSiteMetricsGraph (selectedRegion);
+			
+			// Populate site statistics
+			actdev.populateSiteStatistics ();
+		},
+
+		
+		// Parse and populate site statistics
+		populateSiteStatistics ()
+		{	
+			// Map the array
+			dataMetricsToShow.map(metric => {
+				if (regionData.hasOwnProperty (metric.name)) {
+					// Find the h3 for each statistic
+					var element = $('.' + metric.name).find ('h3').first ();
+
+					// Populate element with data-current and data-goactive (if applicable)
+					element.data('current', regionData[metric.name]);
+					if (metric.go_active) {
+						element.data('goactive', regionData[metric.go_active]);
+						
+						// Populate the h5 elements with the amount of change
+						var difference = parseFloat(-regionData[metric.name]) + parseFloat(regionData[metric.go_active]);
+
+						// Add a + symbol if the number is above 0
+						if (difference > 0) {
+							difference = '+' + difference;
+						}
+						
+						// Save the difference into the element data
+						element.data('difference', difference)
+						
+						// Change the actual stat text
+						var differenceHtml = '';
+						if (difference > 0) {
+							differenceHtml = '<i class="fa fa-arrow-up"></i>' + difference;
+						} else if (difference < 0) {
+							differenceHtml = '<i class="fa fa-arrow-down"></i>' + difference;
+						} else {
+							differenceHtml = difference;
+						}
+						
+						$('.' + metric.name).find ('h5').first ().html(differenceHtml);
+					}
+					
+					// Calculate the decimal factor
+					var decimalFactor = metric.decimal_points === 0 ? 1 : Math.pow (10, metric.decimal_points);
+					
+					// Get the number
+					// If this element doesn't have a different go_active number, keep it the same
+					if (!metric.go_active) {
+						var number = element.data ('current')
+					} else {
+						var number = (currentScenario == 'current' ? element.data ('current') : element.data('goactive'));
+					}
+
+					// If the number is the same, don't animate it
+					if (element.prop('number') != number) {
+						
+						// Animate the number
+						element.animateNumber ({
+							number: number * decimalFactor,
+					
+							numberStep: function(now, tween) {
+								var flooredNumber = Math.floor(now) / decimalFactor, target = $(tween.elem);
+					
+								if (metric.decimal_points > 0) {
+									// Force decimal places even if they are 0
+									flooredNumber = flooredNumber.toFixed(metric.decimal_points);
+								}
+						
+								// Add a percentage sign if necessary
+								if (metric.percentage) {
+									flooredNumber = flooredNumber + '%';
+								}
+								
+								// Set text
+								target.text(flooredNumber);
+							}
+						});
+					}	
+
+					// Set the property of number, so the animation begins from this number next time, as opposed to 0
+					element.prop('number', number);
+				} else {
+					// Set the text as N/A
+					$('.' + metric.name).find ('h3').text ('N/A');
+					
+					// Empty the changed stat part
+					$('.' + metric.name).find ('h5').empty();
+				}
+			});
+		},
+
+
+		
+		
+		// Fetch and insert site metrics graph 
+		insertSiteMetricsGraph (selectedRegion) 
+		{
+			const metricsImgUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/in-site-metrics.png?raw=true'.replace('{selectedRegion}', selectedRegion);
+			
+			// Add the image
+			$('.graph-container img').attr ('src', metricsImgUrl);
+		},
+
+		
+		// Function to fetch and set region information
+		parseRegionTextualInformation: function (selectedRegion)
+		{
+			const allSitesInfoUrl = "https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.csv";
+			
+			// Stream and parse the CSV file
+			Papa.parse (allSitesInfoUrl, {
+				header: true,
+				download: true,
+				complete: function (fields) {
+					
+					// Locate the site in the all_sites object
+					let site = fields.data.find (o => o.site_name === selectedRegion);
+					
+					// Set the title text
+					$('h1.site-title').text (site.full_name);
+					
+					// Start building the descriptive blurb
+					var descriptionText = `This development in ${site.main_local_authority} will contain ${site.dwellings_when_complete} dwellings when complete.`
+					
+					// Complete the blurb, based on completion status
+					var completionText = '';
+					switch (site.is_complete) {
+						case 'yes':
+								completionText = ' The project has been completed.';
+								break;
+						case 'yes (partly before 2011)':
+								completionText = ' The project has been completed, being partly completed before 2011.';
+								break;
+						case 'mostly':
+							completionText = ' The project is mostly complete.';
+							break;
+						case 'mostly (partly before 2011)':
+								completionText = ' The project is mostly complete, and was partly completed before 2011.';
+								break;
+						case 'partly':
+								completionText = ' The project is partly complete.';
+								break;
+						case 'partly (partly before 2011)':
+							completionText = ' The project is partly complete, and was partly completed before 2011.';
+							break;
+						case 'no':
+							completionText = ' The project is not complete.';
+							break;
+						default:
+							break;
+					}
+
+					// Add this to the HTML
+					$('.site-description').text (descriptionText + completionText);
+				}
+			})
 		}
 	};
 	
