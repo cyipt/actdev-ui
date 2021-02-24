@@ -46,7 +46,7 @@ var actdev = (function ($) {
 		regionsNameField: 'full_name',
 		regionsSubstitutionToken: '{site_name}',
 		regionSwitcherNullText: 'Go to development',
-		regionSwitcherCallback: function (selectedRegion) {actdev.populateRegionData (selectedRegion);},
+		regionSwitcherCallback: function (selectedRegion) {actdev.fetchRegionData (selectedRegion);},
 		
 		// Initial view of all regions; will use regionsFile
 		initialRegionsView: true,
@@ -423,6 +423,8 @@ var actdev = (function ($) {
 				+ '<p><a href="{properties.url}"><img src="/images/icons/bullet_go.png" /> <strong>View full details</a></strong></p>'
 		},
 	};	
+
+	var regionData = {}; // This will be overwritten each time a new region's data is fetched
 	
 	return {
 		
@@ -441,48 +443,13 @@ var actdev = (function ($) {
 			// Run the layerviewer for these settings and layers
 			layerviewer.initialise (_settings, _layerConfig);
 		},
-		
-		
-		// Function to fetch and generate site statistics
-		populateRegionData: function (selectedRegion)
-		{
-			// Parse and insert region textual information (title, description)
-			actdev.parseRegionTextualInformation (selectedRegion);
 
-			// Fetch and insert the graphs
-			actdev.insertSiteMetricsGraph (selectedRegion);
-			
-			// Populate site statistics
-			actdev.populateSiteStatistics (selectedRegion);
-		},
 
-		
-		// Parse and populate site statistics
-		populateSiteStatistics (selectedRegion)
+		fetchRegionData: function (selectedRegion)
 		{
 			const siteMetricsUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/in-site-metrics.csv'.replace('{selectedRegion}', selectedRegion);
-			const dataMetricsToShow = [
-				{
-					name: 'percent_cycle_base',
-					percentage: true
-				}, 
-				{
-					name: 'percent_walk_base',
-					percentage: true
-				}, 
-				{
-					name: 'percent_drive_base',
-					percentage: true
-				}, 
-				{
-					name: 'site_cycle_circuity',
-					percentage: false
-				}
-			]
 			
 			// Stream and parse the CSV file
-			var decimalPlaces = 2;
-			var decimalFactor = decimalPlaces === 0 ? 1 : Math.pow(10, decimalPlaces);
 			Papa.parse (siteMetricsUrl, {
 				header: true,
 				download: true,
@@ -501,45 +468,105 @@ var actdev = (function ($) {
 							// Unpack the parsed data object
 							var modeSplitData = fields.data.shift();
 
-							// Merge the mode-split data with the in-site-metrics
-							var data = {...inSiteMetrics, ...modeSplitData}
-					
-							// Map the array
-							dataMetricsToShow.map(metric => {
-								if (data.hasOwnProperty (metric.name)) {
-									
-									// Find the h3 for each statistic
-									var element = $('.' + metric.name).find('h3');
-									
-									// Animate the number
-									element.animateNumber ({
-										number: data[metric.name] * decimalFactor,
-								
-										numberStep: function(now, tween) {
-											var flooredNumber = Math.floor(now) / decimalFactor, target = $(tween.elem);
-								
-											if (decimalPlaces > 0) {
-												// Force decimal places even if they are 0
-												flooredNumber = flooredNumber.toFixed(decimalPlaces);
-											}
-									
-											// Add a percentage sign
-											if (metric.percentage) {
-												flooredNumber = flooredNumber + '%';
-											}
-											
-											// Set text
-											target.text(flooredNumber);
-											}
-										});
-								} else {
-									$('.' + metric.name).find('h3').text ('N/A');
-								}
-							});
+							// Merge the mode-split data with the in-site-metrics and overwrite the class property
+							regionData = {...inSiteMetrics, ...modeSplitData}
+
+							// Populate the page with the fetched data
+							actdev.populateRegionData (selectedRegion);
 						}
 					});
 				}
 			});
+		},
+
+		
+		// Function to fetch and generate site statistics
+		populateRegionData: function (selectedRegion)
+		{	
+			// Parse and insert region textual information (title, description)
+			actdev.parseRegionTextualInformation (selectedRegion);
+
+			// Fetch and insert the graphs
+			actdev.insertSiteMetricsGraph (selectedRegion);
+			
+			// Populate site statistics
+			actdev.populateSiteStatistics ();
+		},
+
+		
+		// Parse and populate site statistics
+		populateSiteStatistics ()
+		{
+			const dataMetricsToShow = [
+				{
+					name: 'percent_cycle_base',
+					percentage: true,
+					decimal_points: 0,
+					go_active: 'percent_cycle_goactive'
+				}, 
+				{
+					name: 'percent_walk_base',
+					percentage: true,
+					decimal_points: 0,
+					go_active: 'percent_walk_goactive'
+				}, 
+				{
+					name: 'percent_drive_base',
+					percentage: true,
+					decimal_points: 0,
+					go_active: 'percent_drive_goactive'
+				}, 
+				{
+					name: 'site_cycle_circuity',
+					percentage: false,
+					decimal_points: 2,
+					go_active: false
+				}
+			]
+			
+
+			// Map the array
+			dataMetricsToShow.map(metric => {
+				if (regionData.hasOwnProperty (metric.name)) {
+					
+					// Find the h3 for each statistic
+					var element = $('.' + metric.name).find('h3').first();
+
+					// Populate element with data-current and data-goactive (if applicable)
+					element.data('current', regionData[metric.name]);
+					if (metric.hasOwnProperty ('go_active')) {
+						element.data('goactive', regionData[metric.go_active]);
+					}
+					
+					// Calculate the decimal factor
+					var decimalFactor = metric.decimal_points === 0 ? 1 : Math.pow(10, metric.decimal_points);
+					
+					// Animate the number
+					element.animateNumber ({
+						number: regionData[metric.name] * decimalFactor,
+				
+						numberStep: function(now, tween) {
+							var flooredNumber = Math.floor(now) / decimalFactor, target = $(tween.elem);
+				
+							if (metric.decimal_points > 0) {
+								// Force decimal places even if they are 0
+								flooredNumber = flooredNumber.toFixed(metric.decimal_points);
+							}
+					
+							// Add a percentage sign
+							if (metric.percentage) {
+								flooredNumber = flooredNumber + '%';
+							}
+							
+							// Set text
+							target.text(flooredNumber);
+						}
+					});
+				} else {
+					$('.' + metric.name).find('h3').text ('N/A');
+				}
+			});
+
 		},
 		
 		
