@@ -39,7 +39,7 @@ html, body, section {height: 100vh;}
 .headline-stats ul.secondary-stats li {display: inline-block; padding: 0 10px 0 0;}
 .headline-stats .secondary-stats h3 {font-size: 23px;}
 .headline-stats .secondary-stats h4 {font-size: 16px; font-weight: 300;}
-.stat h5 {display: none;}
+.stat h5 {visibility: hidden;}
 
 @media screen and (max-width: 800px) {
     .infographic-header h1 {font-size: 35px; padding-left: 10px;}

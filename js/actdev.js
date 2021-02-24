@@ -510,9 +510,9 @@ var actdev = (function ($) {
 
 				// If we are currently in go-active mode, reveal the changed stats
 				if (actdev.getCurrentScenario () === 'goactive') {
-					$('.stat h5').show();
+					$('.stat h5').css('visibility', 'visible');
 				} else {
-					$('.stat h5').hide();
+					$('.stat h5').css('visibility', 'hidden');
 				}
 
 			});
