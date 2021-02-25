@@ -443,28 +443,48 @@ var actdev = (function ($) {
 			full_name: 'cycle',
 			percentage: true,
 			decimal_points: 0,
-			go_active: 'percent_cycle_goactive'
+			go_active: 'percent_cycle_goactive',
+			colour_ramp: [
+				[35, '#54ad32'],
+				[20, '#f0bb40'],
+				[0, '#eb3323']
+			]
 		}, 
 		{
 			name: 'percent_walk_base',
 			full_name: 'walk',
 			percentage: true,
 			decimal_points: 0,
-			go_active: 'percent_walk_goactive'
+			go_active: 'percent_walk_goactive',
+			colour_ramp: [
+				[35, '#54ad32'],
+				[20, '#f0bb40'],
+				[0, '#eb3323']
+			]
 		}, 
 		{
 			name: 'percent_drive_base',
 			full_name: 'driving',
 			percentage: true,
 			decimal_points: 0,
-			go_active: 'percent_drive_goactive'
+			go_active: 'percent_drive_goactive',
+			colour_ramp: [
+				[35, '#eb3323'],
+				[25, '#f0bb40'],
+				[0, '#54ad32']
+			]
 		}, 
 		{
 			name: 'site_cycle_circuity',
 			full_name: 'cycle circuity',
 			percentage: false,
 			decimal_points: 2,
-			go_active: false
+			go_active: false,
+			colour_ramp: [
+				[2, '#eb3323'],
+				[1.6, '#f0bb40'],
+				[0, '#54ad32']
+			]
 		}
 	]
 	
@@ -828,20 +848,18 @@ var actdev = (function ($) {
 					if (element.prop('number') != number) {
 						
 						// Calculate the color
-						// !FIXME this can be more detailed
-						var color;
-						if (number > 35) {
-							color = '#54ad32';
-						} else if (number > 25) {
-							color = '#f0bb40';
-						} else {
-							color = '#eb3323';
-						}
+						var colour;
+						$.each(metric.colour_ramp, function (indexInArray, keyValueColourPair) { 
+							if (number > keyValueColourPair[0]) {// i.e. [25, '#ffffff']
+								colour = keyValueColourPair[1];
+								return false;
+							}
+						});
 						
 						// Animate the number
 						element.animateNumber ({
 							number: number * decimalFactor,
-							color: color,
+							color: colour,
 					
 							numberStep: function(now, tween) {
 								var flooredNumber = Math.floor(now) / decimalFactor, target = $(tween.elem);
@@ -862,8 +880,8 @@ var actdev = (function ($) {
 						});
 
 						// Set the proper label and colours
-						$('.' + metric.name).find ('h4').first ().text(metric.full_name).css('color', color);
-						$('.' + metric.name).find ('h5').first ().css('color', color);
+						$('.' + metric.name).find ('h4').first ().text(metric.full_name).css('color', colour);
+						$('.' + metric.name).find ('h5').first ().css('color', colour);
 					}	
 
 					// Set the property of number, so the animation begins from this number next time, as opposed to 0
