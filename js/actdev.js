@@ -927,7 +927,9 @@ var actdev = (function ($) {
 					let site = fields.data.find (o => o.site_name === selectedRegion);
 					
 					// Set the title text
-					$('h1.site-title').text (site.full_name);
+					$('h1.site-title').animate({'opacity': 0}, 300, function () {
+						$(this).text(site.full_name);
+					}).animate({'opacity': 1}, 200);
 					
 					// Start building the descriptive blurb
 					var descriptionText = `This development in ${site.main_local_authority} will contain ${site.dwellings_when_complete} dwellings when complete.`
@@ -961,7 +963,9 @@ var actdev = (function ($) {
 					}
 
 					// Add this to the HTML
-					$('.site-description').text (descriptionText + completionText);
+					$('.site-description').animate({'opacity': 0}, 300, function () {
+						$(this).text(descriptionText + completionText);
+					}).animate({'opacity': 1}, 200);
 				}
 			})
 		}
