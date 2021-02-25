@@ -495,6 +495,8 @@ var actdev = (function ($) {
 			$('#selector ul li label').on ('click', function (e) {
 				$(e.target).closest ('li').toggleClass ('active');
 			})
+
+			actdev.showHideElementsBasedOnScenario ();
 		},
 
 
@@ -506,25 +508,33 @@ var actdev = (function ($) {
 				actdev.setCurrentScenario ();
 
 				// Refresh the new stats
-				actdev.populateSiteStatistics ()
+				actdev.populateSiteStatistics ();
 
-				// If we are currently in go-active mode, reveal the changed stats
-				if (actdev.getCurrentScenario () === 'goactive') {
-					$('.stat h5').css('visibility', 'visible');
-				} else {
-					$('.stat h5').css('visibility', 'hidden');
-				}
-
-				// Hide or show the corresponding mode-split graphic
-				if (actdev.getCurrentScenario () === 'goactive') {
-					$('.graph-container .current').hide();
-					$('.graph-container .goactive').show();
-				} else {
-					$('.graph-container .current').show();
-					$('.graph-container .goactive').hide();
-				}
+				// Show or hide the right elements
+				actdev.showHideElementsBasedOnScenario ();
 
 			});
+		},
+
+
+		// Show/hide elements based on current or goactive scneario
+		showHideElementsBasedOnScenario: function ()
+		{
+			// If we are currently in go-active mode, reveal the changed stats
+			if (actdev.getCurrentScenario () === 'goactive') {
+				$('.stat h5').css('visibility', 'visible');
+			} else {
+				$('.stat h5').css('visibility', 'hidden');
+			}
+
+			// Hide or show the corresponding mode-split graphic
+			if (actdev.getCurrentScenario () === 'goactive') {
+				$('.graph-container .current').hide();
+				$('.graph-container .goactive').show();
+			} else {
+				$('.graph-container .current').show();
+				$('.graph-container .goactive').hide();
+			}
 		},
 
 
