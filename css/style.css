@@ -96,7 +96,7 @@ ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filte
 /* Style Mapbox components */
 #styleswitcher {padding: 10px;}
 #styleswitcher li {margin: 5.5px 0;}
-#legend {background-color: #515151; color: #ffffff; padding: 15px; border-radius: 10px; opacity: 0.85}
+#legend {background-color: #515151; color: #ffffff; padding: 15px; border-radius: 10px; opacity: 0.85; width: auto;}
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib {border-radius: 10px;}
 .mapboxgl-ctrl.mapboxgl-ctrl-group:not(#legend) {filter: invert(0.75);}
 
