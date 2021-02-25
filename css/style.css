@@ -44,13 +44,6 @@ html, body, section {height: 100vh;}
 .headline-stats .secondary-stats h4 {font-size: 16px; font-weight: 400;}
 .stat h5 {visibility: hidden;}
 
-@media screen and (max-width: 800px) {
-    .infographic-header h1 {font-size: 35px; padding-left: 10px; margin-top: 50px;}
-    .infographic-header-container {margin-left: 10px;}
-    .headline-stats {padding-left: 10px;}
-    .infographic-header ul.external-links {margin-left: 10px;}
-}
-
 /* Site info */
 .site-info-sections {margin: 20px 10px;}
 .site-info-content {display: flex; flex-flow: row wrap;}
@@ -126,3 +119,15 @@ ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filte
 .ios-segmented-control .option label span {display: block; position: relative; z-index: 2; -webkit-transition: all .2s ease; transition: all .2s ease; will-change: transform;}
 .ios-segmented-control .option input:checked+label::before, .ios-segmented-control .option input:checked+label::after {background: var(--background);z-index: 1;}
 .ios-segmented-control .option input:checked+label {cursor: default;}
+
+/* Small screen fixes */
+@media screen and (max-width: 1262px) {
+    .infographic-header h1 {font-size: 35px; padding-left: 10px; margin-top: 50px;}
+    .infographic-header-container {margin-left: 10px; display: block;}
+    .headline-stats {padding-left: 10px;}
+    .infographic-header ul.external-links {margin-left: 10px;}
+    .ios-segmented-control .option label {font-size: 15px;}
+    .site-info-content {display: block; flex: unset;}
+    .site-info-content .graph-container {flex-basis: unset;}
+    .site-info-content .caption-container {flex-basis: unset;}
+}
