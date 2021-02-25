@@ -44,7 +44,7 @@ var actdev = (function ($) {
 		//dataLoadingSpinnerSelector: 'empty',
 		
 		// First-run welcome message
-		firstRunMessageHtml: '<p>Welcome to Actdev (Alpha UI), Active travel provision and potential in planned and proposed development sites.</p><p><strong>Please choose a region</strong> in the top-right to begin.</p>',
+		firstRunMessageHtml: '<p>Welcome to Actdev, Active travel provision and potential in planned and proposed development sites.</p><p><strong>Please choose a region</strong> in the top-right to begin.</p>',
 		
 		// Region switcher, with areas defined as a GeoJSON file
 		regionsFile: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.geojson',
@@ -542,7 +542,6 @@ var actdev = (function ($) {
 				.then(response => response.json())
 				.then(geojson => {
 					allSitesGeoJson = geojson;
-					this.getSiteBoundary('great-kneighton');
 				});
 		},
 

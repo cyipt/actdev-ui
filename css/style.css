@@ -4,7 +4,7 @@ a {text-decoration: none;}
 ul {list-style: none;}
 
 /* Typography */
-body, h2, h3, h4, h5, p, a {background-color: #434343; font-family: 'Arimo', sans-serif;}
+body, h2, h3, h4, h5, p, a {font-family: 'Arimo', sans-serif;}
 h1 {color: white; font-family: 'Arimo', sans-serif;}
 .green {color: #53e21f;}
 .blue {color: #4aa59d;}
@@ -20,7 +20,7 @@ html, body, section {height: 100vh;}
 /* Infographic side */
 
 /* Headline */
-.infographic-header i.site-back-arrow {position: absolute; display: inline-block; font-size: 30px; padding: 2.5px 10px; border: 0.5px solid #ffffff4f; border-radius: 30px; transition: 0.3s;}
+.infographic-half i.site-back-arrow {position: absolute; font-size: 30px; padding: 2.5px 10px; border: 0.5px solid #ffffff4f; border-radius: 30px; transition: 0.3s;}
 .infographic-header i.site-back-arrow:hover {transform: scale(1.2); border-color: orange; color: orange;}
 .infographic-header h1 {font-size: 50px; display: inline-block; padding: 5px 5px 5px 78px; margin: 0;}
 .infographic-header-container {display: flex; flex-wrap: wrap; margin-left: 80px;}
@@ -102,6 +102,11 @@ ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filte
 #legend {background-color: #515151; color: #ffffff; padding: 15px; border-radius: 10px; opacity: 0.85; width: auto;}
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib {border-radius: 10px;}
 .mapboxgl-ctrl.mapboxgl-ctrl-group:not(#legend, #regionswitcher) {filter: invert(0.75);}
+
+/* Vex dialog boxes */
+.vex.vex-theme-plain .vex-content {color: white; background-color: #323232;}
+.vex.vex-theme-plain .vex-dialog-button-primary {background-color: orange;}
+
 
 /* iOS style segmented control */
 .ios-segmented-control {background: rgb(85, 85, 85); border-radius: 30px; margin: 10px; padding: 2px; border: none; outline: none; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);}  
