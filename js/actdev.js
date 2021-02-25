@@ -196,7 +196,7 @@ var actdev = (function ($) {
 		},
 		
 		accessibility: {
-			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/dartboard-1-3-6km.geojson',
+			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/dartboard.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonColourField: 'busyness',
