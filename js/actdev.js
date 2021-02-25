@@ -32,7 +32,7 @@ var actdev = (function ($) {
 		iconSize: [38, 42],
 		
 		// Geolocation position
-		geolocationPosition: 'top-left',
+		geolocationPosition: false,
 		
 		// Enable scale bar
 		enableScale: true,
