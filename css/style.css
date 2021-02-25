@@ -82,7 +82,7 @@ ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filte
 .selector.map ul li.active {background-color: orange;}
 .selector.map ul li.active:hover {background-color: rgb(247, 219, 167);}
 .selector.map ul li label i {font-size: 20px; padding-bottom: 5px;}
-.selector.map ul li label {color: white;}
+.selector.map ul li label {color: white; display: block;}
 .selector.map ul li input {display: none;}
 .selector.map li img.loading {display: none;}
 .selector.map p.total {display: none;}
