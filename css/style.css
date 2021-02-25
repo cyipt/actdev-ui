@@ -63,7 +63,7 @@ html, body, section {height: 100vh;}
 .site-info-title hr {flex-grow:1; height: 1px; margin-left: 10px; background-color: #9f9f9f;}
 .section-description {font-weight: 300; font-size: 15px; line-height: 22px; margin: 15px 15px;}
 ul.site-data-carousel {margin: 10px 0; height: 198px; width: 100%; overflow-x: scroll; overflow-y: hidden; white-space:nowrap;}
-ul.site-data-carousel li {display: inline-block; margin: 0 15px; vertical-align: top;}
+ul.site-data-carousel li {display: inline-block; margin: 0 15px; width: 140px; vertical-align: top;}
 ul.site-data-carousel li .data-carousel-header {height: 180px; overflow: hidden;}
 ul.site-data-carousel li .data-carousel-header input {float: right; position: relative; top: 18px; right: 18px; transform: scale(1.5);}
 ul.site-data-carousel li .data-carousel-header label {display: inline-block;}
