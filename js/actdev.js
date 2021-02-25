@@ -431,6 +431,7 @@ var actdev = (function ($) {
 	};	
 
 	var regionData = {}; // This will be overwritten each time a new region's data is fetched
+	var currentRegion = '';
 	var currentScenario = 'current';
 	var dataMetricsToShow = [
 		{
@@ -500,6 +501,9 @@ var actdev = (function ($) {
 			// Add handler for scenario switcher
 			actdev.showHideElementsBasedOnScenario ();
 
+			// Add handler for A/B streets external link
+			actdev.listenForABStreets ();
+
 			// Initialise tooltips
 			actdev.initialiseTooltips ();
 		},
@@ -540,6 +544,26 @@ var actdev = (function ($) {
 				$('.graph-container .current').show();
 				$('.graph-container .goactive').hide();
 			}
+		},
+
+
+		// Listen for A/B streets link click, and calculate the right map position/zoom level
+		listenForABStreets: function ()
+		{
+			$('#view-simulation').on ('click', function () {
+				// Generate the URL
+				var simulationUrl = '/abstreet/?--actdev={%site_name}&--cam={%mapposition}'
+				simulationUrl = simulationUrl.replace('{%site_name}', actdev.currentRegion);
+				
+				var _map = layerviewer.getMap();
+				var centre = _map.getCenter ();
+
+				var zoom = _map.getZoom ();
+				var mapPosition = zoom.toFixed(1) + '/' + centre.lat.toFixed(5) + '/' + centre.lng.toFixed(5);		// Should be the same as the hash, if the hash exists
+				simulationUrl = simulationUrl.replace('{%mapposition}', mapPosition);
+				
+				window.open(simulationUrl);
+			});
 		},
 
 
@@ -620,6 +644,9 @@ var actdev = (function ($) {
 		// Function to fetch and generate site statistics
 		populateRegionData: function (selectedRegion)
 		{	
+			// Save the current region as class property
+			actdev.currentRegion = selectedRegion;
+			
 			// Parse and insert region textual information (title, description)
 			actdev.parseRegionTextualInformation (selectedRegion);
 
@@ -734,8 +761,6 @@ var actdev = (function ($) {
 			});
 		},
 
-
-		
 		
 		// Fetch and insert site metrics graph 
 		insertSiteMetricsGraph (selectedRegion) 
