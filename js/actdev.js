@@ -515,6 +515,15 @@ var actdev = (function ($) {
 					$('.stat h5').css('visibility', 'hidden');
 				}
 
+				// Hide or show the corresponding mode-split graphic
+				if (actdev.getCurrentScenario () === 'goactive') {
+					$('.graph-container .current').hide();
+					$('.graph-container .goactive').show();
+				} else {
+					$('.graph-container .current').show();
+					$('.graph-container .goactive').hide();
+				}
+
 			});
 		},
 
@@ -695,10 +704,13 @@ var actdev = (function ($) {
 		// Fetch and insert site metrics graph 
 		insertSiteMetricsGraph (selectedRegion) 
 		{
-			const metricsImgUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/in-site-metrics.png?raw=true'.replace('{selectedRegion}', selectedRegion);
+			//const metricsImgUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/in-site-metrics.png?raw=true'.replace('{selectedRegion}', selectedRegion);
+			const modeSplitCurrentUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/mode-split-base.png?raw=true'.replace('{selectedRegion}', selectedRegion);
+			const modeSplitGoActiveUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/mode-split-goactive.png?raw=true'.replace('{selectedRegion}', selectedRegion);
 			
 			// Add the image
-			$('.graph-container img').attr ('src', metricsImgUrl);
+			$('.graph-container img.current').attr ('src', modeSplitCurrentUrl);
+			$('.graph-container img.goactive').attr ('src', modeSplitGoActiveUrl);
 		},
 
 		
