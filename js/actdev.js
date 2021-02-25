@@ -53,6 +53,7 @@ var actdev = (function ($) {
 		regionsSubstitutionToken: '{site_name}',
 		regionSwitcherNullText: 'Go to development',
 		regionSwitcherCallback: function (selectedRegion) {actdev.fetchRegionData (selectedRegion);},
+		regionSwitcherDefaultRegion: 'great-kneighton', // Default region to load if no region saved in cookie
 		
 		// Initial view of all regions; will use regionsFile
 		initialRegionsView: true,
