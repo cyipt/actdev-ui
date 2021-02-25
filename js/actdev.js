@@ -492,11 +492,16 @@ var actdev = (function ($) {
 		// Initialise general UI handlers
 		initUi: function ()
 		{
+			// Add listener for region selector
 			$('#selector ul li label').on ('click', function (e) {
 				$(e.target).closest ('li').toggleClass ('active');
 			})
 
+			// Add handler for scenario switcher
 			actdev.showHideElementsBasedOnScenario ();
+
+			// Initialise tooltips
+			actdev.initialiseTooltips ();
 		},
 
 
@@ -535,6 +540,27 @@ var actdev = (function ($) {
 				$('.graph-container .current').show();
 				$('.graph-container .goactive').hide();
 			}
+		},
+
+
+		// Initialise the tooltips
+		initialiseTooltips: function ()
+		{
+			tippy('#desirelines-tooltip', {
+				content: "View desire lines that show the relative amount of travel from the site to work, retail and F&B sites outside of the perimeter",
+			});
+
+			tippy('#routenetwork-tooltip', {
+				content: "A route network showing journeys taken from the development.",
+			});
+
+			tippy('#accessibility-tooltip', {
+				content: "A radar graph that shows levels of accessibility to and from the site.",
+			});
+
+			tippy('#studyarea-tooltip', {
+				content: "The study area.",
+			});
 		},
 
 
