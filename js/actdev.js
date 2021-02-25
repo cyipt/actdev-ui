@@ -550,6 +550,9 @@ var actdev = (function ($) {
 		// Fetch site photos (siteName)
 		fetchSitePhotos: function (siteName)
 		{
+			// Clear any existing photos
+			actdev.clearCarouselPhotos ();
+			
 			// Build CycleStreets API response
 			var photomapApiUrl = 'https://api.cyclestreets.net/v2/photomap.locations?tags=actdev&fields=id,hasPhoto,thumbnailUrl,license,caption&boundary={%boundary}&key={%apiKey}';
 			
@@ -560,18 +563,26 @@ var actdev = (function ($) {
 				return;
 			}
 			
-			var stringifiedSiteBoundary = JSON.stringify(siteBoundary.pop());
+			var stringifiedSiteBoundary = JSON.stringify(siteBoundary[siteBoundary.length-1]); // Don't use .pop() here, as it'll mutate the main dictionary
 			
 			// Replace boundary and api key url tolens
 			photomapApiUrl = photomapApiUrl.replace('{%boundary}', stringifiedSiteBoundary);
 			photomapApiUrl = photomapApiUrl.replace('{%apiKey}', _settings.apiKey);
-
+			
 			// Fetch the photos
 			fetch(photomapApiUrl)
 				.then(response => response.json())
 				.then(photomapResponse => {
 					actdev.populateSitePhotos (photomapResponse);
 				});
+		},
+
+
+		// Clear all photos in the carousel
+		clearCarouselPhotos: function ()
+		{
+			var cellElements = $('.carousel').flickity('getCellElements');
+			$('.carousel').flickity('remove', cellElements);
 		},
 
 
@@ -583,7 +594,6 @@ var actdev = (function ($) {
 				cellAlign: 'center',
 				contain: true,
 				pageDots: false,
-				fullscreen: true,
 				setGallerySize: false
 			});
 		},
@@ -591,7 +601,7 @@ var actdev = (function ($) {
 
 		// Populate the site photo thumnails
 		populateSitePhotos: function (photomapGeojson)
-		{
+		{			
 			var thumbnailHtml = `
 				<div class="carousel-cell">
 				<img src="{%thumbnailUrl}" />
@@ -618,7 +628,7 @@ var actdev = (function ($) {
 			$.each(allSitesGeoJson.features, function (indexInArray, site) { 
 				 if (site.properties.site_name == siteName) {
 					siteObject = site; 
-					return false
+					return false;
 				 }
 			});
 			
