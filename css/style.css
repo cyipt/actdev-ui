@@ -4,8 +4,8 @@ a {text-decoration: none;}
 ul {list-style: none;}
 
 /* Typography */
-body {background-color: #434343; font-family: 'Source Sans Pro', sans-serif;}
-h1 {color: white;}
+body, h2, h3, h4, h5, p, a {background-color: #434343; font-family: 'Arimo', sans-serif;}
+h1 {color: white; font-family: 'Arimo', sans-serif;}
 .green {color: #53e21f;}
 .blue {color: #4aa59d;}
 .red {color: #dc3a26;}
@@ -20,13 +20,14 @@ html, body, section {height: 100vh;}
 /* Infographic side */
 
 /* Headline */
-.infographic-header i.site-back-arrow {position: absolute; display: inline-block; font-size: 30px; padding: 2.5px 10px; border: 0.5px solid #ffffff4f; border-radius: 10px; transition: 0.3s;}
+.infographic-header i.site-back-arrow {position: absolute; display: inline-block; font-size: 30px; padding: 2.5px 10px; border: 0.5px solid #ffffff4f; border-radius: 30px; transition: 0.3s;}
 .infographic-header i.site-back-arrow:hover {transform: scale(1.2); border-color: orange; color: orange;}
 .infographic-header h1 {font-size: 50px; display: inline-block; padding: 5px 5px 5px 78px; margin: 0;}
 .infographic-header-container {display: flex; flex-wrap: wrap; margin-left: 80px;}
 .infographic-header-left {flex: 1;}
 .infographic-header-right {flex: 1; margin-right: 10px;}
 .infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px; font-size: 18px;}
+.infographic-header ul.external-links {margin-left: 80px; font-size: 18px;}
 .infographic-header ul.external-links li {display: inline-block;}
 .infographic-header ul.external-links li a.site-info-link {display: inline-block;}
 .infographic-header ul.external-links li a.site-info-link {color: white; padding: 0; margin: 5px 20px 0 0; transition: .3s;}
@@ -37,29 +38,30 @@ html, body, section {height: 100vh;}
 .headline-stats h3, .headline-stats h4 {display: inline-block;}
 .headline-stats .main-headline-stat {color: green; margin-right: 10px;}
 .headline-stats .main-headline-stat h3 {font-size: 35px;}
-.headline-stats .main-headline-stat h4 {font-size: 28px; font-weight: 300;}
+.headline-stats .main-headline-stat h4 {font-size: 28px; font-weight: 400;}
 .headline-stats ul.secondary-stats li {display: inline-block; padding: 0 10px 0 0;}
 .headline-stats .secondary-stats h3 {font-size: 23px;}
-.headline-stats .secondary-stats h4 {font-size: 16px; font-weight: 300;}
+.headline-stats .secondary-stats h4 {font-size: 16px; font-weight: 400;}
 .stat h5 {visibility: hidden;}
 
 @media screen and (max-width: 800px) {
     .infographic-header h1 {font-size: 35px; padding-left: 10px;}
     .infographic-header-container {margin-left: 10px;}
     .headline-stats {padding-left: 10px;}
+    .infographic-header ul.external-links {margin-left: 10px;}
 }
 
 /* Site info */
 .site-info-sections {margin: 20px 10px;}
 .site-info-content {display: flex; flex-flow: row wrap;}
-.site-info-content .graph-container {flex-basis: 70%; transition: height 1s linear; margin-top: 10px;}
+.site-info-content .graph-container {flex-basis: 63%; transition: height 1s linear; margin: 20px 0;}
 .site-info-content .graph-container img {display: block; margin: 0; height: 260px; width: 430px;}
 .site-info-content .graph-container img.inverted {filter: invert(0.735);}
-.site-info-content .caption-container {font-weight: 300; font-size: 14px; margin-top: 10px; flex-basis: 30%;}
+.site-info-content .caption-container {font-weight: 400; font-size: 15px; line-height: 22px; margin-top: 10px; flex-basis: 37%;}
 .site-info-title {display:flex; flex-direction:row; align-items: center;}
-.site-info-title h4 {flex-grow: 0;}
+.site-info-title h4 {flex-grow: 0; font-size: 17px;}
 .site-info-title hr {flex-grow:1; height: 1px; margin-left: 10px; background-color: #9f9f9f;}
-.section-description {font-weight: 300; font-size: 14px; margin: 10px 15px;}
+.section-description {font-weight: 300; font-size: 15px; line-height: 22px; margin: 15px 15px;}
 ul.site-data-carousel {margin: 10px 0; height: 198px; width: 100%; overflow-x: scroll; overflow-y: hidden; white-space:nowrap;}
 ul.site-data-carousel li {display: inline-block; margin: 0 15px; vertical-align: top;}
 ul.site-data-carousel li .data-carousel-header {height: 180px; overflow: hidden;}
@@ -73,15 +75,16 @@ ul.site-data-carousel li .data-carousel-header .info-circle:hover {transform: sc
 ul.site-data-carousel li .controls {margin: 0 10px;}
 ul.site-data-carousel li .controls input {margin-left: 15px;}
 ul.site-data-carousel li .controls label {margin-left: 7.5px; font-weight: 300; font-size: 14px}
-ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filter: invert(0.75);}
+ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filter: invert(0.87); transform: scale(1.1);}
 
-.site-info-section .carousel {height: 150px; margin: 20px 0 20px 20px;}
-.site-info-section .carousel-cell {height: 100%; width: 200px;}
+.site-info-section .carousel {height: 150px; margin: 20px 0 20px 20px; padding-bottom: 20px;}
+.site-info-section .carousel-cell {height: 100%; width: 200px; margin: 0 4px;}
 .site-info-section .flickity-prev-next-button {width: 30px; height: 30px;}
+.carousel.is-fullscreen .carousel-cell {height: 100%;}
 
 /* Map side */
-.selector.map {position: absolute; bottom: 0; right: 0; float: right; margin: 25px 60px; padding: 0 25px; background-color: #515151; border-radius: 12px; opacity: 0.85}
-.selector.map ul li {display: inline-block; border-radius: 2px; width: 60px; height: 60px; vertical-align: top; text-align: center; margin: 0 1px; padding: 10px 0; font-size: 10px; transition: .3s}
+.selector.map {position: absolute; bottom: 0; right: 0; float: right; margin: 25px 60px; padding: 0 25px; background-color: #515151; border-radius: 30px; box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);}
+.selector.map ul li {display: inline-block; border-radius: 2px; width: 60px; height: 52px; vertical-align: top; text-align: center; margin: 0 1px; padding: 8px 0; font-size: 10px; transition: .3s}
 .selector.map ul li:hover {background-color: grey;}
 .selector.map ul li.active {background-color: orange;}
 .selector.map ul li.active:hover {background-color: rgb(247, 219, 167);}
@@ -91,21 +94,21 @@ ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filte
 .selector.map li img.loading {display: none;}
 .selector.map p.total {display: none;}
 
-#regionswitcher {transform: scale(2.2); margin-right: 180px;}
+#regionswitcher {transform: scale(1.7); margin: 18px 112px 0 0;}
 
 /* Style Mapbox components */
 #styleswitcher {padding: 10px;}
 #styleswitcher li {margin: 5.5px 0;}
 #legend {background-color: #515151; color: #ffffff; padding: 15px; border-radius: 10px; opacity: 0.85; width: auto;}
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib {border-radius: 10px;}
-.mapboxgl-ctrl.mapboxgl-ctrl-group:not(#legend) {filter: invert(0.75);}
+.mapboxgl-ctrl.mapboxgl-ctrl-group:not(#legend, #regionswitcher) {filter: invert(0.75);}
 
 /* iOS style segmented control */
-.ios-segmented-control {--background: rgba(239,239,240,0.5); background: var(--background); border-radius: 9px; margin: 10px; padding: 2px; border: none; outline: none; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}  
+.ios-segmented-control {background: rgb(85, 85, 85); border-radius: 30px; margin: 10px; padding: 2px; border: none; outline: none; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);}  
 .ios-segmented-control .option {position: relative; cursor: pointer;}
-.ios-segmented-control .option:hover input:not(:checked) + label span, .ios-segmented-control .option:active input:not(:checked) + label span, .ios-segmented-control .option:focus input:not(:checked) + label span {color: white;}
+.ios-segmented-control .option:hover input:not(:checked) + label span, .ios-segmented-control .option:active input:not(:checked) + label span, .ios-segmented-control .option:focus input:not(:checked) + label span {transform: scale(1.1);}
 .ios-segmented-control .option:active input:not(:checked) + label span {transform: scale(.95);}  
-.ios-segmented-control .option label {position: relative; display: block; text-align: center; padding: 3px 0vmin; background: rgba(255,255,255,0); font-weight: 500; color: rgba(0,0,0,1); font-size: 20px; height: 60px; line-height: 54px; text-overflow: clip; overflow: hidden;}  
+.ios-segmented-control .option label {position: relative; display: block; text-align: center; padding: 3px 0vmin; background: rgba(255,255,255,0); font-weight: 500; color: white; font-size: 20px; height: 60px; line-height: 54px; text-overflow: clip; overflow: hidden;}  
 .ios-segmented-control .option label::before, .ios-segmented-control .option label::after {content: ''; width: 1px; background: rgba(142,142,147,.15); position: absolute; top: 14%; bottom: 14%; will-change: background; -webkit-transition: background .3s ease; transition: background .3s ease;}  
 .ios-segmented-control .option label::before {left: 0; transform: translateX(-.5px);}  
 .ios-segmented-control .option label::after {right: 0; transform: translateX(.5px);}  
@@ -113,7 +116,7 @@ ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filte
 .ios-segmented-control .option:first-of-type label::before {opacity: 0;}  
 .ios-segmented-control .option:last-of-type label::after {opacity: 0;}
 .ios-segmented-control .option input {position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; padding: 0; margin: 0; -webkit-appearance: none; -moz-appearance: none; appearance: none; outline: none; border: none; opacity: 0;}  
-.ios-segmented-control .selection {background: rgba(255,255,255,1); border: .5px solid rgba(0,0,0,0.04); box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); border-radius: 7px; grid-column: 1; grid-row: 1; z-index: 2; will-change: transform; -webkit-transition: transform .2s ease; transition: transform .2s ease;}  
+.ios-segmented-control .selection {background: rgb(146, 146, 146); border: .5px solid rgba(0,0,0,0.04); box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); border-radius: 30px; grid-column: 1; grid-row: 1; z-index: 2; will-change: transform; -webkit-transition: transform .2s ease; transition: transform .2s ease;}  
 .ios-segmented-control .option label span {display: block; position: relative; z-index: 2; -webkit-transition: all .2s ease; transition: all .2s ease; will-change: transform;}
 .ios-segmented-control .option input:checked+label::before, .ios-segmented-control .option input:checked+label::after {background: var(--background);z-index: 1;}
 .ios-segmented-control .option input:checked+label {cursor: default;}

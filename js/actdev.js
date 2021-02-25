@@ -818,14 +818,14 @@ var actdev = (function ($) {
 					if (element.prop('number') != number) {
 						
 						// Calculate the color
-						// !FIXME this can be more details
+						// !FIXME this can be more detailed
 						var color;
 						if (number > 35) {
-							color = 'green';
+							color = '#54ad32';
 						} else if (number > 25) {
 							color = '#f0bb40';
 						} else {
-							color = 'red';
+							color = '#eb3323';
 						}
 						
 						// Animate the number
