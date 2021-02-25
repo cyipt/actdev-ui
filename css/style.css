@@ -91,6 +91,8 @@ ul.site-data-carousel .controls label {margin-left: 7.5px; font-weight: 300; fon
 #regionswitcher {transform: scale(2.2); margin-right: 180px;}
 
 /* Style Mapbox components */
+#styleswitcher {padding: 10px;}
+#styleswitcher li {margin: 5.5px 0;}
 #legend {background-color: #515151; color: #ffffff; padding: 15px; border-radius: 25px; box-shadow: 5px 5px 15px -1px #000000; opacity: 0.85}
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib {border-radius: 10px;}
 .mapboxgl-ctrl.mapboxgl-ctrl-group:not(#legend) {filter: invert(0.75);}
