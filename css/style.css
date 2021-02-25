@@ -25,6 +25,7 @@ html, body, section {height: 100vh;}
 .infographic-header h1 {font-size: 50px; display: inline-block; padding: 5px 5px 5px 80px; margin: 0;}
 .infographic-header-container {display: flex; flex-wrap: wrap; margin-left: 80px;}
 .infographic-header-left {flex: 1;}
+.infographic-header-right {flex: 1; margin-right: 10px;}
 .infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px;}
 .infographic-header ul.external-links li {display: inline-block;}
 .infographic-header ul.external-links li a.site-info-link {display: inline-block;}
@@ -52,7 +53,7 @@ html, body, section {height: 100vh;}
 .site-info-sections {margin: 20px 10px;}
 .site-info-content {display: flex; flex-flow: row wrap;}
 .site-info-content .graph-container {flex-basis: 70%; transition: height 1s linear; margin-top: 10px;}
-.site-info-content .graph-container img {display: block; margin: 0 auto; height: 260px; width: 430px;}
+.site-info-content .graph-container img {display: block; margin: 0; height: 260px; width: 430px;}
 .site-info-content .graph-container img.inverted {filter: invert(0.735);}
 .site-info-content .caption-container {margin-top: 10px; flex-basis: 30%;}
 .site-info-title {display:flex; flex-direction:row; align-items: center;}
@@ -74,7 +75,7 @@ ul.site-data-carousel li .controls input {margin-left: 15px;}
 ul.site-data-carousel li .controls label {margin-left: 7.5px; font-weight: 300; font-size: 14px}
 ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filter: invert(0.75);}
 
-.site-info-section .carousel {height: 100px; margin: 20px 0 0 15px;}
+.site-info-section .carousel {height: 100px; margin: 20px 0 0 20px;}
 .site-info-section .carousel-cell {width: 200px;}
 .site-info-section .flickity-prev-next-button {width: 30px; height: 30px;}
 
@@ -100,12 +101,12 @@ ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filte
 .mapboxgl-ctrl.mapboxgl-ctrl-group:not(#legend) {filter: invert(0.75);}
 
 /* iOS style segmented control */
-.ios-segmented-control {--background: rgba(239,239,240,1); background: var(--background); border-radius: 9px; margin: 10px 0 0 0; padding: 2px; border: none; outline: none; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}  
+.ios-segmented-control {--background: rgba(239,239,240,0.5); background: var(--background); border-radius: 9px; margin: 10px; padding: 2px; border: none; outline: none; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}  
 .ios-segmented-control .option {position: relative; cursor: pointer;}
-.ios-segmented-control .option:hover input:not(:checked) + label span, .ios-segmented-control .option:active input:not(:checked) + label span, .ios-segmented-control .option:focus input:not(:checked) + label span {opacity: .2;}
+.ios-segmented-control .option:hover input:not(:checked) + label span, .ios-segmented-control .option:active input:not(:checked) + label span, .ios-segmented-control .option:focus input:not(:checked) + label span {color: white;}
 .ios-segmented-control .option:active input:not(:checked) + label span {transform: scale(.95);}  
-.ios-segmented-control .option label {position: relative; display: block; text-align: center; padding: 3px 6vmin; background: rgba(255,255,255,0); font-weight: 500; color: rgba(0,0,0,1); font-size: 20px; height: 30px; line-height: 24px;}  
-.ios-segmented-control .option label::before, .ios-segmented-control .option label::after {content: ''; width: 1px; background: rgba(142,142,147,.15); position: absolute; top: 14%; bottom: 14%; will-change: background; -webkit-transition: background .2s ease; transition: background .2s ease;}  
+.ios-segmented-control .option label {position: relative; display: block; text-align: center; padding: 3px 0vmin; background: rgba(255,255,255,0); font-weight: 500; color: rgba(0,0,0,1); font-size: 20px; height: 60px; line-height: 54px; text-overflow: clip; overflow: hidden;}  
+.ios-segmented-control .option label::before, .ios-segmented-control .option label::after {content: ''; width: 1px; background: rgba(142,142,147,.15); position: absolute; top: 14%; bottom: 14%; will-change: background; -webkit-transition: background .3s ease; transition: background .3s ease;}  
 .ios-segmented-control .option label::before {left: 0; transform: translateX(-.5px);}  
 .ios-segmented-control .option label::after {right: 0; transform: translateX(.5px);}  
 .ios-segmented-control .option:first-of-type {grid-column: 1; grid-row: 1; box-shadow: none;}  
