@@ -39,7 +39,7 @@ html, body, section {height: 100vh;}
 .headline-stats .main-headline-stat {color: green; margin-right: 10px;}
 .headline-stats .main-headline-stat h3 {font-size: 35px;}
 .headline-stats .main-headline-stat h4 {font-size: 28px; font-weight: 400;}
-.headline-stats ul.secondary-stats li {display: inline-block; padding: 0 10px 0 0;}
+.headline-stats ul.secondary-stats li {display: inline-block; padding: 0 10px 0 0; margin-bottom: 5px;}
 .headline-stats .secondary-stats h3 {font-size: 23px;}
 .headline-stats .secondary-stats h4 {font-size: 16px; font-weight: 400;}
 .stat h5 {visibility: hidden;}
