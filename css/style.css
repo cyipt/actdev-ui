@@ -55,14 +55,14 @@ html, body, section {height: 100vh;}
 .site-info-sections {margin: 20px 10px;}
 .site-info-content {display: flex; flex-flow: row wrap;}
 .site-info-content .graph-container {flex-basis: 63%; transition: height 1s linear; margin: 20px 0;}
-.site-info-content .graph-container img {display: block; margin: 0; height: 260px; width: 430px;}
+.site-info-content .graph-container img {display: block; margin: 0; height: 277px; width: 495px;}
 .site-info-content .graph-container img.inverted {filter: invert(0.735);}
 .site-info-content .caption-container {font-weight: 400; font-size: 15px; line-height: 22px; margin: 10px 0 20px 20px; flex-basis: 30%; min-width: 200px;}
 .site-info-title {display:flex; flex-direction:row; align-items: center;}
 .site-info-title h4 {flex-grow: 0; font-size: 17px;}
 .site-info-title hr {flex-grow:1; height: 1px; margin-left: 10px; background-color: #9f9f9f;}
 .section-description {font-weight: 300; font-size: 15px; line-height: 22px; margin: 15px 15px;}
-ul.site-data-carousel {margin: 10px 0; height: 198px; width: 100%; overflow-x: scroll; overflow-y: hidden; white-space:nowrap;}
+ul.site-data-carousel {margin: 25px 0; height: 198px; width: 100%; overflow-x: scroll; overflow-y: hidden; white-space:nowrap;}
 ul.site-data-carousel li {display: inline-block; margin: 0 15px; width: 140px; vertical-align: top;}
 ul.site-data-carousel li .data-carousel-header {height: 180px; overflow: hidden;}
 ul.site-data-carousel li .data-carousel-header input {float: right; position: relative; top: 18px; right: 18px; transform: scale(1.5);}
@@ -99,6 +99,7 @@ ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filte
 /* Style Mapbox components */
 #styleswitcher {padding: 10px;}
 #styleswitcher li {margin: 5.5px 0;}
+#styleswitcher label {margin-left: 6px;}
 #legend {background-color: #515151; color: #ffffff; padding: 15px; border-radius: 10px; opacity: 0.85; width: auto;}
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib {border-radius: 10px;}
 .mapboxgl-ctrl.mapboxgl-ctrl-group:not(#legend, #regionswitcher) {filter: invert(0.75);}
