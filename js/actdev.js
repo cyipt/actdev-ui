@@ -551,7 +551,7 @@ var actdev = (function ($) {
 			});
 
 			tippy('#routenetwork-tooltip', {
-				content: "A route network showing journeys taken from the development.",
+				content: "These represent the route network data along the desire lines (likely fast route).",
 			});
 
 			tippy('#accessibility-tooltip', {
