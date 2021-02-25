@@ -936,25 +936,25 @@ var actdev = (function ($) {
 					var completionText = '';
 					switch (site.is_complete) {
 						case 'yes':
-								completionText = ' The project has been completed.';
+								completionText = ' The site has been completed.';
 								break;
 						case 'yes (partly before 2011)':
-								completionText = ' The project has been completed, being partly completed before 2011.';
+								completionText = ' The site has been completed, being partly completed before 2011.';
 								break;
 						case 'mostly':
-							completionText = ' The project is mostly complete.';
+							completionText = ' The site is mostly complete.';
 							break;
 						case 'mostly (partly before 2011)':
-								completionText = ' The project is mostly complete, and was partly completed before 2011.';
+								completionText = ' The site is mostly complete, and was partly completed before 2011.';
 								break;
 						case 'partly':
-								completionText = ' The project is partly complete.';
+								completionText = ' The site is partly complete.';
 								break;
 						case 'partly (partly before 2011)':
-							completionText = ' The project is partly complete, and was partly completed before 2011.';
+							completionText = ' The site is partly complete, and was partly completed before 2011.';
 							break;
 						case 'no':
-							completionText = ' The project is not complete.';
+							completionText = ' The site is not complete.';
 							break;
 						default:
 							break;
