@@ -126,7 +126,10 @@ ul.site-data-carousel li .controls select {display: block; margin: 0 auto; filte
     .infographic-header-container {margin-left: 10px; display: block;}
     .headline-stats {padding-left: 10px;}
     .infographic-header ul.external-links {margin-left: 10px;}
-    .ios-segmented-control .option label {font-size: 15px;}
+    .infographic-header-right {padding: 10px 60px 10px 0;}
+    .ios-segmented-control {height: 50px;}
+    .ios-segmented-control span {height: 47px;}
+    .ios-segmented-control .option label {font-size: 15px; line-height: 39px;}
     .site-info-content {display: block; flex: unset;}
     .site-info-content .graph-container {flex-basis: unset;}
     .site-info-content .caption-container {flex-basis: unset;}
