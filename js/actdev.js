@@ -431,8 +431,11 @@ var actdev = (function ($) {
 	};	
 
 	var regionData = {}; // This will be overwritten each time a new region's data is fetched
+	var allSitesJsonUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.geojson';
+	var allSitesGeoJson = false;
 	var currentRegion = '';
 	var currentScenario = 'current';
+	var fklyCarousel = false;
 	var dataMetricsToShow = [
 		{
 			name: 'percent_cycle_base',
@@ -498,6 +501,12 @@ var actdev = (function ($) {
 				$(e.target).closest ('li').toggleClass ('active');
 			})
 
+			// Initialise carousel 
+			actdev.initialiseCarousel ();
+			
+			// Fetch and store all-sites.geojson
+			actdev.fetchAllSites ();
+			
 			// Add handler for scenario switcher
 			actdev.showHideElementsBasedOnScenario ();
 
@@ -506,6 +515,7 @@ var actdev = (function ($) {
 
 			// Initialise tooltips
 			actdev.initialiseTooltips ();
+
 		},
 
 
@@ -521,8 +531,102 @@ var actdev = (function ($) {
 
 				// Show or hide the right elements
 				actdev.showHideElementsBasedOnScenario ();
-
 			});
+		},
+
+
+		// Fetch all sites
+		fetchAllSites: function ()
+		{
+			fetch(allSitesJsonUrl)
+				.then(response => response.json())
+				.then(geojson => {
+					allSitesGeoJson = geojson;
+					this.getSiteBoundary('great-kneighton');
+				});
+		},
+
+
+		// Fetch site photos (siteName)
+		fetchSitePhotos: function (siteName)
+		{
+			// Build CycleStreets API response
+			var photomapApiUrl = 'https://api.cyclestreets.net/v2/photomap.locations?tags=actdev&fields=id,hasPhoto,thumbnailUrl,license,caption&boundary={%boundary}&key={%apiKey}';
+			
+			// Get the site boundary
+			var siteBoundary = actdev.getSiteBoundary (siteName);
+			
+			if (!siteBoundary) {
+				return;
+			}
+			
+			var stringifiedSiteBoundary = JSON.stringify(siteBoundary.pop());
+			
+			// Replace boundary and api key url tolens
+			photomapApiUrl = photomapApiUrl.replace('{%boundary}', stringifiedSiteBoundary);
+			photomapApiUrl = photomapApiUrl.replace('{%apiKey}', _settings.apiKey);
+
+			// Fetch the photos
+			fetch(photomapApiUrl)
+				.then(response => response.json())
+				.then(photomapResponse => {
+					actdev.populateSitePhotos (photomapResponse);
+				});
+		},
+
+
+		// Initialise carousel
+		initialiseCarousel: function ()
+		{
+		
+			$('.carousel').flickity({
+				cellAlign: 'center',
+				contain: true,
+				pageDots: false,
+				fullscreen: true,
+				setGallerySize: false
+			});
+		},
+
+
+		// Populate the site photo thumnails
+		populateSitePhotos: function (photomapGeojson)
+		{
+			var thumbnailHtml = `
+				<div class="carousel-cell">
+				<img src="{%thumbnailUrl}" />
+				</div>
+				`
+
+			photomapGeojson.features.map(photoObject => {
+				$('.carousel').flickity('append', $(thumbnailHtml.replace('{%thumbnailUrl}', photoObject.properties.thumbnailUrl)));
+			});
+
+		},
+
+
+		// Get site boundary. Returns an array with the boundary or false if no matching site was found
+		getSiteBoundary: function (siteName) 
+		{
+			// Exit if no sites stores
+			if (!allSitesGeoJson) {
+				return;
+			};
+
+			// Iterate through sites until we find a match
+			var siteObject = false;
+			$.each(allSitesGeoJson.features, function (indexInArray, site) { 
+				 if (site.properties.site_name == siteName) {
+					siteObject = site; 
+					return false
+				 }
+			});
+			
+			if (siteObject) {
+				return siteObject.geometry.coordinates;
+			} else {
+				return siteObject;
+			}
 		},
 
 
@@ -645,7 +749,10 @@ var actdev = (function ($) {
 		populateRegionData: function (selectedRegion)
 		{	
 			// Save the current region as class property
-			actdev.currentRegion = selectedRegion;
+			currentRegion = selectedRegion;
+
+			// Get the site photos
+			actdev.fetchSitePhotos (selectedRegion);
 			
 			// Parse and insert region textual information (title, description)
 			actdev.parseRegionTextualInformation (selectedRegion);
