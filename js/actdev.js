@@ -806,6 +806,7 @@ var actdev = (function ($) {
 
 					// Populate element with data-current and data-goactive (if applicable)
 					element.data('current', regionData[metric.name]);
+					var differenceHtml = '';
 					if (metric.go_active) {
 						element.data('goactive', regionData[metric.go_active]);
 						
@@ -821,7 +822,6 @@ var actdev = (function ($) {
 						element.data('difference', difference)
 						
 						// Change the actual stat text
-						var differenceHtml = '';
 						if (difference > 0) {
 							differenceHtml = '<i class="fa fa-arrow-up"></i>' + difference;
 						} else if (difference < 0) {
@@ -830,8 +830,10 @@ var actdev = (function ($) {
 							differenceHtml = difference;
 						}
 						
-						$('.' + metric.name).find ('h5').first ().html(differenceHtml);
+					} else {
+						differenceHtml = '<i class="fa"></i>'; // i.e., empty placeholder
 					}
+					$('.' + metric.name).find ('h5').first ().html(differenceHtml);
 					
 					// Calculate the decimal factor
 					var decimalFactor = metric.decimal_points === 0 ? 1 : Math.pow (10, metric.decimal_points);
