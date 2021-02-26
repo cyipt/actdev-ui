@@ -687,7 +687,7 @@ var actdev = (function ($) {
 			$('#view-simulation').on ('click', function () {
 				// Generate the URL
 				var simulationUrl = '/abstreet/?--actdev={%site_name}&--cam={%mapposition}'
-				simulationUrl = simulationUrl.replace('{%site_name}', actdev.currentRegion);
+				simulationUrl = simulationUrl.replace('{%site_name}', currentRegion);
 				
 				var _map = layerviewer.getMap();
 				var centre = _map.getCenter ();
