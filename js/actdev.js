@@ -409,7 +409,8 @@ var actdev = (function ($) {
 		planningapplications: {
 			apiCall: '/v2/planningapplications.locations',
 			apiFixedParameters: {
-				limit: 250
+				limit: 250,
+				size: 'Large'
 			},
 			iconUrl: '/images/icons/signs_neutral.svg',
 			iconSizeField: 'app_size',
