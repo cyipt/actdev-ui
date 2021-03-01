@@ -38,9 +38,9 @@
 	.photos {background-color: #434343; flex: 1;}
 
 	
-	.about-md {margin-top: 25px;}
-	.about-md h1 {color: white; font-size: 28px; margin: 20px 0 10px;}
-	.about-md h2 {color: white; font-size: 25px;}
+	#content {margin-top: 25px;}
+	#content h1 {color: white; font-size: 28px; margin: 20px 0 10px;}
+	#content h2 {color: white; font-size: 25px;}
 
 	.photos {padding: 30px 0;}
 	.photos img {display: block; margin: 0 auto; padding: 5px 0; height: calc(100vh / 4);}
@@ -55,7 +55,7 @@
 			<section class="about">
 				<h1>ACTDEV</h1>
 				<h2>Active travel in new developments</h2>
-				<section class="about-md">
+				<section id="content">
 
 				</section>
 
@@ -84,11 +84,11 @@
 <!-- Render the MD -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-    const mdFileLocation = "https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui/about/about.md";
+    const mdFileLocation = "./about.md";
 	
 	fetch (mdFileLocation)
    		.then (r => r.text())
    		.then (t => {
-			$('.about-md').html (marked(t));
+			$('#content').html (marked(t));
 		   });
   </script>
