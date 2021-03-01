@@ -814,8 +814,8 @@ var actdev = (function ($) {
 
 		
 		// Parse and populate site statistics
-		populateSiteStatistics ()
-		{	
+		populateSiteStatistics: function ()
+		{
 			// Map the array
 			dataMetricsToShow.map(metric => {
 				if (regionData.hasOwnProperty (metric.name)) {
@@ -918,7 +918,7 @@ var actdev = (function ($) {
 
 		
 		// Fetch and insert site metrics graph 
-		insertSiteMetricsGraph (selectedRegion) 
+		insertSiteMetricsGraph: function (selectedRegion)
 		{
 			//const metricsImgUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/in-site-metrics.png?raw=true'.replace('{selectedRegion}', selectedRegion);
 			const modeSplitCurrentUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/mode-split-base.png?raw=true'.replace('{selectedRegion}', selectedRegion);
