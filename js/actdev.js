@@ -229,7 +229,7 @@ var actdev = (function ($) {
 		},
 		
 		buildings: {
-			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/buildings_od.geojson',
+			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/site_buildings.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonColourField: 'building',
