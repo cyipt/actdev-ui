@@ -52,7 +52,7 @@ var actdev = (function ($) {
 		regionsNameField: 'full_name',
 		regionsSubstitutionToken: '{site_name}',
 		regionSwitcherNullText: 'Go to development',
-		regionSwitcherCallback: function (selectedRegion) {actdev.fetchRegionData (selectedRegion);},
+		regionSwitcherCallback: function (selectedRegion) {actdev.fetchRegionData (selectedRegion);}, // This is called when a region is switched, including startup
 		regionSwitcherDefaultRegion: 'great-kneighton', // Default region to load if no region saved in cookie
 		
 		// Initial view of all regions; will use regionsFile
@@ -437,7 +437,7 @@ var actdev = (function ($) {
 	var allSitesGeoJson = false;
 	var currentRegion = '';
 	var currentScenario = 'current';
-	var fklyCarousel = false;
+	var modeSplitCsvData = false;
 	var dataMetricsToShow = [
 		{
 			name: 'percent_cycle_base',
@@ -522,12 +522,32 @@ var actdev = (function ($) {
 			$('#selector ul li label').on ('click', function (e) {
 				$(e.target).closest ('li').toggleClass ('active');
 			})
-
-			// Initialise carousel 
-			actdev.initialiseCarousel ();
 			
 			// Fetch and store all-sites.geojson
 			actdev.fetchAllSites ();
+		},
+
+
+		// Fetch all sites
+		fetchAllSites: function ()
+		{
+			fetch(allSitesJsonUrl)
+				.then(response => response.json())
+				.then(geojson => {
+					allSitesGeoJson = geojson;
+
+					// "Boot the rest of the site"
+					actdev.secondInitialisation ();
+				});
+		},
+
+
+		// A callback, run after the site has downloaded the initial all-sites.geojson. 
+		// Exsentially a second initialisation, or a continuation of the first, equivalent of booting first to 16 then to 32 bit modes.
+		secondInitialisation: function ()
+		{
+			// Load the carousel
+			actdev.initialiseCarousel ();
 			
 			// Add handler for scenario switcher
 			actdev.showHideElementsBasedOnScenario ();
@@ -548,23 +568,15 @@ var actdev = (function ($) {
 				// Save the new scenario
 				actdev.setCurrentScenario ();
 
+				// Generate the graphs
+				actdev.addBarChart ();
+				
 				// Refresh the new stats
 				actdev.populateSiteStatistics ();
 
 				// Show or hide the right elements
 				actdev.showHideElementsBasedOnScenario ();
 			});
-		},
-
-
-		// Fetch all sites
-		fetchAllSites: function ()
-		{
-			fetch(allSitesJsonUrl)
-				.then(response => response.json())
-				.then(geojson => {
-					allSitesGeoJson = geojson;
-				});
 		},
 
 
@@ -736,6 +748,8 @@ var actdev = (function ($) {
 		},
 
 
+		
+		// Callback, triggered when a region gets changed. This also triggers at launch
 		fetchRegionData: function (selectedRegion)
 		{
 			const siteMetricsUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/in-site-metrics.csv'.replace('{selectedRegion}', selectedRegion);
@@ -762,10 +776,10 @@ var actdev = (function ($) {
 						complete: function (fields) {
 							
 							// Unpack the parsed data object
-							var modeSplitData = fields.data.shift();
+							modeSplitCsvData = fields.data;
 
 							// Merge the mode-split data with the in-site-metrics and overwrite the class property
-							regionData = {...inSiteMetrics, ...modeSplitData}
+							regionData = {...inSiteMetrics, ...modeSplitCsvData[0]}; // !FIXME this needs to use a different data source, not only 0-3 band
 
 							// Populate the page with the fetched data
 							actdev.populateRegionData (selectedRegion);
@@ -782,6 +796,9 @@ var actdev = (function ($) {
 			// Save the current region as class property
 			currentRegion = selectedRegion;
 
+			// Generate the graph
+			actdev.addBarChart ();
+			
 			// Get the site photos
 			actdev.fetchSitePhotos (selectedRegion);
 			
@@ -969,7 +986,125 @@ var actdev = (function ($) {
 					}).animate({'opacity': 1}, 200);
 				}
 			})
-		}
+		},
+
+
+		addBarChart: function ()
+		{	
+			actdev.insertChartIntoCanvas (actdev.generateBarChartDataObject(), actdev.generateBarChartOptionsObject('Mode split transport'));
+		},	
+
+
+		// Generate bar chart data
+		generateBarChartDataObject: function ()
+		{
+			var labels = [modeSplitCsvData.map(distanceBand => distanceBand.distance_band)]
+			//labels.pop() // Remove the spurious "" that pappa parse leaves
+			var datasets = [
+				{
+					label: 'Walk',
+					backgroundColor: '#457b9d',
+					data: [modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))]
+				},
+				{
+					label: 'Bike',
+					backgroundColor: '#90be6d',
+					data: [modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))]
+				}, {
+					label: 'Other',
+					backgroundColor: '#ffd166',
+					data: [modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))]
+				}, {
+					label: 'Car',
+					backgroundColor: '#fe5f55',
+					data: [modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))]
+				},
+			]
+
+			console.log (datasets);
+			datasets.map(data => data.data.pop());
+			var data = {
+				labels: ['January', 'February', 'March', 'April'],
+				datasets: [{
+					label: 'Walk',
+					backgroundColor: '#457b9d',
+					data: [
+						1,
+						4,
+						5,
+						5,
+					]
+				}, {
+					label: 'Bike',
+					backgroundColor: '#90be6d',
+					data: [
+						2,
+						1,
+						5,
+						7,
+					]
+				}, {
+					label: 'Other',
+					backgroundColor: '#ffd166',
+					data: [
+						5,
+						4,
+						8,
+						2,
+					]
+				}, {
+					label: 'Car',
+					backgroundColor: '#fe5f55',
+					data: [
+						1,
+						2,
+						7,
+						2,
+					]
+				}, ],
+				//data: datasets,
+		
+			};
+
+			return data;
+		},
+
+
+		generateBarChartOptionsObject: function (text)
+		{
+			return {
+				title: {
+					display: true,
+					text: text,
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false
+				},
+				responsive: true,
+				scales: {
+					xAxes: [{
+						stacked: true,
+					}],
+					yAxes: [{
+						stacked: true
+					}]
+				},
+				indexAxis: 'y',
+			}
+		},
+
+		
+		// Insert graph into canvas
+		insertChartIntoCanvas: function (barChartData, barChartOptions) 
+		{	
+			var ctx = document.getElementById('densityChart').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type: 'horizontalBar',
+				data: barChartData,
+				options: barChartOptions
+			});
+		},
 	};
 	
 } (jQuery));

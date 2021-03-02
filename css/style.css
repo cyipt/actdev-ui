@@ -136,4 +136,30 @@ html, body, section {height: 100vh;}
 }
 
 
-.national-level-zoom .site-title {color: orange;}
+.national-level-zoom {display: flex;}
+.national-level-zoom .text-section {background-color: #434343; color: white; flex: 0.75; padding: 1rem; overflow-y: scroll;}
+.national-level-zoom .graph-half {background-color: #434343; flex: 1.25; padding: 1rem 10rem;}
+.national-level-zoom #observablehq-chart {padding: 25px 50px 50px 50px;}
+
+.national-level-zoom .site-title {color: orange; font-size: 50px; display: inline-block; padding: 5px 5px 5px 20px; margin: 0;}
+.national-level-zoom .site-description {color: #dbabc3; font-size: 20px; display: inline-block; padding: 5px 5px 20px 20px; margin: 0;}
+.national-level-zoom .blurb {color: white; font-size: 18px; font-weight: 300; display: inline-block; padding: 10px 5px 5px 20px;}
+.national-level-zoom .ios-segmented-control {margin: 50px;}
+.national-level-zoom p {margin: 20px 5px 5px 20px;}
+
+.national-level-zoom ul.links {margin: 20px; font-size: 18px;}
+.national-level-zoom ul.links li {display: inline-block;}
+.national-level-zoom ul.links li a {display: inline-block;}
+.national-level-zoom ul.links li a {color: white; padding: 0; margin: 5px 20px 0 0; transition: .3s;}
+.national-level-zoom ul.links li a:hover {transform: scale(1.05); color: orange;}
+
+.national-level-zoom section.photos {height: auto; display: block; margin: 30px 10px 15px 20px;}
+.national-level-zoom section.photos img {display: inline-block; width: 110px; margin: 0 5px;}
+
+.national-level-zoom section.footer {margin-top: 30px;}
+.national-level-zoom section.footer img {height: 90px; margin-right: 25px;}
+
+.national-level-zoom .graph-half h2 {color: orange; font-size: 30px; display: inline-block; padding: 10px 5px 5px 20px;}
+.national-level-zoom .graph-half .section-title {display:flex; flex-direction:row; align-items: center;}
+.national-level-zoom .graph-half .section-title h2 {flex-grow: 0;}
+.national-level-zoom .graph-half .section-title hr {flex-grow:1; height: 1px; margin-left: 10px; background-color: #9f9f9f;}

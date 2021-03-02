@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>ActDev - Active travel provision and potential in planned and proposed development sites.</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-title" content="ActDev" />
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#90be6d">
+	<meta name="theme-color" content="#ffffff">
+
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="/js/lib/mapbox-gl-js/mapbox-gl.css" />
+	<script src="/js/lib/mapbox-gl-js/mapbox-gl.min.js"></script>
+	<script src="/js/lib/jquery/jquery.min.js"></script>
+
+	<script src="/js/lib/jquery-ui/jquery-ui.min.js"></script>
+
+	<script src="/js/lib/jQuery-Touch-Events/src/1.0.9/jquery.mobile-events.min.js"></script>
+
+	<script src="/js/lib/mapbox-gl-draw/mapbox-gl-draw.js"></script>
+	<link rel="stylesheet" href="/js/lib/mapbox-gl-draw/mapbox-gl-draw.css" />
+
+	<script src="/js/lib/js-cookie/js.cookie.js"></script>
+
+	<!-- Vex dialogs; see: https://github.hubspot.com/vex/ -->
+	<script src="/js/lib/vex-4.1.0/dist/js/vex.combined.min.js"></script>
+	<link rel="stylesheet" href="/js/lib/vex-4.1.0/dist/css/vex.css" />
+	<link rel="stylesheet" href="/js/lib/vex-4.1.0/dist/css/vex-theme-plain.css" />
+
+	<!-- Chart.js -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
+	<!-- GeoJSON parser for flat JSON; see: https://www.npmjs.com/package/geojson -->
+	<!--<script src="https://unpkg.com/geojson@0.5.0/geojson.js"></script>-->
+	<script src="/js/lib/GeoJSON.js/geojson.js"></script>
+
+	<!-- GeoJSON extent library; see: https://github.com/mapbox/geojson-extent -->
+	<script src="/js/lib/geojson-extent/geojson-extent.js"></script>
+
+	<!-- LayerViewer library, providing the application logic -->
+	<script src="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.js"></script>
+	<link rel="stylesheet" type="text/css" href="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.css" />
+	<script src="/js/lib/Mapboxgljs.LayerViewer/lib/geocoder.js"></script>
+
+	<!-- Fontawesome icons -->
+	<script src="/js/lib/fontawesome/fontawesome-kit-7bd5544b77.js"></script>
+
+	<!-- Parse CSV -->
+	<script src="/js/lib/PapaParse/papaparse.min.js"></script>
+	
+	<!-- Flickity carousel -->
+	<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+	<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/flickity-fullscreen@1/fullscreen.css">
+	<script src="https://unpkg.com/flickity-fullscreen@1/fullscreen.js"></script>
+
+	<!-- D3.js -->
+	<script src="https://d3js.org/d3.v6.min.js"></script>
+
+	<!-- Animate number -->
+	<script src="/js/lib/jquery-animateNumber-0.0.14/jquery.animateNumber.min.js"></script>
+
+	<!-- Tooltip -->
+	<script src="https://unpkg.com/@popperjs/core@2"></script>
+	<script src="https://unpkg.com/tippy.js@6"></script>
+
+	<!-- ActDev application and its config, implementing the LayerViewer library -->
+	<script src="/.config.js"></script>
+	<script src="/js/actdev.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<script>
+		$(function () {
+			actdev.initialise(config);
+		});
+	</script>
+
+<body>
+	<main>
+		<section class="site-level-view">
+			<div class="infographic-half">
+				
+				<div class="infographic-header">
+					<i class="fa fa-long-arrow-alt-left site-back-arrow"></i>
+					<h1 class="site-title"></h1>
+
+					<div class="infographic-header-container">
+						<div class="infographic-header-left">
+							<p class="site-description"></p>
+						</div>
+
+						<div class="infographic-header-right">
+							<form id="scenario">
+								<div class="ios-segmented-control">
+									<span class="selection"></span>
+									<div class="option">
+										<input type="radio" id="current" name="current-scenario" value="current" checked>
+										<label for="current"><span>Current</span></label>
+									</div>
+									<div class="option">
+										<input type="radio" id="goactive" name="current-scenario" value="goactive">
+										<label for="goactive"><span>Go Active</span></label>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<ul class="external-links">
+						<li><a class="site-info-link" href="#">Planning application <i class="fa fa-chevron-right"></i></a></li>
+						<li><a class="site-info-link" id="view-simulation" href="#">View simulation <i class="fa fa-chevron-right"></i></a></li>
+					</ul>
+
+					<div class="headline-stats">
+						<div class="stat main-headline-stat percent_cycle_base">
+							<h3></h3>
+							<h4></h4>
+							<h5></h5>
+						</div>
+						<ul class="secondary-stats">
+							<li class="stat blue percent_walk_base">
+								<h3></h3>
+								<h4></h4>
+								<h5></h5>
+							</li>
+							<li class="stat red percent_drive_base">
+								<h3></h3>
+								<h4></h4>
+								<h5></h5>
+							</li>
+							<li class="stat yellow site_cycle_circuity">
+								<h3></h3>
+								<h4></h4>
+								<h5></h5>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="site-info-sections">
+					<div class="site-info-section">
+						<div class="site-info-title">
+							<h4>Accessibility</h4>
+							<hr />
+						</div>
+						<div class="site-info-content">
+							<div class="graph-container">
+								<canvas id="densityChart" width="600" height="400"></canvas>
+							</div>
+							<div class="caption-container">
+								<p>This graph displays the mode-split transport data of the site. The data is separated into distance bands, and stacked by mode. </p>
+								<br />
+								<p>Try switching between Current and Go Active modes to see the change.</p>
+							</div>
+						</div>
+						
+					</div>
+
+					<div class="site-info-section">
+						<div class="site-info-title">
+							<h4>Site data</h4>
+							<hr />
+						</div>
+						<form id="data">
+							<div class="selector">
+								<ul class="site-data-carousel">
+									<li class="desirelines">
+										
+										<div class="data-carousel-header">
+											<input type="checkbox" name="show[]" id="show_desirelines" />
+											<label for="show_desirelines"><img src="/images/placeholders/desire-lines.png" />
+											</label>
+											
+											<p>Desire lines</p>
+											<p class="info-circle" id="desirelines-tooltip">ⓘ</p>
+										</div>
+										<div class="controls" id="desirelines"></div>
+									</li>
+
+									<li>
+										<div class="data-carousel-header">
+											<input type="checkbox" name="show[]k" id="show_routenetwork" checked />
+											<label for="show_routenetwork"><img src="/images/placeholders/route-network.png" /></label>
+											<p>Route network</p>
+											<p class="info-circle" id="routenetwork-tooltip">ⓘ</p>
+										</div>
+
+										<div class="controls routenetwork" id="routenetwork">
+											<select name="type">
+												<option value="fast">Cycling - fast</option>
+												<option value="balanced">Cycling - balanced</option>
+												<option value="quiet">Cycling - quiet</option>
+												<option value="walk">Walk</option>
+											</select>
+										</div>
+									</li>
+
+									<li>
+										<div class="data-carousel-header">
+											<input type="checkbox" name="show[]" id="show_accessibility" />
+											<label for="show_accessibility"><img src="/images/placeholders/accessibility.png" /></label>
+											<p>Accessibility</p>
+											<p class="info-circle" id="accessibility-tooltip">ⓘ</p>
+										</div>
+										<div class="controls">
+										</div>
+									</li>
+
+									<li>
+										<div class="data-carousel-header">
+											<input type="checkbox" name="show[]" id="show_studyarea" />
+											<label for="show_studyarea"><img src="/images/placeholders/study-area.png" /></label>
+											<p>Study area</p>
+											<p class="info-circle" id="studyarea-tooltip">ⓘ</p>
+										</div>
+										<div class="controls"></div>
+									</li>
+								</ul>
+							</div>
+						</form>
+					</div>
+
+					<div class="site-info-section">
+						<div class="site-info-title">
+							<h4>Site photos</h4>
+							<hr>
+						</div>
+						<div class="carousel">
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="map-half">
+				<div id="map"></div>
+			</div>
+
+			<div class="selector map" id="selector">
+				<ul>
+					<li class="buildings">
+						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+						<p class="total"></p>
+						<input type="checkbox" name="show[]" id="show_buildings" />
+						<label for="show_buildings"><i class="fa fa-building"></i><br />Buildings</label>
+					</li>		
+					<li class="planningapplications">
+						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+						<p class="total"></p>
+						<input type="checkbox" name="show[]" id="show_planningapplications" />
+						<label for="show_planningapplications"><i class="fa fa-file-alt"></i><br />Applications</label>
+					</li>
+					<li class="collisions">
+						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+						<p class="total"></p>
+						<input type="checkbox" name="show[]" id="show_collisions" />
+						<label for="show_collisions"><i class="fa fa-car-crash"></i><br />Collisions</label>
+					</li>
+					<li class="trafficcounts">
+						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+						<p class="total"></p>
+						<input type="checkbox" name="show[]" id="show_trafficcounts" />
+						<label for="show_trafficcounts"><i class="fa fa-car"></i><br />Traffic counts</label>
+					</li>			
+				</ul>
+			</div>
+		</section>
+
+	</main>
+
+
+</body>
+
+<!-- iOS control script -->
+<script>
+	// Constants
+	const SEGMENTED_CONTROL_BASE_SELECTOR = ".ios-segmented-control";
+	const SEGMENTED_CONTROL_INDIVIDUAL_SEGMENT_SELECTOR = ".ios-segmented-control .option input";
+	const SEGMENTED_CONTROL_BACKGROUND_PILL_SELECTOR = ".ios-segmented-control .selection";
+
+
+	// Main
+	document.addEventListener("DOMContentLoaded", setup);
+
+	// Body functions
+	function setup() {
+		forEachElement(SEGMENTED_CONTROL_BASE_SELECTOR, elem => {
+			elem.addEventListener("change", updatePillPosition);
+		})
+		window.addEventListener("resize",
+			updatePillPosition
+			); // Prevent pill from detaching from element when window resized. Becuase this is rare I haven't bothered with throttling the event
+	}
+
+	function updatePillPosition() {
+		forEachElement(SEGMENTED_CONTROL_INDIVIDUAL_SEGMENT_SELECTOR, (elem, index) => {
+			if (elem.checked) moveBackgroundPillToElement(elem, index);
+		})
+	}
+
+	function moveBackgroundPillToElement(elem, index) {
+		document.querySelector(SEGMENTED_CONTROL_BACKGROUND_PILL_SELECTOR).style.transform = "translateX(" + (elem
+			.offsetWidth * index) + "px)";
+	}
+
+	// Helper functions
+
+	function forEachElement(className, fn) {
+		Array.from(document.querySelectorAll(className)).forEach(fn);
+	}
+</script>
+
+
+<script type="module">
+	import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+	import define from "/js/chart.js";
+	new Runtime().module(define, name => {
+	if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart"));
+	});
+</script>
+
+</html>
