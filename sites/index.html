@@ -108,11 +108,11 @@
 									<span class="selection"></span>
 									<div class="option">
 										<input type="radio" id="current" name="current-scenario" value="current" checked="checked" />
-										<label for="current"><span>Current</span></label>
+										<label for="current"><span title="Current transport status, based on 2011 census data">Current</span></label>
 									</div>
 									<div class="option">
 										<input type="radio" id="goactive" name="current-scenario" value="goactive" />
-										<label for="goactive"><span>Go Active</span></label>
+										<label for="goactive"><span title="A potential future transport scenario, based on much higher levels of investment in active modes">Go Active</span></label>
 									</div>
 								</div>
 							</form>
@@ -120,8 +120,8 @@
 					</div>
 
 					<ul class="external-links">
-						<li><a class="site-info-link planning-url" href="#">Planning application <i class="fa fa-chevron-right"></i></a></li>
-						<li><a class="site-info-link" id="view-simulation" href="#">View simulation <i class="fa fa-chevron-right"></i></a></li>
+						<li><a class="site-info-link planning-url" href="#" title="View the main planning application for this development">Planning application <i class="fa fa-chevron-right"></i></a></li>
+						<li><a class="site-info-link" id="view-simulation" href="#" title="View a simulation of transport users emanating from this development">View simulation <i class="fa fa-chevron-right"></i></a></li>
 					</ul>
 
 					<div class="headline-stats">
@@ -260,25 +260,25 @@
 
 			<div class="selector map" id="selector">
 				<ul>
-					<li class="buildings">
+					<li class="buildings" title="Show buildings within the site and beyond, which are helpful when consider journeys to points of interest">
 						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
 						<p class="total"></p>
 						<input type="checkbox" name="show[]" id="show_buildings" />
 						<label for="show_buildings"><i class="fa fa-building"></i><br />Buildings</label>
 					</li>		
-					<li class="planningapplications">
+					<li class="planningapplications" title="Major planning applications within the site">
 						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
 						<p class="total"></p>
 						<input type="checkbox" name="show[]" id="show_planningapplications" />
 						<label for="show_planningapplications"><i class="fa fa-file-alt"></i><br />Applications</label>
 					</li>
-					<li class="collisions">
+					<li class="collisions" title="Collisions in this area, from STATS19 data">
 						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
 						<p class="total"></p>
 						<input type="checkbox" name="show[]" id="show_collisions" />
 						<label for="show_collisions"><i class="fa fa-car-crash"></i><br />Collisions</label>
 					</li>
-					<li class="trafficcounts">
+					<li class="trafficcounts" title="Traffic counts, from DfT data">
 						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
 						<p class="total"></p>
 						<input type="checkbox" name="show[]" id="show_trafficcounts" />
