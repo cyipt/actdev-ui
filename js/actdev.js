@@ -505,7 +505,7 @@ var actdev = (function ($) {
 			
 			// Run the layerviewer for these settings and layers
 			layerviewer.initialise (_settings, _layerConfig);
-
+			
 			// Initialise ACTDEV UI listeners
 			actdev.initUi ();
 			
@@ -552,8 +552,8 @@ var actdev = (function ($) {
 			// Add handler for scenario switcher
 			actdev.showHideElementsBasedOnScenario ();
 
-			// Add handler for A/B streets external link
-			actdev.listenForABStreets ();
+			// Add handler for A/B Street external link
+			actdev.listenForABStreet ();
 
 			// Initialise tooltips
 			actdev.initialiseTooltips ();
@@ -694,15 +694,15 @@ var actdev = (function ($) {
 		},
 
 
-		// Listen for A/B streets link click, and calculate the right map position/zoom level
-		listenForABStreets: function ()
+		// Listen for A/B Street link click, and calculate the right map position/zoom level
+		listenForABStreet: function ()
 		{
 			$('#view-simulation').on ('click', function () {
 				// Generate the URL
 				var simulationUrl = '/abstreet/?--actdev={%site_name}&--cam={%mapposition}'
 				simulationUrl = simulationUrl.replace('{%site_name}', currentRegion);
 				
-				var _map = layerviewer.getMap();
+				var _map = layerviewer.getMap ();
 				var centre = _map.getCenter ();
 
 				var zoom = _map.getZoom ();
@@ -788,7 +788,7 @@ var actdev = (function ($) {
 				}
 			});
 		},
-
+		
 		
 		// Function to fetch and generate site statistics
 		populateRegionData: function (selectedRegion)
