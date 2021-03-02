@@ -986,7 +986,7 @@ var actdev = (function ($) {
 					}).animate({'opacity': 1}, 200);
 
 					// Change the planning URL or hide if N/A
-					if (site.hasOwnProperty('planning_url')) {
+					if (site.planning_url != 'NA') {
 						$('.planning-url').show();
 						$('.planning-url').prop('href', site.planning_url);
 					} else {
