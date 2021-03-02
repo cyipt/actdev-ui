@@ -56,7 +56,7 @@ html, body, section {height: 100vh;}
 .site-level-view .site-info-title h4 {flex-grow: 0; font-size: 17px;}
 .site-level-view .site-info-title hr {flex-grow:1; height: 1px; margin-left: 10px; background-color: #9f9f9f;}
 .site-level-view .section-description {font-weight: 300; font-size: 15px; line-height: 22px; margin: 15px 15px;}
-.site-level-view ul.site-data-carousel {margin: 25px 0; height: 198px; width: 100%; overflow-x: scroll; overflow-y: hidden; white-space:nowrap;}
+.site-level-view ul.site-data-carousel {margin: 25px 0; height: 213px; width: 100%; overflow-x: scroll; overflow-y: hidden; white-space: nowrap;}
 .site-level-view ul.site-data-carousel li {display: inline-block; margin: 0 15px; width: 140px; vertical-align: top;}
 .site-level-view ul.site-data-carousel li .data-carousel-header {height: 180px; overflow: hidden;}
 .site-level-view ul.site-data-carousel li .data-carousel-header input {float: right; position: relative; top: 18px; right: 18px; transform: scale(1.5); z-index: 500;}
