@@ -1001,7 +1001,7 @@ var actdev = (function ($) {
 					}).animate({'opacity': 1}, 200);
 					
 					// Start building the descriptive blurb
-					var descriptionText = `This development in ${site.main_local_authority} will contain ${site.dwellings_when_complete} dwellings when complete.`
+					var descriptionText = `This development in ${site.main_local_authority} will contain ` + parseInt (site.dwellings_when_complete).toLocaleString() + ` dwellings when complete.`
 					
 					// Complete the blurb, based on completion status
 					var completionText = '';
