@@ -28,7 +28,12 @@
 	<script src="/js/lib/jquery-ui/jquery-ui.min.js"></script>
 
 	<script src="/js/lib/jQuery-Touch-Events/src/1.0.9/jquery.mobile-events.min.js"></script>
-
+	
+	<!-- Leaflet.js for mini maps -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+	
 	<script src="/js/lib/mapbox-gl-draw/mapbox-gl-draw.js"></script>
 	<link rel="stylesheet" href="/js/lib/mapbox-gl-draw/mapbox-gl-draw.css" />
 
@@ -176,9 +181,7 @@
 										
 										<div class="data-carousel-header">
 											<input type="checkbox" name="show[]" id="show_desirelines" />
-											<label for="show_desirelines"><img src="/images/placeholders/desire-lines.png" />
-											</label>
-											
+											<label for="show_desirelines"><div class="minimap" id="map_desirelines"></div></label>
 											<p>Desire lines</p>
 											<p class="info-circle" id="desirelines-tooltip">ⓘ</p>
 										</div>
@@ -187,8 +190,8 @@
 
 									<li>
 										<div class="data-carousel-header">
-											<input type="checkbox" name="show[]k" id="show_routenetwork" checked />
-											<label for="show_routenetwork"><img src="/images/placeholders/route-network.png" /></label>
+											<input type="checkbox" name="show[]" id="show_routenetwork" checked />
+											<label for="show_routenetwork"><div class="minimap" id="map_routenetwork"></div></label>
 											<p>Route network</p>
 											<p class="info-circle" id="routenetwork-tooltip">ⓘ</p>
 										</div>
@@ -206,7 +209,7 @@
 									<li>
 										<div class="data-carousel-header">
 											<input type="checkbox" name="show[]" id="show_accessibility" />
-											<label for="show_accessibility"><img src="/images/placeholders/accessibility.png" /></label>
+											<label for="show_accessibility"><div class="minimap" id="map_accessibility"></div></label>
 											<p>Accessibility</p>
 											<p class="info-circle" id="accessibility-tooltip">ⓘ</p>
 										</div>
@@ -217,7 +220,7 @@
 									<li>
 										<div class="data-carousel-header">
 											<input type="checkbox" name="show[]" id="show_studyarea" />
-											<label for="show_studyarea"><img src="/images/placeholders/study-area.png" /></label>
+											<label for="show_studyarea"><div class="minimap" id="map_studyarea"></div></label>
 											<p>Study area</p>
 											<p class="info-circle" id="studyarea-tooltip">ⓘ</p>
 										</div>

@@ -58,9 +58,9 @@ html, body, section {height: 100vh;}
 .site-level-view  ul.site-data-carousel {margin: 25px 0; height: 198px; width: 100%; overflow-x: scroll; overflow-y: hidden; white-space:nowrap;}
 .site-level-view  ul.site-data-carousel li {display: inline-block; margin: 0 15px; width: 140px; vertical-align: top;}
 .site-level-view  ul.site-data-carousel li .data-carousel-header {height: 180px; overflow: hidden;}
-.site-level-view  ul.site-data-carousel li .data-carousel-header input {float: right; position: relative; top: 18px; right: 18px; transform: scale(1.5);}
+.site-level-view  ul.site-data-carousel li .data-carousel-header input {float: right; position: relative; top: 18px; right: 18px; transform: scale(1.5); z-index: 500;}
 .site-level-view  ul.site-data-carousel li .data-carousel-header label {display: inline-block;}
-.site-level-view  ul.site-data-carousel li .data-carousel-header img {width: 130px; height: 130px; border-radius: 25px; transition: 0.2s; display: block; margin: 5px 4.5%; text-align: center;}
+.site-level-view  ul.site-data-carousel li .data-carousel-header div.minimap {width: 130px; height: 130px; border-radius: 25px; transition: 0.2s; display: block; margin: 5px 4.5%; text-align: center;}
 .site-level-view  ul.site-data-carousel li .data-carousel-header img:hover {box-shadow: 0px 0px 5px 0px #FFFFFF;;}
 .site-level-view  ul.site-data-carousel li .data-carousel-header p {display: block; margin: 7.5px auto; font-weight: 300; text-align: center;}
 .site-level-view  ul.site-data-carousel li .data-carousel-header .info-circle {position: relative; float: right; bottom: 35px; right: 3px; font-size: 12px; transition: .5s; cursor: pointer;}

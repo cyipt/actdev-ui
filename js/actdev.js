@@ -438,6 +438,8 @@ var actdev = (function ($) {
 	var currentRegion = '';
 	var currentScenario = 'current';
 	var modeSplitCsvData = false;
+	var _miniMaps = {};			// Handle to each mini map
+	var _miniMapLayers = {};	// Handle to each mini map's layer
 	var dataMetricsToShow = [
 		{
 			name: 'percent_cycle_base',
@@ -488,6 +490,7 @@ var actdev = (function ($) {
 			]
 		}
 	]
+	
 	
 	return {
 		
@@ -810,6 +813,21 @@ var actdev = (function ($) {
 			
 			// Populate site statistics
 			actdev.populateSiteStatistics ();
+			
+			// Populate mini-maps
+			var regionBounds = layerviewer.getRegionBounds ();
+			var miniMaps = ['desirelines', 'routenetwork', 'accessibility', 'studyarea'];
+			var id;
+			var url;
+			var regionWsen = regionBounds[selectedRegion];
+			var regionCentre = [ (regionWsen[1] + regionWsen[3])/2, (regionWsen[0] + regionWsen[2])/2 ];	// lat,lon centre
+			$.each (miniMaps, function (index, layerId) {
+				id = 'map_' + layerId;
+				url = _layerConfig[layerId].apiCall;
+				url = url.replace ('{site_name}', selectedRegion);
+				url = url.replace ('{%type}', 'fast');
+				actdev.miniMap (id, url, regionCentre);
+			});
 		},
 
 		
@@ -928,7 +946,40 @@ var actdev = (function ($) {
 			$('.graph-container img.current').attr ('src', modeSplitCurrentUrl);
 			$('.graph-container img.goactive').attr ('src', modeSplitGoActiveUrl);
 		},
-
+		
+		
+		// Function to create a mini-map, using Leaflet.js (which is lightweight and will load quickly)
+		miniMap: function (id, geojsonUrl, regionCentre)
+		{
+			// Initialise map if not already present
+			if (!_miniMaps[id]) {
+				
+				// Define URL for raster basemap; available styles include: streets-v11, dark-v10
+				var mapboxUrl = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}?access_token=' + _settings.mapboxApiKey;
+				
+				// Create the map
+				_miniMaps[id] = L.map (id, {attributionControl: false, zoomControl: false}).setView (regionCentre, 9);
+				L.tileLayer (mapboxUrl, {
+					tileSize: 256,
+					maxZoom: 20
+				}).addTo (_miniMaps[id] );
+				
+				// Disable interaction; see: https://gis.stackexchange.com/a/201470/58752
+				_miniMaps[id]._handlers.forEach (function (handler) {
+					handler.disable ();
+				});
+				
+			// Otherwise move the map location and clear any layers
+			} else {
+				_miniMaps[id].setView (regionCentre, 10);
+				_miniMaps[id].removeLayer (_miniMapLayers[id]);
+			}
+			
+			// Add the GeoJSON layer
+			_miniMapLayers[id] = new L.geoJson.ajax (geojsonUrl);
+			_miniMapLayers[id].addTo (_miniMaps[id]);
+		},
+		
 		
 		// Function to fetch and set region information
 		parseRegionTextualInformation: function (selectedRegion)
