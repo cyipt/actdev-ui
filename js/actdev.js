@@ -984,6 +984,14 @@ var actdev = (function ($) {
 					$('.site-description').animate({'opacity': 0}, 300, function () {
 						$(this).text(descriptionText + completionText);
 					}).animate({'opacity': 1}, 200);
+
+					// Change the planning URL or hide if N/A
+					if (site.hasOwnProperty('planning_url')) {
+						$('.planning-url').show();
+						$('.planning-url').prop('href', site.planning_url);
+					} else {
+						$('.planning-url').hide();
+					}
 				}
 			})
 		},
