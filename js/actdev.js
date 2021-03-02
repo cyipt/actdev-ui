@@ -780,7 +780,7 @@ var actdev = (function ($) {
 
 							// Merge the mode-split data with the in-site-metrics and overwrite the class property
 							regionData = {...inSiteMetrics, ...modeSplitCsvData[0]}; // !FIXME this needs to use a different data source, not only 0-3 band
-
+							
 							// Populate the page with the fetched data
 							actdev.populateRegionData (selectedRegion);
 						}
@@ -1006,72 +1006,33 @@ var actdev = (function ($) {
 		// Generate bar chart data
 		generateBarChartDataObject: function ()
 		{
-			var labels = [modeSplitCsvData.map(distanceBand => distanceBand.distance_band)]
-			//labels.pop() // Remove the spurious "" that pappa parse leaves
+			
+			var labels = modeSplitCsvData.map(distanceBand => distanceBand.distance_band)
+			labels.pop() // Remove the spurious "" that pappa parse leaves
 			var datasets = [
 				{
 					label: 'Walk',
 					backgroundColor: '#457b9d',
-					data: [modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))]
+					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))
 				},
 				{
 					label: 'Bike',
 					backgroundColor: '#90be6d',
-					data: [modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))]
+					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))
 				}, {
 					label: 'Other',
 					backgroundColor: '#ffd166',
-					data: [modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))]
+					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))
 				}, {
 					label: 'Car',
 					backgroundColor: '#fe5f55',
-					data: [modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))]
+					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))
 				},
 			]
 
-			console.log (datasets);
-			datasets.map(data => data.data.pop());
 			var data = {
-				labels: ['January', 'February', 'March', 'April'],
-				datasets: [{
-					label: 'Walk',
-					backgroundColor: '#457b9d',
-					data: [
-						1,
-						4,
-						5,
-						5,
-					]
-				}, {
-					label: 'Bike',
-					backgroundColor: '#90be6d',
-					data: [
-						2,
-						1,
-						5,
-						7,
-					]
-				}, {
-					label: 'Other',
-					backgroundColor: '#ffd166',
-					data: [
-						5,
-						4,
-						8,
-						2,
-					]
-				}, {
-					label: 'Car',
-					backgroundColor: '#fe5f55',
-					data: [
-						1,
-						2,
-						7,
-						2,
-					]
-				}, ],
-				//data: datasets,
-		
+				labels: labels,
+				datasets: datasets,
 			};
 
 			return data;
