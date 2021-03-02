@@ -73,7 +73,7 @@ export default function define(runtime, observer) {
     return (
       d3.scaleOrdinal()
         .domain(data.columns.slice(1))
-        .range(["#457b9d", "#90be6d", "#ffd166", "#fe5f55"])
+        .range(["#457b9d", "#90be6d", "#fe5f55", "#ffd166"])
     )
   });
   main.variable(observer("xAxis")).define("xAxis", ["data", "x", "innerRadius"], function (data, x, innerRadius) {
