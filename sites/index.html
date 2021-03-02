@@ -66,9 +66,6 @@
 	<link rel="stylesheet" href="https://unpkg.com/flickity-fullscreen@1/fullscreen.css">
 	<script src="https://unpkg.com/flickity-fullscreen@1/fullscreen.js"></script>
 
-	<!-- D3.js -->
-	<script src="https://d3js.org/d3.v6.min.js"></script>
-
 	<!-- Animate number -->
 	<script src="/js/lib/jquery-animateNumber-0.0.14/jquery.animateNumber.min.js"></script>
 
@@ -320,15 +317,6 @@
 	function forEachElement(className, fn) {
 		Array.from(document.querySelectorAll(className)).forEach(fn);
 	}
-</script>
-
-
-<script type="module">
-	import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-	import define from "/js/chart.js";
-	new Runtime().module(define, name => {
-	if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart"));
-	});
 </script>
 
 </html>
