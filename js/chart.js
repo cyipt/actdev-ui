@@ -104,7 +104,7 @@ export default function define(runtime, observer) {
         .call(g => g.append("text")
           .attr("y", d => -y(y.ticks(5).pop()))
           .attr("dy", "-1em")
-          .text("Population"))
+          .text("Trips"))
         .call(g => g.selectAll("g")
           .data(y.ticks(5).slice(1))
           .join("g")
