@@ -1007,13 +1007,13 @@ var actdev = (function ($) {
 				url = _layerConfig[layerId].apiCall;
 				url = url.replace ('{site_name}', selectedRegion);
 				url = url.replace ('{%type}', 'fast');
-				actdev.miniMap (id, url, regionCentre);
+				actdev.miniMap (id, url, regionCentre, layerId);
 			});
 		},
 		
 		
 		// Function to create a mini-map, using Leaflet.js (which is lightweight and will load quickly)
-		miniMap: function (id, geojsonUrl, regionCentre)
+		miniMap: function (id, geojsonUrl, regionCentre, layerId)
 		{
 			// Initialise map if not already present
 			if (!_miniMaps[id]) {
@@ -1041,15 +1041,53 @@ var actdev = (function ($) {
 			
 			// Define the styling/behaviour for the GeoJSON layer
 			var stylingBehaviour = {
-				style: {
-					color: '#888',
-					weight: 2
+				style: function (feature) {
+					
+					// Default
+					var style = {
+						color: '#888',
+						weight: 2
+					}
+					
+					// Dynamic styling based on data, if enabled
+					if (_layerConfig[layerId].polygonColourField && _layerConfig[layerId].polygonColourStops) {
+						style.fillColor = actdev.lookupStyleValue (feature.properties[_layerConfig[layerId].polygonColourField], _layerConfig[layerId].polygonColourStops);
+						if (_layerConfig[layerId].hasOwnProperty ('fillOpacity')) {
+							style.fillOpacity = _layerConfig[layerId].fillOpacity;
+						}
+					}
+					
+					// Return the resulting style
+					return style;
 				}
 			};
 			
 			// Add the GeoJSON layer
 			_miniMapLayers[id] = L.geoJson.ajax (geojsonUrl, stylingBehaviour);
 			_miniMapLayers[id].addTo (_miniMaps[id]);
+		},
+		
+		
+		// Assign style from lookup table
+		lookupStyleValue: function (value, lookupTable)
+		{
+			// Loop through each style stop until found
+			var styleStop;
+			for (var i = 0; i < lookupTable.length; i++) {
+				styleStop = lookupTable[i];
+				if (typeof lookupTable[0][0] === 'string') {	// Fixed string values
+					if (value == styleStop[0]) {
+						return styleStop[1];
+					}
+				} else {					// Range values
+					if (value >= styleStop[0]) {
+						return styleStop[1];
+					}
+				}
+			}
+			
+			// Fallback to final colour in the list
+			return styleStop[1];
 		},
 		
 		
