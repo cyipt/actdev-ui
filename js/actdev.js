@@ -446,6 +446,7 @@ var actdev = (function ($) {
 	var currentRegion = '';
 	var currentScenario = 'current';
 	var modeSplitCsvData = false;
+	var _accessibilityChart = false; // The chart.js main site-mode split chart
 	var _miniMaps = {};			// Handle to each mini map
 	var _miniMapLayers = {};	// Handle to each mini map's layer
 	var dataMetricsToShow = [
@@ -522,7 +523,6 @@ var actdev = (function ($) {
 			
 			// Listen to scenario being changed
 			actdev.listenForScenarioChange ();
-			
 		},
 
 
@@ -580,7 +580,7 @@ var actdev = (function ($) {
 				actdev.setCurrentScenario ();
 
 				// Generate the graphs
-				actdev.addBarChart ();
+				actdev.updateChartData ();
 				
 				// Refresh the new stats
 				actdev.populateSiteStatistics ();
@@ -1075,31 +1075,54 @@ var actdev = (function ($) {
 
 
 		// Generate bar chart data
-		generateBarChartDataObject: function ()
+		generateBarChartDataObject: function (goActive = false)
 		{
 			
 			var labels = modeSplitCsvData.map(distanceBand => distanceBand.distance_band)
 			labels.pop() // Remove the spurious "" that pappa parse leaves
-			var datasets = [
-				{
-					label: 'Walk',
-					backgroundColor: '#457b9d',
-					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))
-				},
-				{
-					label: 'Bike',
-					backgroundColor: '#90be6d',
-					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.cycle_base))
-				}, {
-					label: 'Other',
-					backgroundColor: '#ffd166',
-					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.other_base))
-				}, {
-					label: 'Car',
-					backgroundColor: '#fe5f55',
-					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.drive_base))
-				},
-			]
+			if (goActive) {
+				var datasets = [
+					{
+						label: 'Walk',
+						backgroundColor: '#457b9d',
+						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_goactive))
+					},
+					{
+						label: 'Bike',
+						backgroundColor: '#90be6d',
+						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.cycle_goactive))
+					}, {
+						label: 'Other',
+						backgroundColor: '#ffd166',
+						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.other_goactive))
+					}, {
+						label: 'Car',
+						backgroundColor: '#fe5f55',
+						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.drive_goactive))
+					},
+				]
+			} else {
+				var datasets = [
+					{
+						label: 'Walk',
+						backgroundColor: '#457b9d',
+						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))
+					},
+					{
+						label: 'Bike',
+						backgroundColor: '#90be6d',
+						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.cycle_base))
+					}, {
+						label: 'Other',
+						backgroundColor: '#ffd166',
+						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.other_base))
+					}, {
+						label: 'Car',
+						backgroundColor: '#fe5f55',
+						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.drive_base))
+					},
+				]
+			}
 
 			var data = {
 				labels: labels,
@@ -1152,12 +1175,29 @@ var actdev = (function ($) {
 		insertChartIntoCanvas: function (barChartData, barChartOptions) 
 		{	
 			var ctx = document.getElementById('densityChart').getContext('2d');
-			window.myBar = new Chart(ctx, {
+			_accessibilityChart = new Chart(ctx, {
 				type: 'horizontalBar',
 				data: barChartData,
 				options: barChartOptions
 			});
 		},
+
+
+		updateChartData: function () {
+			var goActive = (actdev.getCurrentScenario () === 'goactive');
+			var newDataSet = actdev.generateBarChartDataObject (goActive);
+
+			// Iterate through and replace data
+			var currentDataSet = 0;
+			newDataSet.datasets.map(dataSet => {
+				console.log (dataSet.data);
+				_accessibilityChart.data.datasets[currentDataSet].data = dataSet.data;
+				currentDataSet += 1;
+			});
+
+			_accessibilityChart.update();
+		}
+		
 	};
 	
 } (jQuery));
