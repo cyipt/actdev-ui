@@ -827,6 +827,13 @@ var actdev = (function ($) {
 			actdev.populateSiteStatistics ();
 			
 			// Populate mini-maps
+			actdev.populateMinimaps (selectedRegion);
+		},
+
+
+		// Fill in the small site-data minimaps
+		populateMinimaps: function (selectedRegion)
+		{
 			var regionBounds = layerviewer.getRegionBounds ();
 			var miniMaps = ['desirelines', 'routes', 'routenetwork', 'accessibility', 'studyarea', 'jts'];
 			var id;
@@ -1188,7 +1195,7 @@ var actdev = (function ($) {
 			}
 		},
 
-
+		// Update chart
 		updateChartData: function () {
 			var goActive = (actdev.getCurrentScenario () === 'goactive');
 			var newDataSet = actdev.generateBarChartDataObject (goActive);
@@ -1196,7 +1203,6 @@ var actdev = (function ($) {
 			// Iterate through and replace data
 			var currentDataSet = 0;
 			newDataSet.datasets.map(dataSet => {
-				console.log (dataSet.data);
 				_accessibilityChart.data.datasets[currentDataSet].data = dataSet.data;
 				currentDataSet += 1;
 			});
