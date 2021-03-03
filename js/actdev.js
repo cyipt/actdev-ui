@@ -743,6 +743,10 @@ var actdev = (function ($) {
 			tippy('#studyarea-tooltip', {
 				content: "The study area.",
 			});
+
+			tippy('#accessibility-tooltip', {
+				content: 'This graph displays the mode-split transport data of the site. The data is separated into distance bands, and stacked by mode.'
+			})
 		},
 
 
@@ -1110,8 +1114,15 @@ var actdev = (function ($) {
 		{
 			return {
 				title: {
-					display: true,
-					text: text,
+					display: false,
+				},
+				legend: {
+					position: 'right',
+					align: 'middle',
+					labels: {
+						fontColor: 'white',
+						fontSize: 13
+					}
 				},
 				tooltips: {
 					mode: 'index',
@@ -1121,9 +1132,15 @@ var actdev = (function ($) {
 				scales: {
 					xAxes: [{
 						stacked: true,
+						ticks: {
+							fontColor: "#ffffff"
+						}
 					}],
 					yAxes: [{
-						stacked: true
+						stacked: true,
+						ticks: {
+							fontColor: "#ffffff"
+						}
 					}]
 				},
 				indexAxis: 'y',
