@@ -8,6 +8,9 @@
 
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-title" content="ActDev" />
+
+	<!-- Fontawesome icons -->
+	<script src="/js/lib/fontawesome/fontawesome-kit-7bd5544b77.js"></script>
 	
 	<!-- Fonts -->
 	<link rel="preconnect" href="https://fonts.gstatic.com"> 
@@ -37,6 +40,9 @@
 	.about {background-color: #434343; color: white; flex: 2; padding: 1rem; overflow-y: scroll;}
 	.photos {background-color: #434343; flex: 1;}
 
+	i.site-back-arrow {position: absolute; font-size: 30px; margin-top: 30px; margin-left: 20px; padding: 2.5px 10px; color: orange; border-color: orange; border: 0.5px solid; border-radius: 30px; transition: 0.3s;}
+	i.site-back-arrow:hover {transform: scale(1.2);}
+	.about h1, .about h2 {margin-left: 80px;}
 	
 	#content {margin-top: 25px;}
 	#content h1 {color: white; font-size: 28px; margin: 20px 0 10px;}
@@ -53,6 +59,7 @@
 <body>
 	<main>
 		<div class="app-container">
+			<a href="/"><i class="fa fa-long-arrow-alt-left site-back-arrow"></i></a>
 			<section class="about">
 				<h1>ACTDEV</h1>
 				<h2>Active travel in new developments</h2>
