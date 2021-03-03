@@ -1025,7 +1025,7 @@ var actdev = (function ($) {
 			if (!_miniMaps[id]) {
 				
 				// Define URL for raster basemap; available styles include: streets-v11, dark-v10
-				var mapboxUrl = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}?access_token=' + _settings.mapboxApiKey;
+				var mapboxUrl = 'https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}?access_token=' + _settings.mapboxApiKey;
 				
 				// Create the map
 				_miniMaps[id] = L.map (id, {attributionControl: false, zoomControl: false}).setView (regionCentre, 9);
