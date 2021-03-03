@@ -14,8 +14,8 @@ h1 {color: white; font-family: 'Arimo', sans-serif;}
 /* Main container */
 html, body, section {height: 100vh;}
 .site-level-view {display: flex;}
-.site-level-view .infographic-half {background-color: #434343; color: white; flex: .85; padding: 1rem; overflow-y: scroll;}
-.site-level-view .map-half {background-color: #7a7a7a; flex: 1.15;}
+.site-level-view .infographic-half {background-color: #434343; color: white; flex: .92; padding: 1rem; overflow-y: scroll;}
+.site-level-view .map-half {background-color: #7a7a7a; flex: 1.08;}
 
 /* Infographic side */
 
