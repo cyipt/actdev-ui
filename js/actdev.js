@@ -250,6 +250,25 @@ var actdev = (function ($) {
 			}
 		},
 		
+		places: {
+			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/trip_attractors.geojson',
+			retrievalStrategy: 'none',
+			apiKey: false,
+			polygonColourField: 'building',
+			polygonStyle: {
+				'university': 'green',
+				'school': 'teal',
+				'retail': 'orange',
+				'civic': 'purple',
+				'hospital': 'gray',
+				'commercial': 'red',
+				'office': 'gray',
+				'industrial': 'red',
+				'warehouse': 'red'
+			},
+			fitInitial: true
+		},
+		
 		jts: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/jts-lsoas.geojson',
 			retrievalStrategy: 'none',
