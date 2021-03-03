@@ -582,7 +582,7 @@ var actdev = (function ($) {
 		// Listener for toggling of the current/goactive segmented control
 		listenForScenarioChange: function ()
 		{
-			# Trigger when the segmented control changes
+			// Trigger when the segmented control changes
 			$('#scenario').change (function () {
 				
 				// Set the new scenario
