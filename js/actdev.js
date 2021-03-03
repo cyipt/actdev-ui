@@ -1070,7 +1070,8 @@ var actdev = (function ($) {
 
 		addBarChart: function ()
 		{	
-			actdev.insertChartIntoCanvas (actdev.generateBarChartDataObject(), actdev.generateBarChartOptionsObject('Mode split transport'));
+			var goActive = (actdev.getCurrentScenario () === 'goactive');
+			actdev.insertChartIntoCanvas (actdev.generateBarChartDataObject(goActive), actdev.generateBarChartOptionsObject('Mode split transport'));
 		},	
 
 
@@ -1174,12 +1175,17 @@ var actdev = (function ($) {
 		// Insert graph into canvas
 		insertChartIntoCanvas: function (barChartData, barChartOptions) 
 		{	
-			var ctx = document.getElementById('densityChart').getContext('2d');
-			_accessibilityChart = new Chart(ctx, {
-				type: 'horizontalBar',
-				data: barChartData,
-				options: barChartOptions
-			});
+			// If there is no chart element on screen, generate a new one
+			if (!_accessibilityChart) {
+				var ctx = document.getElementById('densityChart').getContext('2d');
+				_accessibilityChart = new Chart(ctx, {
+					type: 'horizontalBar',
+					data: barChartData,
+					options: barChartOptions
+				});
+			} else {
+				actdev.updateChartData ();
+			}
 		},
 
 
