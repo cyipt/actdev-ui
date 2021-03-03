@@ -443,16 +443,16 @@ var actdev = (function ($) {
 	};	
 	
 	// Other definitions
-	var regionData = {}; // This will be overwritten each time a new region's data is fetched
-	var allSitesJsonUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.geojson';
-	var allSitesGeoJson = false;
-	var currentRegion = '';
-	var currentScenario = 'current';
-	var modeSplitCsvData = false;
+	var _regionData = {}; // This will be overwritten each time a new region's data is fetched
+	var _allSitesJsonUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.geojson';
+	var _allSitesGeoJson = false;
+	var _currentRegion = '';
+	var _currentScenario = 'current';
+	var _modeSplitCsvData = false;
 	var _accessibilityChart = false; // The chart.js main site-mode split chart
 	var _miniMaps = {};			// Handle to each mini map
 	var _miniMapLayers = {};	// Handle to each mini map's layer
-	var dataMetricsToShow = [
+	var _dataMetricsToShow = [
 		{
 			name: 'percent_commute_active_base',
 			full_name: 'active commuters',
@@ -500,7 +500,7 @@ var actdev = (function ($) {
 				[1.6, '#f8d277'],
 				[0, '#54ad32']
 			],
-			//post_processing: function (number) {return number/1000;}
+			//post_processing: function (number) {return (number / 1000);}
 		}
 	];
 	
@@ -546,10 +546,10 @@ var actdev = (function ($) {
 		// Fetch all sites
 		fetchAllSites: function ()
 		{
-			fetch (allSitesJsonUrl)
+			fetch (_allSitesJsonUrl)
 				.then ((response) => response.json())
 				.then ((geojson) => {
-					allSitesGeoJson = geojson;
+					_allSitesGeoJson = geojson;
 
 					// "Boot the rest of the site"
 					actdev.secondInitialisation ();
@@ -668,13 +668,13 @@ var actdev = (function ($) {
 		getSiteBoundary: function (siteName) 
 		{
 			// Exit if no sites stores
-			if (!allSitesGeoJson) {
+			if (!_allSitesGeoJson) {
 				return;
 			}
 
 			// Iterate through sites until we find a match
 			var siteObject = false;
-			$.each(allSitesGeoJson.features, function (indexInArray, site) { 
+			$.each (_allSitesGeoJson.features, function (indexInArray, site) {
 				 if (site.properties.site_name == siteName) {
 					siteObject = site; 
 					return false;
@@ -694,7 +694,7 @@ var actdev = (function ($) {
 		{
 			// Iterate through sites until we find a match
 			var siteObject = false;
-			$.each(allSitesGeoJson.features, function (indexInArray, site) { 
+			$.each (_allSitesGeoJson.features, function (indexInArray, site) {
 				 if (site.properties.site_name == siteName) {
 					siteObject = site; 
 					return false;
@@ -708,14 +708,14 @@ var actdev = (function ($) {
 		showHideElementsBasedOnScenario: function ()
 		{
 			// If we are currently in go-active mode, reveal the changed stats
-			if (currentScenario == 'goactive') {
+			if (_currentScenario == 'goactive') {
 				$('.stat h5').css('visibility', 'visible');
 			} else {
 				$('.stat h5').css('visibility', 'hidden');
 			}
 
 			// Hide or show the corresponding mode-split graphic
-			if (currentScenario === 'goactive') {
+			if (_currentScenario == 'goactive') {
 				$('.graph-container .current').hide();
 				$('.graph-container .goactive').show();
 			} else {
@@ -732,7 +732,7 @@ var actdev = (function ($) {
 				
 				// Generate the URL
 				var simulationUrl = '/abstreet/?--actdev={%site_name}&--cam={%mapposition}';
-				simulationUrl = simulationUrl.replace('{%site_name}', currentRegion);
+				simulationUrl = simulationUrl.replace('{%site_name}', _currentRegion);
 				
 				var _map = layerviewer.getMap ();
 				var centre = _map.getCenter ();
@@ -780,7 +780,7 @@ var actdev = (function ($) {
 
 		setCurrentScenario: function ()
 		{
-			currentScenario = actdev.getCurrentScenario ();
+			_currentScenario = actdev.getCurrentScenario ();
 		},
 
 
@@ -792,7 +792,7 @@ var actdev = (function ($) {
 			siteMetricsUrl = siteMetricsUrl.replace ('{selectedRegion}', selectedRegion);
 			
 			// Reset the "cached" numbers used when animating stats
-			dataMetricsToShow.map ((metric) => {
+			_dataMetricsToShow.map ((metric) => {
 				$('.' + metric.name).find ('h3').first ().prop ('number', '');
 			});
 
@@ -814,10 +814,10 @@ var actdev = (function ($) {
 						complete: function (fields) {
 							
 							// Unpack the parsed data object
-							modeSplitCsvData = fields.data;
+							_modeSplitCsvData = fields.data;
 
 							// Merge the mode-split data with the in-site-metrics and overwrite the class property
-							regionData = {...inSiteMetrics, ...modeSplitCsvData[0]}; // !FIXME this needs to use a different data source, not only 0-3 band
+							_regionData = {...inSiteMetrics, ..._modeSplitCsvData[0]}; // !FIXME this needs to use a different data source, not only 0-3 band
 							
 							// Populate the page with the fetched data
 							actdev.populateRegionData (selectedRegion);
@@ -832,7 +832,7 @@ var actdev = (function ($) {
 		populateRegionData: function (selectedRegion)
 		{	
 			// Save the current region as class property
-			currentRegion = selectedRegion;
+			_currentRegion = selectedRegion;
 
 			// Generate the graph
 			actdev.addBarChart ();
@@ -858,13 +858,13 @@ var actdev = (function ($) {
 		populateSiteStatistics: function ()
 		{
 			// Get the site object
-			var siteObject = actdev.getSiteObjectFromAllSites(currentRegion);
+			var siteObject = actdev.getSiteObjectFromAllSites (_currentRegion);
 
 			// Merge in the region specific data to the properties
-			var allData = {...siteObject.properties, ...regionData};
+			var allData = {...siteObject.properties, ..._regionData};
 			
 			// Loop through the metrics to show
-			dataMetricsToShow.map ((metric) => {
+			_dataMetricsToShow.map ((metric) => {
 				if (allData.hasOwnProperty (metric.name)) {
 					// Find the h3 for each statistic
 					var element = $('.' + metric.name).find ('h3').first ();
@@ -909,11 +909,11 @@ var actdev = (function ($) {
 					if (!metric.go_active) {
 						number = element.data ('current');
 					} else {
-						number = (currentScenario == 'current' ? element.data ('current') : element.data('goactive'));
+						number = (_currentScenario == 'current' ? element.data ('current') : element.data('goactive'));
 					}
 
 					// If there is any post-processing strategy for the number, do it
-					if (metric.hasOwnProperty('post_processing')) {
+					if (metric.hasOwnProperty ('post_processing')) {
 						number = metric.post_processing (number);
 					}
 
@@ -1120,7 +1120,7 @@ var actdev = (function ($) {
 
 		addBarChart: function ()
 		{	
-			var goActive = (actdev.getCurrentScenario () === 'goactive');
+			var goActive = (actdev.getCurrentScenario () == 'goactive');
 			actdev.insertChartIntoCanvas (actdev.generateBarChartDataObject(goActive), actdev.generateBarChartOptionsObject('Mode split transport'));
 		},	
 
@@ -1128,7 +1128,7 @@ var actdev = (function ($) {
 		// Generate bar chart data
 		generateBarChartDataObject: function (goActive = false)
 		{
-			var labels = modeSplitCsvData.map ((distanceBand) => distanceBand.distance_band);
+			var labels = _modeSplitCsvData.map ((distanceBand) => distanceBand.distance_band);
 			labels.pop ();	// Remove the spurious "" that Pappa Parse leaves
 			
 			var datasets;
@@ -1137,19 +1137,19 @@ var actdev = (function ($) {
 					{
 						label: 'Walk',
 						backgroundColor: '#457b9d',
-						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.walk_goactive)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.walk_goactive)))
 					}, {
 						label: 'Bike',
 						backgroundColor: '#90be6d',
-						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.cycle_goactive)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.cycle_goactive)))
 					}, {
 						label: 'Other',
 						backgroundColor: '#ffd166',
-						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.other_goactive)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.other_goactive)))
 					}, {
 						label: 'Car',
 						backgroundColor: '#fe5f55',
-						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.drive_goactive)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.drive_goactive)))
 					}
 				];
 			} else {
@@ -1157,19 +1157,19 @@ var actdev = (function ($) {
 					{
 						label: 'Walk',
 						backgroundColor: '#457b9d',
-						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.walk_base)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.walk_base)))
 					}, {
 						label: 'Bike',
 						backgroundColor: '#90be6d',
-						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.cycle_base)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.cycle_base)))
 					}, {
 						label: 'Other',
 						backgroundColor: '#ffd166',
-						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.other_base)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.other_base)))
 					}, {
 						label: 'Car',
 						backgroundColor: '#fe5f55',
-						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.drive_base)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.drive_base)))
 					}
 				];
 			}
@@ -1239,7 +1239,7 @@ var actdev = (function ($) {
 
 		// Update chart
 		updateChartData: function () {
-			var goActive = (actdev.getCurrentScenario () === 'goactive');
+			var goActive = (actdev.getCurrentScenario () == 'goactive');
 			var newDataSet = actdev.generateBarChartDataObject (goActive);
 
 			// Iterate through and replace data
