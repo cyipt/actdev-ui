@@ -849,28 +849,9 @@ var actdev = (function ($) {
 			actdev.populateSiteStatistics (selectedRegion);
 			
 			// Populate mini-maps
-			actdev.populateMinimaps (selectedRegion);
+			actdev.populateMiniMaps (selectedRegion);
 		},
-
-
-		// Fill in the small site-data minimaps
-		populateMinimaps: function (selectedRegion)
-		{
-			var regionBounds = layerviewer.getRegionBounds ();
-			var miniMaps = ['desirelines', 'routes', 'routenetwork', 'accessibility', 'studyarea', 'jts'];
-			var id;
-			var url;
-			var regionWsen = regionBounds[selectedRegion];
-			var regionCentre = [ (regionWsen[1] + regionWsen[3])/2, (regionWsen[0] + regionWsen[2])/2 ];	// lat,lon centre
-			$.each (miniMaps, function (index, layerId) {
-				id = 'map_' + layerId;
-				url = _layerConfig[layerId].apiCall;
-				url = url.replace ('{site_name}', selectedRegion);
-				url = url.replace ('{%type}', 'fast');
-				actdev.miniMap (id, url, regionCentre);
-			});
-		},
-
+		
 		
 		// Parse and populate site statistics
 		populateSiteStatistics: function ()
@@ -997,6 +978,32 @@ var actdev = (function ($) {
 			// Add the image
 			$('.graph-container img.current').attr ('src', modeSplitCurrentUrl);
 			$('.graph-container img.goactive').attr ('src', modeSplitGoActiveUrl);
+		},
+		
+		
+		// Fill in the small site-data mini-maps
+		populateMiniMaps: function (selectedRegion)
+		{
+			// Get the bounds of this region
+			var regionBounds = layerviewer.getRegionBounds ();
+			
+			// Dtetermine layers to get mini maps
+			var miniMaps = $('#data .selector li').map (function () {
+				return $(this).attr ('class');
+			});
+			
+			// Create mini maps for each layer
+			var id;
+			var url;
+			var regionWsen = regionBounds[selectedRegion];
+			var regionCentre = [ (regionWsen[1] + regionWsen[3])/2, (regionWsen[0] + regionWsen[2])/2 ];	// lat,lon centre
+			$.each (miniMaps, function (index, layerId) {
+				id = 'map_' + layerId;
+				url = _layerConfig[layerId].apiCall;
+				url = url.replace ('{site_name}', selectedRegion);
+				url = url.replace ('{%type}', 'fast');
+				actdev.miniMap (id, url, regionCentre);
+			});
 		},
 		
 		

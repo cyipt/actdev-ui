@@ -171,25 +171,25 @@
 						<form id="data">
 							<div class="selector">
 								<ul class="site-data-carousel">
+									
 									<li class="desirelines">
-										
 										<div class="data-carousel-header">
 											<input type="checkbox" name="show[]" id="show_desirelines" />
 											<label for="show_desirelines"><div class="minimap" id="map_desirelines"></div></label>
 											<p>Desire lines</p>
 											<p class="info-circle" id="desirelines-tooltip">ⓘ</p>
 										</div>
-										<div class="controls" id="desirelines"></div>
+										<div class="controls" id="desirelines">
+										</div>
 									</li>
-
-									<li>
+									
+									<li class="routes">
 										<div class="data-carousel-header">
 											<input type="checkbox" name="show[]" id="show_routes" />
 											<label for="show_routes"><div class="minimap" id="map_routes"></div></label>
 											<p>Route network</p>
 											<p class="info-circle" id="routes-tooltip">ⓘ</p>
 										</div>
-
 										<div class="controls routes" id="routes">
 											<select name="type">
 												<option value="fast">Cycling - fast</option>
@@ -199,15 +199,14 @@
 											</select>
 										</div>
 									</li>
-
-									<li>
+									
+									<li class="routenetwork">
 										<div class="data-carousel-header">
 											<input type="checkbox" name="show[]" id="show_routenetwork" checked="checked" />
 											<label for="show_routenetwork"><div class="minimap" id="map_routenetwork"></div></label>
 											<p>Route network</p>
 											<p class="info-circle" id="routenetwork-tooltip">ⓘ</p>
 										</div>
-
 										<div class="controls routenetwork" id="routenetwork">
 											<select name="type">
 												<option value="fast">Cycling - fast</option>
@@ -217,37 +216,40 @@
 											</select>
 										</div>
 									</li>
-
-									<li>
+									
+									<li class="accessibility">
 										<div class="data-carousel-header">
 											<input type="checkbox" name="show[]" id="show_accessibility" />
 											<label for="show_accessibility"><div class="minimap" id="map_accessibility"></div></label>
 											<p>Accessibility</p>
 											<p class="info-circle" id="accessibility-tooltip">ⓘ</p>
 										</div>
-										<div class="controls">
+										<div class="controls" id="desirelines">
 										</div>
 									</li>
-
-									<li>
+									
+									<li class="jts">
 										<div class="data-carousel-header">
 											<input type="checkbox" name="show[]" id="show_jts" />
 											<label for="show_jts"><div class="minimap" id="map_jts"></div></label>
 											<p>Journey times</p>
 											<p class="info-circle" id="jts-tooltip">ⓘ</p>
 										</div>
-										<div class="controls"></div>
+										<div class="controls" id="jts">
+										</div>
 									</li>
-
-									<li>
+									
+									<li class="studyarea">
 										<div class="data-carousel-header">
 											<input type="checkbox" name="show[]" id="show_studyarea" />
 											<label for="show_studyarea"><div class="minimap" id="map_studyarea"></div></label>
 											<p>Study area</p>
 											<p class="info-circle" id="studyarea-tooltip">ⓘ</p>
 										</div>
-										<div class="controls"></div>
+										<div class="controls" id="studyarea">
+										</div>
 									</li>
+									
 								</ul>
 							</div>
 						</form>
