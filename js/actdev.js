@@ -1086,20 +1086,20 @@ var actdev = (function ($) {
 					{
 						label: 'Walk',
 						backgroundColor: '#457b9d',
-						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_goactive))
+						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.walk_goactive)))
 					},
 					{
 						label: 'Bike',
 						backgroundColor: '#90be6d',
-						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.cycle_goactive))
+						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.cycle_goactive)))
 					}, {
 						label: 'Other',
 						backgroundColor: '#ffd166',
-						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.other_goactive))
+						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.other_goactive)))
 					}, {
 						label: 'Car',
 						backgroundColor: '#fe5f55',
-						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.drive_goactive))
+						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.drive_goactive)))
 					},
 				]
 			} else {
@@ -1107,20 +1107,20 @@ var actdev = (function ($) {
 					{
 						label: 'Walk',
 						backgroundColor: '#457b9d',
-						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))
+						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.walk_base)))
 					},
 					{
 						label: 'Bike',
 						backgroundColor: '#90be6d',
-						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.cycle_base))
+						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.cycle_base)))
 					}, {
 						label: 'Other',
 						backgroundColor: '#ffd166',
-						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.other_base))
+						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.other_base)))
 					}, {
 						label: 'Car',
 						backgroundColor: '#fe5f55',
-						data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.drive_base))
+						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.drive_base)))
 					},
 				]
 			}
