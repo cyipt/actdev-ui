@@ -559,6 +559,16 @@ var actdev = (function ($) {
 			
 			// Fetch and store all-sites.geojson
 			actdev.fetchAllSites ();
+			
+			// Treat site data drop-downs change as implied enabling of layer
+			$('#data select').on ('click', function (e) {
+				var parentDiv = $(e.target).parent ('div');
+				var layerId = parentDiv[0].id;
+				var checkboxId = 'show_' + layerId;
+				if ($('#' + checkboxId).not (':checked').length) {
+					$('#' + checkboxId).click ();	// Also triggers event
+				}
+			});
 		},
 
 
@@ -1011,7 +1021,7 @@ var actdev = (function ($) {
 			// Get the bounds of this region
 			var regionBounds = layerviewer.getRegionBounds ();
 			
-			// Dtetermine layers to get mini maps
+			// Determine layers to get mini maps
 			var miniMaps = $('#data .selector li').map (function () {
 				return $(this).attr ('class');
 			});
