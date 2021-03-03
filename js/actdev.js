@@ -209,7 +209,8 @@ var actdev = (function ($) {
 				[0, '#6a040f'],
 			],
 			legend: 'range',
-			fillOpacity: 0.6
+			fillOpacity: 0.6,
+			fitInitial: true
 		},
 		
 		studyarea: {
@@ -261,7 +262,8 @@ var actdev = (function ($) {
 			],
 			legend: 'range',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/jts-lsoas-data-dictionary.csv',
-			fieldLabelsCsvField: 'names'
+			fieldLabelsCsvField: 'names',
+			fitInitial: true
 		},
 		
 		// https://www.cyclestreets.net/api/v2/mapdata/
