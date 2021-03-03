@@ -1,7 +1,7 @@
 // Actdev implementation code
 
-/*jslint browser: true, white: true, single: true, for: true */
-/*global $, alert, console, window, osm2geo */
+/*jslint browser: true, white: true, single: true, for: true, long: true */
+/*global $, alert, console, window, jQuery, layerviewer, d3, tippy, Papa, L, Chart */
 
 var actdev = (function ($) {
 	
@@ -61,7 +61,7 @@ var actdev = (function ($) {
 		initialRegionsViewRemovalZoom: false,
 		
 		// Feedback API URL; re-use of settings values represented as placeholders {%apiBaseUrl}, {%apiKey}, are supported
-		feedbackApiUrl: '{%apiBaseUrl}/v2/feedback.add?key={%apiKey}',
+		feedbackApiUrl: '{%apiBaseUrl}/v2/feedback.add?key={%apiKey}'
 	};
 	
 	// Layer definitions
@@ -125,7 +125,7 @@ var actdev = (function ($) {
 				[100, '#5e2612'],
 				[10, '#8b2500'],
 				[5, '#cd5b45'],
-				[1, '#ee8262'],
+				[1, '#ee8262']
 			],
 			lineWidthField: 'cycle_base',
 			lineWidthStops: [
@@ -138,11 +138,11 @@ var actdev = (function ($) {
 				[10, 4],
 				[5, 3],
 				[3, 2],
-				[0, 1],
+				[0, 1]
 			],
 			legend: 'range',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/rnet-cycle-data-dictionary.csv',
-			fieldLabelsCsvField: 'names',
+			fieldLabelsCsvField: 'names'
 		},
 		
 		routes: {
@@ -154,7 +154,7 @@ var actdev = (function ($) {
 				[100, '#5e2612'],
 				[10, '#8b2500'],
 				[5, '#cd5b45'],
-				[1, '#ee8262'],
+				[1, '#ee8262']
 			],
 			lineWidthField: 'cycle_base',
 			lineWidthStops: [
@@ -167,13 +167,13 @@ var actdev = (function ($) {
 				[10, 4],
 				[5, 3],
 				[3, 2],
-				[0, 1],
+				[0, 1]
 			],
 			legend: 'range',
 			name: 'Route network',
 			description: 'Number of people, in each line section',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/routes-cycle-data-dictionary.csv',
-			fieldLabelsCsvField: 'names',
+			fieldLabelsCsvField: 'names'
 		},
 		
 		desirelines: {
@@ -191,11 +191,11 @@ var actdev = (function ($) {
 				[10, 4],
 				[5, 3],
 				[3, 2],
-				[0, 1],
+				[0, 1]
 			],
 			// legend: 'range',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/desire-line-data-dictionary.csv',
-			fieldLabelsCsvField: 'names',
+			fieldLabelsCsvField: 'names'
 		},
 		
 		accessibility: {
@@ -208,7 +208,7 @@ var actdev = (function ($) {
 				[3, '#aec993'],
 				[2, '#fc7753'],
 				[1, '#9d0208'],
-				[0, '#6a040f'],
+				[0, '#6a040f']
 			],
 			legend: 'range',
 			name: 'Accessibility',
@@ -227,7 +227,7 @@ var actdev = (function ($) {
 			style: {
 				Polygon: {
 					"fill-outline-color": "red",
-					"fill-color": "rgba(0,0,0, 0.05)",
+					"fill-color": "rgba(0,0,0, 0.05)"
 				}
 				
 			}
@@ -244,7 +244,7 @@ var actdev = (function ($) {
 				'civic': 'purple',
 				'commercial': 'red',
 				'office': 'gray',
-				'warehouse': 'red',
+				'warehouse': 'red'
 			}
 		},
 		
@@ -262,7 +262,7 @@ var actdev = (function ($) {
 				[30, '#7c7b78'],
 				[20, '#a89e75'],
 				[10, '#d3c165'],
-				[0, '#faea47'],
+				[0, '#faea47']
 			],
 			legend: 'range',
 			name: 'Journey time statistics',
@@ -362,7 +362,7 @@ var actdev = (function ($) {
 				[500, 8],
 				[100, 6],
 				[10, 4],
-				[0, 2],
+				[0, 2]
 			],
 			popupHtml:	// Popup code thanks to https://hfcyclists.org.uk/wp/wp-content/uploads/2014/02/captions-html.txt
 				  '<p>Count Point {properties.id} on <strong>{properties.road}</strong>, a {properties.road_type}<br />'
@@ -425,7 +425,7 @@ var actdev = (function ($) {
 			iconSizes: {
 				'Small': [24, 24],
 				'Medium': [36, 36],
-				'Large': [50, 50],
+				'Large': [50, 50]
 			},
 			popupHtml:
 				  '<p><strong>{properties.description}</strong></p>'
@@ -437,9 +437,10 @@ var actdev = (function ($) {
 				+ 'Local Authority: {properties.area}<br />'
 				+ 'Date: {properties.startdate}</p>'
 				+ '<p><a href="{properties.url}"><img src="/images/icons/bullet_go.png" /> <strong>View full details</a></strong></p>'
-		},
+		}
 	};	
-
+	
+	// Other definitions
 	var regionData = {}; // This will be overwritten each time a new region's data is fetched
 	var allSitesJsonUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.geojson';
 	var allSitesGeoJson = false;
@@ -499,7 +500,7 @@ var actdev = (function ($) {
 			],
 			post_processing: function (number) {return number/1000;}
 		}
-	]
+	];
 	
 	
 	return {
@@ -525,7 +526,7 @@ var actdev = (function ($) {
 			// Listen to scenario being changed
 			actdev.listenForScenarioChange ();
 
-			$('body').on("mouseover", 'svg', function(d,i) {
+			$('body').on ('mouseover', 'svg', function (d,i) {
 				d3.select(this)
 					.style("transform", "scale(1.1,1.1)")
 					.style("transform-origin", "50% 50%");
@@ -539,7 +540,7 @@ var actdev = (function ($) {
 			// Add listener for region selector
 			$('#selector ul li label').on ('click', function (e) {
 				$(e.target).closest ('li').toggleClass ('active');
-			})
+			});
 			
 			// Fetch and store all-sites.geojson
 			actdev.fetchAllSites ();
@@ -549,9 +550,9 @@ var actdev = (function ($) {
 		// Fetch all sites
 		fetchAllSites: function ()
 		{
-			fetch(allSitesJsonUrl)
-				.then(response => response.json())
-				.then(geojson => {
+			fetch (allSitesJsonUrl)
+				.then ((response) => response.json())
+				.then ((geojson) => {
 					allSitesGeoJson = geojson;
 
 					// "Boot the rest of the site"
@@ -623,9 +624,9 @@ var actdev = (function ($) {
 			photomapApiUrl = photomapApiUrl.replace('{%apiKey}', _settings.apiKey);
 			
 			// Fetch the photos
-			fetch(photomapApiUrl)
-				.then(response => response.json())
-				.then(photomapResponse => {
+			fetch (photomapApiUrl)
+				.then ((response) => response.json())
+				.then ((photomapResponse) => {
 					actdev.populateSitePhotos (photomapResponse);
 				});
 		},
@@ -659,12 +660,11 @@ var actdev = (function ($) {
 				<div class="carousel-cell">
 				<img src="{%thumbnailUrl}" />
 				</div>
-				`
+			`;
 
-			photomapGeojson.features.map(photoObject => {
+			photomapGeojson.features.map ((photoObject) => {
 				$('.carousel').flickity('append', $(thumbnailHtml.replace('{%thumbnailUrl}', photoObject.properties.thumbnailUrl)));
 			});
-
 		},
 
 
@@ -674,7 +674,7 @@ var actdev = (function ($) {
 			// Exit if no sites stores
 			if (!allSitesGeoJson) {
 				return;
-			};
+			}
 
 			// Iterate through sites until we find a match
 			var siteObject = false;
@@ -733,8 +733,9 @@ var actdev = (function ($) {
 		listenForABStreet: function ()
 		{
 			$('#view-simulation').on ('click', function () {
+				
 				// Generate the URL
-				var simulationUrl = '/abstreet/?--actdev={%site_name}&--cam={%mapposition}'
+				var simulationUrl = '/abstreet/?--actdev={%site_name}&--cam={%mapposition}';
 				simulationUrl = simulationUrl.replace('{%site_name}', currentRegion);
 				
 				var _map = layerviewer.getMap ();
@@ -753,24 +754,24 @@ var actdev = (function ($) {
 		initialiseTooltips: function ()
 		{
 			tippy('#desirelines-tooltip', {
-				content: "View desire lines that show the relative amount of travel from the site to work, retail and F&B sites outside of the perimeter",
+				content: "View desire lines that show the relative amount of travel from the site to work, retail and F&B sites outside of the perimeter"
 			});
 
 			tippy('#routenetwork-tooltip', {
-				content: "These represent the route network data along the desire lines (likely fast route).",
+				content: "These represent the route network data along the desire lines (likely fast route)."
 			});
 
 			tippy ('.accessibility-tooltip', {
-				content: "A radar graph that shows levels of accessibility to and from the site.",
+				content: "A radar graph that shows levels of accessibility to and from the site."
 			});
 
 			tippy('#studyarea-tooltip', {
-				content: "The study area.",
+				content: "The study area."
 			});
 
 			tippy('#accessibility-tooltip', {
 				content: 'This graph displays the mode-split transport data of the site. The data is separated into distance bands, and stacked by mode.'
-			})
+			});
 		},
 
 
@@ -791,11 +792,12 @@ var actdev = (function ($) {
 		// Callback, triggered when a region gets changed. This also triggers at launch
 		fetchRegionData: function (selectedRegion)
 		{
-			const siteMetricsUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/in-site-metrics.csv'.replace('{selectedRegion}', selectedRegion);
+			var siteMetricsUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/in-site-metrics.csv';
+			siteMetricsUrl = siteMetricsUrl.replace ('{selectedRegion}', selectedRegion);
 			
 			// Reset the "cached" numbers used when animating stats
-			dataMetricsToShow.map (metric => {
-				$('.' + metric.name).find ('h3').first ().prop ('number', '')
+			dataMetricsToShow.map ((metric) => {
+				$('.' + metric.name).find ('h3').first ().prop ('number', '');
 			});
 
 			// Stream and parse the CSV file
@@ -808,7 +810,8 @@ var actdev = (function ($) {
 					var inSiteMetrics = fields.data.shift();
 
 					// Merge in the mode_split objects
-					const siteModeSplit = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/mode-split.csv'.replace('{selectedRegion}', selectedRegion);
+					var siteModeSplit = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/mode-split.csv';
+					siteModeSplit = siteModeSplit.replace ('{selectedRegion}', selectedRegion);
 					Papa.parse (siteModeSplit, {
 						header: true,
 						download: true,
@@ -862,10 +865,10 @@ var actdev = (function ($) {
 			var siteObject = actdev.getSiteObjectFromAllSites(currentRegion);
 
 			// Merge in the region specific data to the properties
-			var allData = {...siteObject.properties, ...regionData}
+			var allData = {...siteObject.properties, ...regionData};
 			
 			// Loop through the metrics to show
-			dataMetricsToShow.map(metric => {
+			dataMetricsToShow.map ((metric) => {
 				if (allData.hasOwnProperty (metric.name)) {
 					// Find the h3 for each statistic
 					var element = $('.' + metric.name).find ('h3').first ();
@@ -885,7 +888,7 @@ var actdev = (function ($) {
 						}
 						
 						// Save the difference into the element data
-						element.data('difference', difference)
+						element.data('difference', difference);
 						
 						// Change the actual stat text
 						if (difference > 0) {
@@ -902,14 +905,15 @@ var actdev = (function ($) {
 					$('.' + metric.name).find ('h5').first ().html(differenceHtml);
 					
 					// Calculate the decimal factor
-					var decimalFactor = metric.decimal_points === 0 ? 1 : Math.pow (10, metric.decimal_points);
+					var decimalFactor = (metric.decimal_points === 0 ? 1 : Math.pow (10, metric.decimal_points));
 					
 					// Get the number
 					// If this element doesn't have a different go_active number, keep it the same
+					var number;
 					if (!metric.go_active) {
-						var number = element.data ('current')
+						number = element.data ('current');
 					} else {
-						var number = (currentScenario == 'current' ? element.data ('current') : element.data('goactive'));
+						number = (currentScenario == 'current' ? element.data ('current') : element.data('goactive'));
 					}
 
 					// If there is any post-processing strategy for the number, do it
@@ -935,11 +939,12 @@ var actdev = (function ($) {
 							color: colour,
 					
 							numberStep: function(now, tween) {
-								var flooredNumber = Math.floor(now) / decimalFactor, target = $(tween.elem);
+								var flooredNumber = (Math.floor(now) / decimalFactor);
+								var target = $(tween.elem);
 					
 								if (metric.decimal_points > 0) {
 									// Force decimal places even if they are 0
-									flooredNumber = flooredNumber.toFixed(metric.decimal_points);
+									flooredNumber = flooredNumber.toFixed (metric.decimal_points);
 								}
 						
 								// Add a percentage sign if necessary
@@ -974,8 +979,10 @@ var actdev = (function ($) {
 		insertSiteMetricsGraph: function (selectedRegion)
 		{
 			//const metricsImgUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/in-site-metrics.png?raw=true'.replace('{selectedRegion}', selectedRegion);
-			const modeSplitCurrentUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/mode-split-base.png?raw=true'.replace('{selectedRegion}', selectedRegion);
-			const modeSplitGoActiveUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/mode-split-goactive.png?raw=true'.replace('{selectedRegion}', selectedRegion);
+			var modeSplitCurrentUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/mode-split-base.png?raw=true';
+			modeSplitCurrentUrl = modeSplitCurrentUrl.replace('{selectedRegion}', selectedRegion);
+			var modeSplitGoActiveUrl = 'https://github.com/cyipt/actdev/blob/main/data-small/{selectedRegion}/mode-split-goactive.png?raw=true';
+			modeSplitGoActiveUrl = modeSplitGoActiveUrl.replace('{selectedRegion}', selectedRegion);
 			
 			// Add the image
 			$('.graph-container img.current').attr ('src', modeSplitCurrentUrl);
@@ -1026,8 +1033,8 @@ var actdev = (function ($) {
 				}).addTo (_miniMaps[id] );
 				
 				// Disable interaction; see: https://gis.stackexchange.com/a/201470/58752
-				_miniMaps[id]._handlers.forEach (function (handler) {
-					handler.disable ();
+				_miniMaps[id]._handlers.forEach (function (handlerType) {
+					handlerType.disable ();
 				});
 				
 			// Otherwise move the map location and clear any layers
@@ -1040,12 +1047,12 @@ var actdev = (function ($) {
 			var stylingBehaviour = {
 				style: {
 					color: '#888',
-					weight: 2,
+					weight: 2
 				}
 			};
 			
 			// Add the GeoJSON layer
-			_miniMapLayers[id] = new L.geoJson.ajax (geojsonUrl, stylingBehaviour);
+			_miniMapLayers[id] = L.geoJson.ajax (geojsonUrl, stylingBehaviour);
 			_miniMapLayers[id].addTo (_miniMaps[id]);
 		},
 		
@@ -1062,7 +1069,7 @@ var actdev = (function ($) {
 				complete: function (fields) {
 					
 					// Locate the site in the all_sites object
-					let site = fields.data.find (o => o.site_name === selectedRegion);
+					var site = fields.data.find ((o) => (o.site_name === selectedRegion));
 					
 					// Set the title text
 					$('h1.site-title').animate({'opacity': 0}, 300, function () {
@@ -1070,7 +1077,7 @@ var actdev = (function ($) {
 					}).animate({'opacity': 1}, 200);
 					
 					// Start building the descriptive blurb
-					var descriptionText = `This development in ${site.main_local_authority} will contain ` + parseInt (site.dwellings_when_complete).toLocaleString() + ` dwellings when complete.`
+					var descriptionText = `This development in ${site.main_local_authority} will contain ` + parseInt (site.dwellings_when_complete).toLocaleString() + ` dwellings when complete.`;
 					
 					// Complete the blurb, based on completion status
 					var completionText = '';
@@ -1096,8 +1103,6 @@ var actdev = (function ($) {
 						case 'no':
 							completionText = ' The site is not complete.';
 							break;
-						default:
-							break;
 					}
 
 					// Add this to the HTML
@@ -1113,7 +1118,7 @@ var actdev = (function ($) {
 						$('.planning-url').hide();
 					}
 				}
-			})
+			});
 		},
 
 
@@ -1127,58 +1132,57 @@ var actdev = (function ($) {
 		// Generate bar chart data
 		generateBarChartDataObject: function (goActive = false)
 		{
+			var labels = modeSplitCsvData.map ((distanceBand) => distanceBand.distance_band);
+			labels.pop ();	// Remove the spurious "" that Pappa Parse leaves
 			
-			var labels = modeSplitCsvData.map(distanceBand => distanceBand.distance_band)
-			labels.pop() // Remove the spurious "" that pappa parse leaves
+			var datasets;
 			if (goActive) {
-				var datasets = [
+				datasets = [
 					{
 						label: 'Walk',
 						backgroundColor: '#457b9d',
-						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.walk_goactive)))
-					},
-					{
+						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.walk_goactive)))
+					}, {
 						label: 'Bike',
 						backgroundColor: '#90be6d',
-						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.cycle_goactive)))
+						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.cycle_goactive)))
 					}, {
 						label: 'Other',
 						backgroundColor: '#ffd166',
-						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.other_goactive)))
+						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.other_goactive)))
 					}, {
 						label: 'Car',
 						backgroundColor: '#fe5f55',
-						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.drive_goactive)))
-					},
-				]
+						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.drive_goactive)))
+					}
+				];
 			} else {
-				var datasets = [
+				datasets = [
 					{
 						label: 'Walk',
 						backgroundColor: '#457b9d',
-						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.walk_base)))
-					},
-					{
+						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.walk_base)))
+					}, {
 						label: 'Bike',
 						backgroundColor: '#90be6d',
-						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.cycle_base)))
+						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.cycle_base)))
 					}, {
 						label: 'Other',
 						backgroundColor: '#ffd166',
-						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.other_base)))
+						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.other_base)))
 					}, {
 						label: 'Car',
 						backgroundColor: '#fe5f55',
-						data: modeSplitCsvData.map(distanceBand => Math.round(Number.parseFloat(distanceBand.drive_base)))
-					},
-				]
+						data: modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.drive_base)))
+					}
+				];
 			}
-
+			
 			var data = {
 				labels: labels,
-				datasets: datasets,
+				datasets: datasets
 			};
-
+			
 			return data;
 		},
 
@@ -1187,7 +1191,7 @@ var actdev = (function ($) {
 		{
 			return {
 				title: {
-					display: false,
+					display: false
 				},
 				legend: {
 					position: 'right',
@@ -1216,8 +1220,8 @@ var actdev = (function ($) {
 						}
 					}]
 				},
-				indexAxis: 'y',
-			}
+				indexAxis: 'y'
+			};
 		},
 
 		
@@ -1227,7 +1231,7 @@ var actdev = (function ($) {
 			// If there is no chart element on screen, generate a new one
 			if (!_accessibilityChart) {
 				var ctx = document.getElementById('densityChart').getContext('2d');
-				_accessibilityChart = new Chart(ctx, {
+				_accessibilityChart = new Chart (ctx, {
 					type: 'horizontalBar',
 					data: barChartData,
 					options: barChartOptions
@@ -1244,7 +1248,7 @@ var actdev = (function ($) {
 
 			// Iterate through and replace data
 			var currentDataSet = 0;
-			newDataSet.datasets.map(dataSet => {
+			newDataSet.datasets.map ((dataSet) => {
 				_accessibilityChart.data.datasets[currentDataSet].data = dataSet.data;
 				currentDataSet += 1;
 			});
