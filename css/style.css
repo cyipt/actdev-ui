@@ -23,18 +23,18 @@ html, body, section {height: 100vh;}
 .site-level-view .infographic-half i.site-back-arrow {position: absolute; font-size: 30px; padding: 2.5px 10px; border: 0.5px solid transparent; border-radius: 30px; transition: 0.3s;}
 .site-level-view .infographic-header i.site-back-arrow:hover {transform: scale(1.2);}
 .site-level-view .infographic-half i.site-back-arrow, .site-level-view .infographic-half i.site-back-arrow {color: orange; border-color: orange;}
-.site-level-view .infographic-header h1 {font-size: 40px; display: inline-block; padding: 0 5px 5px 78px; margin: 0;}
-.site-level-view .infographic-header-container {display: flex; flex-wrap: wrap; margin-left: 80px;}
+.site-level-view .infographic-header h1 {font-size: 40px; display: inline-block; padding: 0 5px 5px 61px; margin: 0;}
+.site-level-view .infographic-header-container {display: flex; flex-wrap: wrap; margin-left:65px;}
 .site-level-view .infographic-header-left {flex: 1;}
 .site-level-view .infographic-header-right {flex: 1; margin-right: 10px;}
 .site-level-view .infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px; font-size: 15px;}
-.site-level-view .infographic-header ul.external-links {margin-left: 80px; font-size: 16px;}
+.site-level-view .infographic-header ul.external-links {margin-left: 65px; font-size: 16px;}
 .site-level-view .infographic-header ul.external-links li {display: inline-block;}
 .site-level-view .infographic-header ul.external-links li a.site-info-link {display: inline-block;}
 .site-level-view .infographic-header ul.external-links li a.site-info-link {color: white; padding: 0; margin: 5px 20px 0 0; transition: .3s;}
 .site-level-view .infographic-header ul.external-links li a.site-info-link:hover {transform: scale(1.05); color: orange;}
 
-.site-level-view .headline-stats {padding: 8px 0 0 80px; display: block;}
+.site-level-view .headline-stats {padding: 8px 0 0 65px; display: block;}
 .site-level-view .headline-stats .main-headline-stat, .headline-stats .secondary-stats {display: inline-block;}
 .site-level-view .headline-stats h3, .headline-stats h4 {display: inline-block;}
 .site-level-view .headline-stats .main-headline-stat {color: green; margin-right: 10px;}
@@ -57,15 +57,16 @@ html, body, section {height: 100vh;}
 .site-level-view .site-info-title p {margin-left: 5px;}
 .site-level-view .site-info-title hr {flex-grow:1; height: 1px; margin-left: 10px; background-color: #9f9f9f;}
 .site-level-view .section-description {font-weight: 300; font-size: 15px; line-height: 22px; margin: 15px 15px;}
-.site-level-view ul.site-data-carousel {margin: 10px 0; height: 220px; width: 100%; overflow-x: scroll; overflow-y: hidden; white-space: nowrap;}
+.site-level-view ul.site-data-carousel {margin: 0; overflow-y: hidden; text-align: center;}
+.site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {height: 140px;}
 .site-level-view ul.site-data-carousel li {display: inline-block; margin: 0 15px; width: 140px; vertical-align: top;}
 .site-level-view ul.site-data-carousel li .data-carousel-header {height: 180px; overflow: hidden;}
-.site-level-view ul.site-data-carousel li .data-carousel-header input {float: right; position: relative; top: 18px; right: 18px; transform: scale(1.5); z-index: 500;}
+.site-level-view ul.site-data-carousel li .data-carousel-header input {float: right; position: relative; top: 25px; right: 18px; transform: scale(1.5); z-index: 500;}
 .site-level-view ul.site-data-carousel li .data-carousel-header label {display: inline-block;}
-.site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {width: 130px; height: 130px; border-radius: 25px; transition: 0.2s; display: block; margin: 5px 4.5%; text-align: center;}
-.site-level-view ul.site-data-carousel li .data-carousel-header img:hover {box-shadow: 0px 0px 5px 0px #FFFFFF;;}
-.site-level-view ul.site-data-carousel li .data-carousel-header p {display: block; margin: 7.5px auto; font-weight: 300; text-align: center;}
-.site-level-view ul.site-data-carousel li .data-carousel-header .info-circle {position: relative; float: right; bottom: 35px; right: 3px; font-size: 12px; transition: .5s; cursor: pointer;}
+.site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {width: 130px; height: 130px; border-radius: 25px; transition: 0.2s; display: block; margin: 5px 4.5%; text-align: center; z-index: 0 /* Fix for Safari not showing border radius */}
+.site-level-view ul.site-data-carousel li .data-carousel-header div.minimap:hover {box-shadow: 1px 1px 10px 1px #FFFFFF;}
+.site-level-view ul.site-data-carousel li .data-carousel-header p {display: block; margin: 2.5px auto; font-weight: 300; font-size: 14px; text-align: center;}
+.site-level-view ul.site-data-carousel li .data-carousel-header .info-circle {position: relative; float: right; bottom: 23px; right: 3px; font-size: 12px; transition: .5s; cursor: pointer;}
 .site-level-view ul.site-data-carousel li .data-carousel-header .info-circle:hover {transform: scale(1.2); color: orange;}
 .site-level-view ul.site-data-carousel li .controls {margin: 0 10px;}
 .site-level-view ul.site-data-carousel li .controls input {margin-left: 15px;}
@@ -123,18 +124,27 @@ html, body, section {height: 100vh;}
 .ios-segmented-control .option input:checked+label {cursor: default;}
 
 /* Small screen fixes */
-@media screen and (max-width: 1262px) {
-    .infographic-header h1 {font-size: 35px; padding-left: 10px; margin-top: 50px;}
-    .infographic-header-container {margin-left: 10px; display: block;}
+@media (max-width: 800px) {
+    .site-level-view {display: block;}
+    .site-level-view .infographic-half {display: block; height: 50vh;}
+    .site-level-view .map-half {display: block; height: 50vh;}
+    .site-level-view .infographic-header i.site-back-arrow {display: none;}
+    .site-level-view .infographic-header h1 {font-size: 30px; padding-left: 10px; margin-top: 0;}
+    .site-level-view .infographic-header-container {margin-left: 10px; display: block;}
     .headline-stats {padding-left: 10px;}
-    .infographic-header ul.external-links {margin-left: 10px;}
-    .infographic-header-right {padding: 10px 60px 10px 0;}
-    .ios-segmented-control {height: 50px;}
-    .ios-segmented-control span {height: 47px;}
-    .ios-segmented-control .option label {font-size: 15px; line-height: 39px;}
-    .site-info-content {display: block; flex: unset;}
-    .site-info-content .graph-container {flex-basis: unset;}
-    .site-info-content .caption-container {flex-basis: unset;}
+    .site-level-view .infographic-header ul.external-links {margin-left: 10px;}
+    .site-level-view .infographic-header-right {padding: 0px 60px 10px 0;}
+    .site-level-view .ios-segmented-control {height: 40px; margin-top: 0;}
+    .site-level-view .ios-segmented-control span {height: 37px;}
+    .site-level-view .ios-segmented-control .option label {font-size: 15px; line-height: 32px;}
+    .site-level-view .headline-stats {padding-left: 10px;}
+    .site-level-view .headline-stats .main-headline-stat h3, .site-level-view .headline-stats .main-headline-stat h4 {font-size: 16px;}
+    .site-level-view .headline-stats .secondary-stats .stat h3, .site-level-view .secondary-stats .stat h4 {font-size: 14px;}
+    .site-level-view .site-info-content {display: block; flex: unset;}
+    .site-level-view .site-info-content .graph-container {flex-basis: unset;}
+    .site-level-view .site-info-content .caption-container {flex-basis: unset;}
+    .site-level-view ul.site-data-carousel li {width: 110px;}
+    .site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {height: 110px;}
 }
 
 
