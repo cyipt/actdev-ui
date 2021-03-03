@@ -482,8 +482,8 @@ var actdev = (function ($) {
 			go_active: 'percent_cycle_goactive',
 			colour_ramp: [
 				[35, '#54ad32'],
-				[20, '#f8d277']
-				[0, '#ec695c'],
+				[20, '#f8d277'],
+				[0, '#ec695c']
 			]
 		}, 
 		{
