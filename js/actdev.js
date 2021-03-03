@@ -760,7 +760,7 @@ var actdev = (function ($) {
 				content: "These represent the route network data along the desire lines (likely fast route).",
 			});
 
-			tippy('#accessibility-tooltip', {
+			tippy ('.accessibility-tooltip', {
 				content: "A radar graph that shows levels of accessibility to and from the site.",
 			});
 
