@@ -451,52 +451,53 @@ var actdev = (function ($) {
 	var _miniMapLayers = {};	// Handle to each mini map's layer
 	var dataMetricsToShow = [
 		{
+			name: 'percent_commute_active_base',
+			full_name: 'active commuters',
+			percentage: true,
+			decimal_points: 0,
+			go_active: 'percent_commute_active_scenario',
+			colour_ramp: [
+				[35, '#54ad32'],
+				[20, '#f0bb40'],
+				[0, '#eb3323']
+			]
+		}, 
+		{
+			name: 'percent_commute_drive_base',
+			full_name: 'driving',
+			percentage: true,
+			decimal_points: 0,
+			go_active: 'percent_commute_drive_scenario',
+			colour_ramp: [
+				[30, '#eb3323'],
+				[20, '#f0bb40'],
+				[0, '#54ad32']
+			]
+		}, 
+		{
 			name: 'percent_cycle_base',
-			full_name: 'cycle',
+			full_name: 'cycling',
 			percentage: true,
 			decimal_points: 0,
 			go_active: 'percent_cycle_goactive',
 			colour_ramp: [
 				[35, '#54ad32'],
-				[20, '#f0bb40'],
-				[0, '#eb3323']
-			]
-		}, 
-		{
-			name: 'percent_walk_base',
-			full_name: 'walk',
-			percentage: true,
-			decimal_points: 0,
-			go_active: 'percent_walk_goactive',
-			colour_ramp: [
-				[35, '#54ad32'],
-				[20, '#f0bb40'],
-				[0, '#eb3323']
-			]
-		}, 
-		{
-			name: 'percent_drive_base',
-			full_name: 'driving',
-			percentage: true,
-			decimal_points: 0,
-			go_active: 'percent_drive_goactive',
-			colour_ramp: [
 				[35, '#eb3323'],
-				[25, '#f0bb40'],
-				[0, '#54ad32']
+				[0, '#f0bb40']
 			]
 		}, 
 		{
-			name: 'site_cycle_circuity',
-			full_name: 'cycle circuity',
+			name: 'median_commute_distance',
+			full_name: 'km median commute',
 			percentage: false,
-			decimal_points: 2,
+			decimal_points: 1,
 			go_active: false,
 			colour_ramp: [
 				[2, '#eb3323'],
 				[1.6, '#f0bb40'],
 				[0, '#54ad32']
-			]
+			],
+			post_processing: function (number) {return number/1000;}
 		}
 	]
 	
@@ -684,18 +685,33 @@ var actdev = (function ($) {
 		},
 
 
+		// Search the allsites geojson and return a site if matching name found
+		getSiteObjectFromAllSites: function (siteName)
+		{
+			// Iterate through sites until we find a match
+			var siteObject = false;
+			$.each(allSitesGeoJson.features, function (indexInArray, site) { 
+				 if (site.properties.site_name == siteName) {
+					siteObject = site; 
+					return false;
+				 }
+			});
+			return siteObject;
+		},
+
+
 		// Show/hide elements based on current or goactive scneario
 		showHideElementsBasedOnScenario: function ()
 		{
 			// If we are currently in go-active mode, reveal the changed stats
-			if (actdev.getCurrentScenario () === 'goactive') {
+			if (currentScenario == 'goactive') {
 				$('.stat h5').css('visibility', 'visible');
 			} else {
 				$('.stat h5').css('visibility', 'hidden');
 			}
 
 			// Hide or show the corresponding mode-split graphic
-			if (actdev.getCurrentScenario () === 'goactive') {
+			if (currentScenario === 'goactive') {
 				$('.graph-container .current').hide();
 				$('.graph-container .goactive').show();
 			} else {
@@ -824,7 +840,7 @@ var actdev = (function ($) {
 			actdev.insertSiteMetricsGraph (selectedRegion);
 			
 			// Populate site statistics
-			actdev.populateSiteStatistics ();
+			actdev.populateSiteStatistics (selectedRegion);
 			
 			// Populate mini-maps
 			actdev.populateMinimaps (selectedRegion);
@@ -853,20 +869,26 @@ var actdev = (function ($) {
 		// Parse and populate site statistics
 		populateSiteStatistics: function ()
 		{
-			// Map the array
+			// Get the site object
+			var siteObject = actdev.getSiteObjectFromAllSites(currentRegion);
+
+			// Merge in the region specific data to the properties
+			var allData = {...siteObject.properties, ...regionData}
+			
+			// Loop through the metrics to show
 			dataMetricsToShow.map(metric => {
-				if (regionData.hasOwnProperty (metric.name)) {
+				if (allData.hasOwnProperty (metric.name)) {
 					// Find the h3 for each statistic
 					var element = $('.' + metric.name).find ('h3').first ();
 
 					// Populate element with data-current and data-goactive (if applicable)
-					element.data('current', regionData[metric.name]);
+					element.data('current', allData[metric.name]);
 					var differenceHtml = '';
 					if (metric.go_active) {
-						element.data('goactive', regionData[metric.go_active]);
+						element.data('goactive', allData[metric.go_active]);
 						
 						// Populate the h5 elements with the amount of change
-						var difference = parseFloat(-regionData[metric.name]) + parseFloat(regionData[metric.go_active]);
+						var difference = parseFloat(-allData[metric.name]) + parseFloat(allData[metric.go_active]);
 
 						// Add a + symbol if the number is above 0
 						if (difference > 0) {
@@ -899,6 +921,11 @@ var actdev = (function ($) {
 						var number = element.data ('current')
 					} else {
 						var number = (currentScenario == 'current' ? element.data ('current') : element.data('goactive'));
+					}
+
+					// If there is any post-processing strategy for the number, do it
+					if (metric.hasOwnProperty('post_processing')) {
+						number = metric.post_processing (number);
 					}
 
 					// If the number is the same, don't animate it

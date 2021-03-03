@@ -14,8 +14,8 @@ h1 {color: white; font-family: 'Arimo', sans-serif;}
 /* Main container */
 html, body, section {height: 100vh;}
 .site-level-view {display: flex;}
-.site-level-view .infographic-half {background-color: #434343; color: white; flex: 1; padding: 1rem; overflow-y: scroll;}
-.site-level-view .map-half {background-color: #7a7a7a; flex: 1;}
+.site-level-view .infographic-half {background-color: #434343; color: white; flex: .85; padding: 1rem; overflow-y: scroll;}
+.site-level-view .map-half {background-color: #7a7a7a; flex: 1.15;}
 
 /* Infographic side */
 
@@ -23,11 +23,11 @@ html, body, section {height: 100vh;}
 .site-level-view .infographic-half i.site-back-arrow {position: absolute; font-size: 30px; padding: 2.5px 10px; border: 0.5px solid transparent; border-radius: 30px; transition: 0.3s;}
 .site-level-view .infographic-header i.site-back-arrow:hover {transform: scale(1.2);}
 .site-level-view .infographic-half i.site-back-arrow, .site-level-view .infographic-half i.site-back-arrow {color: orange; border-color: orange;}
-.site-level-view .infographic-header h1 {font-size: 50px; display: inline-block; padding: 5px 5px 5px 78px; margin: 0;}
+.site-level-view .infographic-header h1 {font-size: 40px; display: inline-block; padding: 5px 5px 5px 78px; margin: 0;}
 .site-level-view .infographic-header-container {display: flex; flex-wrap: wrap; margin-left: 80px;}
 .site-level-view .infographic-header-left {flex: 1;}
 .site-level-view .infographic-header-right {flex: 1; margin-right: 10px;}
-.site-level-view .infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px; font-size: 18px;}
+.site-level-view .infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px; font-size: 16px;}
 .site-level-view .infographic-header ul.external-links {margin-left: 80px; font-size: 18px;}
 .site-level-view .infographic-header ul.external-links li {display: inline-block;}
 .site-level-view .infographic-header ul.external-links li a.site-info-link {display: inline-block;}
