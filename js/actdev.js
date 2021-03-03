@@ -478,11 +478,11 @@ var actdev = (function ($) {
 			]
 		}, 
 		{
-			name: 'percent_cycle_base',
+			name: 'percent_commute_cycle_base',
 			full_name: 'cycling',
 			percentage: true,
 			decimal_points: 0,
-			go_active: 'percent_cycle_goactive',
+			go_active: 'percent_commute_cycle_scenario',
 			colour_ramp: [
 				[35, '#54ad32'],
 				[20, '#f8d277'],
@@ -500,7 +500,7 @@ var actdev = (function ($) {
 				[1.6, '#f8d277'],
 				[0, '#54ad32']
 			],
-			post_processing: function (number) {return number/1000;}
+			//post_processing: function (number) {return number/1000;}
 		}
 	];
 	
