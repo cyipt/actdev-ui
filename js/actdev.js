@@ -141,6 +141,8 @@ var actdev = (function ($) {
 				[0, 1]
 			],
 			legend: 'range',
+			name: 'Route network',
+			description: 'Routes from the site, segmented by section, showing the number of people',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/rnet-cycle-data-dictionary.csv',
 			fieldLabelsCsvField: 'names'
 		},
@@ -170,8 +172,8 @@ var actdev = (function ($) {
 				[0, 1]
 			],
 			legend: 'range',
-			name: 'Route network',
-			description: 'Number of people, in each line section',
+			name: 'Routes',
+			description: 'Routes from the site, showing the number of people',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/routes-cycle-data-dictionary.csv',
 			fieldLabelsCsvField: 'names'
 		},
@@ -212,7 +214,7 @@ var actdev = (function ($) {
 			],
 			legend: 'range',
 			name: 'Accessibility',
-			description: 'Cycleability/walkability of the surrounding area',
+			description: 'Cycleability / walkability of the surrounding area',
 			fillOpacity: 0.6,
 			fitInitial: true
 		},
@@ -266,7 +268,7 @@ var actdev = (function ($) {
 			],
 			legend: 'range',
 			name: 'Journey time statistics',
-			// description: 'Intro text here',
+			description: 'Journey times from the site, in minutes',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/jts-lsoas-data-dictionary.csv',
 			fieldLabelsCsvField: 'names',
 			fitInitial: true
