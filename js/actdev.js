@@ -824,7 +824,7 @@ var actdev = (function ($) {
 			
 			// Populate mini-maps
 			var regionBounds = layerviewer.getRegionBounds ();
-			var miniMaps = ['desirelines', 'routenetwork', 'accessibility', 'studyarea', 'jts'];
+			var miniMaps = ['desirelines', 'routes', 'routenetwork', 'accessibility', 'studyarea', 'jts'];
 			var id;
 			var url;
 			var regionWsen = regionBounds[selectedRegion];

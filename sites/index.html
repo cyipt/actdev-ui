@@ -190,7 +190,25 @@
 
 									<li>
 										<div class="data-carousel-header">
-											<input type="checkbox" name="show[]" id="show_routenetwork" checked />
+											<input type="checkbox" name="show[]" id="show_routes" />
+											<label for="show_routes"><div class="minimap" id="map_routes"></div></label>
+											<p>Route network</p>
+											<p class="info-circle" id="routes-tooltip">ⓘ</p>
+										</div>
+
+										<div class="controls routes" id="routes">
+											<select name="type">
+												<option value="fast">Cycling - fast</option>
+												<option value="balanced">Cycling - balanced</option>
+												<option value="quiet">Cycling - quiet</option>
+												<option value="walk">Walking</option>
+											</select>
+										</div>
+									</li>
+
+									<li>
+										<div class="data-carousel-header">
+											<input type="checkbox" name="show[]" id="show_routenetwork" checked="checked" />
 											<label for="show_routenetwork"><div class="minimap" id="map_routenetwork"></div></label>
 											<p>Route network</p>
 											<p class="info-circle" id="routenetwork-tooltip">ⓘ</p>
