@@ -975,8 +975,16 @@ var actdev = (function ($) {
 				_miniMaps[id].removeLayer (_miniMapLayers[id]);
 			}
 			
+			// Define the styling/behaviour for the GeoJSON layer
+			var stylingBehaviour = {
+				style: {
+					color: '#888',
+					weight: 2,
+				}
+			};
+			
 			// Add the GeoJSON layer
-			_miniMapLayers[id] = new L.geoJson.ajax (geojsonUrl);
+			_miniMapLayers[id] = new L.geoJson.ajax (geojsonUrl, stylingBehaviour);
 			_miniMapLayers[id].addTo (_miniMaps[id]);
 		},
 		
