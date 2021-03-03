@@ -527,15 +527,9 @@ var actdev = (function ($) {
 			
 			// Listen to scenario being changed
 			actdev.listenForScenarioChange ();
-
-			$('body').on ('mouseover', 'svg', function (d,i) {
-				d3.select(this)
-					.style("transform", "scale(1.1,1.1)")
-					.style("transform-origin", "50% 50%");
-			});
 		},
-
-
+		
+		
 		// Initialise general UI handlers
 		initUi: function ()
 		{
