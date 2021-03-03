@@ -19,7 +19,16 @@ export default function define(runtime, observer) {
       .selectAll("path")
       .data(d => d)
       .join("path")
-      .attr("d", arc);
+      .attr("d", arc)
+      .on('mouseover', function(d, i) {
+        d3.select(this)
+        .style("transform", "scale(1.1,1.1)")
+      })
+      .on('mouseout', function(d, i) {
+        d3.select(this)
+        .style("transform", "scale(1.0,1.0)")
+        .style("transform-origin", "50% 50%");
+      });
 
     svg.append("g")
       .call(xAxis);
@@ -89,7 +98,7 @@ export default function define(runtime, observer) {
         `)
           .call(g => g.append("line")
             .attr("x2", -5)
-            .attr("stroke", "#000"))
+            .attr("stroke", "#ffffff"))
           .call(g => g.append("text")
             .attr("transform", d => (x(d.site_name) + x.bandwidth() / 2 + Math.PI / 2) % (2 * Math.PI) < Math.PI
               ? "rotate(90)translate(0,16)"
@@ -110,17 +119,17 @@ export default function define(runtime, observer) {
           .join("g")
           .attr("fill", "none")
           .call(g => g.append("circle")
-            .attr("stroke", "#000")
+            .attr("stroke", "#ffffff")
             .attr("stroke-opacity", 0.5)
             .attr("r", y))
           .call(g => g.append("text")
             .attr("y", d => -y(d))
             .attr("dy", "0.35em")
-            .attr("stroke", "#fff")
+            .attr("stroke", "#ffffff")
             .attr("stroke-width", 5)
             .text(y.tickFormat(5, "s"))
             .clone(true)
-            .attr("fill", "#000")
+            .attr("fill", "#ffffff")
             .attr("stroke", "none")))
     )
   });
