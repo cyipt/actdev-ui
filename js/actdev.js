@@ -1068,12 +1068,21 @@ var actdev = (function ($) {
 						weight: 2
 					}
 					
-					// Dynamic styling based on data, if enabled
+					// Dynamic styling based on data, if enabled - polygons
 					if (_layerConfig[layerId].polygonColourField && _layerConfig[layerId].polygonColourStops) {
 						style.fillColor = actdev.lookupStyleValue (feature.properties[_layerConfig[layerId].polygonColourField], _layerConfig[layerId].polygonColourStops);
-						if (_layerConfig[layerId].hasOwnProperty ('fillOpacity')) {
-							style.fillOpacity = _layerConfig[layerId].fillOpacity;
-						}
+					}
+					if (_layerConfig[layerId].hasOwnProperty ('fillOpacity')) {
+						style.fillOpacity = _layerConfig[layerId].fillOpacity;
+					}
+					
+					// Dynamic styling based on data, if enabled - lines
+					if (_layerConfig[layerId].lineColourField && _layerConfig[layerId].lineColourStops) {
+						style.color = actdev.lookupStyleValue (feature.properties[_layerConfig[layerId].lineColourField], _layerConfig[layerId].lineColourStops);
+					}
+					if (_layerConfig[layerId].lineWidthField && _layerConfig[layerId].lineWidthStops) {
+						style.weight = actdev.lookupStyleValue (feature.properties[_layerConfig[layerId].lineWidthField], _layerConfig[layerId].lineWidthStops);
+						style.weight = style.weight / 5;	// Maps are very small so avoid thick lines
 					}
 					
 					// Return the resulting style
