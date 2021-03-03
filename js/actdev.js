@@ -582,8 +582,10 @@ var actdev = (function ($) {
 		// Listener for toggling of the current/goactive segmented control
 		listenForScenarioChange: function ()
 		{
-			$('.ios-segmented-control').change (function () {
-				// Save the new scenario
+			# Trigger when the segmented control changes
+			$('#scenario').change (function () {
+				
+				// Set the new scenario
 				actdev.setCurrentScenario ();
 
 				// Generate the graphs
