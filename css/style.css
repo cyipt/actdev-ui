@@ -23,32 +23,32 @@ html, body, section {height: 100vh;}
 .site-level-view .infographic-half i.site-back-arrow {position: absolute; font-size: 30px; padding: 2.5px 10px; border: 0.5px solid transparent; border-radius: 30px; transition: 0.3s;}
 .site-level-view .infographic-header i.site-back-arrow:hover {transform: scale(1.2);}
 .site-level-view .infographic-half i.site-back-arrow, .site-level-view .infographic-half i.site-back-arrow {color: orange; border-color: orange;}
-.site-level-view .infographic-header h1 {font-size: 40px; display: inline-block; padding: 5px 5px 5px 78px; margin: 0;}
+.site-level-view .infographic-header h1 {font-size: 40px; display: inline-block; padding: 0 5px 5px 78px; margin: 0;}
 .site-level-view .infographic-header-container {display: flex; flex-wrap: wrap; margin-left: 80px;}
 .site-level-view .infographic-header-left {flex: 1;}
 .site-level-view .infographic-header-right {flex: 1; margin-right: 10px;}
-.site-level-view .infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px; font-size: 16px;}
-.site-level-view .infographic-header ul.external-links {margin-left: 80px; font-size: 18px;}
+.site-level-view .infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px; font-size: 15px;}
+.site-level-view .infographic-header ul.external-links {margin-left: 80px; font-size: 16px;}
 .site-level-view .infographic-header ul.external-links li {display: inline-block;}
 .site-level-view .infographic-header ul.external-links li a.site-info-link {display: inline-block;}
 .site-level-view .infographic-header ul.external-links li a.site-info-link {color: white; padding: 0; margin: 5px 20px 0 0; transition: .3s;}
 .site-level-view .infographic-header ul.external-links li a.site-info-link:hover {transform: scale(1.05); color: orange;}
 
-.site-level-view .headline-stats {padding: 20px 0 0 80px; display: block;}
+.site-level-view .headline-stats {padding: 8px 0 0 80px; display: block;}
 .site-level-view .headline-stats .main-headline-stat, .headline-stats .secondary-stats {display: inline-block;}
 .site-level-view .headline-stats h3, .headline-stats h4 {display: inline-block;}
 .site-level-view .headline-stats .main-headline-stat {color: green; margin-right: 10px;}
-.site-level-view .headline-stats .main-headline-stat h3 {font-size: 35px;}
-.site-level-view .headline-stats .main-headline-stat h4 {font-size: 28px; font-weight: 400;}
+.site-level-view .headline-stats .main-headline-stat h3 {font-size: 22px;}
+.site-level-view .headline-stats .main-headline-stat h4 {font-size: 18px; font-weight: 400;}
 .site-level-view .headline-stats ul.secondary-stats li {display: inline-block; padding: 0 10px 0 0; margin-bottom: 5px;}
-.site-level-view .headline-stats .secondary-stats h3 {font-size: 23px;}
+.site-level-view .headline-stats .secondary-stats h3 {font-size: 20px; margin-top: 10px;}
 .site-level-view .headline-stats .secondary-stats h4 {font-size: 16px; font-weight: 400;}
 .site-level-view .stat h5 {visibility: hidden;}
 
 /* Site info */
-.site-level-view .site-info-sections {margin: 20px 10px;}
+.site-level-view .site-info-sections {margin: 8px 10px;}
 .site-level-view .site-info-content {display: flex; flex-flow: row wrap;}
-.site-level-view .site-info-content .graph-container {flex-basis: 100%; transition: height 1s linear; margin: 20px 0; }
+.site-level-view .site-info-content .graph-container {flex-basis: 100%; transition: height 1s linear; margin: 8px 0; }
 .site-level-view .site-info-content .graph-container img {display: block; margin: 0; height: 277px; width: 495px;}
 .site-level-view .site-info-content .graph-container img.inverted {filter: invert(0.735);}
 .site-level-view .site-info-content .caption-container {font-weight: 400; font-size: 15px; line-height: 22px; margin: 10px 0 20px 20px; flex-basis: 30%; min-width: 200px;}
@@ -57,7 +57,7 @@ html, body, section {height: 100vh;}
 .site-level-view .site-info-title p {margin-left: 5px;}
 .site-level-view .site-info-title hr {flex-grow:1; height: 1px; margin-left: 10px; background-color: #9f9f9f;}
 .site-level-view .section-description {font-weight: 300; font-size: 15px; line-height: 22px; margin: 15px 15px;}
-.site-level-view ul.site-data-carousel {margin: 25px 0; height: 213px; width: 100%; overflow-x: scroll; overflow-y: hidden; white-space: nowrap;}
+.site-level-view ul.site-data-carousel {margin: 10px 0; height: 220px; width: 100%; overflow-x: scroll; overflow-y: hidden; white-space: nowrap;}
 .site-level-view ul.site-data-carousel li {display: inline-block; margin: 0 15px; width: 140px; vertical-align: top;}
 .site-level-view ul.site-data-carousel li .data-carousel-header {height: 180px; overflow: hidden;}
 .site-level-view ul.site-data-carousel li .data-carousel-header input {float: right; position: relative; top: 18px; right: 18px; transform: scale(1.5); z-index: 500;}
@@ -109,7 +109,7 @@ html, body, section {height: 100vh;}
 .ios-segmented-control .option {position: relative; cursor: pointer;}
 .ios-segmented-control .option:hover input:not(:checked) + label span, .ios-segmented-control .option:active input:not(:checked) + label span, .ios-segmented-control .option:focus input:not(:checked) + label span {transform: scale(1.1);}
 .ios-segmented-control .option:active input:not(:checked) + label span {transform: scale(.95);}  
-.ios-segmented-control .option label {position: relative; display: block; text-align: center; padding: 3px 0vmin; background: rgba(255,255,255,0); font-weight: 500; color: white; font-size: 20px; height: 60px; line-height: 54px; text-overflow: clip; overflow: hidden;}  
+.ios-segmented-control .option label {position: relative; display: block; text-align: center; padding: 3px 0vmin; background: rgba(255,255,255,0); font-weight: 500; color: white; font-size: 16px; height: 50px; line-height: 44px; text-overflow: clip; overflow: hidden;}  
 .ios-segmented-control .option label::before, .ios-segmented-control .option label::after {content: ''; width: 1px; background: rgba(142,142,147,.15); position: absolute; top: 14%; bottom: 14%; will-change: background; -webkit-transition: background .3s ease; transition: background .3s ease;}  
 .ios-segmented-control .option label::before {left: 0; transform: translateX(-.5px);}  
 .ios-segmented-control .option label::after {right: 0; transform: translateX(.5px);}  
