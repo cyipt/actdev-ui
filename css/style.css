@@ -94,7 +94,7 @@ html, body, section {height: 100vh;}
 #styleswitcher {padding: 10px;}
 #styleswitcher li {margin: 5.5px 0;}
 #styleswitcher label {margin-left: 6px;}
-#legend {background-color: #515151; color: #ffffff; padding: 15px; border-radius: 10px; opacity: 0.85; width: auto;}
+#legend {background-color: #515151; color: #ffffff; padding: 15px; border-radius: 10px; opacity: 0.85; width: auto; max-width: 130px;}
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib {border-radius: 10px;}
 .mapboxgl-ctrl.mapboxgl-ctrl-group:not(#legend, #regionswitcher) {filter: invert(0.75);}
 
