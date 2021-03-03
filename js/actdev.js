@@ -1089,15 +1089,15 @@ var actdev = (function ($) {
 				{
 					label: 'Bike',
 					backgroundColor: '#90be6d',
-					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))
+					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.cycle_base))
 				}, {
 					label: 'Other',
 					backgroundColor: '#ffd166',
-					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))
+					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.other_base))
 				}, {
 					label: 'Car',
 					backgroundColor: '#fe5f55',
-					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.walk_base))
+					data: modeSplitCsvData.map(distanceBand => Number.parseFloat(distanceBand.drive_base))
 				},
 			]
 
