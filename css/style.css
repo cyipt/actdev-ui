@@ -4,8 +4,8 @@ a {text-decoration: none;}
 ul {list-style: none;}
 
 /* Typography */
-body, h2, h3, h4, h5, p, a {font-family: 'Arimo', sans-serif;}
-h1 {color: white; font-family: 'Arimo', sans-serif;}
+body {font-family: 'Arimo', sans-serif;}
+h1 {color: white;}
 .green {color: #53e21f;}
 .blue {color: #4aa59d;}
 .red {color: #dc3a26;}
