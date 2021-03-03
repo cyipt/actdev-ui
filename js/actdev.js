@@ -457,9 +457,9 @@ var actdev = (function ($) {
 			decimal_points: 0,
 			go_active: 'percent_commute_active_scenario',
 			colour_ramp: [
-				[35, '#54ad32'],
-				[20, '#f0bb40'],
-				[0, '#eb3323']
+				[35, '#90c858'],
+				[20, '#f8d277'],
+				[0, '#ec695c']
 			]
 		}, 
 		{
@@ -469,8 +469,8 @@ var actdev = (function ($) {
 			decimal_points: 0,
 			go_active: 'percent_commute_drive_scenario',
 			colour_ramp: [
-				[30, '#eb3323'],
-				[20, '#f0bb40'],
+				[30, '#ec695c'],
+				[20, '#f8d277'],
 				[0, '#54ad32']
 			]
 		}, 
@@ -482,8 +482,8 @@ var actdev = (function ($) {
 			go_active: 'percent_cycle_goactive',
 			colour_ramp: [
 				[35, '#54ad32'],
-				[35, '#eb3323'],
-				[0, '#f0bb40']
+				[20, '#f8d277']
+				[0, '#ec695c'],
 			]
 		}, 
 		{
@@ -493,8 +493,8 @@ var actdev = (function ($) {
 			decimal_points: 1,
 			go_active: false,
 			colour_ramp: [
-				[2, '#eb3323'],
-				[1.6, '#f0bb40'],
+				[2, '#ec695c'],
+				[1.6, '#f8d277'],
 				[0, '#54ad32']
 			],
 			post_processing: function (number) {return number/1000;}
