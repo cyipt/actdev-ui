@@ -170,6 +170,8 @@ var actdev = (function ($) {
 				[0, 1],
 			],
 			legend: 'range',
+			name: 'Route network',
+			description: 'Number of people, in each line section',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/routes-cycle-data-dictionary.csv',
 			fieldLabelsCsvField: 'names',
 		},
@@ -209,6 +211,8 @@ var actdev = (function ($) {
 				[0, '#6a040f'],
 			],
 			legend: 'range',
+			name: 'Accessibility',
+			description: 'Cycleability/walkability of the surrounding area',
 			fillOpacity: 0.6,
 			fitInitial: true
 		},
@@ -261,6 +265,8 @@ var actdev = (function ($) {
 				[0, '#faea47'],
 			],
 			legend: 'range',
+			name: 'Journey time statistics',
+			// description: 'Intro text here',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/jts-lsoas-data-dictionary.csv',
 			fieldLabelsCsvField: 'names',
 			fitInitial: true
