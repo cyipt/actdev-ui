@@ -65,8 +65,7 @@ html, body, section {height: 100vh;}
 .site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {width: 130px; height: 130px; border-radius: 25px; transition: 0.2s; display: block; margin: 5px 4.5%; text-align: center; z-index: 0 /* Fix for Safari not showing border radius */}
 .site-level-view ul.site-data-carousel li .data-carousel-header div.minimap:hover {box-shadow: 1px 1px 10px 1px #FFFFFF;}
 .site-level-view ul.site-data-carousel li .data-carousel-header p {display: block; margin: 2.5px auto; font-weight: 300; font-size: 14px; text-align: center;}
-.site-level-view ul.site-data-carousel li .data-carousel-header .info-circle {position: relative; float: right; bottom: 23px; right: 3px; font-size: 12px; transition: .5s; cursor: pointer;}
-.site-level-view ul.site-data-carousel li .data-carousel-header .info-circle:hover {transform: scale(1.2); color: orange;}
+.site-level-view ul.site-data-carousel li .data-carousel-header .info-circle {position: relative; float: right; bottom: 23px; right: 3px;}
 .site-level-view ul.site-data-carousel li .controls {margin: 0 10px;}
 .site-level-view ul.site-data-carousel li .controls input {margin-left: 15px;}
 .site-level-view ul.site-data-carousel li .controls label {margin-left: 7.5px; font-weight: 300; font-size: 14px}
@@ -76,6 +75,10 @@ html, body, section {height: 100vh;}
 .site-level-view .site-info-section .carousel-cell {height: 100%; width: 200px; margin: 0 4px;}
 .site-level-view .site-info-section .flickity-prev-next-button {width: 30px; height: 30px;}
 .site-level-view .carousel.is-fullscreen .carousel-cell {height: 100%;}
+
+/* Tooltips */
+.info-circle {font-size: 12px; transition: .5s; cursor: zoom-in;}
+.info-circle:hover {transform: scale(1.2); color: orange;}
 
 /* Map side */
 .site-level-view .selector.map {position: absolute; bottom: 0; right: 0; float: right; margin: 25px 60px; padding: 0 25px; background-color: #515151; border-radius: 30px; box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75); z-index: 10;}
