@@ -111,10 +111,10 @@
 	var initialise = function () 
 	{
 		// Listen to scenario being changed
-		listenForScenarioChange();
+		listenForScenarioChange ();
 
 		// Get the data and add the first bar chart
-		getNationalData();
+		getNationalData ();
 	};
 
 
@@ -122,8 +122,8 @@
 	var listenForScenarioChange = function () 
 	{
 		// Trigger when the segmented control changes
-		$('#scenario').change(function () {
-			updateChartData();
+		$('#scenario').change (function () {
+			updateChartData ();
 		});
 	};
 
@@ -145,7 +145,7 @@
 				_nationalDataObject = fields.data; // Shift as we are left with an empty array at the end
 
 				// Stream and parse the CSV file
-				Papa.parse(nationalStatsGoActive, {
+				Papa.parse (nationalStatsGoActive, {
 					header: true,
 					download: true,
 					complete: function (fields) {
@@ -155,7 +155,7 @@
 						.data; // Shift as we are left with an empty array at the end
 
 						// Add the bar chart
-						addBarChart();
+						addBarChart ();
 					}
 				});
 
@@ -169,13 +169,13 @@
 	// Returns current or goactive
 	var getCurrentScenario = function () 
 	{
-		return $('input[name=current-scenario]:checked', '#scenario').val();
+		return $('input[name=current-scenario]:checked', '#scenario').val ();
 	};
 
 	var addBarChart = function () 
 	{
 		var goActiveBool = (getCurrentScenario() == 'goactive');
-		insertChartIntoCanvas(generateBarChartDataObject(goActiveBool), generateBarChartOptionsObject(
+		insertChartIntoCanvas(generateBarChartDataObject (goActiveBool), generateBarChartOptionsObject(
 			'Site accesibility chart'));
 	};
 
@@ -183,7 +183,7 @@
 	// Generate bar chart data
 	var generateBarChartDataObject = function (goActive = false) 
 	{
-		var labels = _nationalDataObject.map(siteData => siteData.site_name);
+		var labels = _nationalDataObject.map (siteData => siteData.site_name);
 		labels.pop(); // Remove the spurious "" that Pappa Parse leaves
 
 		var datasets;
@@ -191,41 +191,41 @@
 			datasets = [{
 				label: 'Walk',
 				backgroundColor: '#457b9d',
-				data: _nationalDataObjectGoActive.map(siteData => Math.round(Number.parseFloat(siteData
+				data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData
 					.walk_active)))
 			}, {
 				label: 'Bike',
 				backgroundColor: '#90be6d',
-				data: _nationalDataObjectGoActive.map(siteData => Math.round(Number.parseFloat(siteData
+				data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData
 					.cycle_active)))
 			}, {
 				label: 'Car',
 				backgroundColor: '#fe5f55',
-				data: _nationalDataObjectGoActive.map(siteData => Math.round(Number.parseFloat(siteData
+				data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData
 					.drive_active)))
 			}, {
 				label: 'Other',
 				backgroundColor: '#ffd166',
-				data: _nationalDataObjectGoActive.map(siteData => Math.round(Number.parseFloat(siteData
+				data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData
 					.other_active)))
 			}];
 		} else {
 			datasets = [{
 				label: 'Walk',
 				backgroundColor: '#457b9d',
-				data: _nationalDataObject.map(siteData => Math.round(Number.parseFloat(siteData.walk_base)))
+				data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.walk_base)))
 			}, {
 				label: 'Bike',
 				backgroundColor: '#90be6d',
-				data: _nationalDataObject.map(siteData => Math.round(Number.parseFloat(siteData.cycle_base)))
+				data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.cycle_base)))
 			}, {
 				label: 'Car',
 				backgroundColor: '#fe5f55',
-				data: _nationalDataObject.map(siteData => Math.round(Number.parseFloat(siteData.drive_base)))
+				data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.drive_base)))
 			}, {
 				label: 'Other',
 				backgroundColor: '#ffd166',
-				data: _nationalDataObject.map(siteData => Math.round(Number.parseFloat(siteData.other_base)))
+				data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.other_base)))
 			}];
 		}
 
@@ -281,13 +281,13 @@
 				var labelPositions = _nationalSiteChart.scales['y-axis-0']['_labelItems']
 
 				// Build array with y positions
-				var labelYPositions = labelPositions.map(label => label.y);
+				var labelYPositions = labelPositions.map (label => label.y);
 				
 				// Find closest position
 				var closestNumber = getClosestNumber (clickYPos, labelYPositions)
 				
 				// Get the corresponding site name
-				var closestSiteObject = labelPositions.find(labelPosition => labelPosition.y === closestNumber).label;
+				var closestSiteObject = labelPositions.find (labelPosition => labelPosition.y === closestNumber).label;
         	}
 		};
 	};
@@ -295,7 +295,7 @@
 	// Function to return the closest number found in a haystack
 	var getClosestNumber = function (needle, haystack) 
 	{
-		return haystack.reduce((a, b) => {
+		return haystack.reduce ((a, b) => {
 			let aDiff = Math.abs(a - needle);
 			let bDiff = Math.abs(b - needle);
 
@@ -313,14 +313,14 @@
 	{
 		// If there is no chart element on screen, generate a new one
 		if (!_nationalSiteChart) {
-			var ctx = document.getElementById('nationalDataChart').getContext('2d');
-			_nationalSiteChart = new Chart(ctx, {
+			var ctx = document.getElementById ('nationalDataChart').getContext ('2d');
+			_nationalSiteChart = new Chart (ctx, {
 				type: 'horizontalBar',
 				data: barChartData,
 				options: barChartOptions
 			});
 		} else {
-			updateChartData();
+			updateChartData ();
 		}
 	};
 
@@ -332,12 +332,12 @@
 
 		// Iterate through and replace data
 		var currentDataSet = 0;
-		newDataSet.datasets.map((dataSet) => {
+		newDataSet.datasets.map ((dataSet) => {
 			_nationalSiteChart.data.datasets[currentDataSet].data = dataSet.data;
 			currentDataSet += 1;
 		});
 
-		_nationalSiteChart.update();
+		_nationalSiteChart.update ();
 	};
 
 	initialise();
@@ -354,7 +354,7 @@
 
 
 	// Main
-	document.addEventListener("DOMContentLoaded", setup);
+	document.addEventListener ("DOMContentLoaded", setup);
 
 	// Body functions
 	function setup() {
@@ -366,7 +366,7 @@
 		); // Prevent pill from detaching from element when window resized. Becuase this is rare I haven't bothered with throttling the event
 	}
 
-	function updatePillPosition() {
+	function updatePillPosition () {
 		forEachElement(SEGMENTED_CONTROL_INDIVIDUAL_SEGMENT_SELECTOR, (elem, index) => {
 			if (elem.checked) moveBackgroundPillToElement(elem, index);
 		})
