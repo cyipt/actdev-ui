@@ -18,8 +18,10 @@
 	<meta name="theme-color" content="#ffffff">
 
 	<!-- Fonts -->
-	<link rel="preconnect" href="https://fonts.gstatic.com"> 
-	<link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
 
 	<script src="/js/lib/js-cookie/js.cookie.js"></script>
 
@@ -32,7 +34,7 @@
 
 	<!-- Chart.js -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	
+
 	<!-- Fontawesome icons -->
 	<script src="/js/lib/fontawesome/fontawesome-kit-7bd5544b77.js"></script>
 
@@ -46,7 +48,7 @@
 	<main>
 		<section class="national-level-zoom">
 			<div class="text-section">
-				
+
 				<img src="/images/beta.svg" width="50" height="50" id="beta" title="Public beta - some features are not yet live" style="position: absolute; left: 20em; top: 15px;" />
 				<h1 class="site-title">ACTDEV</h1>
 				<h2 class="site-description">Active travel in new developments</h2>
@@ -80,7 +82,7 @@
 					<img src="/images/assets/leeds.png" />
 					<img src="/images/assets/cyclestreets.png" />
 				</section>
-				
+
 			</div>
 
 
@@ -104,24 +106,24 @@
 <script>
 	var _nationalSiteChart = false;
 	var _nationalDataObject = false; // Store the parsed CSV
-		
+
 	// Main function
-	var initialise = function ()
-	{				
+	var initialise = function () 
+	{
 		// Listen to scenario being changed
-		listenForScenarioChange ();
+		listenForScenarioChange();
 
 		// Get the data and add the first bar chart
-		getNationalData ();
+		getNationalData();
 	};
-	
+
 
 	// Listener for toggling of the current/goactive segmented control
-	var listenForScenarioChange = function ()
+	var listenForScenarioChange = function () 
 	{
 		// Trigger when the segmented control changes
-		$('#scenario').change (function () {			
-			updateChartData ();
+		$('#scenario').change(function () {
+			updateChartData();
 		});
 	};
 
@@ -130,110 +132,113 @@
 	var getNationalData = function () 
 	{
 		var nationalStatsUrl = 'https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui-chart/small-site-stats.csv';
-		var nationalStatsGoActive = 'https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui-chart/small-site-stats-goactive.csv'
+		var nationalStatsGoActive =
+			'https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui-chart/small-site-stats-goactive.csv'
 
 		// Stream and parse the CSV file
-		Papa.parse (nationalStatsUrl, {
+		Papa.parse(nationalStatsUrl, {
 			header: true,
 			download: true,
 			complete: function (fields) {
-				
+
 				// Unpack the parsed data object
 				_nationalDataObject = fields.data; // Shift as we are left with an empty array at the end
-				
+
 				// Stream and parse the CSV file
-				Papa.parse (nationalStatsGoActive, {
+				Papa.parse(nationalStatsGoActive, {
 					header: true,
 					download: true,
 					complete: function (fields) {
-						
+
 						// Unpack the parsed data object
-						_nationalDataObjectGoActive = fields.data; // Shift as we are left with an empty array at the end
-						
+						_nationalDataObjectGoActive = fields
+						.data; // Shift as we are left with an empty array at the end
+
 						// Add the bar chart
-						addBarChart ();
+						addBarChart();
 					}
 				});
-				
+
 			}
 		});
-		
-		
+
+
 	};
-	
+
 
 	// Returns current or goactive
-	var getCurrentScenario = function ()
+	var getCurrentScenario = function () 
 	{
-		return $('input[name=current-scenario]:checked', '#scenario').val ();
+		return $('input[name=current-scenario]:checked', '#scenario').val();
 	};
 
-	var addBarChart = function ()
+	var addBarChart = function () 
 	{
-		var goActiveBool = (getCurrentScenario () == 'goactive');
-		insertChartIntoCanvas (generateBarChartDataObject(goActiveBool), generateBarChartOptionsObject('Site accesibility chart'));
+		var goActiveBool = (getCurrentScenario() == 'goactive');
+		insertChartIntoCanvas(generateBarChartDataObject(goActiveBool), generateBarChartOptionsObject(
+			'Site accesibility chart'));
 	};
 
 
 	// Generate bar chart data
-	var generateBarChartDataObject = function (goActive = false)
+	var generateBarChartDataObject = function (goActive = false) 
 	{
-		var labels = _nationalDataObject.map (siteData => siteData.site_name);
-		labels.pop ();	// Remove the spurious "" that Pappa Parse leaves
-		
+		var labels = _nationalDataObject.map(siteData => siteData.site_name);
+		labels.pop(); // Remove the spurious "" that Pappa Parse leaves
+
 		var datasets;
 		if (goActive) {
-			datasets = [
-				{
-					label: 'Walk',
-					backgroundColor: '#457b9d',
-					data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData.walk_active)))
-				}, {
-					label: 'Bike',
-					backgroundColor: '#90be6d',
-					data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData.cycle_active)))
-				}, {
-					label: 'Car',
-					backgroundColor: '#fe5f55',
-					data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData.drive_active)))
-				}, {
-					label: 'Other',
-					backgroundColor: '#ffd166',
-					data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData.other_active)))
-				}
-			];
+			datasets = [{
+				label: 'Walk',
+				backgroundColor: '#457b9d',
+				data: _nationalDataObjectGoActive.map(siteData => Math.round(Number.parseFloat(siteData
+					.walk_active)))
+			}, {
+				label: 'Bike',
+				backgroundColor: '#90be6d',
+				data: _nationalDataObjectGoActive.map(siteData => Math.round(Number.parseFloat(siteData
+					.cycle_active)))
+			}, {
+				label: 'Car',
+				backgroundColor: '#fe5f55',
+				data: _nationalDataObjectGoActive.map(siteData => Math.round(Number.parseFloat(siteData
+					.drive_active)))
+			}, {
+				label: 'Other',
+				backgroundColor: '#ffd166',
+				data: _nationalDataObjectGoActive.map(siteData => Math.round(Number.parseFloat(siteData
+					.other_active)))
+			}];
 		} else {
-			datasets = [
-				{
-					label: 'Walk',
-					backgroundColor: '#457b9d',
-					data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.walk_base)))
-				}, {
-					label: 'Bike',
-					backgroundColor: '#90be6d',
-					data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.cycle_base)))
-				}, {
-					label: 'Car',
-					backgroundColor: '#fe5f55',
-					data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.drive_base)))
-				}, {
-					label: 'Other',
-					backgroundColor: '#ffd166',
-					data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.other_base)))
-				}
-			];
+			datasets = [{
+				label: 'Walk',
+				backgroundColor: '#457b9d',
+				data: _nationalDataObject.map(siteData => Math.round(Number.parseFloat(siteData.walk_base)))
+			}, {
+				label: 'Bike',
+				backgroundColor: '#90be6d',
+				data: _nationalDataObject.map(siteData => Math.round(Number.parseFloat(siteData.cycle_base)))
+			}, {
+				label: 'Car',
+				backgroundColor: '#fe5f55',
+				data: _nationalDataObject.map(siteData => Math.round(Number.parseFloat(siteData.drive_base)))
+			}, {
+				label: 'Other',
+				backgroundColor: '#ffd166',
+				data: _nationalDataObject.map(siteData => Math.round(Number.parseFloat(siteData.other_base)))
+			}];
 		}
-		
+
 		var data = {
 			labels: labels,
 			datasets: datasets
 		};
-		
+
 		return data;
 	};
 
 
-	var generateBarChartOptionsObject = function (text)
+	var generateBarChartOptionsObject = function (text) 
 	{
 		return {
 			title: {
@@ -266,36 +271,68 @@
 					}
 				}],
 			},
-			indexAxis: 'y'
+			indexAxis: 'y',
+			onClick: (event, item) => {
+				// Chart.js does not include a label click event, so we need to calculate it manually
+				// Get the y position of the click
+				var clickYPos = event.layerY;
+
+				// Get a dictionary of the x,y positions of the chart labels
+				var labelPositions = _nationalSiteChart.scales['y-axis-0']['_labelItems']
+
+				// Build array with y positions
+				var labelYPositions = labelPositions.map(label => label.y);
+				
+				// Find closest position
+				var closestNumber = getClosestNumber (clickYPos, labelYPositions)
+				
+				// Get the corresponding site name
+				var closestSiteObject = labelPositions.find(labelPosition => labelPosition.y === closestNumber).label;
+        	}
 		};
 	};
 
-	
+	// Function to return the closest number found in a haystack
+	var getClosestNumber = function (needle, haystack) 
+	{
+		return haystack.reduce((a, b) => {
+			let aDiff = Math.abs(a - needle);
+			let bDiff = Math.abs(b - needle);
+
+			if (aDiff == bDiff) {
+				return a > b ? a : b;
+			} else {
+				return bDiff < aDiff ? b : a;
+			}
+   		});
+	}
+
+
 	// Insert graph into canvas
 	var insertChartIntoCanvas = function (barChartData, barChartOptions) 
-	{	
+	{
 		// If there is no chart element on screen, generate a new one
 		if (!_nationalSiteChart) {
 			var ctx = document.getElementById('nationalDataChart').getContext('2d');
-			_nationalSiteChart = new Chart (ctx, {
+			_nationalSiteChart = new Chart(ctx, {
 				type: 'horizontalBar',
 				data: barChartData,
 				options: barChartOptions
 			});
 		} else {
-			updateChartData ();
+			updateChartData();
 		}
 	};
 
 	// Update chart
 	var updateChartData = function () 
 	{
-		var goActive = (getCurrentScenario () == 'goactive');
-		var newDataSet = generateBarChartDataObject (goActive);
+		var goActive = (getCurrentScenario() == 'goactive');
+		var newDataSet = generateBarChartDataObject(goActive);
 
 		// Iterate through and replace data
 		var currentDataSet = 0;
-		newDataSet.datasets.map ((dataSet) => {
+		newDataSet.datasets.map((dataSet) => {
 			_nationalSiteChart.data.datasets[currentDataSet].data = dataSet.data;
 			currentDataSet += 1;
 		});
@@ -304,6 +341,7 @@
 	};
 
 	initialise();
+	
 </script>
 
 
@@ -325,7 +363,7 @@
 		})
 		window.addEventListener("resize",
 			updatePillPosition
-			); // Prevent pill from detaching from element when window resized. Becuase this is rare I haven't bothered with throttling the event
+		); // Prevent pill from detaching from element when window resized. Becuase this is rare I haven't bothered with throttling the event
 	}
 
 	function updatePillPosition() {
