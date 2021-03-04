@@ -279,18 +279,19 @@
 
 				// Get a dictionary of the x,y positions of the chart labels
 				var labelPositions = _nationalSiteChart.scales['y-axis-0']['_labelItems']
-
-				// Build array with y positions
-				var labelYPositions = labelPositions.map (label => label.y);
 				
-				// Find closest position
-				var closestNumber = getClosestNumber (clickYPos, labelYPositions)
+				// Find closest position from an array with all the y positions
+				var closestNumber = getClosestNumber (clickYPos, labelPositions.map (label => label.y))
 				
 				// Get the corresponding site name
 				var closestSiteObject = labelPositions.find (labelPosition => labelPosition.y === closestNumber).label;
+
+				// Redirect to the site page
+				window.location = "/sites";
         	}
 		};
 	};
+
 
 	// Function to return the closest number found in a haystack
 	var getClosestNumber = function (needle, haystack) 
