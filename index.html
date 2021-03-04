@@ -28,6 +28,8 @@
 	<link rel="stylesheet" href="/js/lib/vex-4.1.0/dist/css/vex.css" />
 	<link rel="stylesheet" href="/js/lib/vex-4.1.0/dist/css/vex-theme-plain.css" />
 
+	<script src="/js/lib/jquery/jquery.min.js"></script>
+
 	<!-- Chart.js -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	
@@ -36,9 +38,6 @@
 
 	<!-- Parse CSV -->
 	<script src="/js/lib/PapaParse/papaparse.min.js"></script>
-	
-	<!-- D3.js -->
-	<script src="https://d3js.org/d3.v6.min.js"></script>
 
 	<script src="/.config.js"></script>
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
@@ -53,17 +52,19 @@
 				<h2 class="site-description">Active travel in new developments</h2>
 				<h3 class="blurb">This website provides evidence on active travel provision and potential in and around planned and proposed development sites.</h3>
 				<h3 class="blurb">Explore the sites we’ve studied.</h3>
-				<div class="ios-segmented-control">
-					<span class="selection"></span>
-					<div class="option">
-						<input type="radio" id="current" name="current-scenario" value="current" checked>
-						<label for="current"><span>Current</span></label>
+				<form id="scenario">
+					<div class="ios-segmented-control">
+						<span class="selection"></span>
+						<div class="option">
+							<input type="radio" id="current" name="current-scenario" value="current" checked>
+							<label for="current"><span>Current</span></label>
+						</div>
+						<div class="option">
+							<input type="radio" id="goactive" name="current-scenario" value="goactive">
+							<label for="goactive"><span>Go Active</span></label>
+						</div>
 					</div>
-					<div class="option">
-						<input type="radio" id="goactive" name="current-scenario" value="goactive">
-						<label for="goactive"><span>Go Active</span></label>
-					</div>
-				</div>
+				</form>
 				<p>A range of factors influence ease of access by walking and cycling. Distance to key destinations such as workplaces is relevant, but equally important is the type of roads that must be followed and the presence or absence of good quality walking and cycling infrastructure.</p>
 				<p>For case study sites, we have investigated measures affecting modal choice. These include the ratio of journey times/distances to local destinations by car as compared to by bicycle, the busyness of the roads, and the circuity of the routes. We have also studied access to public transport nodes such as rail stations.</p>
 				<ul class="links">
@@ -88,10 +89,9 @@
 					<h2>Site data</h2>
 					<hr />
 				</div>
-				<p style="color: white;"><em>Development note: Work on this chart panel is not yet complete.<br />Click anywhere in it to access site-level data.</em></p>
-				<a href="/sites/">						<!-- Temporary link to /sites/ -->
-				<div id="observablehq-chart"></div>
-				</a>									<!-- / Temporary link to /sites/ -->
+				<div class="graph-container">
+					<canvas id="nationalDataChart" width="800" height="800"></canvas>
+				</div>
 			</div>
 		</section>
 
@@ -99,6 +99,213 @@
 
 
 </body>
+
+<!-- Chart script -->
+<script>
+	var _nationalSiteChart = false;
+	var _nationalDataObject = false; // Store the parsed CSV
+		
+	// Main function
+	var initialise = function ()
+	{				
+		// Listen to scenario being changed
+		listenForScenarioChange ();
+
+		// Get the data and add the first bar chart
+		getNationalData ();
+	};
+	
+
+	// Listener for toggling of the current/goactive segmented control
+	var listenForScenarioChange = function ()
+	{
+		// Trigger when the segmented control changes
+		$('#scenario').change (function () {			
+			updateChartData ();
+		});
+	};
+
+
+	// Get the site-level data
+	var getNationalData = function () 
+	{
+		var nationalStatsUrl = 'https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui-chart/small-site-stats.csv';
+		var nationalStatsGoActive = 'https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui-chart/small-site-stats-goactive.csv'
+
+		// Stream and parse the CSV file
+		Papa.parse (nationalStatsUrl, {
+			header: true,
+			download: true,
+			complete: function (fields) {
+				
+				// Unpack the parsed data object
+				_nationalDataObject = fields.data; // Shift as we are left with an empty array at the end
+				
+				// Stream and parse the CSV file
+				Papa.parse (nationalStatsGoActive, {
+					header: true,
+					download: true,
+					complete: function (fields) {
+						
+						// Unpack the parsed data object
+						_nationalDataObjectGoActive = fields.data; // Shift as we are left with an empty array at the end
+						
+						// Add the bar chart
+						addBarChart ();
+					}
+				});
+				
+			}
+		});
+		
+		
+	};
+	
+
+	// Returns current or goactive
+	var getCurrentScenario = function ()
+	{
+		return $('input[name=current-scenario]:checked', '#scenario').val ();
+	};
+
+	var addBarChart = function ()
+	{
+		var goActiveBool = (getCurrentScenario () == 'goactive');
+		insertChartIntoCanvas (generateBarChartDataObject(goActiveBool), generateBarChartOptionsObject('Site accesibility chart'));
+	};
+
+
+	// Generate bar chart data
+	var generateBarChartDataObject = function (goActive = false)
+	{
+		var labels = _nationalDataObject.map (siteData => siteData.site_name);
+		labels.pop ();	// Remove the spurious "" that Pappa Parse leaves
+		
+		var datasets;
+		if (goActive) {
+			datasets = [
+				{
+					label: 'Walk',
+					backgroundColor: '#457b9d',
+					data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData.walk_active)))
+				}, {
+					label: 'Bike',
+					backgroundColor: '#90be6d',
+					data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData.cycle_active)))
+				}, {
+					label: 'Car',
+					backgroundColor: '#fe5f55',
+					data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData.drive_active)))
+				}, {
+					label: 'Other',
+					backgroundColor: '#ffd166',
+					data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData.other_active)))
+				}
+			];
+		} else {
+			datasets = [
+				{
+					label: 'Walk',
+					backgroundColor: '#457b9d',
+					data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.walk_base)))
+				}, {
+					label: 'Bike',
+					backgroundColor: '#90be6d',
+					data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.cycle_base)))
+				}, {
+					label: 'Car',
+					backgroundColor: '#fe5f55',
+					data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.drive_base)))
+				}, {
+					label: 'Other',
+					backgroundColor: '#ffd166',
+					data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.other_base)))
+				}
+			];
+		}
+		
+		var data = {
+			labels: labels,
+			datasets: datasets
+		};
+		
+		return data;
+	};
+
+
+	var generateBarChartOptionsObject = function (text)
+	{
+		return {
+			title: {
+				display: false
+			},
+			legend: {
+				position: 'right',
+				align: 'middle',
+				labels: {
+					fontColor: 'white',
+					fontSize: 13
+				}
+			},
+			tooltips: {
+				mode: 'index',
+				intersect: false
+			},
+			responsive: true,
+			scales: {
+				xAxes: [{
+					stacked: true,
+					ticks: {
+						fontColor: "#ffffff"
+					},
+				}],
+				yAxes: [{
+					stacked: true,
+					ticks: {
+						fontColor: "#ffffff"
+					}
+				}],
+			},
+			indexAxis: 'y'
+		};
+	};
+
+	
+	// Insert graph into canvas
+	var insertChartIntoCanvas = function (barChartData, barChartOptions) 
+	{	
+		// If there is no chart element on screen, generate a new one
+		if (!_nationalSiteChart) {
+			var ctx = document.getElementById('nationalDataChart').getContext('2d');
+			_nationalSiteChart = new Chart (ctx, {
+				type: 'horizontalBar',
+				data: barChartData,
+				options: barChartOptions
+			});
+		} else {
+			updateChartData ();
+		}
+	};
+
+	// Update chart
+	var updateChartData = function () 
+	{
+		var goActive = (getCurrentScenario () == 'goactive');
+		var newDataSet = generateBarChartDataObject (goActive);
+
+		// Iterate through and replace data
+		var currentDataSet = 0;
+		newDataSet.datasets.map ((dataSet) => {
+			_nationalSiteChart.data.datasets[currentDataSet].data = dataSet.data;
+			currentDataSet += 1;
+		});
+
+		_nationalSiteChart.update();
+	};
+
+	initialise();
+</script>
+
 
 <!-- iOS control script -->
 <script>
@@ -137,15 +344,6 @@
 	function forEachElement(className, fn) {
 		Array.from(document.querySelectorAll(className)).forEach(fn);
 	}
-</script>
-
-
-<script type="module">
-	import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-	import define from "/js/chart.js";
-	new Runtime().module(define, name => {
-	if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart"));
-	});
 </script>
 
 </html>
