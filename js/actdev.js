@@ -54,6 +54,7 @@ var actdev = (function ($) {
 		regionSwitcherNullText: 'Go to development',
 		regionSwitcherCallback: function (selectedRegion) {actdev.fetchRegionData (selectedRegion);}, // This is called when a region is switched, including startup
 		regionSwitcherDefaultRegion: 'great-kneighton', // Default region to load if no region saved in cookie
+		regionSwitcherMaxZoom: 13,
 		
 		// Initial view of all regions; will use regionsFile
 		initialRegionsView: true,
