@@ -284,10 +284,10 @@
 				var closestNumber = getClosestNumber (clickYPos, labelPositions.map (label => label.y))
 				
 				// Get the corresponding site name
-				var closestSiteObject = labelPositions.find (labelPosition => labelPosition.y === closestNumber).label;
+				var closestSite = labelPositions.find ((labelPosition) => (labelPosition.y === closestNumber)).label;
 
 				// Redirect to the site page
-				window.location = "/sites";
+				window.location.href = '/' + closestSite + '/';
         	}
 		};
 	};
