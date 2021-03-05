@@ -792,7 +792,7 @@ var actdev = (function ($) {
 			});
 
 			tippy ('.accessibility-tooltip', {
-				content: "A radar graph that shows levels of accessibility to and from the site."
+				content: "A graph that shows levels of accessibility to and from the site."
 			});
 
 			tippy('#studyarea-tooltip', {
