@@ -139,10 +139,11 @@
 		Papa.parse(nationalStatsUrl, {
 			header: true,
 			download: true,
+			skipEmptyLines: true,
 			complete: function (fields) {
 
 				// Unpack the parsed data object
-				_nationalDataObject = fields.data; // Shift as we are left with an empty array at the end
+				_nationalDataObject = fields.data;
 
 				// Stream and parse the CSV file
 				Papa.parse (nationalStatsGoActive, {
@@ -151,8 +152,7 @@
 					complete: function (fields) {
 
 						// Unpack the parsed data object
-						_nationalDataObjectGoActive = fields
-						.data; // Shift as we are left with an empty array at the end
+						_nationalDataObjectGoActive = fields.data;
 
 						// Add the bar chart
 						addBarChart ();
@@ -184,7 +184,6 @@
 	var generateBarChartDataObject = function (goActive = false) 
 	{
 		var labels = _nationalDataObject.map (siteData => siteData.site_name);
-		labels.pop(); // Remove the spurious "" that Pappa Parse leaves
 
 		var datasets;
 		if (goActive) {

@@ -833,6 +833,7 @@ var actdev = (function ($) {
 			Papa.parse (siteMetricsUrl, {
 				header: true,
 				download: true,
+				skipEmptyLines: true,
 				error: function (error, File) {
 					vex.dialog.alert ('Error: Could not load site metrics for ' + selectedRegion + ', so we have been unable to update the information panel.');
 					// Note that the 'complete' callback below will not be run, so the modesplit data will not then be loaded either
@@ -840,14 +841,15 @@ var actdev = (function ($) {
 				complete: function (fields) {
 					
 					// Unpack the parsed data object
-					var inSiteMetrics = fields.data.shift();
-
+					var inSiteMetrics = fields.data;
+					
 					// Merge in the mode_split objects
 					var siteModeSplit = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/mode-split.csv';
 					siteModeSplit = siteModeSplit.replace ('{selectedRegion}', selectedRegion);
 					Papa.parse (siteModeSplit, {
 						header: true,
 						download: true,
+						skipEmptyLines: true,
 						complete: function (fields) {
 							
 							// Unpack the parsed data object
@@ -1146,6 +1148,7 @@ var actdev = (function ($) {
 			Papa.parse (allSitesInfoUrl, {
 				header: true,
 				download: true,
+				skipEmptyLines: true,
 				complete: function (fields) {
 					
 					// Locate the site in the all_sites object
