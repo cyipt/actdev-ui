@@ -817,7 +817,6 @@ var actdev = (function ($) {
 		},
 
 
-		
 		// Callback, triggered when a region gets changed. This also triggers at launch
 		fetchRegionData: function (selectedRegion)
 		{
@@ -833,6 +832,10 @@ var actdev = (function ($) {
 			Papa.parse (siteMetricsUrl, {
 				header: true,
 				download: true,
+				error: function (error, File) {
+					vex.dialog.alert ('Error: Could not load site metrics for ' + selectedRegion + ', so we have been unable to update the information panel.');
+					// Note that the 'complete' callback below will not be run, so the modesplit data will not then be loaded either
+				},
 				complete: function (fields) {
 					
 					// Unpack the parsed data object
