@@ -250,7 +250,7 @@ var actdev = (function ($) {
 			}
 		},
 		
-		places: {
+		destinations: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/trip_attractors.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
