@@ -509,9 +509,10 @@ var actdev = (function ($) {
 		}, 
 		{
 			name: 'median_commute_distance',
-			full_name: 'km median commute',
+			full_name: 'median commute',
 			percentage: false,
 			decimal_points: 1,
+			unit: 'km',
 			go_active: false,
 			colour_ramp: [
 				[2, '#ec695c'],
@@ -982,6 +983,11 @@ var actdev = (function ($) {
 								// Add a percentage sign if necessary
 								if (metric.percentage) {
 									flooredNumber = flooredNumber + '%';
+								}
+
+								// Add a unit if necessary
+								if (metric.hasOwnProperty ('unit')) {
+									flooredNumber = flooredNumber + metric.unit;
 								}
 								
 								// Set text
