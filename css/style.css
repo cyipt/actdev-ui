@@ -50,6 +50,8 @@ html, body, section {height: 100vh;}
 .site-level-view .headline-stats .secondary-stats h3 {font-size: 25px; margin-top: 10px;}
 .site-level-view .headline-stats .secondary-stats h4 {font-size: 12px; font-weight: 400;}
 .site-level-view .stat h5 {visibility: hidden; justify-self: end;}
+.site-level-view .headline-stats .secondary-stats h5 {margin-bottom: -8px;}
+.site-level-view .headline-stats .secondary-stats i {font-size: 10px; padding-right: 2px;}
 
 /* Site info */
 .site-level-view .site-info-sections {margin: 8px 10px;}
@@ -144,9 +146,11 @@ html, body, section {height: 100vh;}
     .site-level-view .ios-segmented-control span {height: 37px;}
     .site-level-view .ios-segmented-control .option label {font-size: 15px; line-height: 32px;}
     .site-level-view .headline-stats {padding-left: 10px;}
-    .site-level-view .headline-stats .main-headline-stat h3, .site-level-view .headline-stats .main-headline-stat h4 {font-size: 16px;}
-    .site-level-view .headline-stats .secondary-stats .stat h3, .site-level-view .secondary-stats .stat h4 {font-size: 14px;}
     .site-level-view .site-info-content {display: block; flex: unset;}
+    .site-level-view .headline-stats .main-headline-stat h3 {font-size: 24px;}
+    .site-level-view .headline-stats .main-headline-stat h4 {font-size: 12px; margin-bottom: 0;}
+    .site-level-view .headline-stats .secondary-stats h3 {font-size: 21px;}
+    .site-level-view .headline-stats .secondary-stats h4 {margin-bottom: 0px;}
     .site-level-view .site-info-content .graph-container {flex-basis: unset;}
     .site-level-view .site-info-content .caption-container {flex-basis: unset;}
     .site-level-view ul.site-data-carousel li {width: 110px;}
@@ -170,8 +174,11 @@ html, body, section {height: 100vh;}
     .site-level-view .ios-segmented-control span {height: 37px;}
     .site-level-view .ios-segmented-control .option label {font-size: 15px; line-height: 32px;}
     .site-level-view .headline-stats {padding-left: 10px;}
-    .site-level-view .headline-stats .main-headline-stat h3, .site-level-view .headline-stats .main-headline-stat h4 {font-size: 16px;}
-    .site-level-view .headline-stats .secondary-stats .stat h3, .site-level-view .secondary-stats .stat h4 {font-size: 14px;}
+    .site-level-view .headline-stats .stat-flex-wrapper, .site-level-view .headline-stats .stat-number, .site-level-view .headline-stats .stat-description.grid {display: inline-block;}
+    .site-level-view .headline-stats .main-headline-stat h3, .site-level-view .headline-stats .secondary-stats h3 {font-size: 17px;}
+    .site-level-view .headline-stats .main-headline-stat h4, .site-level-view .headline-stats .main-headline-stat h5 {font-size: 12px;}
+    .site-level-view .headline-stats .secondary-stats h5, .site-level-view .headline-stats .main-headline-stat h5 {margin-bottom: -6px;}
+    .site-level-view .headline-stats .stat-number {padding-right: 0;}
     .site-level-view .site-info-content {display: block; flex: unset;}
     .site-level-view .site-info-content .graph-container {flex-basis: unset;}
     .site-level-view .site-info-content .caption-container {flex-basis: unset;}
