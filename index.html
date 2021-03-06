@@ -133,7 +133,8 @@
 	{
 		var nationalStatsUrl = 'https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui-chart/small-site-stats.csv';
 		var nationalStatsGoActive =
-			'https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui-chart/small-site-stats-goactive.csv'
+			'https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui-chart/small-site-stats-goactive.csv';
+		var allSitesCSVInfo = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.csv';
 
 		// Stream and parse the CSV file
 		Papa.parse(nationalStatsUrl, {
@@ -154,8 +155,35 @@
 						// Unpack the parsed data object
 						_nationalDataObjectGoActive = fields.data;
 
-						// Add the bar chart
-						addBarChart ();
+						// Patch in the pretty name
+						Papa.parse (allSitesCSVInfo, {
+							header: true,
+							download: true,
+							complete: function (fields) {
+
+								// Unpack the parsed data object
+								allSitesCsv = fields.data;
+
+								// Remove spurious last field 
+								allSitesCsv.pop();
+								
+								// Add the pretty name to the national data object
+								var currentSiteIndex = 0;
+								var fullName;
+								allSitesCsv.map(siteInfo => {
+									fullName = siteInfo.full_name;
+									
+									// If the full name is too long to conmfortably display (i.e. Berryfields, Aylesbury Garden Town), use only the bit after the comma
+									if (fullName.length > 20 && fullName.includes(',')) {
+										fullName = fullName.split (',').pop();
+									}
+									_nationalDataObject[currentSiteIndex]['full_name'] = fullName;
+									currentSiteIndex += 1;
+								});
+								// Add the bar chart
+								addBarChart ();
+							}
+						});
 					}
 				});
 
@@ -172,6 +200,8 @@
 		return $('input[name=current-scenario]:checked', '#scenario').val ();
 	};
 
+	
+	// Add the bar chart to the DOM
 	var addBarChart = function () 
 	{
 		var goActiveBool = (getCurrentScenario() == 'goactive');
@@ -183,7 +213,7 @@
 	// Generate bar chart data
 	var generateBarChartDataObject = function (goActive = false) 
 	{
-		var labels = _nationalDataObject.map (siteData => siteData.site_name);
+		var labels = _nationalDataObject.map (siteData => siteData.full_name);
 
 		var datasets;
 		if (goActive) {
