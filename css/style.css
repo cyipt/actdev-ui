@@ -22,27 +22,34 @@ html, body, section {height: 100vh;}
 /* Headline */
 .site-level-view .infographic-half i.site-back-arrow {position: absolute; font-size: 30px; padding: 5px 10px 5px; border: 0.5px solid transparent; color: white; border-radius: 30px; transition: 0.3s;}
 .site-level-view .infographic-header i.site-back-arrow:hover {transform: scale(1.2); color: orange; border-color: orange;}
-.site-level-view .infographic-header h1 {font-size: 40px; display: inline-block; padding: 0 5px 5px 61px; margin: 0;}
+.site-level-view .infographic-header h1 {font-size: 25px; display: inline-block; padding: 0 5px 5px 64px; margin: 0;}
 .site-level-view .infographic-header-container {display: flex; flex-wrap: wrap; margin-left:65px;}
 .site-level-view .infographic-header-left {flex: 1;}
 .site-level-view .infographic-header-right {flex: 1; margin-right: 10px;}
 .site-level-view .infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px; font-size: 15px;}
-.site-level-view .infographic-header ul.external-links {margin-left: 65px; font-size: 16px;}
+.site-level-view .infographic-header ul.external-links {margin-left: 61px; font-size: 16px;}
 .site-level-view .infographic-header ul.external-links li {display: inline-block;}
 .site-level-view .infographic-header ul.external-links li a.site-info-link {display: inline-block;}
 .site-level-view .infographic-header ul.external-links li a.site-info-link {color: white; padding: 0; margin: 5px 20px 0 0; transition: .3s;}
 .site-level-view .infographic-header ul.external-links li a.site-info-link:hover {transform: scale(1.05); color: orange;}
 
-.site-level-view .headline-stats {padding: 8px 0 0 65px; display: block;}
-.site-level-view .headline-stats .main-headline-stat, .headline-stats .secondary-stats {display: inline-block;}
+.site-level-view .headline-stats {padding: 15px 0 0 64px; display: block;}
+.site-level-view .headline-stats {display: inline-block; }
+.site-level-view .headline-stats .stat {display: inline-block; margin-right: 10px;}
+.site-level-view .headline-stats .stat-flex-wrapper {display: flex;}
+.site-level-view .headline-stats .stat-number {flex: 30%; padding-right: 3px;}
+.site-level-view .headline-stats .stat-description {flex: 70%;}
+.site-level-view .headline-stats .grid {display: grid; align-items: end}
 .site-level-view .headline-stats h3, .headline-stats h4 {display: inline-block;}
-.site-level-view .headline-stats .main-headline-stat {color: green; margin-right: 10px;}
-.site-level-view .headline-stats .main-headline-stat h3 {font-size: 22px;}
-.site-level-view .headline-stats .main-headline-stat h4 {font-size: 18px; font-weight: 400;}
+.site-level-view .headline-stats .main-headline-stat {color: green; margin-bottom: 10px;}
+.site-level-view .headline-stats .main-headline-stat h3 {font-size: 30px;}
+.site-level-view .headline-stats .main-headline-stat h4 {font-size: 16px; font-weight: 400; line-height: 13px; margin-bottom: 5px;}
 .site-level-view .headline-stats ul.secondary-stats li {display: inline-block; padding: 0 10px 0 0; margin-bottom: 5px;}
-.site-level-view .headline-stats .secondary-stats h3 {font-size: 20px; margin-top: 10px;}
-.site-level-view .headline-stats .secondary-stats h4 {font-size: 16px; font-weight: 400;}
-.site-level-view .stat h5 {visibility: hidden;}
+.site-level-view .headline-stats .secondary-stats {display: inline-block;}
+.site-level-view .headline-stats .secondary-stats .stat .stat-description.grid {margin-bottom: 3px;}
+.site-level-view .headline-stats .secondary-stats h3 {font-size: 25px; margin-top: 10px;}
+.site-level-view .headline-stats .secondary-stats h4 {font-size: 12px; font-weight: 400;}
+.site-level-view .stat h5 {visibility: hidden; justify-self: end;}
 
 /* Site info */
 .site-level-view .site-info-sections {margin: 8px 10px;}
@@ -127,12 +134,8 @@ html, body, section {height: 100vh;}
 .ios-segmented-control .option input:checked+label {cursor: default;}
 
 /* Small screen fixes */
-@media (max-width: 800px) {
-    .site-level-view {display: block;}
-    .site-level-view .infographic-half {display: block; height: 50vh;}
-    .site-level-view .map-half {display: block; height: 50vh;}
-    .site-level-view .infographic-header i.site-back-arrow {display: none;}
-    .site-level-view .infographic-header h1 {font-size: 30px; padding-left: 10px; margin-top: 0;}
+@media (max-width: 1000px) {
+    .site-level-view .infographic-header h1 {font-size: 20px; padding-left: 10px; margin-top: 50px;}
     .site-level-view .infographic-header-container {margin-left: 10px; display: block;}
     .headline-stats {padding-left: 10px;}
     .site-level-view .infographic-header ul.external-links {margin-left: 10px;}
@@ -151,6 +154,31 @@ html, body, section {height: 100vh;}
     .site-level-view .selector.map ul {overflow-x: scroll; white-space: nowrap;}
 }
 
+
+/* Small screen fixes */
+@media (max-width: 800px) {
+    .site-level-view {display: block;}
+    .site-level-view .infographic-half {display: block; height: 50vh;}
+    .site-level-view .map-half {display: block; height: 50vh;}
+    .site-level-view .infographic-header i.site-back-arrow {display: none;}
+    .site-level-view .infographic-header h1 {font-size: 20px; padding-left: 10px; margin-top: 0;}
+    .site-level-view .infographic-header-container {margin-left: 10px; display: block;}
+    .headline-stats {padding-left: 10px;}
+    .site-level-view .infographic-header ul.external-links {margin-left: 10px;}
+    .site-level-view .infographic-header-right {padding: 0px 60px 10px 0;}
+    .site-level-view .ios-segmented-control {height: 40px; margin-top: 0;}
+    .site-level-view .ios-segmented-control span {height: 37px;}
+    .site-level-view .ios-segmented-control .option label {font-size: 15px; line-height: 32px;}
+    .site-level-view .headline-stats {padding-left: 10px;}
+    .site-level-view .headline-stats .main-headline-stat h3, .site-level-view .headline-stats .main-headline-stat h4 {font-size: 16px;}
+    .site-level-view .headline-stats .secondary-stats .stat h3, .site-level-view .secondary-stats .stat h4 {font-size: 14px;}
+    .site-level-view .site-info-content {display: block; flex: unset;}
+    .site-level-view .site-info-content .graph-container {flex-basis: unset;}
+    .site-level-view .site-info-content .caption-container {flex-basis: unset;}
+    .site-level-view ul.site-data-carousel li {width: 110px;}
+    .site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {height: 110px;}
+    .site-level-view .selector.map ul {overflow-x: scroll; white-space: nowrap;}
+}
 
 .national-level-zoom {display: flex;}
 .national-level-zoom .text-section {position: relative; background-color: #434343; color: white; flex: 0.75; padding: 1rem; overflow-y: scroll;}
