@@ -92,7 +92,7 @@
 					<hr />
 				</div>
 				<div class="graph-container">
-					<canvas id="nationalDataChart" width="800" height="600"></canvas>
+					<canvas id="nationalDataChart" width="700" height="600"></canvas>
 				</div>
 			</div>
 		</section>
@@ -171,13 +171,7 @@
 								var currentSiteIndex = 0;
 								var fullName;
 								allSitesCsv.map(siteInfo => {
-									fullName = siteInfo.full_name;
-									
-									// If the full name is too long to conmfortably display (i.e. Berryfields, Aylesbury Garden Town), use only the bit after the comma
-									if (fullName.length > 20 && fullName.includes(',')) {
-										fullName = fullName.split (',').pop();
-									}
-									_nationalDataObject[currentSiteIndex]['full_name'] = fullName;
+									_nationalDataObject[currentSiteIndex]['full_name'] = siteInfo.full_name;
 									currentSiteIndex += 1;
 								});
 								// Add the bar chart
@@ -270,6 +264,11 @@
 	var generateBarChartOptionsObject = function (text) 
 	{
 		return {
+			layout: {
+				padding: {
+					left: 50
+				}
+			},
 			title: {
 				display: false
 			},
