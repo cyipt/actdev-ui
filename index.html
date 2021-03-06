@@ -266,7 +266,7 @@
 		return {
 			layout: {
 				padding: {
-					left: 50
+					left: 60
 				}
 			},
 			title: {
@@ -314,8 +314,11 @@
 				// Get the corresponding site name
 				var closestSite = labelPositions.find ((labelPosition) => (labelPosition.y === closestNumber)).label;
 
+				// Search to find the code-site-name that matches the prettified label
+				var siteCode = _nationalDataObject.find(site => site.full_name === closestSite).site_name;
+
 				// Redirect to the site page
-				window.location.href = '/' + closestSite + '/';
+				window.location.href = '/' + siteCode + '/';
         	}
 		};
 	};
