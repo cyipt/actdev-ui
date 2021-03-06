@@ -684,6 +684,15 @@ var actdev = (function ($) {
 		// Populate the site photo thumnails
 		populateSitePhotos: function (photomapGeojson)
 		{			
+			// If there are no photos, hide the Photos section
+			if (photomapGeojson.features.length < 1){
+				$('.photos').hide();
+				return;
+			}
+
+			// Show the Photos section if this had been hidden
+			$('.photos').show();
+			
 			var thumbnailHtml = `
 				<div class="carousel-cell">
 				<img src="{%thumbnailUrl}" />
