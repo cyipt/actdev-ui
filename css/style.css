@@ -66,8 +66,8 @@ html, body, section {height: 100vh;}
 .site-level-view .site-info-title hr {flex-grow:1; height: 1px; margin-left: 10px; background-color: #9f9f9f;}
 .site-level-view .section-description {font-weight: 300; font-size: 15px; line-height: 22px; margin: 15px 15px;}
 .site-level-view ul.site-data-carousel {margin: 0; overflow-y: hidden; margin-bottom: 12px;}
-.site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {height: 140px;}
-.site-level-view ul.site-data-carousel li {display: inline-block; margin: 0 15px; width: 140px; vertical-align: top;}
+.site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {height: 110px;}
+.site-level-view ul.site-data-carousel li {display: inline-block; margin: 0 7.5px; width: 140px; vertical-align: top;}
 .site-level-view ul.site-data-carousel li .data-carousel-header {height: 180px; overflow: hidden;}
 .site-level-view ul.site-data-carousel li .data-carousel-header input {float: right; position: relative; top: 25px; right: 18px; transform: scale(1.5); z-index: 500;}
 .site-level-view ul.site-data-carousel li .data-carousel-header label {display: inline-block;}
@@ -165,8 +165,8 @@ html, body, section {height: 100vh;}
 /* Small screen fixes */
 @media (max-width: 800px) {
     .site-level-view {display: block;}
-    .site-level-view .infographic-half {display: block; height: 50vh;}
-    .site-level-view .map-half {display: block; height: 50vh;}
+    .site-level-view .infographic-half {display: block; height: 35vh;}
+    .site-level-view .map-half {display: block; height: 65vh;}
     .site-level-view .infographic-header i.site-back-arrow {display: none;}
     .site-level-view .infographic-header h1 {font-size: 20px; padding-left: 10px; margin-top: 0;}
     .site-level-view .infographic-header-container {margin-left: 10px; display: block;}
@@ -185,9 +185,14 @@ html, body, section {height: 100vh;}
     .site-level-view .site-info-content {display: block; flex: unset;}
     .site-level-view .site-info-content .graph-container {flex-basis: unset;}
     .site-level-view .site-info-content .caption-container {flex-basis: unset;}
-    .site-level-view ul.site-data-carousel li {width: 110px;}
-    .site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {height: 110px;}
+    .site-level-view ul.site-data-carousel li {width: 70px;}
+    .site-level-view ul.site-data-carousel li .data-carousel-header {height: 137px;}
+    .site-level-view ul.site-data-carousel li .data-carousel-header p {font-size: 12px;}
+    .site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {height: 70px;}
+    .site-level-view .selector.map {margin: 0; width: 100vw; border-radius: 0; padding: 0 5px;}
     .site-level-view .selector.map ul {overflow-x: scroll; white-space: nowrap;}
+    #regionswitcher {transform: scale(1); margin: -5px 5px 0 0;}
+    #legend {font-size: 10px;}
 }
 
 .national-level-zoom {display: flex;}
