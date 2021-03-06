@@ -24,7 +24,7 @@ html, body, section {height: 100vh;}
 .site-level-view .infographic-header i.site-back-arrow:hover {transform: scale(1.2); color: orange; border-color: orange;}
 .site-level-view .infographic-header h1 {font-size: 25px; display: inline-block; padding: 0 5px 5px 64px; margin: 0;}
 .site-level-view .infographic-header-container {display: flex; flex-wrap: wrap; margin-left:65px;}
-.site-level-view .infographic-header-left {flex: 1;}
+.site-level-view .infographic-header-left {flex: 1.5;}
 .site-level-view .infographic-header-right {flex: 1; margin-right: 10px;}
 .site-level-view .infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px; font-size: 15px;}
 .site-level-view .infographic-header ul.external-links {margin-left: 61px; font-size: 16px;}
@@ -137,7 +137,8 @@ html, body, section {height: 100vh;}
 
 /* Small screen fixes */
 @media (max-width: 1000px) {
-    .site-level-view .infographic-header h1 {font-size: 20px; padding-left: 10px; margin-top: 50px;}
+    .site-level-view .infographic-header h1 {font-size: 20px; padding-left: 50px; margin-top: 10px;}
+    .site-level-view .infographic-header i:hover {border: transparent;}
     .site-level-view .infographic-header-container {margin-left: 10px; display: block;}
     .headline-stats {padding-left: 10px;}
     .site-level-view .infographic-header ul.external-links {margin-left: 10px;}
@@ -153,8 +154,10 @@ html, body, section {height: 100vh;}
     .site-level-view .headline-stats .secondary-stats h4 {margin-bottom: 0px;}
     .site-level-view .site-info-content .graph-container {flex-basis: unset;}
     .site-level-view .site-info-content .caption-container {flex-basis: unset;}
-    .site-level-view ul.site-data-carousel li {width: 110px;}
-    .site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {height: 110px;}
+    .site-level-view ul.site-data-carousel li {width: 110px; margin: 0 2.5px;}
+    .site-level-view ul.site-data-carousel li .data-carousel-header {height: 170px;}
+    .site-level-view ul.site-data-carousel li .data-carousel-header .info-circle {float: none; bottom: unset; right: unset;}
+    .site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {height: 110px; margin: 0;}
     .site-level-view .selector.map ul {overflow-x: scroll; white-space: nowrap;}
 }
 
