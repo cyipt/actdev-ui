@@ -43,9 +43,6 @@ var actdev = (function ($) {
 		// Custom data loading spinner selector for layerviewer. For layer specific spinner, should contain layerId
 		//dataLoadingSpinnerSelector: 'empty',
 		
-		// First-run welcome message
-		firstRunMessageHtml: '<p>Welcome to Actdev, Active travel provision and potential in planned and proposed development sites.</p><p><strong>Please choose a region</strong> in the top-right to begin.</p>',
-		
 		// Region switcher, with areas defined as a GeoJSON file
 		regionsFile: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.geojson',
 		regionsField: 'site_name',
