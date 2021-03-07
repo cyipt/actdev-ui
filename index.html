@@ -405,6 +405,7 @@
 
 		if (replaceData) {
 			_nationalSiteChart.data = newDataSet;
+			_nationalSiteChart.update (0);
 		} else {
 			// Iterate through and replace data
 			var currentDataSet = 0;
@@ -412,9 +413,8 @@
 				_nationalSiteChart.data.datasets[currentDataSet].data = dataSet.data;
 				currentDataSet += 1;
 			});
+			_nationalSiteChart.update ();
 		}
-
-		_nationalSiteChart.update ();
 	};
 
 	initialise();
