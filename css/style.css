@@ -226,3 +226,5 @@ html, body, section {height: 100vh;}
 .national-level-zoom .graph-half .section-title {display:flex; flex-direction:row; align-items: center;}
 .national-level-zoom .graph-half .section-title h2 {flex-grow: 0;}
 .national-level-zoom .graph-half .section-title hr {flex-grow:1; height: 1px; margin-left: 10px; background-color: #9f9f9f;}
+.national-level-zoom .graph-half input {font-size: 16px; font-weight: 300; color: white; line-height: 1.625; background-color: #434343; outline: none; border-color: #eee; border: none; border-bottom: 1px solid #9e9e9e; box-shadow: none; box-sizing: content-box; border-radius: 0; background-image: url( //addsearch.com/logo/AAAAAA-20.png ); background-repeat: no-repeat; background-position: 95% 50%; width: 60%; padding: 15px; margin: 15px 15px 15px 20px; cursor: auto;
+}

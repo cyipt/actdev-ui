@@ -91,6 +91,7 @@
 					<h2>Site data</h2>
 					<hr />
 				</div>
+				<input type="text" id="site-search" name="site-search" placeholder="Search for developments..." />
 				<div class="graph-container">
 					<canvas id="nationalDataChart" width="700" height="600"></canvas>
 				</div>
@@ -106,12 +107,16 @@
 <script>
 	var _nationalSiteChart = false;
 	var _nationalDataObject = false; // Store the parsed CSV
+	var _currentSearchQuery = '';
 
 	// Main function
 	var initialise = function () 
 	{
 		// Listen to scenario being changed
 		listenForScenarioChange ();
+
+		// Listen to the search bar
+		listenToSearchBar ();
 
 		// Get the data and add the first bar chart
 		getNationalData ();
@@ -124,6 +129,17 @@
 		// Trigger when the segmented control changes
 		$('#scenario').change (function () {
 			updateChartData ();
+		});
+	};
+
+
+	// Listen to the search bar and filter
+	var listenToSearchBar = function () 
+	{
+		$('#site-search').on ('keyup', function () {
+			_currentSearchQuery = $(this).val ().toLowerCase ();
+			const replaceData = true;
+			updateChartData (replaceData);
 		});
 	};
 
@@ -200,7 +216,7 @@
 	{
 		var goActiveBool = (getCurrentScenario() == 'goactive');
 		insertChartIntoCanvas(generateBarChartDataObject (goActiveBool), generateBarChartOptionsObject(
-			'Site accesibility chart'));
+			'Site accessibility chart'));
 	};
 
 
@@ -209,46 +225,51 @@
 	{
 		var labels = _nationalDataObject.map (siteData => siteData.full_name);
 
+		// Filter this data if we need to search
+		var labels = labels.filter (siteName => siteName.toLowerCase ().includes (_currentSearchQuery));
+
 		var datasets;
 		if (goActive) {
+			var filteredDataObject = _nationalDataObjectGoActive.filter (siteInfo => siteInfo.full_name.toLowerCase ().includes (_currentSearchQuery));
 			datasets = [{
 				label: 'Walk',
 				backgroundColor: '#457b9d',
-				data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData
+				data: filteredDataObject.map (siteData => Math.round(Number.parseFloat(siteData
 					.walk_active)))
 			}, {
 				label: 'Bike',
 				backgroundColor: '#90be6d',
-				data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData
+				data: filteredDataObject.map (siteData => Math.round(Number.parseFloat(siteData
 					.cycle_active)))
 			}, {
 				label: 'Car',
 				backgroundColor: '#fe5f55',
-				data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData
+				data: filteredDataObject.map (siteData => Math.round(Number.parseFloat(siteData
 					.drive_active)))
 			}, {
 				label: 'Other',
 				backgroundColor: '#ffd166',
-				data: _nationalDataObjectGoActive.map (siteData => Math.round(Number.parseFloat(siteData
+				data: filteredDataObject.map (siteData => Math.round(Number.parseFloat(siteData
 					.other_active)))
 			}];
 		} else {
+			var filteredDataObject = _nationalDataObject.filter (siteInfo => siteInfo.full_name.toLowerCase ().includes (_currentSearchQuery));
 			datasets = [{
 				label: 'Walk',
 				backgroundColor: '#457b9d',
-				data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.walk_base)))
+				data: filteredDataObject.map (siteData => Math.round(Number.parseFloat(siteData.walk_base)))
 			}, {
 				label: 'Bike',
 				backgroundColor: '#90be6d',
-				data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.cycle_base)))
+				data: filteredDataObject.map (siteData => Math.round(Number.parseFloat(siteData.cycle_base)))
 			}, {
 				label: 'Car',
 				backgroundColor: '#fe5f55',
-				data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.drive_base)))
+				data: filteredDataObject.map (siteData => Math.round(Number.parseFloat(siteData.drive_base)))
 			}, {
 				label: 'Other',
 				backgroundColor: '#ffd166',
-				data: _nationalDataObject.map (siteData => Math.round(Number.parseFloat(siteData.other_base)))
+				data: filteredDataObject.map (siteData => Math.round(Number.parseFloat(siteData.other_base)))
 			}];
 		}
 
@@ -256,6 +277,7 @@
 			labels: labels,
 			datasets: datasets
 		};
+
 
 		return data;
 	};
@@ -357,17 +379,21 @@
 	};
 
 	// Update chart
-	var updateChartData = function () 
+	var updateChartData = function (replaceData = false) 
 	{
 		var goActive = (getCurrentScenario() == 'goactive');
 		var newDataSet = generateBarChartDataObject(goActive);
 
-		// Iterate through and replace data
-		var currentDataSet = 0;
-		newDataSet.datasets.map ((dataSet) => {
-			_nationalSiteChart.data.datasets[currentDataSet].data = dataSet.data;
-			currentDataSet += 1;
-		});
+		if (replaceData) {
+			_nationalSiteChart.data = newDataSet;
+		} else {
+			// Iterate through and replace data
+			var currentDataSet = 0;
+			newDataSet.datasets.map ((dataSet) => {
+				_nationalSiteChart.data.datasets[currentDataSet].data = dataSet.data;
+				currentDataSet += 1;
+			});
+		}
 
 		_nationalSiteChart.update ();
 	};
