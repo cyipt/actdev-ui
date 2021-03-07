@@ -375,14 +375,16 @@ var actdev = (function ($) {
 				[2000, '#fce8af'],
 				[0, '#61fa61']
 			],
-			lineWidthField: 'cycle_pcu',	// #!# Fixme - should be Daily cycles
+			lineWidthField: 'car_pcu',
 			lineWidthStops: [
-				[1000, 10],
-				[500, 8],
-				[100, 6],
-				[10, 4],
-				[0, 2]
+				[50000, 6],
+				[40000, 5],
+				[30000, 4],
+				[20000, 2],
+				[10000, 1]
 			],
+			legend: 'range',
+			name: 'Car PCU',
 			popupHtml:	// Popup code thanks to https://hfcyclists.org.uk/wp/wp-content/uploads/2014/02/captions-html.txt
 				  '<p>Count Point {properties.id} on <strong>{properties.road}</strong>, a {properties.road_type}<br />'
 				+ 'Located in {properties.wardname} in {properties.boroughname}<br />'
