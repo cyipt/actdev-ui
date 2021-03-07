@@ -122,10 +122,11 @@ var actdev = (function ($) {
 			apiKey: false,
 			lineColourField: 'busyness',
 			lineColourStops: [
-				[100, '#5e2612'],
-				[10, '#8b2500'],
-				[5, '#cd5b45'],
-				[1, '#ee8262']
+				[5, '#eb4e3c'],
+				[4, '#d37077'],
+				[3, '#e3b5bf'],
+				[2, '#8abedf'],
+				[1, '#56ade2'],
 			],
 			lineWidthField: 'cycle_base',
 			lineWidthStops: [
@@ -152,10 +153,11 @@ var actdev = (function ($) {
 			apiKey: false,
 			lineColourField: 'mean_busyness',
 			lineColourStops: [
-				[100, '#5e2612'],
-				[10, '#8b2500'],
-				[5, '#cd5b45'],
-				[1, '#ee8262']
+				[5, '#eb4e3c'],
+				[4, '#d37077'],
+				[3, '#e3b5bf'],
+				[2, '#8abedf'],
+				[1, '#56ade2'],
 			],
 			lineWidthField: 'cycle_base',
 			lineWidthStops: [
