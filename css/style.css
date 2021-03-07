@@ -29,8 +29,9 @@ html, body, section {height: 100vh;}
 .site-level-view .infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px; font-size: 15px;}
 .site-level-view .infographic-header ul.external-links {margin-left: 61px; font-size: 16px;}
 .site-level-view .infographic-header ul.external-links li {display: inline-block;}
-.site-level-view .infographic-header ul.external-links li a.site-info-link {display: inline-block;}
-.site-level-view .infographic-header ul.external-links li a.site-info-link {color: white; padding: 0; margin: 5px 20px 0 0; transition: .3s;}
+.site-level-view .infographic-header ul.external-links li img {width: 20px; margin: 2px 0 0 5px;}
+.site-level-view .infographic-header ul.external-links li a.site-info-link {display: inline-block; vertical-align: top; line-height: 23px; height: 33px;}
+.site-level-view .infographic-header ul.external-links li a.site-info-link {color: white; padding: 3px 10px 0; margin: 5px 20px 0 0; transition: .3s; border: 1px solid white; border-radius: 25px;}
 .site-level-view .infographic-header ul.external-links li a.site-info-link:hover {transform: scale(1.05); color: orange;}
 
 .site-level-view .headline-stats {padding: 15px 0 0 64px; display: block;}
