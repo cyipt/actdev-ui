@@ -473,7 +473,7 @@ var actdev = (function ($) {
 	var _dataMetricsToShow = [
 		{
 			name: 'percent_commute_active_base',
-			full_name: 'active commuters',
+			full_name: 'active',
 			percentage: true,
 			decimal_points: 0,
 			go_active: 'percent_commute_active_scenario',

@@ -14,8 +14,8 @@ h1 {color: white;}
 /* Main container */
 html, body, section {height: 100vh;}
 .site-level-view {display: flex;}
-.site-level-view .infographic-half {position: relative; background-color: #434343; color: white; flex: .92; padding: 1rem; overflow-y: scroll;}
-.site-level-view .map-half {background-color: #7a7a7a; flex: 1.08;}
+.site-level-view .infographic-half {position: relative; background-color: #434343; color: white; flex: .85; padding: 1rem; overflow-y: scroll;}
+.site-level-view .map-half {background-color: #7a7a7a; flex: 1.15;}
 
 /* Infographic side */
 
@@ -67,14 +67,14 @@ html, body, section {height: 100vh;}
 .site-level-view .section-description {font-weight: 300; font-size: 15px; line-height: 22px; margin: 15px 15px;}
 .site-level-view ul.site-data-carousel {margin: 0; overflow-y: hidden; margin-bottom: 12px;}
 .site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {height: 110px;}
-.site-level-view ul.site-data-carousel li {display: inline-block; margin: 0 7.5px; width: 140px; vertical-align: top;}
-.site-level-view ul.site-data-carousel li .data-carousel-header {height: 180px; overflow: hidden;}
-.site-level-view ul.site-data-carousel li .data-carousel-header input {float: right; position: relative; top: 25px; right: 18px; transform: scale(1.5); z-index: 500;}
-.site-level-view ul.site-data-carousel li .data-carousel-header label {display: inline-block;}
-.site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {width: 130px; height: 130px; border-radius: 25px; transition: 0.2s; display: block; margin: 5px 4.5%; text-align: center; z-index: 0 /* Fix for Safari not showing border radius */}
+.site-level-view ul.site-data-carousel li {display: inline-block; margin: 0 7.5px; width: 118px; vertical-align: top;}
+.site-level-view ul.site-data-carousel li .data-carousel-header {height: 170px; overflow: hidden;}
+.site-level-view ul.site-data-carousel li .data-carousel-header input {float: right; position: relative; top: 29px; right: 17px; transform: scale(1.5); z-index: 500;}
+.site-level-view ul.site-data-carousel li .data-carousel-header label {display: inline-block; font-size: 14px;}
+.site-level-view ul.site-data-carousel li .data-carousel-header div.minimap {width: 110px; height: 110px; border-radius: 25px; transition: 0.2s; display: block; margin: 5px 4.5%; text-align: center; z-index: 0 /* Fix for Safari not showing border radius */}
 .site-level-view ul.site-data-carousel li .data-carousel-header div.minimap:hover {box-shadow: 1px 1px 10px 1px #FFFFFF;}
 .site-level-view ul.site-data-carousel li .data-carousel-header p {display: block; margin: 2.5px auto; font-weight: 300; font-size: 14px; text-align: center;}
-.site-level-view ul.site-data-carousel li .data-carousel-header .info-circle {position: relative; float: right; bottom: 23px; right: 3px;}
+.site-level-view ul.site-data-carousel li .data-carousel-header .info-circle {position: relative; float: right; bottom: 34px; right: 0;}
 .site-level-view ul.site-data-carousel li .controls {margin: 0 10px;}
 .site-level-view ul.site-data-carousel li .controls input {margin-left: 15px;}
 .site-level-view ul.site-data-carousel li .controls label {margin-left: 7.5px; font-weight: 300; font-size: 14px}
@@ -136,7 +136,9 @@ html, body, section {height: 100vh;}
 .ios-segmented-control .option input:checked+label {cursor: default;}
 
 /* Small screen fixes */
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
+    .site-level-view .infographic-half {flex: 1;}
+    .site-level-view .map-half {flex: 1;}
     .site-level-view .infographic-header h1 {font-size: 20px; padding-left: 50px; margin-top: 10px;}
     .site-level-view .infographic-header i:hover {border: transparent;}
     .site-level-view .infographic-header-container {margin-left: 10px; display: block;}
