@@ -843,33 +843,40 @@ var actdev = (function ($) {
 				download: true,
 				skipEmptyLines: true,
 				error: function (error, File) {
-					vex.dialog.alert ('Error: Could not load site metrics for ' + selectedRegion + ', so we have been unable to update the information panel.');
-					// Note that the 'complete' callback below will not be run, so the modesplit data will not then be loaded either
+					actdev.mergeInSiteModeSplitData ({}, selectedRegion);
 				},
 				complete: function (fields) {
 					
 					// Unpack the parsed data object
 					var inSiteMetrics = fields.data;
 					
-					// Merge in the mode_split objects
-					var siteModeSplit = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/mode-split.csv';
-					siteModeSplit = siteModeSplit.replace ('{selectedRegion}', selectedRegion);
-					Papa.parse (siteModeSplit, {
-						header: true,
-						download: true,
-						skipEmptyLines: true,
-						complete: function (fields) {
-							
-							// Unpack the parsed data object
-							_modeSplitCsvData = fields.data;
+					// Merge in mode-split data
+					actdev.mergeInSiteModeSplitData (inSiteMetrics, selectedRegion);
+				}
+			});
+		},
 
-							// Merge the mode-split data with the in-site-metrics and overwrite the class property
-							_regionData = {...inSiteMetrics, ..._modeSplitCsvData[0]}; // !FIXME this needs to use a different data source, not only 0-3 band
-							
-							// Populate the page with the fetched data
-							actdev.populateRegionData (selectedRegion);
-						}
-					});
+
+		// Merge inSiteMetrics with mode split data
+		mergeInSiteModeSplitData: function (inSiteMetrics, selectedRegion)
+		{
+			// Merge in the mode_split objects
+			var siteModeSplit = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{selectedRegion}/mode-split.csv';
+			siteModeSplit = siteModeSplit.replace ('{selectedRegion}', selectedRegion);
+			Papa.parse (siteModeSplit, {
+				header: true,
+				download: true,
+				skipEmptyLines: true,
+				complete: function (fields) {
+					
+					// Unpack the parsed data object
+					_modeSplitCsvData = fields.data;
+
+					// Merge the mode-split data with the in-site-metrics and overwrite the class property
+					_regionData = {...inSiteMetrics, ..._modeSplitCsvData[0]}; // !FIXME this needs to use a different data source, not only 0-3 band
+					
+					// Populate the page with the fetched data
+					actdev.populateRegionData (selectedRegion);
 				}
 			});
 		},
