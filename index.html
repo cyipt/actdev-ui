@@ -325,10 +325,11 @@
 			onClick: (event, item) => {
 				// Chart.js does not include a label click event, so we need to calculate it manually
 				// Get the y position of the click
-				var clickYPos = event.layerY;
+				var clickYPos = getOffset(event).y;
 
 				// Get a dictionary of the x,y positions of the chart labels
 				var labelPositions = _nationalSiteChart.scales['y-axis-0']['_labelItems']
+				
 				
 				// Find closest position from an array with all the y positions
 				var closestNumber = getClosestNumber (clickYPos, labelPositions.map (label => label.y))
@@ -343,6 +344,25 @@
 				window.location.href = '/' + siteCode + '/';
         	}
 		};
+	};
+
+	
+	// Function to return the offset of an event click
+	var getOffset = function (event) {
+		var el = event.target,
+			x = 0,
+			y = 0;
+
+		while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+			x += el.offsetLeft - el.scrollLeft;
+			y += el.offsetTop - el.scrollTop;
+			el = el.offsetParent;
+		}
+
+		x = event.clientX - x;
+		y = event.clientY - y;
+
+		return {x: x, y: y};
 	};
 
 
