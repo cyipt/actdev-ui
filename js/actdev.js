@@ -554,10 +554,6 @@ var actdev = (function ($) {
 		// Initialise general UI handlers
 		initUi: function ()
 		{
-			// Add listener for region selector
-			$('#selector ul li label').on ('click', function (e) {
-				$(e.target).closest ('li').toggleClass ('active');
-			});
 			
 			// Fetch and store all-sites.geojson
 			actdev.fetchAllSites ();
