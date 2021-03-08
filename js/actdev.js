@@ -873,8 +873,8 @@ var actdev = (function ($) {
 					// Unpack the parsed data object
 					_modeSplitCsvData = fields.data;
 
-					// Merge the mode-split data with the in-site-metrics and overwrite the class property
-					_regionData = {...inSiteMetrics, ..._modeSplitCsvData[0]}; // !FIXME this needs to use a different data source, not only 0-3 band
+					// Set the in site metrics 
+					_regionData = inSiteMetrics; // We can merge more data in here if we need
 					
 					// Populate the page with the fetched data
 					actdev.populateRegionData (selectedRegion);
