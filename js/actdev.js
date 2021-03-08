@@ -570,6 +570,12 @@ var actdev = (function ($) {
 			
 			// Listen to scenario being changed
 			actdev.listenForScenarioChange ();
+			
+			// Listen for basemap change
+			// !FIXME this is very hacky; see: https://github.com/cyipt/actdev-ui/issues/50#issuecomment-793052191
+			$('#styleswitcher ul li').on ('click', function () {
+				location.reload ();
+			});
 		},
 		
 		
