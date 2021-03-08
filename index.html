@@ -166,6 +166,7 @@
 				Papa.parse (nationalStatsGoActive, {
 					header: true,
 					download: true,
+					skipEmptyLines: true,
 					complete: function (fields) {
 
 						// Unpack the parsed data object
@@ -175,13 +176,11 @@
 						Papa.parse (allSitesCSVInfo, {
 							header: true,
 							download: true,
+							skipEmptyLines: true,
 							complete: function (fields) {
 
 								// Unpack the parsed data object
 								allSitesCsv = fields.data;
-
-								// Remove spurious last field 
-								allSitesCsv.pop();
 								
 								// Add the pretty name to the national data object for both scenarios
 								var currentSiteIndex = 0;
@@ -191,10 +190,6 @@
 									_nationalDataObjectGoActive[currentSiteIndex]['full_name'] = siteInfo.full_name;
 									currentSiteIndex += 1;
 								});
-
-								// Remove the spurious empty field
-								_nationalDataObject.pop ();
-								_nationalDataObjectGoActive.pop ();
 
 								// Add the bar chart
 								addBarChart ();
