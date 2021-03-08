@@ -562,7 +562,8 @@ var actdev = (function ($) {
 			// Fetch and store all-sites.geojson
 			actdev.fetchAllSites ();
 			
-			// Treat site data drop-downs change as implied enabling of layer
+			// Treat site data drop-downs change as implicit enabling of layer
+			// #!# Ideally this would use the native layerviewer formChangeImplicitCheckbox function, but that has a hard-coded parent DOM structure
 			$('#data select').on ('click', function (e) {
 				var parentDiv = $(e.target).parent ('div');
 				var layerId = parentDiv[0].id;
