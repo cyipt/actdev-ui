@@ -795,6 +795,7 @@ var actdev = (function ($) {
 		// Listen for A/B Street link click, and calculate the right map position/zoom level
 		listenForABStreet: function ()
 		{
+			// Generate the A/B Street link dynamically, so that the map position matches
 			$('#view-simulation').on ('click', function () {
 				
 				// Generate the URL
