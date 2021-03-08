@@ -1057,13 +1057,17 @@ var actdev = (function ($) {
 			// Create mini maps for each layer
 			var id;
 			var url;
+			var defaultType;
 			var regionWsen = regionBounds[selectedRegion];
 			var regionCentre = [ (regionWsen[1] + regionWsen[3])/2, (regionWsen[0] + regionWsen[2])/2 ];	// lat,lon centre
 			$.each (miniMaps, function (index, layerId) {
 				id = 'map_' + layerId;
 				url = _layerConfig[layerId].apiCall;
 				url = url.replace ('{site_name}', selectedRegion);
-				url = url.replace ('{%type}', 'fast');
+				if (url.indexOf ('{%type}') !== -1) {
+					defaultType = $('#data .selector li.' + layerId + ' select option[selected="selected"]')[0].value;
+					url = url.replace ('{%type}', defaultType);
+				}
 				actdev.miniMap (id, url, regionCentre, layerId);
 			});
 		},
