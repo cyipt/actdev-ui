@@ -1237,8 +1237,7 @@ var actdev = (function ($) {
 		generateBarChartDataObject: function (goActive = false)
 		{
 			var labels = _modeSplitCsvData.map ((distanceBand) => distanceBand.distance_band);
-			labels.pop ();	// Remove the spurious "" that Pappa Parse leaves
-			
+
 			var datasets;
 			if (goActive) {
 				datasets = [
