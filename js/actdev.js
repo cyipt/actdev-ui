@@ -1051,7 +1051,7 @@ var actdev = (function ($) {
 			
 			// Determine layers to get mini maps
 			var miniMaps = $('#data .selector li').map (function () {
-				return $(this).attr ('class');
+				return $(this).attr ('class').replace (' selected', '');	// #!# This should ideally be more defensive; if another class were present it would fail
 			});
 			
 			// Create mini maps for each layer
