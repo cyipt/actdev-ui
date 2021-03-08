@@ -199,6 +199,28 @@ var actdev = (function ($) {
 			fieldLabelsCsvField: 'names'
 		},
 		
+		insite: {
+			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/in-site-{%type}-rnet.geojson',
+			retrievalStrategy: 'none',
+			apiKey: false,
+			lineWidthField: 'walk',	// walk / cycle / drive
+			lineWidthStops: [
+				[999999, 9],
+				[500, 8],
+				[200, 7],
+				[100, 6],
+				[50, 5],
+				[10, 4],
+				[5, 3],
+				[3, 2],
+				[0, 1]
+			],
+			// legend: 'range',
+			name: 'In-site network',
+			description: 'Routes within the site, helping show the overall suitability of a site from a walking / cycling perspective',
+			fitInitial: true
+		},
+		
 		accessibility: {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/dartboard.geojson',
 			retrievalStrategy: 'none',
@@ -554,7 +576,6 @@ var actdev = (function ($) {
 		// Initialise general UI handlers
 		initUi: function ()
 		{
-			
 			// Fetch and store all-sites.geojson
 			actdev.fetchAllSites ();
 			
@@ -787,6 +808,7 @@ var actdev = (function ($) {
 
 
 		// Initialise the tooltips
+		// #!# These need to be moved into the HTML and not hard-coded here
 		initialiseTooltips: function ()
 		{
 			tippy('#desirelines-tooltip', {
@@ -795,6 +817,10 @@ var actdev = (function ($) {
 
 			tippy('#routenetwork-tooltip', {
 				content: "These represent the route network data along the desire lines (likely fast route)."
+			});
+
+			tippy ('#insite-tooltip', {
+				content: 'Routes within the site, helping show the overall suitability of a site from a walking / cycling perspective',
 			});
 
 			tippy ('.accessibility-tooltip', {
