@@ -1215,7 +1215,7 @@ var actdev = (function ($) {
 					}).animate({'opacity': 1}, 200);
 					
 					// Start building the descriptive blurb
-					var descriptionText = `This development in ${site.main_local_authority} will contain ` + parseInt (site.dwellings_when_complete).toLocaleString() + ` dwellings when complete.`;
+					var descriptionText = `This development in ${site.main_local_authority} will contain <strong>` + parseInt (site.dwellings_when_complete).toLocaleString() + `</strong> dwellings when complete.`;
 					
 					// Complete the blurb, based on completion status
 					var completionText = '';
@@ -1245,11 +1245,11 @@ var actdev = (function ($) {
 
 					// Add in the median commute !FIXME this should come from a centralised (merged) data object
 					var siteData = actdev.getSiteObjectFromAllSites (_currentRegion);
-					var medianCommuteText = ` This median commute distance is ${siteData.properties.median_commute_distance}km.`;
+					var medianCommuteText = ` This median commute distance is <strong>${siteData.properties.median_commute_distance}km</strong>.`;
 
 					// Add this to the HTML
 					$('.site-description').animate({'opacity': 0}, 300, function () {
-						$(this).text(descriptionText + completionText + medianCommuteText);
+						$(this).html(descriptionText + completionText + medianCommuteText);
 					}).animate({'opacity': 1}, 200);
 
 					// Change the planning URL or hide if N/A
