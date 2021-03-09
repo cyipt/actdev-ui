@@ -219,8 +219,8 @@ html, body, section {height: 100vh;}
 .national-level-zoom section.photos {height: auto; display: block; margin: 30px 10px 15px 20px;}
 .national-level-zoom section.photos img {display: inline-block; width: 110px; margin: 0 5px;}
 
-.national-level-zoom section.footer {margin-top: 30px;}
-.national-level-zoom section.footer img {height: 90px; margin-right: 25px;}
+.national-level-zoom section.footer {margin-top: 30px; height: 100px;}
+.national-level-zoom section.footer img {height: 60px; margin-right: 15px;}
 
 .national-level-zoom .graph-half h2 {color: orange; font-size: 30px; display: inline-block; padding: 10px 5px 5px 20px;}
 .national-level-zoom .graph-half .section-title {display:flex; flex-direction:row; align-items: center;}
