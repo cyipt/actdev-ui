@@ -8,7 +8,7 @@
 
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-title" content="ActDev" />
-
+	
 	<!-- Fontawesome icons -->
 	<script src="/js/lib/fontawesome/fontawesome-kit-7bd5544b77.js"></script>
 	
@@ -21,11 +21,11 @@
 <style>
 	/* Reset styles */
 	*:not(.carousel), *:before, *:after {margin: 0; padding: 0; box-sizing: border-box; max-width: 100%;}
-	a {text-decoration: none;}
+	a {text-decoration: none; color: #ccc; border-bottom: 1px solid gray;}
 	ul {list-style: none;}
 
 	/* Typography */
-	body {background-color: #434343; font-family: 'Source Sans Pro', sans-serif;}
+	body {background-color: #434343; font-family: 'Arimo', sans-serif;}
 	h1 {color: #f09135; font-size: 60px;}
 	h2 {color: #9babc3; font-size: 30px;}
 	.green {color: #53e21f;}
@@ -40,13 +40,14 @@
 	.about {background-color: #434343; color: white; flex: 2; padding: 1rem; overflow-y: scroll;}
 	.photos {background-color: #434343; flex: 1;}
 
-	i.site-back-arrow {position: absolute; font-size: 30px; margin-top: 30px; margin-left: 20px; padding: 2.5px 10px; color: orange; border-color: orange; border: 0.5px solid; border-radius: 30px; transition: 0.3s;}
+	i.site-back-arrow {position: absolute; font-size: 30px; margin-top: 15px; padding: 2.5px 10px; color: orange; border-color: orange; border: 0.5px solid; border-radius: 30px; transition: 0.3s;}
 	i.site-back-arrow:hover {transform: scale(1.2);}
+
 	.about h1, .about h2 {margin-left: 80px;}
 	
 	#content {margin-top: 25px;}
-	#content h1 {color: white; font-size: 28px; margin: 20px 0 10px;}
-	#content h2 {color: white; font-size: 25px;}
+	#content h1 {color: white; font-size: 28px; margin: 30px 0 10px;}
+	#content h2 {color: white; font-size: 25px; margin: 20px 0 7.5px 0;}
 	#content p {padding: 6px 0;}
 
 	.photos {padding: 30px 0;}
@@ -59,8 +60,8 @@
 <body>
 	<main>
 		<div class="app-container">
-			<a href="/"><i class="fa fa-long-arrow-alt-left site-back-arrow"></i></a>
 			<section class="about">
+				<a href="/"><i class="fa fa-long-arrow-alt-left site-back-arrow"></i></a>
 				<h1>ActDev</h1>
 				<h2>Active travel in new developments</h2>
 				<section id="content">
@@ -93,7 +94,7 @@
 <!-- Render the MD -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-    const mdFileLocation = "./about.md";
+    const mdFileLocation = "https://raw.githubusercontent.com/cyipt/actdev/main/code/tests/manual.md";
 	
 	fetch (mdFileLocation)
    		.then (r => r.text())

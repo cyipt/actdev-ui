@@ -24,7 +24,7 @@ if [ -f "${downloadFile}" ]; then
 fi
 
 # Get the data
-rm abst_actdev-*.zip
+rm -f abst_actdev-*.zip
 wget -O $downloadFile "https://github.com/cyipt/actdev/releases/download/${version}/abst_actdev.zip"
 
 # Unzip the new version
