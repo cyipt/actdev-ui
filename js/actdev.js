@@ -502,9 +502,9 @@ var actdev = (function ($) {
 			decimal_points: 0,
 			go_active: 'percent_commute_active_scenario',
 			colour_ramp: [
-				[30, '#90c858'],
-				[20, '#f8d277'],
-				[0, '#ec695c']
+				[40, '#54ad32'],
+				[25, '#f8d277'],
+				[0, '#54ad32']
 			]
 		}, 
 		{
@@ -539,9 +539,9 @@ var actdev = (function ($) {
 			//unit: false
 			go_active: 'percent_commute_walk_scenario',
 			colour_ramp: [
-				[15, '#ec695c'],
-				[10, '#f8d277'],
-				[0, '#54ad32']
+				[25, '#54ad32'], // green
+				[15, '#f8d277'], 
+				[0, '#ec695c']
 			],
 			//post_processing: function (number) {return (number / 1000);}
 		}
