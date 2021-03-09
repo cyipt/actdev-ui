@@ -1245,7 +1245,7 @@ var actdev = (function ($) {
 
 					// Add in the median commute !FIXME this should come from a centralised (merged) data object
 					var siteData = actdev.getSiteObjectFromAllSites (_currentRegion);
-					var medianCommuteText = `This median commute distance is ${siteData.properties.median_commute_distance}km.`;
+					var medianCommuteText = ` This median commute distance is ${siteData.properties.median_commute_distance}km.`;
 
 					// Add this to the HTML
 					$('.site-description').animate({'opacity': 0}, 300, function () {
