@@ -497,12 +497,12 @@ var actdev = (function ($) {
 	var _dataMetricsToShow = [
 		{
 			name: 'percent_commute_active_base',
-			full_name: 'active',
+			full_name: 'active commuters',
 			percentage: true,
 			decimal_points: 0,
 			go_active: 'percent_commute_active_scenario',
 			colour_ramp: [
-				[35, '#90c858'],
+				[30, '#90c858'],
 				[20, '#f8d277'],
 				[0, '#ec695c']
 			]
@@ -514,7 +514,7 @@ var actdev = (function ($) {
 			decimal_points: 0,
 			go_active: 'percent_commute_drive_scenario',
 			colour_ramp: [
-				[30, '#ec695c'],
+				[50, '#ec695c'],
 				[20, '#f8d277'],
 				[0, '#54ad32']
 			]
@@ -526,21 +526,21 @@ var actdev = (function ($) {
 			decimal_points: 0,
 			go_active: 'percent_commute_cycle_scenario',
 			colour_ramp: [
-				[35, '#54ad32'],
-				[20, '#f8d277'],
+				[15, '#54ad32'],
+				[10, '#f8d277'],
 				[0, '#ec695c']
 			]
 		}, 
 		{
-			name: 'median_commute_distance',
-			full_name: 'median commute',
-			percentage: false,
-			decimal_points: 1,
-			unit: 'km',
-			go_active: false,
+			name: 'percent_commute_walk_base',
+			full_name: 'walking',
+			percentage: true,
+			decimal_points: 0,
+			//unit: false
+			go_active: 'percent_commute_walk_scenario',
 			colour_ramp: [
-				[2, '#ec695c'],
-				[1.6, '#f8d277'],
+				[15, '#ec695c'],
+				[10, '#f8d277'],
 				[0, '#54ad32']
 			],
 			//post_processing: function (number) {return (number / 1000);}
@@ -1243,9 +1243,13 @@ var actdev = (function ($) {
 							break;
 					}
 
+					// Add in the median commute !FIXME this should come from a centralised (merged) data object
+					var siteData = actdev.getSiteObjectFromAllSites (_currentRegion);
+					var medianCommuteText = `This median commute distance is ${siteData.properties.median_commute_distance}km.`;
+
 					// Add this to the HTML
 					$('.site-description').animate({'opacity': 0}, 300, function () {
-						$(this).text(descriptionText + completionText);
+						$(this).text(descriptionText + completionText + medianCommuteText);
 					}).animate({'opacity': 1}, 200);
 
 					// Change the planning URL or hide if N/A
