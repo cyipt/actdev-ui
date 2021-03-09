@@ -1352,12 +1352,22 @@ var actdev = (function ($) {
 						stacked: true,
 						ticks: {
 							fontColor: "#ffffff"
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'count',
+							fontColor: '#929292'
 						}
 					}],
 					yAxes: [{
 						stacked: true,
 						ticks: {
 							fontColor: "#ffffff"
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'km band',
+							fontColor: '#929292'
 						}
 					}]
 				},
