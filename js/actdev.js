@@ -504,7 +504,7 @@ var actdev = (function ($) {
 			colour_ramp: [
 				[40, '#54ad32'],
 				[25, '#f8d277'],
-				[0, '#54ad32']
+				[0, '#ec695c']
 			]
 		}, 
 		{
