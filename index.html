@@ -94,7 +94,7 @@
 				</div>
 				<input type="text" id="site-search" name="site-search" placeholder="Search for developments..." />
 				<div class="graph-container">
-					<canvas id="nationalDataChart" width="700" height="600"></canvas>
+					<canvas id="nationalDataChart" width="700" ></canvas>
 				</div>
 			</div>
 		</section>
@@ -216,6 +216,10 @@
 	// Add the bar chart to the DOM
 	var addBarChart = function () 
 	{
+		// Set the chart to be 100vh
+		var chart = document.getElementById('nationalDataChart');
+		chart.height = window.innerHeight/2;
+		
 		var goActiveBool = (getCurrentScenario() == 'goactive');
 		insertChartIntoCanvas(generateBarChartDataObject (goActiveBool), generateBarChartOptionsObject(
 			'Site accessibility chart'));
