@@ -421,7 +421,7 @@ var actdev = (function ($) {
 			],
 			legend: 'range',
 			name: 'Journey time statistics',
-			description: 'Journey times from the site, in minutes',
+			description: 'Average minimum travel time to centres of employment by cycling, in minutes',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/jts-lsoas-data-dictionary.csv',
 			fieldLabelsCsvField: 'names',
 			fitInitial: true
