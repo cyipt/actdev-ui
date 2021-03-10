@@ -170,7 +170,9 @@ var actdev = (function ($) {
 					[0, 1]
 				]
 			},
-			legend: 'range',
+			legend: {
+				'walk,quiet,balanced,fast': 'range'
+			},
 			name: 'Route network',
 			description: 'Routes from the site, segmented by section, showing the number of people',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/rnet-cycle-data-dictionary.csv',
@@ -232,7 +234,9 @@ var actdev = (function ($) {
 					[0, 1]
 				]
 			},
-			legend: 'range',
+			legend: {
+				'walk,quiet,balanced,fast': 'range'
+			},
 			name: 'Routes',
 			description: 'Routes from the site, showing the number of people',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/routes-cycle-data-dictionary.csv',
@@ -325,7 +329,9 @@ var actdev = (function ($) {
 					[0, 1]
 				],
 			},
-			// legend: 'range',
+			legend: {
+				'walk,cycle,drive': 'range'
+			},
 			name: 'In-site network',
 			description: 'Routes within the site, helping show the overall suitability of a site from a walking / cycling perspective',
 			fitInitial: true
