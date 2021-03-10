@@ -334,7 +334,8 @@ var actdev = (function ($) {
 			},
 			name: 'In-site network',
 			description: 'Routes within the site, indicating overall walkability / cycleability, showing the number of people',
-			fitInitial: true
+			fitInitial: true,
+			fitInitialPadding: 50
 		},
 		
 		accessibility: {
