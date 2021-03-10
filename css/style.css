@@ -56,6 +56,7 @@ html, body, section {height: 100vh;}
 .site-level-view .stat h5 {visibility: hidden; justify-self: end;}
 .site-level-view .headline-stats .secondary-stats h5 {margin-bottom: -8px;}
 .site-level-view .headline-stats .secondary-stats i {font-size: 10px; padding-right: 2px;}
+.tippy-content {padding: 8px 12px; border-radius: 5px; max-width: 200px;}
 
 /* Site info */
 .site-level-view .site-info-sections {margin: 8px 10px;}
