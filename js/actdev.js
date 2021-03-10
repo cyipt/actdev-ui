@@ -119,26 +119,57 @@ var actdev = (function ($) {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/rnet-{%type}.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
-			lineColourField: 'busyness',
-			lineColourStops: [
-				[5, '#eb4e3c'],
-				[4, '#d37077'],
-				[3, '#e3b5bf'],
-				[2, '#8abedf'],
-				[1, '#56ade2'],
-			],
-			lineWidthField: 'cycle_base',
-			lineWidthStops: [
-				[999999, 9],
-				[500, 8],
-				[200, 7],
-				[100, 6],
-				[50, 5],
-				[10, 4],
-				[5, 3],
-				[3, 2],
-				[0, 1]
-			],
+			sublayerParameter: 'type',
+			lineColourField: {
+				walk: 'walk_base',
+				quiet: 'busyness',
+				balanced: 'busyness',
+				fast: 'busyness',
+			},
+			lineColourStops: {
+				walk: [
+					[300, '#eb4e3c'],
+					[200, '#d37077'],
+					[100, '#e3b5bf'],
+					[20, '#8abedf'],
+					[1, '#56ade2'],
+				],
+				'quiet,balanced,fast': [
+					[5, '#eb4e3c'],
+					[4, '#d37077'],
+					[3, '#e3b5bf'],
+					[2, '#8abedf'],
+					[1, '#56ade2'],
+				]
+			},
+			lineWidthField: {
+				walk: 'walk_base',
+				quiet: 'cycle_base',
+				balanced: 'cycle_base',
+				fast: 'cycle_base',
+			},
+			lineWidthStops: {
+				walk: [
+					[999999, 7],
+					[500, 6],
+					[200, 5],
+					[100, 4],
+					[50, 3],
+					[10, 2],
+					[0, 1]
+				],
+				'quiet,balanced,fast': [
+					[999999, 9],
+					[500, 8],
+					[200, 7],
+					[100, 6],
+					[50, 5],
+					[10, 4],
+					[5, 3],
+					[3, 2],
+					[0, 1]
+				]
+			},
 			legend: 'range',
 			name: 'Route network',
 			description: 'Routes from the site, segmented by section, showing the number of people',
@@ -159,11 +190,10 @@ var actdev = (function ($) {
 			},
 			lineColourStops: {
 				walk: [
-					[10, 'black'],
-					[5, '#eb4e3c'],
-					[4, '#d37077'],
-					[3, '#e3b5bf'],
-					[2, '#8abedf'],
+					[300, '#eb4e3c'],
+					[200, '#d37077'],
+					[100, '#e3b5bf'],
+					[20, '#8abedf'],
 					[1, '#56ade2'],
 				],
 				'quiet,balanced,fast': [
@@ -182,14 +212,12 @@ var actdev = (function ($) {
 			},
 			lineWidthStops: {
 				walk: [
-					[999999, 9],
-					[500, 8],
-					[200, 7],
-					[100, 6],
-					[50, 5],
-					[10, 4],
-					[5, 3],
-					[3, 2],
+					[999999, 7],
+					[500, 6],
+					[200, 5],
+					[100, 4],
+					[50, 3],
+					[10, 2],
 					[0, 1]
 				],
 				'quiet,balanced,fast': [
@@ -237,18 +265,66 @@ var actdev = (function ($) {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/in-site-{%type}-rnet.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
-			lineWidthField: 'walk',	// walk / cycle / drive
-			lineWidthStops: [
-				[999999, 9],
-				[500, 8],
-				[200, 7],
-				[100, 6],
-				[50, 5],
-				[10, 4],
-				[5, 3],
-				[3, 2],
-				[0, 1]
-			],
+			sublayerParameter: 'type',
+			lineColourField: {
+				walk: 'walk',
+				cycle: 'cycle',
+				drive: 'drive',
+			},
+			lineColourStops: {
+				walk: [
+					[30, '#eb4e3c'],
+					[20, '#d37077'],
+					[10, '#e3b5bf'],
+					[3, '#8abedf'],
+					[1, '#56ade2']
+				],
+				cycle: [
+					[15, '#eb4e3c'],
+					[10, '#d37077'],
+					[6, '#e3b5bf'],
+					[2, '#8abedf'],
+					[1, '#56ade2']
+				],
+				drive: [
+					[5, '#eb4e3c'],
+					[4, '#d37077'],
+					[3, '#e3b5bf'],
+					[2, '#8abedf'],
+					[1, '#56ade2']
+				]
+			},
+			lineWidthField: {
+				walk: 'walk',
+				cycle: 'cycle',
+				drive: 'drive'
+			},
+			lineWidthStops: {
+				walk: [
+					[10, 6],
+					[8, 5],
+					[6, 4],
+					[4, 3],
+					[2, 2],
+					[0, 1]
+				],
+				cycle: [
+					[10, 6],
+					[8, 5],
+					[6, 4],
+					[4, 3],
+					[2, 2],
+					[0, 1]
+				],
+				drive: [
+					[10, 6],
+					[8, 5],
+					[6, 4],
+					[4, 3],
+					[2, 2],
+					[0, 1]
+				],
+			},
 			// legend: 'range',
 			name: 'In-site network',
 			description: 'Routes within the site, helping show the overall suitability of a site from a walking / cycling perspective',
