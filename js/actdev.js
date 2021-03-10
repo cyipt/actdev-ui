@@ -979,11 +979,13 @@ var actdev = (function ($) {
 			var tooltip;
 			var tooltipText;
 			var tooltipDiv;
-			_dataMetricsToShow.map (metric => {
+			var nextIndex;
+			var valueString;
+			_dataMetricsToShow.map ((metric) => {
 				// Write a tooltip div and associate it with the stat
 				tooltipDiv = '<div class="stat-tooltip" id="' + metric.name + '_tooltip"></div>';
 				$('.' + metric.name).append (tooltipDiv);
-
+				
 				// ID the tooltip
 				tooltip = document.getElementById (metric.name + '_tooltip');
 				
@@ -992,12 +994,14 @@ var actdev = (function ($) {
 				{	
 					// Generate the tooltip HTML
 					tooltipText = '<p>Ranked active travel performance for ' + metric.full_name + '.<p>';
-					metric.colour_ramp.map (rampArray => {
-						tooltipText += '<p style="color: ' + rampArray[1] + '"><i class="fa fa-square"></i>: ' + rampArray[0] + '%</p>';
+					$.each (metric.colour_ramp, function (index, rampArray) {
+						nextIndex = index - 1;
+						valueString = rampArray[0] + (metric.colour_ramp.hasOwnProperty (nextIndex) ? '-' + metric.colour_ramp[nextIndex][0] + '%' : '%+');
+						tooltipText += '<p style="color: ' + rampArray[1] + '"><i class="fa fa-square"></i>: ' + valueString + '</p>';
 					});
 					
 					//'<p style="color: ' + rampArray[1] + '">▣</p>';
-					tooltip.innerHTML = tooltipText
+					tooltip.innerHTML = tooltipText;
 
 					// Activate the tooltip
 					tippy('.' + metric.name, {
