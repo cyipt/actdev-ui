@@ -914,7 +914,7 @@ var actdev = (function ($) {
 					// Generate the tooltip HTML
 					tooltipText = '<p>Ranked active travel performance for ' + metric.full_name + '.<p>';
 					metric.colour_ramp.map (rampArray => {
-						tooltipText += '<p style="color: ' + rampArray[1] + '">▣: ' + rampArray[0] + '%</p>';
+						tooltipText += '<p style="color: ' + rampArray[1] + '"><i class="fa fa-square"></i>: ' + rampArray[0] + '%</p>';
 					});
 					
 					//'<p style="color: ' + rampArray[1] + '">▣</p>';
