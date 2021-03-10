@@ -333,7 +333,7 @@ var actdev = (function ($) {
 				'walk,cycle,drive': 'range'
 			},
 			name: 'In-site network',
-			description: 'Routes within the site, helping show the overall suitability of a site from a walking / cycling perspective',
+			description: 'Routes within the site, indicating overall walkability / cycleability, showing the number of people',
 			fitInitial: true
 		},
 		
