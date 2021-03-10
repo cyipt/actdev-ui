@@ -1425,7 +1425,7 @@ var actdev = (function ($) {
 					var insiteCircuityText = '';
 					if (siteData.properties.hasOwnProperty ('in_site_cycle_circuity')) {
 						if (siteData.properties['in_site_cycle_circuity'] !== null) {
-							insiteCircuityText = `<p>In-site circuity is <strong>${siteData.properties['in_site_cycle_circuity']}</strong>.</p>`;
+							insiteCircuityText = `<p><a href="/manual/#circuity" title="Link to manual page about circuity">In-site circuity</a> is <strong>${siteData.properties['in_site_cycle_circuity']}</strong>.</p>`;
 						}
 					}
 
