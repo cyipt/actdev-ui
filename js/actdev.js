@@ -150,26 +150,60 @@ var actdev = (function ($) {
 			apiCall: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/{site_name}/routes-{%type}.geojson',
 			retrievalStrategy: 'none',
 			apiKey: false,
-			lineColourField: 'mean_busyness',
-			lineColourStops: [
-				[5, '#eb4e3c'],
-				[4, '#d37077'],
-				[3, '#e3b5bf'],
-				[2, '#8abedf'],
-				[1, '#56ade2'],
-			],
-			lineWidthField: 'cycle_base',
-			lineWidthStops: [
-				[999999, 9],
-				[500, 8],
-				[200, 7],
-				[100, 6],
-				[50, 5],
-				[10, 4],
-				[5, 3],
-				[3, 2],
-				[0, 1]
-			],
+			sublayerParameter: 'type',
+			lineColourField: {
+				walk: 'walk_base',
+				quiet: 'mean_busyness',
+				balanced: 'mean_busyness',
+				fast: 'mean_busyness',
+			},
+			lineColourStops: {
+				walk: [
+					[10, 'black'],
+					[5, '#eb4e3c'],
+					[4, '#d37077'],
+					[3, '#e3b5bf'],
+					[2, '#8abedf'],
+					[1, '#56ade2'],
+				],
+				'quiet,balanced,fast': [
+					[5, '#eb4e3c'],
+					[4, '#d37077'],
+					[3, '#e3b5bf'],
+					[2, '#8abedf'],
+					[1, '#56ade2'],
+				]
+			},
+			lineWidthField: {
+				walk: 'walk_base',
+				quiet: 'cycle_base',
+				balanced: 'cycle_base',
+				fast: 'cycle_base',
+			},
+			lineWidthStops: {
+				walk: [
+					[999999, 9],
+					[500, 8],
+					[200, 7],
+					[100, 6],
+					[50, 5],
+					[10, 4],
+					[5, 3],
+					[3, 2],
+					[0, 1]
+				],
+				'quiet,balanced,fast': [
+					[999999, 9],
+					[500, 8],
+					[200, 7],
+					[100, 6],
+					[50, 5],
+					[10, 4],
+					[5, 3],
+					[3, 2],
+					[0, 1]
+				]
+			},
 			legend: 'range',
 			name: 'Routes',
 			description: 'Routes from the site, showing the number of people',
