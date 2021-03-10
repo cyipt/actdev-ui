@@ -338,11 +338,11 @@ var actdev = (function ($) {
 			apiKey: false,
 			polygonColourField: 'busyness_cycle_base',
 			polygonColourStops: [
-				[4, '#2fd987'],
-				[3, '#aec993'],
-				[2, '#fc7753'],
-				[1, '#9d0208'],
-				[0, '#6a040f']
+				[8, '#6a040f'],
+				[6, '#9d0208'],
+				[4, '#fc7753'],
+				[2, '#aec993'],
+				[0, '#2fd987']
 			],
 			legend: 'range',
 			name: 'Accessibility',
