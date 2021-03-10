@@ -174,7 +174,7 @@ var actdev = (function ($) {
 				'walk,quiet,balanced,fast': 'range'
 			},
 			name: 'Route network',
-			description: 'Routes from the site, segmented by section, showing the busyness rating',
+			description: 'Routes from the site, segmented by section, showing the busyness rating. (Thicker lines indicate more people.)',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/rnet-cycle-data-dictionary.csv',
 			fieldLabelsCsvField: 'names'
 		},
@@ -238,7 +238,7 @@ var actdev = (function ($) {
 				'walk,quiet,balanced,fast': 'range'
 			},
 			name: 'Routes',
-			description: 'Routes from the site, showing the busyness rating',
+			description: 'Routes from the site, showing the busyness rating. (Thicker lines indicate more people.)',
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/routes-cycle-data-dictionary.csv',
 			fieldLabelsCsvField: 'names'
 		},
