@@ -347,7 +347,9 @@ var actdev = (function ($) {
 			name: 'Accessibility',
 			description: 'Cycleability / walkability of the surrounding area',
 			fillOpacity: 0.6,
-			fitInitial: true
+			fitInitial: true,
+			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/dartboard-data-dictionary.csv',
+			fieldLabelsCsvField: 'names'
 		},
 		
 		studyarea: {
