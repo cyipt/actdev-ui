@@ -27,6 +27,8 @@ html, body, section {height: 100vh;}
 .site-level-view .infographic-header-left {flex: 1.5;}
 .site-level-view .infographic-header-right {flex: 1; margin-right: 10px;}
 .site-level-view .infographic-header p.site-description {padding: 10px 30px 15px 0; min-width: 250px; font-size: 15px;}
+.site-level-view .infographic-header p.site-text-stats {margin-bottom: 7.5px;}
+.site-level-view .infographic-header hr {margin: 2px 0;}
 .site-level-view .infographic-header ul.external-links {margin-left: 61px; font-size: 16px;}
 .site-level-view .infographic-header ul.external-links li {display: inline-block;}
 .site-level-view .infographic-header ul.external-links li img {width: 20px; margin: 2px 0 0 5px;}

@@ -947,7 +947,7 @@ var actdev = (function ($) {
 
 			// Merge in the region specific data to the properties
 			var allData = {...siteObject.properties, ..._regionData};
-			
+
 			// Loop through the metrics to show
 			_dataMetricsToShow.map ((metric) => {
 				if (allData.hasOwnProperty (metric.name)) {
@@ -1243,14 +1243,28 @@ var actdev = (function ($) {
 							break;
 					}
 
-					// Add in the median commute !FIXME this should come from a centralised (merged) data object
-					var siteData = actdev.getSiteObjectFromAllSites (_currentRegion);
-					var medianCommuteText = ` This median commute distance is <strong>${siteData.properties.median_commute_distance}km</strong>.`;
-
 					// Add this to the HTML
 					$('.site-description').animate({'opacity': 0}, 300, function () {
-						$(this).html(descriptionText + completionText + medianCommuteText);
+						$(this).html(descriptionText + completionText);
 					}).animate({'opacity': 1}, 200);
+
+					// Add in the other site text stats: median commute !FIXME this should come from a centralised (merged) data object
+					var siteData = actdev.getSiteObjectFromAllSites (_currentRegion);
+					var medianCommuteText = `The median commute distance is <strong>${siteData.properties.median_commute_distance}km</strong>.`;
+
+					// Add in the in-site circuity (if present)
+					var insiteCircuityText = '';
+					if (siteData.properties.hasOwnProperty ('in_site_cycle_circuity')) {
+						if (siteData.properties['in_site_cycle_circuity'] !== null) {
+							insiteCircuityText = `<p>In-site circuity is <strong>${siteData.properties['in_site_cycle_circuity']}</strong>.</p>`;
+						}
+					}
+
+					// Add this to the HTML
+					$('.site-text-stats').animate({'opacity': 0}, 300, function () {
+						$(this).html(medianCommuteText + insiteCircuityText);
+					}).animate({'opacity': 1}, 200);
+
 
 					// Change the planning URL or hide if N/A
 					if (site.planning_url != 'NA') {
