@@ -6,10 +6,10 @@ ul {list-style: none;}
 /* Typography */
 body, input, textarea, select, option {font-family: 'Arimo', sans-serif;}
 h1 {color: white;}
-.green {color: #53e21f;}
+.green {color: #54ad32;}
 .blue {color: #4aa59d;}
-.red {color: #dc3a26;}
-.yellow {color: #f0bb40;}
+.red {color: #ec695c;}
+.yellow {color: #f8d277;}
 
 /* Main container */
 html, body, section {height: 100vh;}
@@ -39,6 +39,7 @@ html, body, section {height: 100vh;}
 .site-level-view .headline-stats {padding: 15px 0 0 64px; display: block;}
 .site-level-view .headline-stats {display: inline-block; }
 .site-level-view .headline-stats .stat {display: inline-block; margin-right: 10px;}
+.site-level-view .headline-stats .stat-tooltip {display: none;}
 .site-level-view .headline-stats .stat-flex-wrapper {display: flex;}
 .site-level-view .headline-stats .stat-number {flex: 30%; padding-right: 3px;}
 .site-level-view .headline-stats .stat-description {flex: 70%;}

@@ -865,7 +865,7 @@ var actdev = (function ($) {
 		initialiseTooltips: function ()
 		{
 			tippy('#desirelines-tooltip', {
-				content: "View desire lines that show the relative amount of travel from the site to work, retail and F&B sites outside of the perimeter"
+				content: "View desire lines that show the relative amount of travel from the site to work, retail and F&B sites outside of the perimeter."
 			});
 
 			tippy('#routenetwork-tooltip', {
@@ -887,6 +887,46 @@ var actdev = (function ($) {
 			tippy('#accessibility-tooltip', {
 				content: 'This graph displays the mode-split transport data of the site. The data is separated into distance bands, and stacked by mode.'
 			});
+
+			// Stat tooltips
+			actdev.generateStatTooltips ();
+		},
+
+		
+		// Programatically generates headline stat tooltip legends
+		generateStatTooltips: function ()
+		{
+			// For each data matric, fill in the HTML with the tooltip
+			var tooltip;
+			var tooltipText;
+			var tooltipDiv;
+			_dataMetricsToShow.map (metric => {
+				// Write a tooltip div and associate it with the stat
+				tooltipDiv = '<div class="stat-tooltip" id="' + metric.name + '_tooltip"></div>';
+				$('.' + metric.name).append (tooltipDiv);
+
+				// ID the tooltip
+				tooltip = document.getElementById (metric.name + '_tooltip');
+				
+				// If we find an element that matches:
+				if (tooltip !== null) 
+				{	
+					// Generate the tooltip HTML
+					tooltipText = '<p>Ranked active travel performance.<p>';
+					metric.colour_ramp.map (rampArray => {
+						tooltipText += '<p style="color: ' + rampArray[1] + '">▣: ' + rampArray[0] + '%</p>';
+					});
+					
+					//'<p style="color: ' + rampArray[1] + '">▣</p>';
+					tooltip.innerHTML = tooltipText
+
+					// Activate the tooltip
+					tippy('.' + metric.name, {
+						content: tooltip.innerHTML,
+						allowHTML: true,
+					});
+				}
+			})
 		},
 
 
