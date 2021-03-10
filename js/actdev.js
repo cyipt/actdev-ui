@@ -121,18 +121,14 @@ var actdev = (function ($) {
 			apiKey: false,
 			sublayerParameter: 'type',
 			lineColourField: {
-				walk: 'walk_base',
+				walk: 'walk_base',		// Could be any numeric field - we are creating only dark lines as no busyness, for consistency
 				quiet: 'busyness',
 				balanced: 'busyness',
 				fast: 'busyness',
 			},
 			lineColourStops: {
 				walk: [
-					[300, '#eb4e3c'],
-					[200, '#d37077'],
-					[100, '#e3b5bf'],
-					[20, '#8abedf'],
-					[1, '#56ade2'],
+					[999999, '#444']
 				],
 				'quiet,balanced,fast': [
 					[5, '#eb4e3c'],
@@ -171,7 +167,8 @@ var actdev = (function ($) {
 				]
 			},
 			legend: {
-				'walk,quiet,balanced,fast': 'range'
+				walk: false,
+				'quiet,balanced,fast': 'range'
 			},
 			name: 'Route network',
 			description: 'Routes from the site, segmented by section, showing the busyness rating. (Thicker lines indicate more people.)',
@@ -185,18 +182,14 @@ var actdev = (function ($) {
 			apiKey: false,
 			sublayerParameter: 'type',
 			lineColourField: {
-				walk: 'walk_base',
+				walk: 'walk_base',		// Could be any numeric field - we are creating only dark lines as no busyness, for consistency
 				quiet: 'mean_busyness',
 				balanced: 'mean_busyness',
 				fast: 'mean_busyness',
 			},
 			lineColourStops: {
 				walk: [
-					[300, '#eb4e3c'],
-					[200, '#d37077'],
-					[100, '#e3b5bf'],
-					[20, '#8abedf'],
-					[1, '#56ade2'],
+					[999999, '#444']
 				],
 				'quiet,balanced,fast': [
 					[5, '#eb4e3c'],
@@ -235,7 +228,8 @@ var actdev = (function ($) {
 				]
 			},
 			legend: {
-				'walk,quiet,balanced,fast': 'range'
+				walk: false,
+				'quiet,balanced,fast': 'range'
 			},
 			name: 'Routes',
 			description: 'Routes from the site, showing the busyness rating. (Thicker lines indicate more people.)',
