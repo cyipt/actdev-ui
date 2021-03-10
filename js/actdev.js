@@ -630,6 +630,18 @@ var actdev = (function ($) {
 				}
 			});
 			
+			// Ugly workaround to switch checkbox off-then-on when changing sublayer type, otherwise the cycle styling sometimes shows the walk styling
+			// #!# This problem is almost certainly related to the (needing to be fixed anyway) error "Expected value to be of type number, but found null instead" which was not resolved in https://github.com/cyclestreets/Mapboxgljs.LayerViewer/commit/6f12d5af8ca77216d5c955ed71d777030056327e
+			$('#data select').on ('change', function (e) {
+				var parentDiv = $(e.target).parent ('div');
+				var layerId = parentDiv[0].id;
+				var checkboxId = 'show_' + layerId;
+				if ($('#' + checkboxId).is (':checked')) {
+					$('#' + checkboxId).click ();
+					$('#' + checkboxId).click ();
+				}
+			});
+			
 			// Segmented control
 			actdev.segmentedControl ();
 		},
