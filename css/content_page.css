@@ -1,9 +1,4 @@
 
-/* Reset styles */
-*:not(.carousel), *:before, *:after {margin: 0; padding: 0; box-sizing: border-box; max-width: 100%;}
-a {text-decoration: none;}
-ul {list-style: none;}
-
 /* Typography */
 body {background-color: #434343; font-family: 'Source Sans Pro', sans-serif;}
 h1 {color: #f09135; font-size: 30px;}
@@ -22,7 +17,7 @@ i.site-back-arrow:hover {transform: scale(1.2);}
 #content {margin-top: 25px;  text-align: justify; text-justify: inter-word;}
 #content h1 {color: white; font-size: 22px; margin: 20px 0 10px;}
 #content h2, #content h3 {color: white; font-size: 22px; margin: 20px 0 10px;}
-#content p {padding: 6px 0;}
+#content p, #content li {line-height: 1.45em; padding: 6px 0; font-size: 17px}
 #content a {color: orange;}
 
 .photos {padding: 30px 0;}
@@ -40,7 +35,7 @@ i.site-back-arrow:hover {transform: scale(1.2);}
 	i.site-back-arrow {font-size: 20px; margin-top: 10px; margin-left: 10px;}
 	.about h1 {margin-top: 40px; font-size: 25px; margin-left: 0;}
 	.about h2 {font-size: 22px; margin-left: 0;}
-	#content p {font-size: 14px;}
+	#content p, #content li {font-size: 14px;}
 	.about {display: block;}
 	.footer img {height: 35px; margin-right: 10px;}
 }
