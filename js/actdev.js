@@ -47,15 +47,13 @@ var actdev = (function ($) {
 		regionsFile: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.geojson',
 		regionsField: 'site_name',
 		regionsNameField: 'full_name',
+		regionsPopupFull: true,
 		regionsSubstitutionToken: '{site_name}',
 		regionSwitcherNullText: 'Go to development',
 		regionSwitcherCallback: function (selectedRegion) {actdev.fetchRegionData (selectedRegion);}, // This is called when a region is switched, including startup
 		regionSwitcherDefaultRegion: 'great-kneighton', // Default region to load if no region saved in cookie
 		regionSwitcherMaxZoom: 12,
 		regionSwitcherPermalinks: true,
-		regionsPopupCallback: function (regionName) {
-			return '<a href="/' + regionName + '/">' + regionName + '</a>';
-		}, // Generate a custom popup HTML for regions
 		
 		// Initial view of all regions; will use regionsFile
 		initialRegionsView: true,
