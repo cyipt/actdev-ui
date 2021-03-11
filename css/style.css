@@ -242,8 +242,8 @@ body {background-color: #434343;}
 @media (max-width: 800px) {
     .national-level-zoom {display: block;}
     .national-level-zoom .site-title {font-size: 30px;}
-    .national-level-zoom .text-section {display: block; height: 40vh; padding: 0.5rem; overflow-y: scroll;}
-    .national-level-zoom .graph-half {display: block; height: 60vh; overflow-y: scroll;}
+    .national-level-zoom .text-section {display: block; height: 47vh; padding: 0.5rem; overflow-y: scroll;}
+    .national-level-zoom .graph-half {display: block; height: 53vh; overflow-y: scroll; padding-top: 2px;}
     .national-level-zoom .ios-segmented-control {margin: 10px 50px}
     .national-level-zoom .graph-half .section-title h2 {font-size: 25px;}
     .national-level-zoom .graph-half input {width: 78%;}

@@ -331,7 +331,12 @@
 				yAxes: [{
 					stacked: true,
 					ticks: {
-						fontColor: "#ffffff"
+						fontColor: "#ffffff",
+						/*
+						callback: function(value) {
+							return value.substr(0, 20) + '...';//truncate
+						},
+						*/
 					}
 				}],
 			},
