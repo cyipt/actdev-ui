@@ -289,6 +289,16 @@
 
 	var generateBarChartOptionsObject = function (text) 
 	{
+		var minHeight = 150; 
+		var minWidth = 500;
+		var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+		if (width < minWidth || _nationalSiteChart.height < minHeight) {
+			var legendPosition = 'top';
+		} else {
+			var legendPosition = 'right';
+		}
+		
 		return {
 			layout: {
 				padding: {
@@ -299,7 +309,7 @@
 				display: false
 			},
 			legend: {
-				position: 'right',
+				position: legendPosition,
 				align: 'middle',
 				labels: {
 					fontColor: 'white',
