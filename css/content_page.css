@@ -13,6 +13,7 @@ html, body {height: 100vh;}
 i.site-back-arrow {position: absolute; font-size: 30px; margin-top: 30px; margin-left: 20px; padding: 2.5px 10px; color: orange; border-color: orange; border: 0.5px solid; border-radius: 30px; transition: 0.3s;}
 i.site-back-arrow:hover {transform: scale(1.2);}
 .about h1, .about h2 {margin-left: 80px;}
+#about {overflow-y: hidden;}
 
 #content {margin-top: 25px;  text-align: justify; text-justify: inter-word;}
 #content h1 {color: white; font-size: 22px; margin: 20px 0 10px;}
