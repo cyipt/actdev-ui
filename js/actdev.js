@@ -798,19 +798,17 @@ var actdev = (function ($) {
 			// Clear any existing photos
 			actdev.clearCarouselPhotos ();
 			
-			// Build CycleStreets API response
-			var photomapApiUrl = 'https://api.cyclestreets.net/v2/photomap.locations?tags=actdev&fields=id,hasPhoto,thumbnailUrl,license,caption&boundary={%boundary}&key={%apiKey}';
-			
 			// Get the site boundary
 			var siteBoundary = actdev.getSiteBoundary (siteName);
-			
 			if (!siteBoundary) {
 				return;
 			}
 			
+			// Stringify for API request
 			var stringifiedSiteBoundary = JSON.stringify(siteBoundary[siteBoundary.length-1]); // Don't use .pop() here, as it'll mutate the main dictionary
 			
-			// Replace boundary and api key url tolens
+			// Build CycleStreets API response, replacing boundary and API key URL tokens
+			var photomapApiUrl = 'https://api.cyclestreets.net/v2/photomap.locations?tags=actdev&fields=id,hasPhoto,thumbnailUrl,license,caption&boundary={%boundary}&key={%apiKey}';
 			photomapApiUrl = photomapApiUrl.replace('{%boundary}', stringifiedSiteBoundary);
 			photomapApiUrl = photomapApiUrl.replace('{%apiKey}', _settings.apiKey);
 			
