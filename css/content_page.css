@@ -20,6 +20,7 @@ i.site-back-arrow:hover {transform: scale(1.2);}
 #content h2, #content h3 {color: white; font-size: 22px; margin: 20px 0 10px;}
 #content p, #content li {line-height: 1.45em; padding: 6px 0; font-size: 17px}
 #content a {color: orange;}
+#content img {max-width: 80%; max-height: 650px;}
 
 .photos {padding: 30px 0;}
 .photos img {display: block; margin: 0 auto; padding: 5px 0; height: calc(100vh / 4);}
