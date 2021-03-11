@@ -1359,6 +1359,11 @@ var actdev = (function ($) {
 		// Assign style from lookup table
 		lookupStyleValue: function (value, lookupTable)
 		{
+			// If the value is null, set to be transparent
+			if (value === null) {
+				return 'transparent';
+			}
+			
 			// Loop through each style stop until found
 			var styleStop;
 			for (var i = 0; i < lookupTable.length; i++) {
