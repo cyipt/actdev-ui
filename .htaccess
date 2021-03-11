@@ -2,6 +2,9 @@
 RewriteEngine on
 RewriteRule ^abstreet/([-a-z]+)$ /abstreet/index.html?--dev&--actdev=$1 [L]
 
+# Redirect feedback page
+RewriteRule ^feedback/? https://forms.office.com/Pages/ResponsePage.aspx?id=qO3qvR3IzkWGPlIypTW3yyMypkiIdOJGrvs4vzE0KWxUQzY2WDhJVFNDTzk0Q1oxQlVSSkJaSUVGMi4u [L]
+
 # Normalise with trailing slash
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
