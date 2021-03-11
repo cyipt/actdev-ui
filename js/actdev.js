@@ -529,6 +529,19 @@ var actdev = (function ($) {
 				+ '</div>'
 		},
 		
+		ltns: {
+			apiCall: '/v2/advocacydata.ltns',
+			lineColourApiField: 'colour',
+			zoomInitial: 14,
+			name: 'LTNs',
+			description: 'LTNs and rat-runs - experimental data',
+			legend: [
+				['LTN', '#4d4'],
+				['Traffic-calmed', '#f80'],
+				['Rat-runs', '#d44']
+			]
+		},
+		
 		photos: {
 			apiCall: '/v2/photomap.locations',
 			apiFixedParameters: {
