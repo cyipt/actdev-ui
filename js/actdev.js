@@ -348,6 +348,7 @@ var actdev = (function ($) {
 			legend: 'range',
 			name: 'Accessibility',
 			description: 'Cycleability of the surrounding area, showing the level of busyness of the roads',
+			popupsRoundingDP: 1,
 			fillOpacity: 0.6,
 			fitInitial: true,
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/dartboard-data-dictionary.csv',
@@ -1479,7 +1480,8 @@ var actdev = (function ($) {
 				actdev.updateChartData ();
 			}
 		},
-
+		
+		
 		// Update chart
 		updateChartData: function () {
 			var goActive = (actdev.getCurrentScenario () == 'goactive');
