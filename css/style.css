@@ -246,5 +246,5 @@ body {background-color: #434343;}
     .national-level-zoom .graph-half {display: block; height: 60vh; overflow-y: scroll;}
     .national-level-zoom .ios-segmented-control {margin: 10px 50px}
     .national-level-zoom .graph-half .section-title h2 {font-size: 25px;}
-    .national-level-zoom .graph-half input {display: none;}
+    .national-level-zoom .graph-half input {width: 78%;}
 }
