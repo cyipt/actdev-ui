@@ -349,7 +349,7 @@ var actdev = (function ($) {
 			],
 			legend: 'range',
 			name: 'Accessibility',
-			description: 'Cycleability / walkability of the surrounding area, showing the level of busyness of the roads',
+			description: 'Cycleability of the surrounding area, showing the level of busyness of the roads',
 			fillOpacity: 0.6,
 			fitInitial: true,
 			fieldLabelsCsv: 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/dartboard-data-dictionary.csv',
