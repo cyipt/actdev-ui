@@ -53,6 +53,9 @@ var actdev = (function ($) {
 		regionSwitcherDefaultRegion: 'great-kneighton', // Default region to load if no region saved in cookie
 		regionSwitcherMaxZoom: 12,
 		regionSwitcherPermalinks: true,
+		regionsPopupCallback: function (regionName) {
+			return '<a href="/' + regionName + '/">' + regionName + '</a>';
+		}, // Generate a custom popup HTML for regions
 		
 		// Initial view of all regions; will use regionsFile
 		initialRegionsView: true,
