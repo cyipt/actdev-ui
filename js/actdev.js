@@ -540,7 +540,8 @@ var actdev = (function ($) {
 			legend: [
 				['LTN', '#4d4'],
 				['Traffic-calmed', '#f80'],
-				['Rat-runs', '#d44']
+				['Rat-runs', '#d44'],
+				['Main roads', '#888']
 			]
 		},
 		
