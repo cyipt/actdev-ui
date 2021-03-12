@@ -471,6 +471,26 @@ var actdev = (function ($) {
 				+ '</table>'
 		},
 		
+		cycleparking: {
+			apiCall: '/v2/pois.locations',
+			apiFixedParameters: {
+				type: 'cycleparking',
+				fields: 'id,name,osmTags[capacity,access,bicycle_parking,covered],nodeId',
+				limit: 400
+			},
+			iconUrl: '/images/icons/cycleparking_good.svg',
+			iconSize: [24, 24],
+			popupHtml:
+				  '<p><strong>Cycle parking</strong></p>'
+				+ '<table>'
+				+ '<tr><td>Spaces:</td><td>{properties.Capacity}</td></tr>'
+				+ '<tr><td>Access:</td><td>{properties.Access}</tr>'
+				+ '<tr><td>Type:</td><td>{properties.Bicycle_parking}</tr>'
+				+ '<tr><td>Covered?:</td><td>{properties.Covered}</tr>'
+				+ '</table>'
+				+ '<p class="edit"><a href="https://www.openstreetmap.org/edit?node={properties.nodeId}" target="_blank">Add/edit details</a></p>'
+		},
+		
 		collisions: {
 			apiCall: '/v2/collisions.locations',
 			apiFixedParameters: {
