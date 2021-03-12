@@ -95,8 +95,8 @@
 					<hr />
 				</div>
 				<input type="text" id="site-search" name="site-search" placeholder="Search for developments..." />
-				<div class="graph-container">
-					<canvas id="nationalDataChart" height="300" width="600"></canvas>
+				<div class="graph-container" style="height: 650px; width: 100%; min-width: 400px; max-width: 700px;">
+					<canvas id="nationalDataChart" /></canvas>
 				</div>
 			</div>
 		</section>
@@ -211,15 +211,17 @@
 	{
 		return $('input[name=current-scenario]:checked', '#scenario').val ();
 	};
-
+	
 	
 	// Add the bar chart to the DOM
 	var addBarChart = function () 
 	{
 		// Set the chart to be 100vh
 		var chart = document.getElementById('nationalDataChart');
-		chart.height = window.innerHeight/1.6;
 		
+		chart.style.width = '100%';
+		chart.style.height = '650px';
+
 		var goActiveBool = (getCurrentScenario() == 'goactive');
 		insertChartIntoCanvas(generateBarChartDataObject (goActiveBool), generateBarChartOptionsObject(
 			'Site accessibility chart'));
@@ -287,11 +289,10 @@
 
 	var generateBarChartOptionsObject = function (text) 
 	{
-		var minHeight = 150; 
-		var minWidth = 500;
+		// #!# This is problematic because it doesn't trigger a repaint on resize
+		var minWidth = 1000;
 		var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-
-		if (width < minWidth || _nationalSiteChart.height < minHeight) {
+		if (width < minWidth) {
 			var legendPosition = 'top';
 		} else {
 			var legendPosition = 'right';
@@ -318,7 +319,7 @@
 				mode: 'index',
 				intersect: false
 			},
-			responsive: true,
+			responsive: false,
 			scales: {
 				xAxes: [{
 					stacked: true,
@@ -364,20 +365,10 @@
 
 	
 	// Function to return the offset of an event click
-	var getOffset = function (event) {
-		var el = event.target,
-			x = 0,
-			y = 0;
-
-		while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
-			x += el.offsetLeft - el.scrollLeft;
-			y += el.offsetTop - el.scrollTop;
-			el = el.offsetParent;
-		}
-
-		x = event.clientX - x;
-		y = event.clientY - y;
-
+	var getOffset = function (event)
+	{
+		var x = event.offsetX;
+		var y = event.offsetY;
 		return {x: x, y: y};
 	};
 
