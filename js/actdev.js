@@ -955,18 +955,26 @@ var actdev = (function ($) {
 			// Generate the A/B Street link dynamically, so that the map position matches
 			$('#view-simulation').on ('click', function () {
 				
-				// Generate the URL
-				var simulationUrl = '/abstreet/?--actdev={%site_name}&--cam={%mapposition}';
-				simulationUrl = simulationUrl.replace('{%site_name}', _currentRegion);
+				// Define the URL structure
+				var simulationUrl = '/abstreet/?--actdev={%site_name}&--cam={%mapposition}&--actdev_scenario={%scenario}';
 				
+				// Set the region
+				simulationUrl = simulationUrl.replace ('{%site_name}', _currentRegion);
+				
+				// Set the map position
 				var _map = layerviewer.getMap ();
 				var centre = _map.getCenter ();
-
 				var zoom = _map.getZoom ();
 				var mapPosition = zoom.toFixed(1) + '/' + centre.lat.toFixed(5) + '/' + centre.lng.toFixed(5);		// Should be the same as the hash, if the hash exists
 				simulationUrl = simulationUrl.replace('{%mapposition}', mapPosition);
 				
-				window.open(simulationUrl);
+				// Set the scenario
+				var scenario = actdev.getCurrentScenario ();
+				var abStreetScenario = (scenario == 'current' ? 'base' : 'go_active');	// Translate current/goactive to A/B Street names base/go_active
+				simulationUrl = simulationUrl.replace('{%scenario}', abStreetScenario);
+				
+				// Open the link, in a new window
+				window.open (simulationUrl);
 			});
 		},
 
