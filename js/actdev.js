@@ -641,6 +641,7 @@ var actdev = (function ($) {
 	var _nationalDataObject = false; // Store the parsed CSV
 	var _nationalDataObjectGoActive = false;
 	var _currentSearchQuery = '';
+	
 	// Site level definitions
 	var _regionData = {}; // This will be overwritten each time a new region's data is fetched
 	var _allSitesJsonUrl = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.geojson';
