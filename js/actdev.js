@@ -721,16 +721,9 @@ var actdev = (function ($) {
 			// Set the page 
 			_page = page;
 			
-			if (_page == 'sites') {
-				// Run the layerviewer for these settings and layers
-				layerviewer.initialise (_settings, _layerConfig);
-			}
-			
-			// Initialise ACTDEV UI listeners
-			actdev.initUi ();
-			
-			// Listen to scenario being changed
-			actdev.listenForScenarioChange ();
+			// Initialise ActDev UI for the respective page
+			var initFunction = 'initUi' + _page.charAt (0).toUpperCase () + _page.slice (1); 
+			actdev[initFunction] ();
 			
 			// Listen for basemap change
 			// !FIXME this is very hacky; see: https://github.com/cyipt/actdev-ui/issues/50#issuecomment-793052191
@@ -740,48 +733,36 @@ var actdev = (function ($) {
 		},
 		
 		
-		// Initialise general UI handlers
-		initUi: function ()
+		// Initialise sites UI
+		initUiSites: function ()
 		{
-			if (_page == 'sites') 
-			{
-				// Fetch and store all-sites.geojson
-				actdev.fetchAllSites ();
-				
-				// Treat site data drop-downs change as implicit enabling of layer
-				// #!# Ideally this would use the native layerviewer formChangeImplicitCheckbox function, but that has a hard-coded parent DOM structure
-				$('#data select').on ('click', function (e) {
-					var parentDiv = $(e.target).parent ('div');
-					var layerId = parentDiv[0].id;
-					var checkboxId = 'show_' + layerId;
-					if ($('#' + checkboxId).not (':checked').length) {
-						$('#' + checkboxId).click ();	// Also triggers event
-					}
-				});
-				
-				// Ugly workaround to switch checkbox off-then-on when changing sublayer type, otherwise the cycle styling sometimes shows the walk styling
-				// #!# This problem is almost certainly related to the (needing to be fixed anyway) error "Expected value to be of type number, but found null instead" which was not resolved in https://github.com/cyclestreets/Mapboxgljs.LayerViewer/commit/6f12d5af8ca77216d5c955ed71d777030056327e
-				$('#data select').on ('change', function (e) {
-					var parentDiv = $(e.target).parent ('div');
-					var layerId = parentDiv[0].id;
-					var checkboxId = 'show_' + layerId;
-					if ($('#' + checkboxId).is (':checked')) {
-						$('#' + checkboxId).click ();
-						$('#' + checkboxId).click ();
-					}
-				});
-			}
-
-			if (_page == 'national') 
-			{
-				// Listen to the search bar
-				actdev.listenToSearchBar ();
-
-				// Get the data and add the first bar chart
-				actdev.getNationalData ();
-			}
+			// Run the layerviewer for these settings and layers
+			layerviewer.initialise (_settings, _layerConfig);
 			
-			// Segmented control
+			// Fetch and store all-sites.geojson
+			actdev.fetchAllSites ();
+
+			// Listen to scenario being changed
+			actdev.listenForScenarioChange ();
+
+			// Initialise segmented control
+			actdev.segmentedControl ();
+		},
+
+
+		// Initialise national-level UI
+		initUiNational: function ()
+		{
+			// Listen to the search bar
+			actdev.listenToSearchBar ();
+
+			// Get the data and add the first bar chart
+			actdev.getNationalData ();
+
+			// Listen to scenario being changed
+			actdev.listenForScenarioChange ();
+			
+			// Initialise segmented control
 			actdev.segmentedControl ();
 		},
 
@@ -792,7 +773,7 @@ var actdev = (function ($) {
 			$('#site-search').on ('keyup', function () {
 				_currentSearchQuery = $(this).val ().toLowerCase ();
 				const replaceData = true;
-				actdev.updateChartData (replaceData);
+				actdev.updateChartDataNational (replaceData);
 			});
 		},
 
@@ -844,7 +825,7 @@ var actdev = (function ($) {
 									});
 
 									// Add the bar chart
-									actdev.addBarChart ();
+									actdev.addBarChartNational ();
 								}
 							});
 						}
@@ -869,8 +850,7 @@ var actdev = (function ($) {
 		},
 
 
-		// A callback, run after the site has downloaded the initial all-sites.geojson. 
-		// Essentially a second initialisation, or a continuation of the first, equivalent of booting first to 16 then to 32 bit modes.
+		// A callback to continue initialisation of the site-level view, run after the site has downloaded the initial all-sites.geojson. 
 		secondInitialisation: function ()
 		{
 			// Load the carousel
@@ -885,6 +865,28 @@ var actdev = (function ($) {
 			// Initialise tooltips
 			actdev.initialiseTooltips ();
 
+			// Treat site data drop-downs change as implicit enabling of layer
+			// #!# Ideally this would use the native layerviewer formChangeImplicitCheckbox function, but that has a hard-coded parent DOM structure
+			$('#data select').on ('click', function (e) {
+				var parentDiv = $(e.target).parent ('div');
+				var layerId = parentDiv[0].id;
+				var checkboxId = 'show_' + layerId;
+				if ($('#' + checkboxId).not (':checked').length) {
+					$('#' + checkboxId).click ();	// Also triggers event
+				}
+			});
+			
+			// Ugly workaround to switch checkbox off-then-on when changing sublayer type, otherwise the cycle styling sometimes shows the walk styling
+			// #!# This problem is almost certainly related to the (needing to be fixed anyway) error "Expected value to be of type number, but found null instead" which was not resolved in https://github.com/cyclestreets/Mapboxgljs.LayerViewer/commit/6f12d5af8ca77216d5c955ed71d777030056327e
+			$('#data select').on ('change', function (e) {
+				var parentDiv = $(e.target).parent ('div');
+				var layerId = parentDiv[0].id;
+				var checkboxId = 'show_' + layerId;
+				if ($('#' + checkboxId).is (':checked')) {
+					$('#' + checkboxId).click ();
+					$('#' + checkboxId).click ();
+				}
+			});
 		},
 
 
@@ -899,7 +901,7 @@ var actdev = (function ($) {
 					actdev.setCurrentScenario ();
 
 					// Generate the graphs
-					actdev.updateChartData ();
+					actdev.updateChartDataSites ();
 					
 					// Refresh the new stats
 					actdev.populateSiteStatistics ();
@@ -909,7 +911,7 @@ var actdev = (function ($) {
 				} 
 
 				if (_page == 'national') {
-					actdev.updateChartData ();
+					actdev.updateChartDataNational ();
 				}
 			});
 		},
@@ -955,7 +957,6 @@ var actdev = (function ($) {
 		// Initialise carousel
 		initialiseCarousel: function ()
 		{
-		
 			$('.carousel').flickity({
 				cellAlign: 'center',
 				contain: true,
@@ -1230,7 +1231,7 @@ var actdev = (function ($) {
 			_currentRegion = selectedRegion;
 
 			// Generate the graph
-			actdev.addBarChart ();
+			actdev.addBarChartSites ();
 			
 			// Get the site photos
 			actdev.fetchSitePhotos (selectedRegion);
@@ -1483,263 +1484,263 @@ var actdev = (function ($) {
 		},
 
 
-		addBarChart: function ()
+		addBarChartSites: function ()
 		{	
-			if (_page == 'sites') {
-				var goActive = (actdev.getCurrentScenario () == 'goactive');
-				actdev.insertChartIntoCanvas (actdev.generateBarChartDataObject(goActive), actdev.generateBarChartOptionsObject ('Mode split transport'));
-			}
+			var goActive = (actdev.getCurrentScenario () == 'goactive');
+			actdev.insertChartIntoCanvas (actdev.generateBarChartDataObjectSites (goActive), actdev.generateBarChartOptionsObjectSites ('Mode split transport'));
+		},	
 
-			if (_page == 'national') {
-				// Set the chart to be 100vh
-				var chart = document.getElementById ('nationalDataChart');
-				
-				chart.style.width = '100%';
-				chart.style.height = '650px';
 
-				var goActiveBool = (actdev.getCurrentScenario () == 'goactive');
-				actdev.insertChartIntoCanvas (actdev.generateBarChartDataObject (goActiveBool), actdev.generateBarChartOptionsObject ('Site accessibility chart'));
-			}
+		addBarChartNational: function ()
+		{	
+			// Set the chart to be 100vh
+			var chart = document.getElementById ('nationalDataChart');
+			
+			chart.style.width = '100%';
+			chart.style.height = '650px';
 
+			var goActiveBool = (actdev.getCurrentScenario () == 'goactive');
+			actdev.insertChartIntoCanvas (actdev.generateBarChartDataObjectNational (goActiveBool), actdev.generateBarChartOptionsObjectNational ('Site accessibility chart'));
 		},	
 
 
 		// Generate bar chart data
-		generateBarChartDataObject: function (goActive = false)
+		generateBarChartDataObjectSites: function (goActive = false)
 		{
-			if (_page == 'sites') {
-				var labels = _modeSplitCsvData.map ((distanceBand) => distanceBand.distance_band);
+			var labels = _modeSplitCsvData.map ((distanceBand) => distanceBand.distance_band);
 
-				var datasets;
-				if (goActive) {
-					datasets = [
-						{
-							label: 'Walk',
-							backgroundColor: '#457b9d',
-							data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.walk_goactive)))
-						}, {
-							label: 'Bike',
-							backgroundColor: '#90be6d',
-							data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.cycle_goactive)))
-						}, {
-							label: 'Other',
-							backgroundColor: '#ffd166',
-							data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.other_goactive)))
-						}, {
-							label: 'Car',
-							backgroundColor: '#fe5f55',
-							data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.drive_goactive)))
-						}
-					];
-				} else {
-					datasets = [
-						{
-							label: 'Walk',
-							backgroundColor: '#457b9d',
-							data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.walk_base)))
-						}, {
-							label: 'Bike',
-							backgroundColor: '#90be6d',
-							data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.cycle_base)))
-						}, {
-							label: 'Other',
-							backgroundColor: '#ffd166',
-							data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.other_base)))
-						}, {
-							label: 'Car',
-							backgroundColor: '#fe5f55',
-							data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.drive_base)))
-						}
-					];
-				}
-				
-				var data = {
-					labels: labels,
-					datasets: datasets
-				};
-				
-				return data;
-			}
-
-			if (_page == 'national') {
-				var labels = _nationalDataObject.map ((siteData) => siteData.full_name);
-
-				// Filter this data if we need to search
-				var labels = labels.filter ((siteName) => siteName.toLowerCase ().includes (_currentSearchQuery));
-
-				var datasets;
-				if (goActive) {
-					var filteredDataObject = _nationalDataObjectGoActive.filter ((siteInfo) => siteInfo.full_name.toLowerCase ().includes (_currentSearchQuery));
-					datasets = [{
+			var datasets;
+			if (goActive) {
+				datasets = [
+					{
 						label: 'Walk',
 						backgroundColor: '#457b9d',
-						data: filteredDataObject.map ((siteData) => Math.round (Number.parseFloat (siteData.walk_active)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.walk_goactive)))
 					}, {
 						label: 'Bike',
 						backgroundColor: '#90be6d',
-						data: filteredDataObject.map ((siteData) => Math.round (Number.parseFloat (siteData.cycle_active)))
-					}, {
-						label: 'Car',
-						backgroundColor: '#fe5f55',
-						data: filteredDataObject.map ((siteData) => Math.round (Number.parseFloat (siteData.drive_active)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.cycle_goactive)))
 					}, {
 						label: 'Other',
 						backgroundColor: '#ffd166',
-						data: filteredDataObject.map ((siteData) => Math.round (Number.parseFloat (siteData.other_active)))
-					}];
-				} else {
-					var filteredDataObject = _nationalDataObject.filter ((siteInfo) => siteInfo.full_name.toLowerCase ().includes (_currentSearchQuery));
-					datasets = [{
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.other_goactive)))
+					}, {
+						label: 'Car',
+						backgroundColor: '#fe5f55',
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.drive_goactive)))
+					}
+				];
+			} else {
+				datasets = [
+					{
 						label: 'Walk',
 						backgroundColor: '#457b9d',
-						data: filteredDataObject.map ((siteData) => Math.round(Number.parseFloat(siteData.walk_base)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.walk_base)))
 					}, {
 						label: 'Bike',
 						backgroundColor: '#90be6d',
-						data: filteredDataObject.map ((siteData) => Math.round(Number.parseFloat(siteData.cycle_base)))
-					}, {
-						label: 'Car',
-						backgroundColor: '#fe5f55',
-						data: filteredDataObject.map ((siteData) => Math.round(Number.parseFloat(siteData.drive_base)))
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.cycle_base)))
 					}, {
 						label: 'Other',
 						backgroundColor: '#ffd166',
-						data: filteredDataObject.map ((siteData) => Math.round(Number.parseFloat(siteData.other_base)))
-					}];
-				}
-				
-				var data = {
-					labels: labels,
-					datasets: datasets
-				};
-
-				return data;
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.other_base)))
+					}, {
+						label: 'Car',
+						backgroundColor: '#fe5f55',
+						data: _modeSplitCsvData.map ((distanceBand) => Math.round(Number.parseFloat(distanceBand.drive_base)))
+					}
+				];
 			}
+			
+			var data = {
+				labels: labels,
+				datasets: datasets
+			};
+			
+			return data;
 		},
 
 
-		generateBarChartOptionsObject: function (text)
+		// Generate bar chart data
+		generateBarChartDataObjectNational: function (goActive = false)
 		{
-			if (_page == 'sites') {
-				return {
-					title: {
-						display: false
-					},
-					legend: {
-						position: 'right',
-						align: 'middle',
-						labels: {
-							fontColor: 'white',
-							fontSize: 13
-						}
-					},
-					tooltips: {
-						mode: 'index',
-						intersect: false
-					},
-					responsive: true,
-					scales: {
-						xAxes: [{
-							stacked: true,
-							ticks: {
-								fontColor: "#ffffff"
-							},
-							scaleLabel: {
-								display: true,
-								labelString: 'count',
-								fontColor: '#929292'
-							}
-						}],
-						yAxes: [{
-							stacked: true,
-							ticks: {
-								fontColor: "#ffffff"
-							},
-							scaleLabel: {
-								display: true,
-								labelString: 'km band',
-								fontColor: '#929292'
-							}
-						}]
-					},
-					indexAxis: 'y'
-				};
+			var labels = _nationalDataObject.map ((siteData) => siteData.full_name);
+
+			// Filter this data if we need to search
+			var labels = labels.filter ((siteName) => siteName.toLowerCase ().includes (_currentSearchQuery));
+
+			var datasets;
+			if (goActive) {
+				var filteredDataObject = _nationalDataObjectGoActive.filter ((siteInfo) => siteInfo.full_name.toLowerCase ().includes (_currentSearchQuery));
+				datasets = [{
+					label: 'Walk',
+					backgroundColor: '#457b9d',
+					data: filteredDataObject.map ((siteData) => Math.round (Number.parseFloat (siteData.walk_active)))
+				}, {
+					label: 'Bike',
+					backgroundColor: '#90be6d',
+					data: filteredDataObject.map ((siteData) => Math.round (Number.parseFloat (siteData.cycle_active)))
+				}, {
+					label: 'Car',
+					backgroundColor: '#fe5f55',
+					data: filteredDataObject.map ((siteData) => Math.round (Number.parseFloat (siteData.drive_active)))
+				}, {
+					label: 'Other',
+					backgroundColor: '#ffd166',
+					data: filteredDataObject.map ((siteData) => Math.round (Number.parseFloat (siteData.other_active)))
+				}];
+			} else {
+				var filteredDataObject = _nationalDataObject.filter ((siteInfo) => siteInfo.full_name.toLowerCase ().includes (_currentSearchQuery));
+				datasets = [{
+					label: 'Walk',
+					backgroundColor: '#457b9d',
+					data: filteredDataObject.map ((siteData) => Math.round(Number.parseFloat(siteData.walk_base)))
+				}, {
+					label: 'Bike',
+					backgroundColor: '#90be6d',
+					data: filteredDataObject.map ((siteData) => Math.round(Number.parseFloat(siteData.cycle_base)))
+				}, {
+					label: 'Car',
+					backgroundColor: '#fe5f55',
+					data: filteredDataObject.map ((siteData) => Math.round(Number.parseFloat(siteData.drive_base)))
+				}, {
+					label: 'Other',
+					backgroundColor: '#ffd166',
+					data: filteredDataObject.map ((siteData) => Math.round(Number.parseFloat(siteData.other_base)))
+				}];
 			}
+			
+			var data = {
+				labels: labels,
+				datasets: datasets
+			};
 
-			if (_page == 'national') {
-				// #!# This is problematic because it doesn't trigger a repaint on resize
-				var minWidth = 1000;
-				var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-				if (width < minWidth) {
-					var legendPosition = 'top';
-				} else {
-					var legendPosition = 'right';
-				}
-				
-				return {
-					layout: {
-						padding: {
-							left: 60
-						}
-					},
-					title: {
-						display: false
-					},
-					legend: {
-						position: legendPosition,
-						align: 'middle',
-						labels: {
-							fontColor: 'white',
-							fontSize: 13
-						}
-					},
-					tooltips: {
-						mode: 'index',
-						intersect: false
-					},
-					responsive: false,
-					scales: {
-						xAxes: [{
-							stacked: true,
-							ticks: {
-								fontColor: "#ffffff"
-							},
-						}],
-						yAxes: [{
-							stacked: true,
-							ticks: {
-								fontColor: "#ffffff",
-								/*
-								callback: function(value) {
-									return value.substr(0, 20) + '...';//truncate
-								},
-								*/
-							}
-						}],
-					},
-					indexAxis: 'y',
-					onClick: (event, item) => {
-						// Chart.js does not include a label click event, so we need to calculate it manually
-						// Get the y position of the click
-						var clickYPos = actdev.getOffset(event).y;
+			return data;
+		},
 
-						// Get a dictionary of the x,y positions of the chart labels
-						var labelPositions = _nationalSiteChart.scales['y-axis-0']['_labelItems']
-						
-						// Find closest position from an array with all the y positions
-						var closestNumber = actdev.getClosestNumber (clickYPos, labelPositions.map ((label) => label.y))
-						
-						// Get the corresponding site name
-						var closestSite = labelPositions.find ((labelPosition) => (labelPosition.y === closestNumber)).label;
 
-						// Search to find the code-site-name that matches the prettified label
-						var siteCode = _nationalDataObject.find ((site) => site.full_name === closestSite).site_name;
-
-						// Redirect to the site page
-						window.location.href = '/' + siteCode + '/';
+		generateBarChartOptionsObjectSites: function (text)
+		{
+			return {
+				title: {
+					display: false
+				},
+				legend: {
+					position: 'right',
+					align: 'middle',
+					labels: {
+						fontColor: 'white',
+						fontSize: 13
 					}
-				};
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false
+				},
+				responsive: true,
+				scales: {
+					xAxes: [{
+						stacked: true,
+						ticks: {
+							fontColor: "#ffffff"
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'count',
+							fontColor: '#929292'
+						}
+					}],
+					yAxes: [{
+						stacked: true,
+						ticks: {
+							fontColor: "#ffffff"
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'km band',
+							fontColor: '#929292'
+						}
+					}]
+				},
+				indexAxis: 'y'
+			};
+		},
+
+
+		generateBarChartOptionsObjectNational: function (text)
+		{
+			// #!# This is problematic because it doesn't trigger a repaint on resize
+			var minWidth = 1000;
+			var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+			if (width < minWidth) {
+				var legendPosition = 'top';
+			} else {
+				var legendPosition = 'right';
 			}
+			
+			return {
+				layout: {
+					padding: {
+						left: 60
+					}
+				},
+				title: {
+					display: false
+				},
+				legend: {
+					position: legendPosition,
+					align: 'middle',
+					labels: {
+						fontColor: 'white',
+						fontSize: 13
+					}
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false
+				},
+				responsive: false,
+				scales: {
+					xAxes: [{
+						stacked: true,
+						ticks: {
+							fontColor: "#ffffff"
+						},
+					}],
+					yAxes: [{
+						stacked: true,
+						ticks: {
+							fontColor: "#ffffff",
+							/*
+							callback: function(value) {
+								return value.substr(0, 20) + '...';//truncate
+							},
+							*/
+						}
+					}],
+				},
+				indexAxis: 'y',
+				onClick: (event, item) => {
+					// Chart.js does not include a label click event, so we need to calculate it manually
+					// Get the y position of the click
+					var clickYPos = actdev.getOffset(event).y;
+
+					// Get a dictionary of the x,y positions of the chart labels
+					var labelPositions = _nationalSiteChart.scales['y-axis-0']['_labelItems']
+					
+					// Find closest position from an array with all the y positions
+					var closestNumber = actdev.getClosestNumber (clickYPos, labelPositions.map ((label) => label.y))
+					
+					// Get the corresponding site name
+					var closestSite = labelPositions.find ((labelPosition) => (labelPosition.y === closestNumber)).label;
+
+					// Search to find the code-site-name that matches the prettified label
+					var siteCode = _nationalDataObject.find ((site) => site.full_name === closestSite).site_name;
+
+					// Redirect to the site page
+					window.location.href = '/' + siteCode + '/';
+				}
+			};
 		},
 
 		
@@ -1781,7 +1782,7 @@ var actdev = (function ($) {
 						options: barChartOptions
 					});
 				} else {
-					actdev.updateChartData ();
+					actdev.updateChartDataSites ();
 				}
 			} 
 
@@ -1795,41 +1796,48 @@ var actdev = (function ($) {
 						options: barChartOptions
 					});
 				} else {
-					actdev.updateChartData ();
+					actdev.updateChartDataNational ();
 				}
 			}
 		},
-		
-		
-		// Update chart
-		updateChartData: function (replaceData = false) {
-			var goActive = (actdev.getCurrentScenario () == 'goactive');
-			var newDataSet = actdev.generateBarChartDataObject (goActive);
 
-			if (_page == 'sites') {
+
+		updateChartDataSites: function () 
+		{
+			// Query goActive status
+			var goActive = (actdev.getCurrentScenario () == 'goactive');
+			
+			var newDataSet = actdev.generateBarChartDataObjectSites (goActive);
+			
+			// Iterate through and replace data
+			var currentDataSet = 0;
+			newDataSet.datasets.map ((dataSet) => {
+				_accessibilityChart.data.datasets[currentDataSet].data = dataSet.data;
+				currentDataSet += 1;
+			});
+
+			_accessibilityChart.update();
+		},
+
+		
+		updateChartDataNational: function (replaceData) 
+		{
+			// Query goActive status
+			var goActive = (actdev.getCurrentScenario () == 'goactive');
+			
+			var newDataSet = actdev.generateBarChartDataObjectNational (goActive);
+			
+			if (replaceData) {
+				_nationalSiteChart.data = newDataSet;
+				_nationalSiteChart.update (0);
+			} else {
 				// Iterate through and replace data
 				var currentDataSet = 0;
 				newDataSet.datasets.map ((dataSet) => {
-					_accessibilityChart.data.datasets[currentDataSet].data = dataSet.data;
+					_nationalSiteChart.data.datasets[currentDataSet].data = dataSet.data;
 					currentDataSet += 1;
 				});
-
-				_accessibilityChart.update();
-			}
-
-			if (_page == 'national') {
-				if (replaceData) {
-					_nationalSiteChart.data = newDataSet;
-					_nationalSiteChart.update (0);
-				} else {
-					// Iterate through and replace data
-					var currentDataSet = 0;
-					newDataSet.datasets.map ((dataSet) => {
-						_nationalSiteChart.data.datasets[currentDataSet].data = dataSet.data;
-						currentDataSet += 1;
-					});
-					_nationalSiteChart.update ();
-				}
+				_nationalSiteChart.update ();
 			}
 		},
 		
