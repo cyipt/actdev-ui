@@ -1185,6 +1185,9 @@ var actdev = (function ($) {
 				download: true,
 				skipEmptyLines: true,
 				error: function (error, File) {
+					console.log (`Failed to download the site metrics for ${selectedRegion}. Probably this file does not exist.`);
+					
+					// Continue with an empty dictionary {}
 					actdev.mergeInSiteModeSplitData ({}, selectedRegion);
 				},
 				complete: function (fields) {
