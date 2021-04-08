@@ -4,6 +4,9 @@ ActDev is a project to develop a strong and nationally scalable evidence base on
 In the first phase of work, we developed a prototype web application showing walking and cycling route from 35 housing developments to key 'trip attractors' and calculated walking and cycling metrics within the boundary of each site.
 The results demonstrate the importance of considering walking and cycling potential and provision early in the planning process, the possibility of quantifying walking and cycling opportunities associated with new developments, and the feasibility of developing an actionable evidence base that will enable the planning process to support ambitious walking, cycling and decarbonisation targets nationawide. 
 
+*"This is absolutely glorious and I and many others were simply astounded when we saw it... Go and have a look if you're involved in urban design and place - you won't regret it."
+(Kit Allwinter, Active Travel Policy Officer, West Yorkshire Combined Authority)*
+
 # High level aims
 
 The high level aims of are to provides ratings for the level of active travel provision (cycling and walking) between development sites and key services, to determine whether a location would be or is acceptable from health perspectives.
@@ -23,3 +26,11 @@ app_size is classified as small, medium or large.
 app_state is the decision status of the application, classified as undecided, permitted, conditions, rejected, withdrawn, referred, or other.
 app_type is classified as full, outline, amendment, conditions, heritage, trees, advertising, telecoms, or other.
 Applications for major new housing developments should be classified as Large. As part of ActDev, we are improving the app_size classification by validating it against a set of around 30 known large housing developments across England. We are also investigating how the proportion of planning applications classified as large varies from one Local Authority to another.
+
+# ActDev workshop
+
+You can see a video recording of the workshop which took place on 12th March 2021
+
+Video part 1 - https://www.youtube.com/watch?v=OiIPp3VE0tY
+
+Video part 2 -https://www.youtube.com/watch?v=P12N51qI5Cs&t=1641s
