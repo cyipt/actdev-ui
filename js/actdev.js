@@ -781,9 +781,8 @@ var actdev = (function ($) {
 		// Get the site-level data, for national view
 		getNationalData: function () 
 		{
-			var nationalStatsUrl = 'https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui-chart/small-site-stats.csv';
-			var nationalStatsGoActive =
-				'https://raw.githubusercontent.com/cyipt/actdev-ui/final-ui-chart/small-site-stats-goactive.csv';
+			var nationalStatsUrl = 'https://raw.githubusercontent.com/cyipt/actdev/master/data-small/mode-share-sites-baseline.csv';
+			var nationalStatsGoActive = 'https://raw.githubusercontent.com/cyipt/actdev/master/data-small/mode-share-sites-goactive.csv';
 			var allSitesCSVInfo = 'https://raw.githubusercontent.com/cyipt/actdev/main/data-small/all-sites.csv';
 
 			// Stream and parse the CSV file
