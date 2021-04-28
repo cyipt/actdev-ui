@@ -8,6 +8,9 @@ REPOSITORY=cyipt/actdev
 ########################################
 
 
+# Bomb out if something goes wrong
+set -e
+
 # Get the version
 get_latest_release() {
 	curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
