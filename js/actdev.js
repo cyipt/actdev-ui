@@ -491,6 +491,42 @@ var actdev = (function ($) {
 				+ '<p class="edit"><a href="https://www.openstreetmap.org/edit?node={properties.nodeId}" target="_blank">Add/edit details</a></p>'
 		},
 		
+		busstops: {
+			apiCall: '/v2/pois.locations',
+			apiFixedParameters: {
+				type: 'busstops',
+				fields: 'name,osmTags,nodeId',
+				limit: 400
+			},
+			iconField: 'iconUrl',
+			iconSize: [12, 12],
+			popupHtml:
+				  '<p><strong>Bus stop</strong></p>'
+				+ '<table>'
+				+ '<tr><td>Name:</td><td>{properties.name}</td></tr>'
+				+ '<tr><td>OSM node ID:</td><td>{properties.nodeId}</td></tr>'
+				+ '</table>'
+				+ '<p class="edit"><a href="https://www.openstreetmap.org/node/{properties.nodeId}" target="_blank">View full details on OSM</a></p>'
+		},
+		
+		railwaystations: {
+			apiCall: '/v2/pois.locations',
+			apiFixedParameters: {
+				type: 'railwaystations',
+				fields: 'name',
+				limit: 400,
+				iconsize: 24
+			},
+			iconField: 'iconUrl',
+			iconSize: [24, 24],
+			popupHtml:
+				  '<p><strong>Railway station</strong></p>'
+				+ '<table>'
+				+ '<tr><td>Name:</td><td>{properties.name}</td></tr>'
+				+ '<tr><td>Station code:</td><td>{properties.id}</td></tr>'
+				+ '</table>'
+		},
+		
 		collisions: {
 			apiCall: '/v2/collisions.locations',
 			apiFixedParameters: {

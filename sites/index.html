@@ -81,7 +81,7 @@
 	<!-- ActDev application and its config, implementing the LayerViewer library -->
 	<script src="/.config.js"></script>
 	<script src="/js/actdev.js?210414"></script>
-	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/css/style.css?211228" />
 	<script>
 		$(function () {
 			actdev.initialise(config, 'sites');
@@ -334,13 +334,25 @@
 						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
 						<p class="total"></p>
 						<input type="checkbox" name="show[]" id="show_planningapplications" />
-						<label for="show_planningapplications"><i class="fa fa-file-alt"></i><br />Applications</label>
+						<label for="show_planningapplications"><i class="fa fa-file-alt"></i><br />Planning applications</label>
 					</li>
 					<li class="cycleparking" title="Cycle parking">
 						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
 						<p class="total"></p>
 						<input type="checkbox" name="show[]" id="show_cycleparking" />
-						<label for="show_cycleparking"><i class="fa fa-parking"></i><br />Bike parking</label>
+						<label for="show_cycleparking"><i class="fa fa-parking"></i><br />Cycle parking</label>
+					</li>
+					<li class="busstops" title="Bus stops">
+						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+						<p class="total"></p>
+						<input type="checkbox" name="show[]" id="show_busstops" />
+						<label for="show_busstops"><i class="fa fa-bus"></i><br />Bus stops</label>
+					</li>
+					<li class="railwaystations" title="Railway stations">
+						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+						<p class="total"></p>
+						<input type="checkbox" name="show[]" id="show_railwaystations" />
+						<label for="show_railwaystations"><i class="fa fa-train"></i><br />Railway stations</label>
 					</li>
 					<li class="collisions" title="Collisions in this area, from STATS19 data">
 						<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
