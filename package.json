@@ -6,8 +6,16 @@
   "author": "CycleStreets Ltd / University of Leeds",
   "license": "GPL-3.0-only",
   "dependencies": {
+    "@popperjs/core": "2.9.0",
     "Mapboxgljs.LayerViewer": "https://github.com/cyclestreets/Mapboxgljs.LayerViewer/",
+    "chart.js": "2.9.4",
+    "flickity": "2.2.2",
+    "flickity-fullscreen": "1.1.1",
     "jquery.animate-number": "^0.0.14",
-    "papaparse": "^5.3.2"
+    "leaflet": "^1.8.0",
+    "leaflet-ajax": "^2.1.0",
+    "marked": "3.0.8",
+    "papaparse": "^5.3.2",
+    "tippy.js": "6.3.1"
   }
 }
