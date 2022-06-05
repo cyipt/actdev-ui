@@ -1,7 +1,9 @@
 .config.js
 
-# Mapboxgljs.LayerViewer library comes from separate repo at https://github.com/cyclestreets/Mapboxgljs.LayerViewer
-js/lib/Mapboxgljs.LayerViewer/
+# Dependencies installed with Yarn
+/js/lib/
+/yarn-error.log
+
 abstreet/
 
 

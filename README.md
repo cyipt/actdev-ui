@@ -16,9 +16,7 @@ git clone https://github.com/cyipt/actdev-ui
 cd actdev-ui
 
 # Clone the library within the repo
-cd js/lib/
-git clone https://github.com/cyclestreets/Mapboxgljs.LayerViewer
-cd -
+yarn install
 
 # Add an Apache configuration
 sudo cp -pr .apache-vhost.conf.template /etc/apache/sites-available/actdev.conf

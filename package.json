@@ -1,0 +1,11 @@
+{
+  "name": "actdev-ui",
+  "version": "1.0.0",
+  "description": "ActDev - Active travel provision and potential in planned and proposed development sites: UI",
+  "repository": "https://github.com/cyipt/actdev-ui/",
+  "author": "CycleStreets Ltd / University of Leeds",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "Mapboxgljs.LayerViewer": "https://github.com/cyclestreets/Mapboxgljs.LayerViewer/"
+  }
+}

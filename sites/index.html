@@ -21,49 +21,49 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" />
 	<link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-	<link rel="stylesheet" href="/js/lib/mapbox-gl-js/mapbox-gl.css" />
-	<script src="/js/lib/mapbox-gl-js/mapbox-gl.min.js"></script>
-	<script src="/js/lib/jquery/jquery.min.js"></script>
+	<link rel="stylesheet" href="/js/lib/mapbox-gl/dist/mapbox-gl.css" />
+	<script src="/js/lib/mapbox-gl/dist/mapbox-gl.js"></script>
+	
+	<script src="/js/lib/jquery/dist/jquery.min.js"></script>
+	
+	<script src="/js/lib/jquery-ui-dist/jquery-ui.min.js"></script>
+	
+	<script src="/js/lib/@benmajor/jquery-touch-events/src/jquery.mobile-events.min.js"></script>
+	
+	<script src="/js/lib/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js"></script>
+	<link rel="stylesheet" href="/js/lib/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css" />
 
-	<script src="/js/lib/jquery-ui/jquery-ui.min.js"></script>
-
-	<script src="/js/lib/jQuery-Touch-Events/src/1.0.9/jquery.mobile-events.min.js"></script>
+	<script src="/js/lib/js-cookie/src/js.cookie.js"></script>
+	
+	<!-- Vex dialogs; see: https://github.hubspot.com/vex/ -->
+	<script src="/js/lib/vex-js/dist/js/vex.combined.min.js"></script>
+	<link rel="stylesheet" href="/js/lib/vex-js/dist/css/vex.css" />
+	<link rel="stylesheet" href="/js/lib/vex-js/dist/css/vex-theme-plain.css" />
+	
+	<!-- GeoJSON parser for flat JSON; see: https://www.npmjs.com/package/geojson -->
+	<script src="/js/lib/geojson/geojson.min.js"></script>
+	
+	<!-- GeoJSON extent library; see: https://github.com/mapbox/geojson-extent -->
+	<script src="/js/lib/@mapbox/geojson-extent/geojson-extent.js"></script>
+	
+	<!-- LayerViewer library, providing the application logic -->
+	<script src="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.js?220605"></script>
+	<link rel="stylesheet" type="text/css" href="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.css?210627" />
+	<script src="/js/lib/Mapboxgljs.LayerViewer/lib/geocoder.js"></script>
 	
 	<!-- Leaflet.js for mini maps -->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
 	
-	<script src="/js/lib/mapbox-gl-draw/mapbox-gl-draw.js"></script>
-	<link rel="stylesheet" href="/js/lib/mapbox-gl-draw/mapbox-gl-draw.css" />
-
-	<script src="/js/lib/js-cookie/js.cookie.js"></script>
-	
-	<!-- Vex dialogs; see: https://github.hubspot.com/vex/ -->
-	<script src="/js/lib/vex-4.1.0/dist/js/vex.combined.min.js"></script>
-	<link rel="stylesheet" href="/js/lib/vex-4.1.0/dist/css/vex.css" />
-	<link rel="stylesheet" href="/js/lib/vex-4.1.0/dist/css/vex-theme-plain.css" />
+	<!-- Parse CSV -->
+	<script src="/js/lib/PapaParse/papaparse.min.js"></script>
 	
 	<!-- Chart.js -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2"></script>
 	
-	<!-- GeoJSON parser for flat JSON; see: https://www.npmjs.com/package/geojson -->
-	<!--<script src="https://unpkg.com/geojson@0.5.0/geojson.js"></script>-->
-	<script src="/js/lib/GeoJSON.js/geojson.js"></script>
-	
-	<!-- GeoJSON extent library; see: https://github.com/mapbox/geojson-extent -->
-	<script src="/js/lib/geojson-extent/geojson-extent.js"></script>
-	
-	<!-- LayerViewer library, providing the application logic -->
-	<script src="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.js?211206"></script>
-	<link rel="stylesheet" type="text/css" href="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.css" />
-	<script src="/js/lib/Mapboxgljs.LayerViewer/lib/geocoder.js"></script>
-	
 	<!-- Fontawesome icons -->
 	<script src="/js/lib/fontawesome/fontawesome-kit-7bd5544b77.js"></script>
-	
-	<!-- Parse CSV -->
-	<script src="/js/lib/PapaParse/papaparse.min.js"></script>
 	
 	<!-- Flickity carousel -->
 	<link rel="stylesheet" href="https://unpkg.com/flickity@2.2.2/dist/flickity.min.css" />
@@ -80,8 +80,8 @@
 	
 	<!-- ActDev application and its config, implementing the LayerViewer library -->
 	<script src="/.config.js"></script>
-	<script src="/js/actdev.js?210414"></script>
-	<link rel="stylesheet" type="text/css" href="/css/style.css?211228" />
+	<script src="/js/actdev.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	<script>
 		$(function () {
 			actdev.initialise(config, 'sites');
