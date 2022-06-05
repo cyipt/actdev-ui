@@ -6,6 +6,8 @@
   "author": "CycleStreets Ltd / University of Leeds",
   "license": "GPL-3.0-only",
   "dependencies": {
-    "Mapboxgljs.LayerViewer": "https://github.com/cyclestreets/Mapboxgljs.LayerViewer/"
+    "Mapboxgljs.LayerViewer": "https://github.com/cyclestreets/Mapboxgljs.LayerViewer/",
+    "jquery.animate-number": "^0.0.14",
+    "papaparse": "^5.3.2"
   }
 }

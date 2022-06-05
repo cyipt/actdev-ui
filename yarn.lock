@@ -252,7 +252,14 @@ jquery-ui-dist@^1.13.1:
   dependencies:
     jquery ">=1.8.0 <4.0.0"
 
-"jquery@>=1.8.0 <4.0.0", jquery@^3.6.0:
+jquery.animate-number@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/jquery.animate-number/-/jquery.animate-number-0.0.14.tgz#9263bb87e3c9ac2e2fc173d16ebd607589ad3198"
+  integrity sha512-G4gylrSOPfREFGcoqIaHXM44I1JhfN4aHpAVGfIVvXW/hFUVEzRbMTwvpu5GVzYyuv2ITKQCgsU/IV8BMEliPQ==
+  dependencies:
+    jquery ">= 1.7.0"
+
+"jquery@>= 1.7.0", "jquery@>=1.8.0 <4.0.0", jquery@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
   integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
