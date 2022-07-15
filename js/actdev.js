@@ -376,7 +376,7 @@ var actdev = (function ($) {
 			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonColourField: 'building',
-			polygonStyle: {
+			polygonColourValues: {
 				'residential': 'green',
 				'retail': 'orange',
 				'civic': 'purple',
@@ -391,7 +391,7 @@ var actdev = (function ($) {
 			retrievalStrategy: 'none',
 			apiKey: false,
 			polygonColourField: 'building',
-			polygonStyle: {
+			polygonColourValues: {
 				'university': 'green',
 				'school': 'teal',
 				'retail': 'orange',
@@ -899,7 +899,7 @@ var actdev = (function ($) {
 
 			// Initialise tooltips
 			actdev.initialiseTooltips ();
-
+			
 			// Treat site data drop-downs change as implicit enabling of layer
 			// #!# Ideally this would use the native layerviewer formChangeImplicitCheckbox function, but that has a hard-coded parent DOM structure
 			$('#data select').on ('click', function (e) {
