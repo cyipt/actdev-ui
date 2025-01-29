@@ -1,25 +1,41 @@
+# Redirection host from HTTP -> HTTPS
 <VirtualHost *:80>
-
-	# Available URL(s)
 	ServerName actdev.cyipt.bike
-	ServerAlias actdev
+	DocumentRoot /var/www/html/
 	
 	# Logging
-	CustomLog /var/log/apache2/actdev-access.log combined
-	ErrorLog /var/log/apache2/actdev-error.log
+	CustomLog ${APACHE_LOG_DIR}/cyipt_http-access.log combined
+	ErrorLog ${APACHE_LOG_DIR}/cyipt_http-error.log
+	
+	# Redirect all traffic to HTTPS
+	RedirectMatch Permanent ^/(?!.well-known)(.*)$ https://actdev.cyipt.bike/
+	
+</VirtualHost>
 
-	# Where the files are
-	DocumentRoot /var/www/actdev-ui/
+
+# HTTPS host, main site
+<VirtualHost *:443>
+	
+	ServerName actdev.cyipt.bike
+	DocumentRoot /var/www/actdev-ui
+	
+	# Enable SSL
+	SSLEngine on
+	SSLCertificateFile    /etc/letsencrypt/live/actdev.cyipt.bike/fullchain.pem
+	SSLCertificateKeyFile /etc/letsencrypt/live/actdev.cyipt.bike/privkey.pem
+	
+	# Logging
+	CustomLog ${APACHE_LOG_DIR}/actdev-access.log combined
+	ErrorLog ${APACHE_LOG_DIR}/actdev-error.log
 	
 	# Allow access
-	<Directory />
+	<Location />
 		Require all granted
-	</Directory>
-
-	# Allow redirects in .htaccess
-	<Directory />
+	</Location>
+	
+	# Enable mod_rewrite directives
+	<Directory /var/www/actdev-ui/>
 		AllowOverride FileInfo
 	</Directory>
 	
 </VirtualHost>
-
