@@ -22,3 +22,7 @@ yarn install
 
 cp -pr .config.js.template .config.js
 echo "Please enter your credentials in .config.js"
+
+cp /var/www/actdev-ui/.cron.template /etc/cron.d/actdev
+chown root:root /etc/cron.d/actdev
+chmod 644 /etc/cron.d/actdev
