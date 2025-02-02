@@ -57,7 +57,7 @@
 	fetch (mdFileLocation)
    		.then (r => r.text())
    		.then (t => {
-			$('#content').html (marked(t));
+			$('#content').html (marked.parse (t));
 		   });
   </script>
 

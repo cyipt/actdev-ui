@@ -14,7 +14,7 @@
     "jquery.animate-number": "^0.0.14",
     "leaflet": "^1.8.0",
     "leaflet-ajax": "^2.1.0",
-    "marked": "3.0.8",
+    "marked": "^15.0.6",
     "papaparse": "^5.3.2",
     "tippy.js": "6.3.1"
   }
