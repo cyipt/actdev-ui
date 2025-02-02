@@ -1,7 +1,7 @@
 // Actdev implementation code
 
 /*jslint browser: true, white: true, single: true, for: true, long: true */
-/*global $, alert, console, window, jQuery, layerviewer, d3, tippy, Papa, L, Chart */
+/*global $, alert, console, window, jQuery, layerviewer, d3, tippy, Papa, Chart */
 
 var actdev = (function ($) {
 	
