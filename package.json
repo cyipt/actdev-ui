@@ -6,7 +6,7 @@
   "author": "CycleStreets Ltd / University of Leeds",
   "license": "GPL-3.0-only",
   "dependencies": {
-    "@popperjs/core": "2.9.0",
+    "@popperjs/core": "^2.11.8",
     "Mapboxgljs.LayerViewer": "https://github.com/cyclestreets/Mapboxgljs.LayerViewer/",
     "chart.js": "2.9.4",
     "flickity": "^3.0.0",
