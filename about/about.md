@@ -2,22 +2,22 @@
 
 ActDev is a project to develop a strong and nationally scalable evidence base on walking and cycling potential and provision in and around new development sites.
 In the first phase of work, we developed a prototype web application showing walking and cycling route from 35 housing developments to key 'trip attractors' and calculated walking and cycling metrics within the boundary of each site.
-The results demonstrate the importance of considering walking and cycling potential and provision early in the planning process, the possibility of quantifying walking and cycling opportunities associated with new developments, and the feasibility of developing an actionable evidence base that will enable the planning process to support ambitious walking, cycling and decarbonisation targets nationawide. 
+The results demonstrate the importance of considering walking and cycling potential and provision early in the planning process, the possibility of quantifying walking and cycling opportunities associated with new developments, and the feasibility of developing an actionable evidence base that will enable the planning process to support ambitious walking, cycling and decarbonisation targets nationwide. 
 
 *"This is absolutely glorious and I and many others were simply astounded when we saw it... Go and have a look if you're involved in urban design and place - you won't regret it."
 (Kit Allwinter, Active Travel Policy Officer, West Yorkshire Combined Authority)*
 
 # High level aims
 
-The high level aims of are to provides ratings for the level of active travel provision (cycling and walking) between development sites and key services, to determine whether a location would be or is acceptable from health perspectives.
+The high level aims of the project are to provide ratings for the level of active travel provision (cycling and walking) between development sites and key services, to determine whether a location would be or is acceptable from health perspectives.
 
 For known planned/existing development sites, the tool will provide additional analysis to inform specific improvements that could be made in active travel provision and proximity of key services within walking and cycling distance.
 Makes the case for further work to create an interactive web application (including the underlying evolving evidence base) to do the above but on a national scale.
 
-# Stretch Goals
+# Stretch goals
 
-Expand (a) to include environmental and safety perspectives, not just health.
-Use historical data to model the likely mode split associated with potential development sites.
+- Expand to include environmental and safety perspectives, not just health.
+- Use historical data to model the likely mode split associated with potential development sites.
 
 # Planning data
 
