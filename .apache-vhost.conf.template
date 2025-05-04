@@ -38,4 +38,9 @@
 		AllowOverride FileInfo
 	</Directory>
 	
+	# Ensure .wasm files get a Content-Length header
+	<Files *.wasm>
+		SetEnv no-gzip 1
+	</Files>
+	
 </VirtualHost>
